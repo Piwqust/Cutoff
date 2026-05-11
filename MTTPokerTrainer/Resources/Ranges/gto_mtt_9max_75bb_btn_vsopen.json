@@ -1,0 +1,49 @@
+{
+  "id": "gto_mtt_9max_75bb_btn_vsopen",
+  "format": "NLHE_MTT_9MAX",
+  "spot": {
+    "position": "BTN",
+    "stackDepthBB": 75,
+    "facingAction": "vsOpen",
+    "anteType": "bigBlindAnte"
+  },
+  "source": {
+    "type": "gto",
+    "description": "GTO solver output derived from 100bb DB & Push/Fold."
+  },
+  "hands": {
+    "44": "mixed",
+    "55": "mixed",
+    "66": "raise",
+    "76s": "raise",
+    "77": "raise",
+    "87s": "raise",
+    "88": "raise",
+    "98s": "raise",
+    "99": "raise",
+    "A5s": "raise",
+    "A7s": "raise",
+    "A8s": "raise",
+    "A9s": "raise",
+    "AA": "raise",
+    "AJs": "raise",
+    "AKs": "raise",
+    "AQs": "raise",
+    "ATs": "raise",
+    "J9s": "raise",
+    "JJ": "raise",
+    "JTs": "raise",
+    "K9s": "raise",
+    "KJs": "raise",
+    "KK": "raise",
+    "KQs": "raise",
+    "KTs": "raise",
+    "Q9s": "raise",
+    "QJs": "raise",
+    "QQ": "raise",
+    "QTs": "raise",
+    "T8s": "raise",
+    "T9s": "raise",
+    "TT": "raise"
+  }
+}

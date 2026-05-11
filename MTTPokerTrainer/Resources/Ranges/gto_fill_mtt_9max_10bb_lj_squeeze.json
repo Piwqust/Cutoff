@@ -1,0 +1,30 @@
+{
+  "id": "gto_fill_mtt_9max_10bb_lj_squeeze",
+  "format": "NLHE_MTT_9MAX",
+  "spot": {
+    "position": "LJ",
+    "stackDepthBB": 10,
+    "facingAction": "squeeze",
+    "anteType": "bigBlindAnte"
+  },
+  "source": {
+    "type": "gto",
+    "description": "GTO approximation (cloned from closest spot to fill missing database entry)."
+  },
+  "hands": {
+    "99": "call",
+    "A5s": "mixed",
+    "AA": "jam",
+    "AJs": "call",
+    "AKs": "jam",
+    "AQs": "call",
+    "ATs": "call",
+    "JJ": "call",
+    "KJs": "call",
+    "KK": "jam",
+    "KQs": "call",
+    "KTs": "call",
+    "QQ": "jam",
+    "TT": "call"
+  }
+}

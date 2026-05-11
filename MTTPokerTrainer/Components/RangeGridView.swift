@@ -1,0 +1,49 @@
+import SwiftUI
+
+/// 13×13 hand matrix laid out edge-to-edge in the parent's width.
+struct RangeGridView: View {
+    let chart: RangeChart?
+    var onCellTap: ((HandCombo, RangeAction) -> Void)? = nil
+
+    private let cols = Array(repeating: GridItem(.flexible(), spacing: 2), count: 13)
+
+    var body: some View {
+        LazyVGrid(columns: cols, spacing: 2) {
+            ForEach(HandCombo.allInMatrixOrder, id: \.notation) { combo in
+                let action: RangeAction = chart?.action(for: combo) ?? .fold
+                Button {
+                    onCellTap?(combo, action)
+                } label: {
+                    RangeCellView(combo: combo, action: action)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+    }
+}
+
+struct RangeLegendView: View {
+    var body: some View {
+        HStack(spacing: AppSpacing.sm) {
+            ForEach([RangeAction.fold, .call, .raise, .threeBet, .jam], id: \.self) { action in
+                HStack(spacing: 4) {
+                    Circle().fill(action.tint).frame(width: 10, height: 10)
+                    Text(action.displayName)
+                        .font(AppTypography.caption)
+                        .foregroundStyle(AppColors.textSecondary)
+                }
+            }
+        }
+    }
+}
+
+#Preview {
+    ZStack {
+        AppBackground()
+        VStack(spacing: AppSpacing.md) {
+            RangeGridView(chart: nil)
+                .padding(.horizontal, AppSpacing.pageHorizontal)
+            RangeLegendView()
+        }
+    }
+}
