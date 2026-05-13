@@ -9,29 +9,11 @@
   },
   "source": {
     "type": "demo",
-    "description": "Approximate demo training range. Not solver-verified."
+    "description": "Demo training range — approximate GTO. Not solver-verified."
   },
   "hands": {
     "KK": "jam",
-    "AJo": "jam",
-    "JTs": "jam",
-    "99": "jam",
-    "KQo": "jam",
-    "AKs": "jam",
     "QQ": "jam",
-    "TT": "jam",
-    "ATs": "jam",
-    "QJo": "jam",
-    "KQs": "jam",
-    "JJ": "jam",
-    "QTs": "jam",
-    "AA": "jam",
-    "KTs": "jam",
-    "AJs": "jam",
-    "AQs": "jam",
-    "AKo": "jam",
-    "KJs": "jam",
-    "AQo": "jam",
-    "QJs": "jam"
+    "AKs": "jam"
   }
 }

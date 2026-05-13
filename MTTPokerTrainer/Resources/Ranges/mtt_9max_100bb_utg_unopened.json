@@ -9,38 +9,17 @@
   },
   "source": {
     "type": "demo",
-    "description": "Approximate demo training range. Not solver-verified."
+    "description": "Demo training range — approximate GTO. Not solver-verified."
   },
   "hands": {
-    "A8s": "raise",
-    "KK": "raise",
-    "AJo": "raise",
-    "JTs": "raise",
-    "A6s": "raise",
-    "A5s": "raise",
-    "99": "raise",
-    "KQo": "raise",
-    "AKs": "raise",
-    "QQ": "raise",
-    "TT": "raise",
-    "ATs": "raise",
-    "QJo": "raise",
-    "A7s": "raise",
-    "KQs": "raise",
-    "T9s": "raise",
-    "JJ": "raise",
-    "QTs": "raise",
-    "J9s": "raise",
     "AA": "raise",
-    "KTs": "raise",
-    "AJs": "raise",
-    "88": "raise",
+    "KK": "raise",
+    "QQ": "raise",
+    "JJ": "raise",
+    "TT": "raise",
+    "AKs": "raise",
     "AQs": "raise",
-    "98s": "raise",
-    "AKo": "raise",
-    "A9s": "raise",
-    "KJs": "raise",
-    "AQo": "raise",
-    "QJs": "raise"
+    "AJs": "raise",
+    "AKo": "raise"
   }
 }

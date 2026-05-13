@@ -1,0 +1,15 @@
+{
+  "id": "gto_demo_mtt_9max_30bb_utg_vsopen",
+  "format": "NLHE_MTT_9MAX",
+  "spot": {
+    "position": "UTG",
+    "stackDepthBB": 30,
+    "facingAction": "vsOpen",
+    "anteType": "bigBlindAnte"
+  },
+  "source": {
+    "type": "demo",
+    "description": "UTG acts first preflop — this spot does not occur in standard play."
+  },
+  "hands": {}
+}

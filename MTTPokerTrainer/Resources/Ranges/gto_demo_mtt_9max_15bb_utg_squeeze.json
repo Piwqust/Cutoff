@@ -1,0 +1,15 @@
+{
+  "id": "gto_demo_mtt_9max_15bb_utg_squeeze",
+  "format": "NLHE_MTT_9MAX",
+  "spot": {
+    "position": "UTG",
+    "stackDepthBB": 15,
+    "facingAction": "squeeze",
+    "anteType": "bigBlindAnte"
+  },
+  "source": {
+    "type": "demo",
+    "description": "UTG acts first preflop — cannot squeeze."
+  },
+  "hands": {}
+}
