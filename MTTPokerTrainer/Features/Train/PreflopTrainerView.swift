@@ -3,19 +3,31 @@ import SwiftData
 
 struct PreflopTrainerView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(ConfigStore.self) private var config
     @State private var vm = PreflopTrainerViewModel()
     @State private var feedbackVisible = false
+
+    private static let primaryRowActions: [PreflopAction] = [.fold, .call]
+    private static let raiseRowActions: [PreflopAction] = [.minRaise, .raise25x]
+    private static let aggressiveRowActions: [PreflopAction] = [.raise3x, .shove]
+    private static let blindRowActions: [PreflopAction] = [.limp, .limpRaise]
 
     var body: some View {
         ZStack {
             AppBackground()
 
-            VStack(alignment: .leading, spacing: AppSpacing.lg) {
+            VStack(alignment: .leading, spacing: AppSpacing.md) {
                 contextStrip
-                Spacer(minLength: AppSpacing.md)
+                if let chart = vm.currentChart {
+                    TableMinimapView(
+                        config: config.config,
+                        heroPosition: chart.position,
+                        actedPositions: vm.actedPositions
+                    )
+                }
                 handDisplay
-                Spacer(minLength: AppSpacing.md)
-                actionRow
+                Spacer(minLength: AppSpacing.xs)
+                actionGrid
                 disclaimer
             }
             .padding(.horizontal, AppSpacing.pageHorizontal)
@@ -68,7 +80,7 @@ struct PreflopTrainerView: View {
     }
 
     private var handDisplay: some View {
-        VStack(spacing: AppSpacing.md) {
+        VStack(spacing: AppSpacing.xs) {
             if let combo = vm.currentCombo {
                 HandCardView(hand: combo.notation)
                 Text(combo.notation)
@@ -81,17 +93,28 @@ struct PreflopTrainerView: View {
         .frame(maxWidth: .infinity)
     }
 
-    private var actionRow: some View {
+    private var actionGrid: some View {
         VStack(spacing: AppSpacing.xs) {
-            HStack(spacing: AppSpacing.xs) {
-                ActionButton(title: "Fold", systemImage: RangeAction.fold.systemImage, tint: AppColors.actionFold, darkForeground: false) { submit(.fold) }
-                ActionButton(title: "Call", systemImage: RangeAction.call.systemImage, tint: AppColors.actionCall) { submit(.call) }
+            actionRow(Self.primaryRowActions)
+            actionRow(Self.raiseRowActions)
+            actionRow(Self.aggressiveRowActions)
+            actionRow(Self.blindRowActions)
+        }
+    }
+
+    private func actionRow(_ actions: [PreflopAction]) -> some View {
+        HStack(spacing: AppSpacing.xs) {
+            ForEach(actions, id: \.self) { action in
+                ActionButton(
+                    title: action.shortLabel,
+                    systemImage: action.systemImage,
+                    tint: action.tint,
+                    darkForeground: action.prefersDarkForeground,
+                    disabled: !vm.isActionEnabled(action)
+                ) {
+                    submit(action)
+                }
             }
-            HStack(spacing: AppSpacing.xs) {
-                ActionButton(title: "Raise",   systemImage: RangeAction.raise.systemImage,    tint: AppColors.actionRaise)    { submit(.raise) }
-                ActionButton(title: "3-bet",   systemImage: RangeAction.threeBet.systemImage, tint: AppColors.actionThreeBet) { submit(.threeBet) }
-            }
-            ActionButton(title: "Jam", systemImage: RangeAction.jam.systemImage, tint: AppColors.actionJam) { submit(.jam) }
         }
     }
 
@@ -102,7 +125,7 @@ struct PreflopTrainerView: View {
             .frame(maxWidth: .infinity, alignment: .center)
     }
 
-    private func submit(_ action: RangeAction) {
+    private func submit(_ action: PreflopAction) {
         vm.submit(action)
         feedbackVisible = true
     }
@@ -110,5 +133,6 @@ struct PreflopTrainerView: View {
 
 #Preview {
     NavigationStack { PreflopTrainerView() }
+        .environment(ConfigStore())
         .modelContainer(for: [QuizResult.self, TrainingSession.self], inMemory: true)
 }

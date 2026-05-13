@@ -2,10 +2,10 @@ import Foundation
 
 /// Outcome category awarded to a single answer.
 enum AnswerOutcome: String, Codable, Hashable {
-    case correct       // exact match
-    case close         // strategically close (e.g. raise vs 3-bet on a marginal hand)
-    case mistake       // wrong but not catastrophic
-    case punt          // catastrophic (e.g. jamming 72o)
+    case correct       // dominant action
+    case close         // mixed-strategy neighbor (action with non-trivial weight)
+    case mistake       // present but rare, or far from dominant action
+    case punt          // freq 0 and aggression-tier-far from dominant
 
     var headline: String {
         switch self {
@@ -29,8 +29,8 @@ enum AnswerOutcome: String, Codable, Hashable {
 struct TrainingAnswer: Hashable {
     let combo: HandCombo
     let spot: TrainingSpot
-    let userAction: RangeAction
-    let correctAction: RangeAction
+    let userAction: PreflopAction
+    let correctAction: PreflopAction
     let outcome: AnswerOutcome
     let timestamp: Date
 }

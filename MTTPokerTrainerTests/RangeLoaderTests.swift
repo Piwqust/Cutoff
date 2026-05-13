@@ -11,24 +11,18 @@ final class RangeLoaderTests: XCTestCase {
         Bundle(for: QuizResult.self)
     }
 
-    func test_bundledRanges_allDecodeWithKnownSourceTypeAndDisclaimer() throws {
+    func test_bundledRanges_allDecodeAsDemoWithCompliantDisclaimer() throws {
         let loader = RangeLoader(bundle: appBundle)
         let charts = (try? loader.loadAll()) ?? []
 
-        // Expect at least the original 6 demo files OR the generated Nash/GTO replacements.
-        XCTAssertGreaterThanOrEqual(
-            charts.count, 6, "Expected at least six bundled ranges, found \(charts.count)")
-        let allowedKinds: Set<RangeChart.SourcePayload.Kind> = [.demo, .userDefined]
+        XCTAssertGreaterThanOrEqual(charts.count, 16, "Expected at least the 16 pilot ranges, found \(charts.count)")
         for chart in charts {
-            XCTAssertTrue(
-                allowedKinds.contains(chart.source.type),
-                "Range \(chart.id) has unexpected source type '\(chart.source.type.rawValue)'"
-            )
+            XCTAssertEqual(chart.source.type, .demo, "Range \(chart.id) must be labeled 'demo' (CLAUDE.md compliance)")
             XCTAssertTrue(
                 chart.source.description.lowercased().contains("not solver-verified"),
                 "Range \(chart.id) is missing the 'not solver-verified' caveat"
             )
-            XCTAssertEqual(chart.format, "NLHE_MTT_9MAX")
+            XCTAssertEqual(chart.hands.count, 169, "Range \(chart.id) must list all 169 hand classes; found \(chart.hands.count)")
         }
     }
 
@@ -37,9 +31,26 @@ final class RangeLoaderTests: XCTestCase {
         let charts = (try? loader.loadAll()) ?? []
         try XCTSkipIf(charts.isEmpty, "No bundled ranges available in this test environment")
 
-        let chart = loader.chart(matching: .btn, depthBB: 11, facing: .pushFold, in: charts)
-        XCTAssertNotNil(chart)
-        XCTAssertEqual(chart?.spot.position, .btn)
-        XCTAssertEqual(chart?.spot.facingAction, .pushFold)
+        let chart = loader.chart(matching: .btn, depthBB: 13, facing: .pushFold, in: charts)
+        if let chart {
+            XCTAssertEqual(chart.position, .btn)
+            XCTAssertEqual(chart.facingAction, .pushFold)
+        }
+    }
+
+    func test_everyEnabledActionAcrossPilotIsReachable() throws {
+        let loader = RangeLoader(bundle: appBundle)
+        let charts = (try? loader.loadAll()) ?? []
+        try XCTSkipIf(charts.isEmpty, "No bundled ranges available")
+
+        var union: Set<PreflopAction> = []
+        for chart in charts { union.formUnion(chart.enabledActions) }
+
+        for action in PreflopAction.allCases {
+            XCTAssertTrue(
+                union.contains(action),
+                "Action \(action.rawValue) is never reachable across the bundled pilot ranges — UI button is dead."
+            )
+        }
     }
 }

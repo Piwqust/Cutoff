@@ -26,8 +26,8 @@ final class QuizResult {
         facingAction: FacingAction,
         anteType: AnteType,
         rangeChartID: String,
-        userAction: RangeAction,
-        correctAction: RangeAction,
+        userAction: PreflopAction,
+        correctAction: PreflopAction,
         outcome: AnswerOutcome
     ) {
         self.id = UUID()
@@ -45,8 +45,8 @@ final class QuizResult {
     }
 
     var position: TablePosition { TablePosition(rawValue: positionRaw) ?? .utg }
-    var facingAction: FacingAction { FacingAction(rawValue: facingActionRaw) ?? .unopened }
+    var facingAction: FacingAction { FacingAction(rawValue: facingActionRaw) ?? .rfi }
     var outcome: AnswerOutcome { AnswerOutcome(rawValue: outcomeRaw) ?? .mistake }
-    var userAction: RangeAction { RangeAction(rawValue: userActionRaw) ?? .fold }
-    var correctAction: RangeAction { RangeAction(rawValue: correctActionRaw) ?? .fold }
+    var userAction: PreflopAction { PreflopAction(rawValue: userActionRaw) ?? .fold }
+    var correctAction: PreflopAction { PreflopAction(rawValue: correctActionRaw) ?? .fold }
 }

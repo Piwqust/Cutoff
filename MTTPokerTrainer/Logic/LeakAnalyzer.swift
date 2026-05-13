@@ -15,31 +15,40 @@ struct Leak: Identifiable, Hashable {
 /// handful of named, friendly leaks. Intentionally simple — this is not a
 /// solver, it's a study cue.
 enum LeakAnalyzer {
+    /// Actions that represent "playing the hand" (any non-fold preflop line).
+    private static let playingActions: Set<PreflopAction> = [
+        .call, .limp, .minRaise, .raise25x, .raise3x, .limpRaise, .shove
+    ]
+
     static func leaks(from results: [QuizResult]) -> [Leak] {
         guard results.count >= 8 else { return [] }
 
         var leaks: [Leak] = []
 
-        // 1) Loose UTG opens — opening hands from UTG that are folds in chart.
+        // 1) Loose UTG opens — opening hands from UTG that the chart wants folded.
         let utg = results.filter { $0.position == .utg }
         if utg.count >= 5 {
-            let looseOpens = utg.filter { $0.userAction == .raise && $0.correctAction == .fold }.count
+            let looseOpens = utg.filter {
+                playingActions.contains($0.userAction) && $0.correctAction == .fold
+            }.count
             let ratio = Double(looseOpens) / Double(utg.count)
             if ratio > 0.18 {
                 leaks.append(Leak(
                     id: "too_loose_utg",
                     title: "Too loose UTG",
-                    detail: "You're opening hands from early position that play badly out of position at 9-max.",
+                    detail: "You're opening hands from early position that play badly out of position.",
                     severity: min(1, ratio * 2),
-                    suggestedSpot: (.utg, 100, .unopened)
+                    suggestedSpot: (.utg, 100, .rfi)
                 ))
             }
         }
 
         // 2) Overfolding BB — folding hands from BB that the chart wants to defend.
-        let bbDefense = results.filter { $0.position == .bb && $0.facingAction == .vsOpen }
+        let bbDefense = results.filter { $0.position == .bb && $0.facingAction == .vsOpenCall }
         if bbDefense.count >= 5 {
-            let overFolds = bbDefense.filter { $0.userAction == .fold && $0.correctAction != .fold }.count
+            let overFolds = bbDefense.filter {
+                $0.userAction == .fold && $0.correctAction != .fold
+            }.count
             let ratio = Double(overFolds) / Double(bbDefense.count)
             if ratio > 0.25 {
                 leaks.append(Leak(
@@ -47,7 +56,7 @@ enum LeakAnalyzer {
                     title: "Overfolding the Big Blind",
                     detail: "You're folding to opens too often. The blinds are already in — defend wider.",
                     severity: min(1, ratio * 1.6),
-                    suggestedSpot: (.bb, 50, .blindDefense)
+                    suggestedSpot: (.bb, 30, .vsOpenCall)
                 ))
             }
         }
@@ -63,13 +72,13 @@ enum LeakAnalyzer {
                     title: "Calling too much vs 3-bet",
                     detail: "Flatting 3-bets out of position with marginal hands loses chips.",
                     severity: min(1, ratio * 1.4),
-                    suggestedSpot: (.btn, 50, .vs3Bet)
+                    suggestedSpot: (.btn, 100, .vs3Bet)
                 ))
             }
         }
 
         // 4) Missing reshove spots — folding when chart wants jam at short stack.
-        let shortJamSpots = results.filter { $0.stackDepthBB <= 20 && $0.correctAction == .jam }
+        let shortJamSpots = results.filter { $0.stackDepthBB <= 20 && $0.correctAction == .shove }
         if shortJamSpots.count >= 4 {
             let missed = shortJamSpots.filter { $0.userAction == .fold }.count
             let ratio = Double(missed) / Double(shortJamSpots.count)
@@ -79,7 +88,7 @@ enum LeakAnalyzer {
                     title: "Missing reshove spots",
                     detail: "You're folding short-stack hands that have enough fold equity to jam.",
                     severity: min(1, ratio * 1.3),
-                    suggestedSpot: (.co, 15, .pushFold)
+                    suggestedSpot: (.btn, 15, .pushFold)
                 ))
             }
         }

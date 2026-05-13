@@ -83,16 +83,16 @@ struct PushFoldTrainerView: View {
 
     private var actionRow: some View {
         HStack(spacing: AppSpacing.md) {
-            ActionButton(title: "Fold", systemImage: RangeAction.fold.systemImage, tint: AppColors.actionFold, darkForeground: false) {
+            ActionButton(title: "Fold", systemImage: PreflopAction.fold.systemImage, tint: AppColors.actionFold, darkForeground: false) {
                 submit(.fold)
             }
-            ActionButton(title: "Jam", systemImage: RangeAction.jam.systemImage, tint: AppColors.actionJam) {
-                submit(.jam)
+            ActionButton(title: "Jam", systemImage: PreflopAction.shove.systemImage, tint: AppColors.actionJam) {
+                submit(.shove)
             }
         }
     }
 
-    private func submit(_ action: RangeAction) {
+    private func submit(_ action: PreflopAction) {
         vm.submit(action)
         feedbackVisible = true
     }

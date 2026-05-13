@@ -18,7 +18,7 @@ struct ReviewView: View {
                             noLeaksState
                         } else {
                             ForEach(leaks) { leak in
-                                LeakCard(leak: leak)
+                                LeakCard(title: leak.title, detail: leak.detail, severity: leak.severity, onDrill: {})
                             }
                         }
                     }

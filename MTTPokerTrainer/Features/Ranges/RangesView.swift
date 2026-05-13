@@ -65,9 +65,9 @@ struct RangesView: View {
     private var gridContainer: some View {
         GeometryReader { geo in
             let _ = geo
-            RangeGridView(chart: vm.activeChart) { combo, action in
+            RangeGridView(chart: vm.activeChart) { combo, freqs in
                 guard let chart = vm.activeChart else { return }
-                detail = RangeDetailPayload(combo: combo, action: action, chart: chart)
+                detail = RangeDetailPayload(combo: combo, frequencies: freqs, chart: chart)
             }
         }
         .aspectRatio(1, contentMode: .fit)
@@ -77,7 +77,7 @@ struct RangesView: View {
         VStack(spacing: AppSpacing.xs) {
             RangeLegendView()
             if let chart = vm.activeChart {
-                Text("\(chart.source.humanLabel) · \(chart.spot.position.displayName) · \(chart.spot.stackDepthBB) BB · \(chart.spot.facingAction.displayName)")
+                Text("\(chart.source.humanLabel) · \(chart.position.displayName) · \(chart.stackDepth) BB · \(chart.facingAction.displayName)")
                     .font(AppTypography.caption)
                     .foregroundStyle(AppColors.textSecondary)
                     .multilineTextAlignment(.center)
@@ -93,7 +93,7 @@ struct RangesView: View {
 struct RangeDetailPayload: Identifiable {
     var id: String { combo.notation + chart.id }
     let combo: HandCombo
-    let action: RangeAction
+    let frequencies: HandFrequencies
     let chart: RangeChart
 }
 
@@ -101,6 +101,7 @@ struct RangeDetailSheet: View {
     let payload: RangeDetailPayload
 
     var body: some View {
+        let dominant = payload.frequencies.dominantAction
         VStack(alignment: .leading, spacing: AppSpacing.md) {
             HStack(spacing: AppSpacing.sm) {
                 HandCardView(hand: payload.combo.notation, size: .compact)
@@ -108,28 +109,31 @@ struct RangeDetailSheet: View {
                     Text(payload.combo.notation)
                         .font(AppTypography.numericLarge)
                         .foregroundStyle(AppColors.textPrimary)
-                    Text("\(payload.chart.spot.position.displayName) · \(payload.chart.spot.stackDepthBB) BB · \(payload.chart.spot.facingAction.displayName)")
+                    Text("\(payload.chart.position.displayName) · \(payload.chart.stackDepth) BB · \(payload.chart.facingAction.displayName)")
                         .font(AppTypography.subheadline)
                         .foregroundStyle(AppColors.textSecondary)
                 }
             }
 
             HStack(spacing: 6) {
-                Image(systemName: payload.action.systemImage)
-                Text(payload.action.displayName)
+                Image(systemName: dominant.systemImage)
+                Text(dominant.displayName)
             }
             .font(AppTypography.bodyBold)
-            .foregroundStyle(payload.action.prefersDarkForeground ? AppColors.backgroundDeep : AppColors.textPrimary)
+            .foregroundStyle(dominant.prefersDarkForeground ? AppColors.backgroundDeep : AppColors.textPrimary)
             .padding(.horizontal, AppSpacing.sm)
             .padding(.vertical, 6)
-            .background(Capsule().fill(payload.action.tint))
+            .background(Capsule().fill(dominant.tint))
 
-            Text(ExplanationBuilder.explain(spot: payload.chart.trainingSpot, combo: payload.combo, correct: payload.action))
+            Text(ExplanationBuilder.explain(spot: payload.chart.trainingSpot, combo: payload.combo, frequencies: payload.frequencies))
                 .font(AppTypography.body)
                 .foregroundStyle(AppColors.textPrimary)
                 .fixedSize(horizontal: false, vertical: true)
 
             Text(payload.chart.source.fullDisclaimer)
+                .font(AppTypography.caption)
+                .foregroundStyle(AppColors.textSecondary)
+            Text(AppTheme.disclaimer)
                 .font(AppTypography.caption)
                 .foregroundStyle(AppColors.textSecondary)
         }

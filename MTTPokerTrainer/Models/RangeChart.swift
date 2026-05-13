@@ -1,55 +1,84 @@
 import Foundation
 
-/// Decoded representation of a bundled or imported range JSON file.
+/// Decoded representation of a bundled range JSON file.
+///
+/// Schema (matches `Resources/Ranges/MTT_8max_<depth>bb_<position>_<facing>.json`):
+/// ```
+/// {
+///   "id": "MTT_8max_30bb_UTG_RFI",
+///   "stackDepth": 30,
+///   "position": "UTG",
+///   "tableSize": 8,
+///   "antePercent": 12.5,
+///   "facingAction": "RFI",
+///   "isICM": false,
+///   "source": { "type": "demo", "description": "Approximate demo training range. Not solver-verified." },
+///   "hands": {
+///     "AA":  { "fold": 0.0, "minRaise": 1.0, "raise25x": 0.0, "shove": 0.0, ... },
+///     "72o": { "fold": 1.0, "minRaise": 0.0, ... }
+///   }
+/// }
+/// ```
 struct RangeChart: Codable, Identifiable, Hashable {
     let id: String
-    let format: String
-    let spot: SpotPayload
+    let stackDepth: Int
+    let position: TablePosition
+    let tableSize: Int
+    let antePercent: Double
+    let facingAction: FacingAction
+    let isICM: Bool?
     let source: SourcePayload
-    let hands: [String: RangeAction]
-
-    struct SpotPayload: Codable, Hashable {
-        let position: TablePosition
-        let stackDepthBB: Int
-        let facingAction: FacingAction
-        let anteType: AnteType
-    }
+    let hands: [String: HandFrequencies]
 
     struct SourcePayload: Codable, Hashable {
-        enum Kind: String, Codable { case demo, userDefined, imported }
+        enum Kind: String, Codable { case demo, userDefined }
         let type: Kind
         let description: String
 
         var humanLabel: String {
             switch type {
-            case .demo: return "Demo training range"
-            case .userDefined: return "Nash / GTO range"
-            case .imported: return "Imported range"
+            case .demo:        return "Demo training range"
+            case .userDefined: return "User-defined range"
             }
         }
 
         var fullDisclaimer: String {
-            switch type {
-            case .demo: return "Demo training range — not solver-verified."
-            case .userDefined: return "Nash / GTO approximation range — not solver-verified."
-            case .imported: return "Imported range — provenance set by you."
-            }
+            "Demo training range — not solver-verified."
         }
     }
 
-    /// Looks up the action for a given combo's notation. Unlisted hands are
-    /// treated as fold (the explicit "default fold" convention).
-    func action(for combo: HandCombo) -> RangeAction {
-        hands[combo.notation] ?? .fold
+    /// Look up the full frequency distribution for a combo. Unlisted hands are
+    /// treated as 100% fold.
+    func frequencies(for combo: HandCombo) -> HandFrequencies {
+        if let f = hands[combo.notation] { return f }
+        return HandFrequencies([.fold: 1.0])
+    }
+
+    /// Convenience: dominant action for a combo.
+    func dominantAction(for combo: HandCombo) -> PreflopAction {
+        frequencies(for: combo).dominantAction
+    }
+
+    /// Aggregate set of actions that have nonzero frequency on any combo —
+    /// used by the trainer UI to decide which buttons are reachable for this
+    /// chart.
+    var enabledActions: Set<PreflopAction> {
+        var out: Set<PreflopAction> = []
+        for f in hands.values {
+            for action in PreflopAction.allCases where f[action] > 0 {
+                out.insert(action)
+            }
+        }
+        return out
     }
 
     var trainingSpot: TrainingSpot {
         TrainingSpot(
-            position: spot.position,
-            stackDepthBB: spot.stackDepthBB,
-            facingAction: spot.facingAction,
-            anteType: spot.anteType,
-            tableSize: 9
+            position: position,
+            stackDepthBB: stackDepth,
+            facingAction: facingAction,
+            anteType: .bigBlindAnte,
+            tableSize: tableSize
         )
     }
 }

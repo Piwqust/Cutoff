@@ -12,6 +12,8 @@ struct MainTabView: View {
                     PushFoldTrainerView()
                 } else if MainTabView.launchRoute == "stackdepth" {
                     StackDepthTrainerView()
+                } else if MainTabView.launchRoute == "postflop" {
+                    PostflopDrillView()
                 } else {
                     TrainDashboardView()
                 }

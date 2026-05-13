@@ -3,7 +3,7 @@ import SwiftData
 
 enum AppModelContainer {
     static func make() -> ModelContainer {
-        let schema = Schema([QuizResult.self, TrainingSession.self])
+        let schema = Schema([QuizResult.self, TrainingSession.self, PostflopDrillSession.self, PostflopResult.self])
         let config = ModelConfiguration("MTTPokerTrainer", schema: schema)
         do {
             return try ModelContainer(for: schema, configurations: [config])

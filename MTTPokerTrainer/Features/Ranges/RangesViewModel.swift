@@ -18,18 +18,18 @@ final class RangesViewModel {
         if charts.isEmpty {
             charts = (try? loader.loadAll()) ?? []
             if let first = charts.first {
-                selectedPosition = first.spot.position
-                selectedDepthBucket = StackDepthBucket.nearest(to: first.spot.stackDepthBB)
-                selectedFacing = first.spot.facingAction
+                selectedPosition = first.position
+                selectedDepthBucket = StackDepthBucket.nearest(to: first.stackDepth)
+                selectedFacing = first.facingAction
             }
         }
     }
 
     // MARK: - Filter selection
-
-    /// Selecting a filter pivots to the chart that best matches it. The other
-    /// two filters auto-adjust to that chart so the grid always changes when
-    /// the user taps a chip — even if no chart matches all three filters.
+    //
+    // Selecting a filter pivots to the chart that best matches it. The other
+    // two filters auto-adjust to that chart so the grid always changes when
+    // the user taps a chip — even if no chart matches all three filters.
 
     func selectPosition(_ pos: TablePosition) {
         selectedPosition = pos
@@ -48,9 +48,9 @@ final class RangesViewModel {
 
     private func syncOtherFiltersTo(_ chart: RangeChart?) {
         guard let chart else { return }
-        selectedPosition = chart.spot.position
-        selectedDepthBucket = StackDepthBucket.nearest(to: chart.spot.stackDepthBB)
-        selectedFacing = chart.spot.facingAction
+        selectedPosition = chart.position
+        selectedDepthBucket = StackDepthBucket.nearest(to: chart.stackDepth)
+        selectedFacing = chart.facingAction
     }
 
     /// Best-match chart for the current filters. Prefers an exact triple
@@ -64,10 +64,10 @@ final class RangesViewModel {
 
         let scored = charts.map { chart -> (chart: RangeChart, score: Int, depthDelta: Int) in
             var score = 0
-            if let pos, chart.spot.position == pos { score += 4 }
-            if let facing, chart.spot.facingAction == facing { score += 2 }
-            let delta = depthBB.map { abs(chart.spot.stackDepthBB - $0) } ?? .max
-            if let depthBB, chart.spot.stackDepthBB == depthBB { score += 1 }
+            if let pos, chart.position == pos { score += 4 }
+            if let facing, chart.facingAction == facing { score += 2 }
+            let delta = depthBB.map { abs(chart.stackDepth - $0) } ?? .max
+            if let depthBB, chart.stackDepth == depthBB { score += 1 }
             return (chart, score, delta)
         }
         return scored.max {
