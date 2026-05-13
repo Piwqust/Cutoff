@@ -1,34 +1,36 @@
 import Foundation
 
 enum PostflopLoaderError: Error, LocalizedError {
-    case notFound
-    case decodeFailed(Error)
+    case bundleResourceMissing
+    case decodingFailed(Error)
 
     var errorDescription: String? {
         switch self {
-        case .notFound: return "Flop library JSON not bundled."
-        case .decodeFailed(let e): return "Flop library decode error: \(e.localizedDescription)"
+        case .bundleResourceMissing: return "postflop_spots.json not found in bundle"
+        case .decodingFailed(let err): return "Failed to decode postflop spots: \(err.localizedDescription)"
         }
     }
 }
 
-/// Loads the bundled `flop_library.json` and exposes typed queries.
+/// Loads the bundled postflop seed spots.
 struct PostflopLoader {
     let bundle: Bundle
+    let resourceName: String
 
-    init(bundle: Bundle = .main) {
+    init(bundle: Bundle = .main, resourceName: String = "postflop_spots") {
         self.bundle = bundle
+        self.resourceName = resourceName
     }
 
-    func loadPack() throws -> PostflopChartPack {
-        guard let url = bundle.url(forResource: "flop_library", withExtension: "json") else {
-            throw PostflopLoaderError.notFound
+    func loadAll() throws -> [PostflopSpot] {
+        guard let url = bundle.url(forResource: resourceName, withExtension: "json") else {
+            throw PostflopLoaderError.bundleResourceMissing
         }
         let data = try Data(contentsOf: url)
         do {
-            return try JSONDecoder().decode(PostflopChartPack.self, from: data)
+            return try JSONDecoder().decode([PostflopSpot].self, from: data)
         } catch {
-            throw PostflopLoaderError.decodeFailed(error)
+            throw PostflopLoaderError.decodingFailed(error)
         }
     }
 }

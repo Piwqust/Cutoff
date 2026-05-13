@@ -3,18 +3,18 @@ import SwiftUI
 /// 13×13 hand matrix laid out edge-to-edge in the parent's width.
 struct RangeGridView: View {
     let chart: RangeChart?
-    var onCellTap: ((HandCombo, RangeAction) -> Void)? = nil
+    var onCellTap: ((HandCombo, HandFrequencies) -> Void)? = nil
 
     private let cols = Array(repeating: GridItem(.flexible(), spacing: 2), count: 13)
 
     var body: some View {
         LazyVGrid(columns: cols, spacing: 2) {
             ForEach(HandCombo.allInMatrixOrder, id: \.notation) { combo in
-                let action: RangeAction = chart?.action(for: combo) ?? .fold
+                let freqs: HandFrequencies = chart?.frequencies(for: combo) ?? HandFrequencies([.fold: 1.0])
                 Button {
-                    onCellTap?(combo, action)
+                    onCellTap?(combo, freqs)
                 } label: {
-                    RangeCellView(combo: combo, action: action)
+                    RangeCellView(combo: combo, frequencies: freqs)
                 }
                 .buttonStyle(.plain)
             }
@@ -23,12 +23,14 @@ struct RangeGridView: View {
 }
 
 struct RangeLegendView: View {
+    private let legendActions: [PreflopAction] = [.fold, .call, .minRaise, .raise25x, .raise3x, .shove]
+
     var body: some View {
         HStack(spacing: AppSpacing.sm) {
-            ForEach([RangeAction.fold, .call, .raise, .threeBet, .jam], id: \.self) { action in
+            ForEach(legendActions, id: \.self) { action in
                 HStack(spacing: 4) {
                     Circle().fill(action.tint).frame(width: 10, height: 10)
-                    Text(action.displayName)
+                    Text(action.shortLabel)
                         .font(AppTypography.caption)
                         .foregroundStyle(AppColors.textSecondary)
                 }

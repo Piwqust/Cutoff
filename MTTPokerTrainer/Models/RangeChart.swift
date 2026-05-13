@@ -1,19 +1,34 @@
 import Foundation
 
-/// Decoded representation of a bundled or imported range JSON file.
+/// Decoded representation of a bundled range JSON file.
+///
+/// Schema (matches `Resources/Ranges/MTT_8max_<depth>bb_<position>_<facing>.json`):
+/// ```
+/// {
+///   "id": "MTT_8max_30bb_UTG_RFI",
+///   "stackDepth": 30,
+///   "position": "UTG",
+///   "tableSize": 8,
+///   "antePercent": 12.5,
+///   "facingAction": "RFI",
+///   "isICM": false,
+///   "source": { "type": "demo", "description": "Approximate demo training range. Not solver-verified." },
+///   "hands": {
+///     "AA":  { "fold": 0.0, "minRaise": 1.0, "raise25x": 0.0, "shove": 0.0, ... },
+///     "72o": { "fold": 1.0, "minRaise": 0.0, ... }
+///   }
+/// }
+/// ```
 struct RangeChart: Codable, Identifiable, Hashable {
     let id: String
-    let format: String
-    let spot: SpotPayload
+    let stackDepth: Int
+    let position: TablePosition
+    let tableSize: Int
+    let antePercent: Double
+    let facingAction: FacingAction
+    let isICM: Bool?
     let source: SourcePayload
-    let hands: [String: RangeAction]
-
-    struct SpotPayload: Codable, Hashable {
-        let position: TablePosition
-        let stackDepthBB: Int
-        let facingAction: FacingAction
-        let anteType: AnteType
-    }
+    let hands: [String: HandFrequencies]
 
     struct SolverConfig: Codable, Hashable {
         let solverName: String
@@ -24,36 +39,7 @@ struct RangeChart: Codable, Identifiable, Hashable {
     }
 
     struct SourcePayload: Codable, Hashable {
-        /// Provenance of the chart. Decoded permissively so legacy `gto`
-        /// values still parse — they're treated as `solverDump`.
-        enum Kind: String, Codable {
-            case nashComputed
-            case solverDump
-            case demoHandAuthored
-            case userImported
-
-            init(from decoder: Decoder) throws {
-                let raw = try decoder.singleValueContainer().decode(String.self)
-                if let direct = Kind(rawValue: raw) {
-                    self = direct
-                    return
-                }
-                // Legacy aliases from earlier schema iterations.
-                switch raw {
-                case "gto":         self = .solverDump
-                case "demo":        self = .demoHandAuthored
-                case "userDefined": self = .userImported
-                case "imported":    self = .userImported
-                case "nash":        self = .nashComputed
-                default:
-                    throw DecodingError.dataCorruptedError(
-                        in: try decoder.singleValueContainer(),
-                        debugDescription: "Unknown range source kind: \(raw)"
-                    )
-                }
-            }
-        }
-
+        enum Kind: String, Codable { case demo, userDefined }
         let type: Kind
         let description: String
         let solver: SolverConfig?
@@ -66,46 +52,48 @@ struct RangeChart: Codable, Identifiable, Hashable {
 
         var humanLabel: String {
             switch type {
-            case .nashComputed:      return "Nash equilibrium"
-            case .solverDump:        return "GTO solver chart"
-            case .demoHandAuthored:  return "Hand-authored approximation"
-            case .userImported:      return "Imported range"
+            case .demo:        return "Demo training range"
+            case .userDefined: return "User-defined range"
             }
         }
 
         var fullDisclaimer: String {
-            switch type {
-            case .nashComputed:
-                return "Nash push/fold equilibrium — mathematically computed for the chosen ante model."
-            case .solverDump:
-                if let s = solver {
-                    var parts = [s.solverName]
-                    if let v = s.solverVersion { parts.append("v\(v)") }
-                    if let i = s.iterations { parts.append("\(i) iter") }
-                    return "Solved with " + parts.joined(separator: " ") + "."
-                }
-                return "GTO solver chart."
-            case .demoHandAuthored:
-                return "Hand-authored approximation — not solver-verified."
-            case .userImported:
-                return "Imported range — provenance set by you."
-            }
+            "Demo training range — not solver-verified."
         }
     }
 
-    /// Looks up the action for a given combo's notation. Unlisted hands are
-    /// treated as fold (the explicit "default fold" convention).
-    func action(for combo: HandCombo) -> RangeAction {
-        hands[combo.notation] ?? .fold
+    /// Look up the full frequency distribution for a combo. Unlisted hands are
+    /// treated as 100% fold.
+    func frequencies(for combo: HandCombo) -> HandFrequencies {
+        if let f = hands[combo.notation] { return f }
+        return HandFrequencies([.fold: 1.0])
+    }
+
+    /// Convenience: dominant action for a combo.
+    func dominantAction(for combo: HandCombo) -> PreflopAction {
+        frequencies(for: combo).dominantAction
+    }
+
+    /// Aggregate set of actions that have nonzero frequency on any combo —
+    /// used by the trainer UI to decide which buttons are reachable for this
+    /// chart.
+    var enabledActions: Set<PreflopAction> {
+        var out: Set<PreflopAction> = []
+        for f in hands.values {
+            for action in PreflopAction.allCases where f[action] > 0 {
+                out.insert(action)
+            }
+        }
+        return out
     }
 
     var trainingSpot: TrainingSpot {
         TrainingSpot(
-            position: spot.position,
-            stackDepthBB: spot.stackDepthBB,
-            facingAction: spot.facingAction,
-            anteType: spot.anteType,
-            tableSize: 9
+            position: position,
+            stackDepthBB: stackDepth,
+            facingAction: facingAction,
+            anteType: .bigBlindAnte,
+            tableSize: tableSize
         )
     }
 

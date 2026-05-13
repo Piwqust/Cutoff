@@ -133,12 +133,12 @@ struct TrainDashboardView: View {
                     tint: AppColors.accentCoral
                 )
             }.buttonStyle(.plain)
-            NavigationLink { FlopTrainerView() } label: {
+            NavigationLink { PostflopDrillView() } label: {
                 TrainingModeCard(
-                    title: TrainingMode.flop.title,
-                    subtitle: TrainingMode.flop.subtitle,
-                    systemImage: TrainingMode.flop.systemImage,
-                    tint: AppColors.accentGreen
+                    title: TrainingMode.postflop.title,
+                    subtitle: TrainingMode.postflop.subtitle,
+                    systemImage: TrainingMode.postflop.systemImage,
+                    tint: AppColors.primaryEmerald
                 )
             }.buttonStyle(.plain)
             NavigationLink { ReviewView() } label: {

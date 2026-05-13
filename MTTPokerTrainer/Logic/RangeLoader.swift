@@ -49,8 +49,8 @@ struct RangeLoader {
     /// Find the chart that best matches a target spot. Falls back to nearest
     /// stack-depth bucket for the same position+facingAction.
     func chart(matching position: TablePosition, depthBB: Int, facing: FacingAction, in charts: [RangeChart]) -> RangeChart? {
-        let candidates = charts.filter { $0.spot.position == position && $0.spot.facingAction == facing }
+        let candidates = charts.filter { $0.position == position && $0.facingAction == facing }
         guard !candidates.isEmpty else { return nil }
-        return candidates.min(by: { abs($0.spot.stackDepthBB - depthBB) < abs($1.spot.stackDepthBB - depthBB) })
+        return candidates.min(by: { abs($0.stackDepth - depthBB) < abs($1.stackDepth - depthBB) })
     }
 }

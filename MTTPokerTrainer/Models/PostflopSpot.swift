@@ -1,102 +1,104 @@
 import Foundation
+import SwiftData
 
-/// Preflop scenario that led to a postflop street. Coarse on purpose: the
-/// trainer drills strategic concepts, not exhaustive runouts.
-enum PreflopScenario: String, CaseIterable, Codable, Identifiable {
-    case srpIP   = "srp_ip"      // single-raised pot, hero in position
-    case srpOOP  = "srp_oop"     // single-raised pot, hero out of position
-    case threeBP_IP  = "3bp_ip"  // 3-bet pot, hero in position
-    case threeBP_OOP = "3bp_oop" // 3-bet pot, hero out of position
-    case limpedPot   = "limped_pot"
-    case fourBP      = "4bp"     // 4-bet pot
-
-    var id: String { rawValue }
-
-    var displayName: String {
-        switch self {
-        case .srpIP:        return "SRP, in position"
-        case .srpOOP:       return "SRP, out of position"
-        case .threeBP_IP:   return "3-bet pot, in position"
-        case .threeBP_OOP:  return "3-bet pot, out of position"
-        case .limpedPot:    return "Limped pot"
-        case .fourBP:       return "4-bet pot"
-        }
-    }
-}
-
-/// Postflop action a player can take on a given street.
-enum PostflopAction: String, CaseIterable, Codable, Hashable {
-    case check
-    case bet33    // ~1/3 pot
-    case bet66    // ~2/3 pot
-    case bet100   // pot-sized
-    case overbet  // 1.5x pot+
-    case call
-    case fold
-    case raise    // any raise size
-    case jam      // all-in
-
-    var displayName: String {
-        switch self {
-        case .check:    return "Check"
-        case .bet33:    return "Bet 33%"
-        case .bet66:    return "Bet 66%"
-        case .bet100:   return "Bet pot"
-        case .overbet:  return "Overbet"
-        case .call:     return "Call"
-        case .fold:     return "Fold"
-        case .raise:    return "Raise"
-        case .jam:      return "Jam"
-        }
-    }
-
-    var systemImage: String {
-        switch self {
-        case .check:    return "hand.raised"
-        case .bet33,
-             .bet66,
-             .bet100,
-             .overbet:  return "arrow.up.right"
-        case .call:     return "equal"
-        case .fold:     return "xmark"
-        case .raise:    return "arrow.up.right.circle.fill"
-        case .jam:      return "flame.fill"
-        }
-    }
-}
-
-/// One postflop spot the user can drill. Self-describing so a quiz can
-/// render it with no extra lookups.
+/// One bundled postflop training spot.
 struct PostflopSpot: Codable, Hashable, Identifiable {
     let id: String
-    let scenario: PreflopScenario
-    let stackDepthBB: Int
-    let textureClass: BoardTextureClass
-    /// Example board the spot uses for rendering (one canonical board per
-    /// texture class). Not necessarily the only valid board for the class.
-    let sampleBoard: String
-    /// Action history up to this decision point, as plain English.
-    let history: [String]
-    /// The decision the hero must make: what actions are available.
-    let availableActions: [PostflopAction]
-    /// Frequency-weighted "correct" answer mix. Sum = 1.0 (within rounding).
-    /// e.g. ["bet33": 0.85, "check": 0.15].
-    let solution: [String: Double]
-    let coachingNote: String
+    let boardTexture: BoardTexture
+    let board: [Card]
+    let heroPosition: TablePosition
+    let heroHand: HoleCards
+    let potSizeBB: Double
+    let effectiveStackBB: Double
+    let stackDepth: Int
+    /// True when hero is in position relative to villain (acts last).
+    let isInPosition: Bool
+    /// True when hero is the actor (no bet to call). When false, the spot is
+    /// "facing a bet" and Check is unavailable.
+    let isHeroToAct: Bool
+    /// 1–3 actions with frequency weights summing to 1.0. Other actions
+    /// implicitly have frequency 0.
+    let correctActions: [String: Double]
+    let explanation: String
+    let source: RangeChart.SourcePayload
+
+    /// Strongly-typed frequency lookup.
+    func frequency(for action: PostflopAction) -> Double {
+        correctActions[action.rawValue] ?? 0
+    }
+
+    /// Action with the highest weight; ties break by passive-first.
+    var dominantAction: PostflopAction {
+        let scored = PostflopAction.allCases.map { ($0, frequency(for: $0)) }
+        return scored.max { lhs, rhs in
+            if lhs.1 != rhs.1 { return lhs.1 < rhs.1 }
+            return lhs.0.aggressionTier > rhs.0.aggressionTier
+        }?.0 ?? .fold
+    }
+
+    /// Set of actions valid to render as buttons for this spot.
+    var validActions: [PostflopAction] {
+        var actions: [PostflopAction] = []
+        if isHeroToAct {
+            actions = [.check, .bet33, .bet67, .bet100]
+            // Short-stack ⇒ allow shove as an open
+            if effectiveStackBB <= 25 { actions.append(.shove) }
+        } else {
+            actions = [.fold, .call, .raise]
+            if effectiveStackBB <= 25 { actions.append(.shove) }
+        }
+        return actions
+    }
 }
 
-/// A "deck" of postflop training spots — what FlopTrainerLoader returns.
-struct PostflopChartPack: Codable {
-    let format: String
-    let version: String
-    let generatedAt: String
-    let source: SourcePayload
-    let spots: [PostflopSpot]
+/// SwiftData record for an aggregate postflop drill session.
+@Model
+final class PostflopDrillSession {
+    @Attribute(.unique) var id: UUID
+    var startedAt: Date
+    var endedAt: Date?
+    var correct: Int
+    var close: Int
+    var mistake: Int
+    var punt: Int
 
-    struct SourcePayload: Codable {
-        let type: String        // "solverDump" / "heuristic"
-        let solverName: String?
-        let assumptions: String?
-        let description: String
+    init() {
+        self.id = UUID()
+        self.startedAt = .now
+        self.endedAt = nil
+        self.correct = 0
+        self.close = 0
+        self.mistake = 0
+        self.punt = 0
     }
+
+    var total: Int { correct + close + mistake + punt }
+    var accuracy: Int {
+        guard total > 0 else { return 0 }
+        let weighted = correct * 100 + close * 70 + mistake * 30
+        return Int((Double(weighted) / Double(total)).rounded())
+    }
+}
+
+/// SwiftData record for one postflop attempt.
+@Model
+final class PostflopResult {
+    @Attribute(.unique) var id: UUID
+    var createdAt: Date
+    var spotID: String
+    var userActionRaw: String
+    var outcomeRaw: String
+    var score: Int
+
+    init(spotID: String, userAction: PostflopAction, outcome: AnswerOutcome) {
+        self.id = UUID()
+        self.createdAt = .now
+        self.spotID = spotID
+        self.userActionRaw = userAction.rawValue
+        self.outcomeRaw = outcome.rawValue
+        self.score = outcome.score
+    }
+
+    var userAction: PostflopAction { PostflopAction(rawValue: userActionRaw) ?? .fold }
+    var outcome: AnswerOutcome { AnswerOutcome(rawValue: outcomeRaw) ?? .mistake }
 }

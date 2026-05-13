@@ -1,38 +1,32 @@
 import Foundation
 
 enum Scorer {
-    /// Score a user's action against the "correct" action for the spot.
+    /// Grade the user's action against the full frequency distribution for the
+    /// combo.
     ///
-    /// - exact match     → `.correct` (100)
-    /// - close action    → `.close`   (70)   — e.g. raise vs 3-bet on a marginal hand
-    /// - strategic miss  → `.mistake` (30)
-    /// - punt            → `.punt`    (0)    — e.g. jamming a fold-only hand
-    static func evaluate(user: RangeAction, correct: RangeAction) -> AnswerOutcome {
-        if user == correct { return .correct }
-        if correct == .mixed { return .close }  // any non-punt response is at least close vs mixed
+    ///   freq[user] ≥ 0.8             → `.correct` (100)
+    ///   0.2 ≤ freq[user] < 0.8       → `.close`   (70)   — mixed-strategy neighbor
+    ///   0.0 < freq[user] < 0.2       → `.mistake` (30)   — present but rare
+    ///   freq[user] == 0 and far from dominant → `.punt`  (0)
+    ///   freq[user] == 0 and adjacent to dominant → `.mistake` (30)
+    ///
+    /// "Far" = aggression-tier distance ≥ 3 from the dominant action.
+    static func evaluate(user: PreflopAction, frequencies: HandFrequencies) -> AnswerOutcome {
+        let f = frequencies[user]
+        if f >= 0.8 { return .correct }
+        if f >= 0.2 { return .close }
+        if f > 0    { return .mistake }
+        // freq[user] == 0 — judge by distance to the dominant action.
+        let dominant = frequencies.dominantAction
+        let dist = abs(user.aggressionTier - dominant.aggressionTier)
+        return dist >= 3 ? .punt : .mistake
+    }
 
-        switch (user, correct) {
-        // Raise vs 3-bet / jam — same direction, different aggression
-        case (.raise, .threeBet), (.threeBet, .raise),
-             (.raise, .jam),      (.jam, .raise),
-             (.threeBet, .jam),   (.jam, .threeBet):
-            return .close
-
-        // Call vs raise — passive vs aggressive but same direction
-        case (.call, .raise), (.raise, .call):
-            return .close
-
-        // Folding when correct line is to play, or playing when correct line is to fold
-        // — that's a genuine mistake but not a punt.
-        case (.fold, _), (_, .fold):
-            return .mistake
-
-        // Jamming when the correct action is .call — that's a punt.
-        case (.jam, .call), (.call, .jam):
-            return .punt
-
-        default:
-            return .mistake
-        }
+    /// Convenience overload kept for legacy single-action callsites (e.g. the
+    /// push/fold trainer that collapses every spot to fold-or-shove).
+    static func evaluate(user: PreflopAction, correct: PreflopAction) -> AnswerOutcome {
+        var f = HandFrequencies()
+        f[correct] = 1
+        return evaluate(user: user, frequencies: f)
     }
 }
