@@ -10,12 +10,32 @@ import SwiftUI
 /// is attached. Without this, every push (position / depth / facing / chart)
 /// crashes when the pushed view tries to read those environment values.
 struct RangesView: View {
+    @Environment(RangeService.self) private var rangeService
     @State private var vm = RangesViewModel()
     @StateObject private var browsing = RangeBrowsingStore()
 
     var body: some View {
-        RangeLibraryView()
-            .onAppear { vm.load() }
+        ZStack {
+            AppBackground()
+            VStack(spacing: AppSpacing.md) {
+                filterRow
+                gridContainer
+                legendAndDisclaimer
+            }
+            .padding(.horizontal, AppSpacing.pageHorizontal)
+            .padding(.top, AppSpacing.sm)
+            .padding(.bottom, AppSpacing.lg)
+        }
+        .navigationTitle("Ranges")
+        .navigationBarTitleDisplayMode(.large)
+        .toolbarBackground(.hidden, for: .navigationBar)
+        .dynamicTypeSize(...DynamicTypeSize.accessibility2)
+        .onAppear { vm.load(using: rangeService) }
+        .sheet(item: $detail) { payload in
+            RangeDetailSheet(payload: payload)
+                .presentationDetents([.fraction(0.4), .medium])
+                .presentationDragIndicator(.visible)
+        }
     }
 
     /// Convenience for the tab root: wraps `RangesView` in a NavigationStack
@@ -110,4 +130,5 @@ struct RangeDetailSheet: View {
 
 #Preview {
     NavigationStack { RangesView() }
+        .environment(RangeService())
 }
