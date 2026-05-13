@@ -12,6 +12,8 @@ struct TrainDashboardView: View {
                 progressCard
                 heroDrillCard
                 drillGrid
+                customDrillLink
+                reviewLink
                 statsRow
             }
             .padding(.horizontal, AppSpacing.pageHorizontal)
@@ -108,56 +110,43 @@ struct TrainDashboardView: View {
         }
     }
 
-    private var modeGrid: some View {
+    private var drillGrid: some View {
         VStack(spacing: AppSpacing.sm) {
-            NavigationLink { PreflopTrainerView() } label: {
-                TrainingModeCard(
-                    title: TrainingMode.preflop.title,
-                    subtitle: TrainingMode.preflop.subtitle,
-                    systemImage: TrainingMode.preflop.systemImage
-                )
-            }.buttonStyle(.plain)
-            NavigationLink { StackDepthTrainerView() } label: {
-                TrainingModeCard(
-                    title: TrainingMode.stackDepth.title,
-                    subtitle: TrainingMode.stackDepth.subtitle,
-                    systemImage: TrainingMode.stackDepth.systemImage,
-                    tint: AppColors.accentLime
-                )
-            }.buttonStyle(.plain)
-            NavigationLink { PushFoldTrainerView() } label: {
-                TrainingModeCard(
-                    title: TrainingMode.pushFold.title,
-                    subtitle: TrainingMode.pushFold.subtitle,
-                    systemImage: TrainingMode.pushFold.systemImage,
-                    tint: AppColors.accentCoral
-                )
-            }.buttonStyle(.plain)
-            NavigationLink { PostflopDrillView() } label: {
-                TrainingModeCard(
-                    title: TrainingMode.postflop.title,
-                    subtitle: TrainingMode.postflop.subtitle,
-                    systemImage: TrainingMode.postflop.systemImage,
-                    tint: AppColors.primaryEmerald
-                )
-            }.buttonStyle(.plain)
-            NavigationLink { ReviewView() } label: {
-                TrainingModeCard(
-                    title: TrainingMode.mistakes.title,
-                    subtitle: TrainingMode.mistakes.subtitle,
-                    systemImage: TrainingMode.mistakes.systemImage,
-                    tint: AppColors.accentPeach
-                )
-            }.buttonStyle(.plain)
-            NavigationLink { DrillPickerView() } label: {
-                TrainingModeCard(
-                    title: "Custom Drill",
-                    subtitle: "Pick position, depth & scenario",
-                    systemImage: "slider.horizontal.3",
-                    tint: AppColors.accentGreen
-                )
-            }.buttonStyle(.plain)
+            ForEach(DrillCategory.allCases.filter { $0 != .mixed }) { category in
+                NavigationLink { DrillTrainerView(category: category) } label: {
+                    TrainingModeCard(
+                        title: category.title,
+                        subtitle: category.subtitle,
+                        systemImage: category.systemImage
+                    )
+                }
+                .buttonStyle(.plain)
+            }
         }
+    }
+
+    private var customDrillLink: some View {
+        NavigationLink { DrillPickerView() } label: {
+            TrainingModeCard(
+                title: "Custom Drill",
+                subtitle: "Pick position, depth & scenario",
+                systemImage: "slider.horizontal.3",
+                tint: AppColors.accentGreen
+            )
+        }
+        .buttonStyle(.plain)
+    }
+
+    private var reviewLink: some View {
+        NavigationLink { ReviewView() } label: {
+            TrainingModeCard(
+                title: "Review mistakes",
+                subtitle: "Replay spots where you lost EV",
+                systemImage: "magnifyingglass",
+                tint: AppColors.accentPeach
+            )
+        }
+        .buttonStyle(.plain)
     }
 
     // MARK: - Stats

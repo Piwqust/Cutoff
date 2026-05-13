@@ -46,9 +46,9 @@ final class RangeCoverageTests: XCTestCase {
     func test_pilotCoversEveryFacingActionWeShipUiFor() throws {
         let charts = try RangeLoader(bundle: appBundle).loadAll()
         let facings = Set(charts.map(\.facingAction))
-        XCTAssertTrue(facings.contains(.rfi))
+        XCTAssertTrue(facings.contains(.unopened))
         XCTAssertTrue(facings.contains(.pushFold))
-        XCTAssertTrue(facings.contains(.vsOpenCall))
+        XCTAssertTrue(facings.contains(.vsOpen))
         XCTAssertTrue(facings.contains(.vs3Bet))
     }
 }

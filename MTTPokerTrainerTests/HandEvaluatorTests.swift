@@ -4,7 +4,7 @@ import XCTest
 
 final class HandEvaluatorTests: XCTestCase {
     private func cards(_ notations: String...) -> [Card] {
-        notations.compactMap { Card($0) }
+        notations.compactMap { Card(notation: $0) }
     }
 
     func test_straightFlushBeatsQuads() {

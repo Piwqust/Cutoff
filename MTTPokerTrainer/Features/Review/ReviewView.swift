@@ -61,8 +61,9 @@ struct ReviewView: View {
                 depthBuckets: [StackDepthBucket.nearest(to: spot.depthBB)],
                 facingActions: [spot.facingAction]
             )
+            let _ = filter
             NavigationLink {
-                PreflopTrainerView(filter: filter)
+                DrillTrainerView(category: .mixed)
             } label: {
                 LeakCard(
                     title: leak.title,
@@ -84,6 +85,24 @@ struct ReviewView: View {
     }
 
     // MARK: - Empty / no-leak states
+
+    private var noLeaksState: some View {
+        GlassCard(padding: AppSpacing.xl) {
+            VStack(spacing: AppSpacing.md) {
+                Image(systemName: "checkmark.seal.fill")
+                    .font(.system(size: 32))
+                    .foregroundStyle(AppColors.primaryMint)
+                Text("No leaks detected")
+                    .font(AppTypography.headline)
+                    .foregroundStyle(AppColors.textPrimary)
+                Text("Keep drilling — patterns surface once you've played enough hands in a given spot.")
+                    .font(AppTypography.body)
+                    .foregroundStyle(AppColors.textSecondary)
+                    .multilineTextAlignment(.center)
+            }
+            .frame(maxWidth: .infinity)
+        }
+    }
 
     private var emptyState: some View {
         GlassCard(padding: AppSpacing.xl) {
@@ -306,12 +325,14 @@ private struct ReviewDetailSheet: View {
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
-                HStack(spacing: 6) {
-                    Image(systemName: row.category.systemImage)
-                    Text(row.category.title)
+                if let cat = DrillCategory(rawValue: row.categoryRaw) {
+                    HStack(spacing: 6) {
+                        Image(systemName: cat.systemImage)
+                        Text(cat.title)
+                    }
+                    .font(AppTypography.caption)
+                    .foregroundStyle(AppColors.textSecondary)
                 }
-                .font(AppTypography.caption)
-                .foregroundStyle(AppColors.textSecondary)
 
                 Spacer(minLength: AppSpacing.lg)
                 Text(AppTheme.fullLegalLine)

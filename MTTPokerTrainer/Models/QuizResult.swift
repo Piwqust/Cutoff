@@ -33,9 +33,12 @@ final class QuizResult {
         facingAction: FacingAction,
         anteType: AnteType,
         rangeChartID: String,
-        userAction: PreflopAction,
-        correctAction: PreflopAction,
-        outcome: AnswerOutcome
+        userAction: RangeAction,
+        correctAction: RangeAction,
+        outcome: AnswerOutcome,
+        category: DrillCategory? = nil,
+        villain: VillainType? = nil,
+        explanation: String = ""
     ) {
         self.id = UUID()
         self.createdAt = .now
@@ -49,14 +52,14 @@ final class QuizResult {
         self.correctActionRaw = correctAction.rawValue
         self.outcomeRaw = outcome.rawValue
         self.score = outcome.score
-        self.categoryRaw = category.rawValue
-        self.villainRaw = villain.rawValue
+        self.categoryRaw = category?.rawValue ?? ""
+        self.villainRaw = villain?.rawValue ?? ""
         self.explanation = explanation
     }
 
     var position: TablePosition { TablePosition(rawValue: positionRaw) ?? .utg }
-    var facingAction: FacingAction { FacingAction(rawValue: facingActionRaw) ?? .rfi }
+    var facingAction: FacingAction { FacingAction(rawValue: facingActionRaw) ?? .unopened }
     var outcome: AnswerOutcome { AnswerOutcome(rawValue: outcomeRaw) ?? .mistake }
-    var userAction: PreflopAction { PreflopAction(rawValue: userActionRaw) ?? .fold }
-    var correctAction: PreflopAction { PreflopAction(rawValue: correctActionRaw) ?? .fold }
+    var userAction: RangeAction { RangeAction(rawValue: userActionRaw) ?? .fold }
+    var correctAction: RangeAction { RangeAction(rawValue: correctActionRaw) ?? .fold }
 }

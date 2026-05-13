@@ -7,6 +7,10 @@ final class RangesViewModel {
     var charts: [RangeChart] = []
     var didLoad = false
 
+    var selectedPosition: TablePosition?
+    var selectedDepthBucket: StackDepthBucket?
+    var selectedFacing: FacingAction?
+
     func load(using service: RangeService) {
         service.ensureLoaded()
         if charts.isEmpty {
@@ -16,6 +20,7 @@ final class RangesViewModel {
                 selectedDepthBucket = StackDepthBucket.nearest(to: first.stackDepth)
                 selectedFacing = first.facingAction
             }
+        }
     }
 
     func charts(forDepth depth: Int) -> [RangeChart] {
@@ -24,6 +29,26 @@ final class RangesViewModel {
 
     func charts(forFacing facing: FacingAction) -> [RangeChart] {
         charts.filter { $0.spot.facingAction == facing }
+    }
+
+    func charts(for position: TablePosition) -> [RangeChart] {
+        charts.filter { $0.position == position }
+    }
+
+    func chart(id: String) -> RangeChart? {
+        charts.first { $0.id == id }
+    }
+
+    private func chartSearchHaystack(_ chart: RangeChart) -> String {
+        [
+            chart.position.displayName,
+            chart.position.rawValue,
+            "\(chart.stackDepth)",
+            "\(chart.stackDepth)bb",
+            chart.facingAction.displayName,
+            chart.facingAction.rawValue,
+            chart.facingAction.headline
+        ].joined(separator: " ").lowercased()
     }
 
     // MARK: - Search

@@ -9,23 +9,19 @@ struct LeakCard: View {
     var spot: TrainingSpot? = nil
     let onDrill: () -> Void
 
-    init(title: String, detail: String, severity: Double, drillTitle: String = "Drill this", onDrill: @escaping () -> Void) {
+    init(
+        title: String,
+        detail: String,
+        severity: Double,
+        drillTitle: String = "Drill this",
+        spot: TrainingSpot? = nil,
+        onDrill: @escaping () -> Void
+    ) {
         self.title = title
         self.detail = detail
         self.severity = severity
         self.drillTitle = drillTitle
-        self.onDrill = onDrill
-    }
-
-    /// Convenience init that takes a `Leak` and wires the drill action to a
-    /// `NavigationLink`-style callback. Used by the Review tab where leaks
-    /// are surfaced inline; the drill button is a no-op for now since the
-    /// suggested-spot routing lives on the Train tab.
-    init(leak: Leak, onDrill: @escaping () -> Void = {}) {
-        self.title = leak.title
-        self.detail = leak.detail
-        self.severity = leak.severity
-        self.drillTitle = "Drill this"
+        self.spot = spot
         self.onDrill = onDrill
     }
 

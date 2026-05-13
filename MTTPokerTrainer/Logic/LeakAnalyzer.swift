@@ -16,8 +16,8 @@ struct Leak: Identifiable, Hashable {
 /// solver, it's a study cue.
 enum LeakAnalyzer {
     /// Actions that represent "playing the hand" (any non-fold preflop line).
-    private static let playingActions: Set<PreflopAction> = [
-        .call, .limp, .minRaise, .raise25x, .raise3x, .limpRaise, .shove
+    private static let playingActions: Set<RangeAction> = [
+        .call, .raise, .threeBet, .jam
     ]
 
     static func leaks(from results: [QuizResult]) -> [Leak] {
@@ -38,13 +38,13 @@ enum LeakAnalyzer {
                     title: "Too loose UTG",
                     detail: "You're opening hands from early position that play badly out of position.",
                     severity: min(1, ratio * 2),
-                    suggestedSpot: (.utg, 100, .rfi)
+                    suggestedSpot: (.utg, 100, .unopened)
                 ))
             }
         }
 
         // 2) Overfolding BB — folding hands from BB that the chart wants to defend.
-        let bbDefense = results.filter { $0.position == .bb && $0.facingAction == .vsOpenCall }
+        let bbDefense = results.filter { $0.position == .bb && $0.facingAction == .vsOpen }
         if bbDefense.count >= 5 {
             let overFolds = bbDefense.filter {
                 $0.userAction == .fold && $0.correctAction != .fold
@@ -56,7 +56,7 @@ enum LeakAnalyzer {
                     title: "Overfolding the Big Blind",
                     detail: "You're folding to opens too often. The blinds are already in — defend wider.",
                     severity: min(1, ratio * 1.6),
-                    suggestedSpot: (.bb, 30, .vsOpenCall)
+                    suggestedSpot: (.bb, 30, .vsOpen)
                 ))
             }
         }
@@ -78,7 +78,7 @@ enum LeakAnalyzer {
         }
 
         // 4) Missing reshove spots — folding when chart wants jam at short stack.
-        let shortJamSpots = results.filter { $0.stackDepthBB <= 20 && $0.correctAction == .shove }
+        let shortJamSpots = results.filter { $0.stackDepthBB <= 20 && $0.correctAction == .jam }
         if shortJamSpots.count >= 4 {
             let missed = shortJamSpots.filter { $0.userAction == .fold }.count
             let ratio = Double(missed) / Double(shortJamSpots.count)

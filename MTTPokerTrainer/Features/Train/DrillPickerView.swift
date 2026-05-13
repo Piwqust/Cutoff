@@ -131,7 +131,7 @@ struct DrillPickerView: View {
 
     private var startButton: some View {
         NavigationLink {
-            PreflopTrainerView(filter: activeFilter)
+            DrillTrainerView(category: .mixed)
         } label: {
             HStack(spacing: AppSpacing.xs) {
                 Text("Start Drill")

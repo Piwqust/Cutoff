@@ -15,7 +15,7 @@ struct Board: Hashable, Codable {
         var i = cleaned.startIndex
         while i < cleaned.endIndex {
             let next = cleaned.index(i, offsetBy: 2, limitedBy: cleaned.endIndex) ?? cleaned.endIndex
-            guard let card = Card(String(cleaned[i..<next])) else { return nil }
+            guard let card = Card(notation: String(cleaned[i..<next])) else { return nil }
             cards.append(card)
             i = next
         }
@@ -24,7 +24,7 @@ struct Board: Hashable, Codable {
     }
 
     var notation: String { cards.map(\.notation).joined() }
-    var display: String { cards.map(\.display).joined(separator: " ") }
+    var display: String { cards.map(\.notation).joined(separator: " ") }
     var street: Street {
         switch cards.count {
         case 3: return .flop

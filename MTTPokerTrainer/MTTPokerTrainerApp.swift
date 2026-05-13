@@ -5,6 +5,8 @@ import SwiftData
 struct MTTPokerTrainerApp: App {
     @State private var configStore = ConfigStore()
     @State private var rangeService = RangeService()
+    @State private var progressStore = ProgressStore()
+    @State private var router = AppRouter()
     private let modelContainer = AppModelContainer.make()
 
     var body: some Scene {
@@ -12,6 +14,8 @@ struct MTTPokerTrainerApp: App {
             RootView()
                 .environment(configStore)
                 .environment(rangeService)
+                .environment(progressStore)
+                .environment(router)
                 .modelContainer(modelContainer)
                 .preferredColorScheme(.dark)
                 .tint(AppColors.primaryMint)

@@ -37,15 +37,15 @@ enum ExplanationBuilder {
         }
 
         switch (dominant, spot.facingAction) {
-        case (.minRaise, .rfi), (.raise25x, .rfi), (.raise3x, .rfi):
+        case (.minRaise, .unopened), (.raise25x, .unopened), (.raise3x, .unopened):
             return "Open. \(pos) at \(bb) BB opens this hand."
-        case (.fold, .rfi):
+        case (.fold, .unopened):
             return "Fold. Too weak from \(pos) at \(bb) BB."
-        case (.raise3x, .vsOpenCall):
+        case (.raise3x, .vsOpen):
             return "3-bet. Strong enough to put pressure on the opener at \(bb) BB."
-        case (.call, .vsOpenCall):
+        case (.call, .vsOpen):
             return "Call. Defends well from \(pos) at \(bb) BB."
-        case (.fold, .vsOpenCall):
+        case (.fold, .vsOpen):
             return "Fold. Dominated too often to defend profitably."
         case (.shove, _):
             return "Jam. At \(bb) BB this hand has the right mix of fold equity and showdown."

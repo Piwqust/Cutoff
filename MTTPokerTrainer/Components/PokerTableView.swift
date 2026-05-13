@@ -242,7 +242,7 @@ struct PokerTableView: View {
         anteType: .bigBlindAnte,
         tableSize: 9
     )
-    return ZStack {
+    ZStack {
         AppBackground()
         VStack(spacing: AppSpacing.xl) {
             PokerTableView(snapshot: .from(spot: spot))

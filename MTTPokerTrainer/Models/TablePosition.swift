@@ -3,7 +3,7 @@ import Foundation
 /// Positions for a 9-max table, in early-to-late order.
 enum TablePosition: String, CaseIterable, Identifiable, Hashable {
     case utg   = "UTG"
-    case utg1  = "UTG1"   // JSON files use "UTG1"; display as "UTG+1"
+    case utg1  = "UTG+1"  // canonical raw; legacy "UTG1" accepted in decoder
     case lj    = "LJ"
     case hj    = "HJ"
     case co    = "CO"
@@ -13,9 +13,7 @@ enum TablePosition: String, CaseIterable, Identifiable, Hashable {
 
     var id: String { rawValue }
 
-    var displayName: String {
-        self == .utg1 ? "UTG+1" : rawValue
-    }
+    var displayName: String { rawValue }
 
     /// Ordered list used by the UI for filter chips.
     static let nineMaxOrder: [TablePosition] = [.utg, .utg1, .lj, .hj, .co, .btn, .sb, .bb]

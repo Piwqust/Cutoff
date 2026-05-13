@@ -29,4 +29,14 @@ enum Scorer {
         f[correct] = 1
         return evaluate(user: user, frequencies: f)
     }
+
+    /// Coarse-action overload used by drill-engine flows where the question
+    /// vocabulary is `RangeAction` (fold/call/raise/3-bet/jam).
+    static func evaluate(user: RangeAction, correct: RangeAction) -> AnswerOutcome {
+        if user == correct { return .correct }
+        let dist = abs(user.aggressionTier - correct.aggressionTier)
+        if dist == 1 { return .close }
+        if dist == 2 { return .mistake }
+        return .punt
+    }
 }

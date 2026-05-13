@@ -53,8 +53,8 @@ final class ScorerTests: XCTestCase {
     }
 
     func test_legacySingleActionOverloadStillWorks() {
-        XCTAssertEqual(Scorer.evaluate(user: .fold, correct: .fold), .correct)
-        XCTAssertEqual(Scorer.evaluate(user: .minRaise, correct: .minRaise), .correct)
-        XCTAssertEqual(Scorer.evaluate(user: .shove, correct: .fold), .punt)
+        XCTAssertEqual(Scorer.evaluate(user: PreflopAction.fold,     correct: PreflopAction.fold), .correct)
+        XCTAssertEqual(Scorer.evaluate(user: PreflopAction.minRaise, correct: PreflopAction.minRaise), .correct)
+        XCTAssertEqual(Scorer.evaluate(user: PreflopAction.shove,    correct: PreflopAction.fold), .punt)
     }
 }

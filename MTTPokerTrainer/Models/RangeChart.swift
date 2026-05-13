@@ -39,7 +39,14 @@ struct RangeChart: Codable, Identifiable, Hashable {
     }
 
     struct SourcePayload: Codable, Hashable {
-        enum Kind: String, Codable { case demo, userDefined, imported, gto }
+        enum Kind: String, Codable {
+            case demo, userDefined, imported, gto, nashComputed, solverDump
+
+            init(from decoder: Decoder) throws {
+                let raw = try decoder.singleValueContainer().decode(String.self)
+                self = Kind(rawValue: raw) ?? .demo
+            }
+        }
         let type: Kind
         let description: String
         let solver: SolverConfig?
@@ -52,19 +59,23 @@ struct RangeChart: Codable, Identifiable, Hashable {
 
         var humanLabel: String {
             switch type {
-            case .demo:        return "Demo training range"
-            case .userDefined: return "Nash / GTO range"
-            case .imported:    return "Imported range"
-            case .gto:         return "GTO approximation range"
+            case .demo:         return "Demo training range"
+            case .userDefined:  return "Nash / GTO range"
+            case .imported:     return "Imported range"
+            case .gto:          return "GTO approximation range"
+            case .nashComputed: return "Nash-computed range"
+            case .solverDump:   return "Solver output (approximate)"
             }
         }
 
         var fullDisclaimer: String {
             switch type {
-            case .demo:        return "Demo training range — not solver-verified."
-            case .userDefined: return "Nash / GTO approximation range — not solver-verified."
-            case .imported:    return "Imported range — provenance set by you."
-            case .gto:         return "GTO approximation range — not solver-verified."
+            case .demo:         return "Demo training range — not solver-verified."
+            case .userDefined:  return "Nash / GTO approximation range — not solver-verified."
+            case .imported:     return "Imported range — provenance set by you."
+            case .gto:          return "GTO approximation range — not solver-verified."
+            case .nashComputed: return "Nash-computed range — heuristic, not solver-verified."
+            case .solverDump:   return "Solver output — approximated, not solver-verified."
             }
         }
     }
@@ -104,6 +115,10 @@ struct RangeChart: Codable, Identifiable, Hashable {
         )
     }
 
+    /// Alias preferred by trainer/UI code that wants the bundled `(position,
+    /// depth, facing)` triple as one value.
+    var spot: TrainingSpot { trainingSpot }
+
     /// Fraction of combos that take each action. Folds are inferred (anything
     /// not listed in `hands` is treated as fold).
     func actionFrequencies() -> [RangeAction: Double] {
@@ -113,5 +128,13 @@ struct RangeChart: Codable, Identifiable, Hashable {
             counts[action(for: combo), default: 0] += 1
         }
         return counts.mapValues { Double($0) / Double(total) }
+    }
+
+    /// Coarse action for a combo: derived from the dominant `PreflopAction`.
+    func action(for combo: HandCombo) -> RangeAction {
+        let freq = frequencies(for: combo)
+        let nonzero = PreflopAction.allCases.filter { freq[$0] > 0 }
+        if nonzero.count > 1 { return .mixed }
+        return RangeAction(freq.dominantAction)
     }
 }

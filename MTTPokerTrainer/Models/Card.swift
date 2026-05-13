@@ -57,6 +57,22 @@ struct Card: Codable, Hashable, Identifiable {
         var container = encoder.singleValueContainer()
         try container.encode(notation)
     }
+
+    /// Unique [0, 52) index used by Monte Carlo equity sampling for fast
+    /// "is this card already dead?" set lookups.
+    var index52: Int { rank.sortValue * 4 + Suit.allCases.firstIndex(of: suit)! }
+
+    /// Full 52-card deck, indexed so `deck[card.index52] == card`.
+    static let deck: [Card] = {
+        var cards: [Card] = []
+        cards.reserveCapacity(52)
+        for rank in HandCombo.Rank.allCases {
+            for suit in Suit.allCases {
+                cards.append(Card(rank: rank, suit: suit))
+            }
+        }
+        return cards
+    }()
 }
 
 /// Two-card hand (hero's hole cards) — distinct from the abstract HandCombo.

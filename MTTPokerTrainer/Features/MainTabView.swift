@@ -7,18 +7,11 @@ struct MainTabView: View {
 
     var body: some View {
         TabView(selection: $selection) {
-            NavigationStack {
-                if MainTabView.launchRoute == "preflop" {
-                    PreflopTrainerView()
-                } else if MainTabView.launchRoute == "pushfold" {
-                    PushFoldTrainerView()
-                } else if MainTabView.launchRoute == "stackdepth" {
-                    StackDepthTrainerView()
-                } else if MainTabView.launchRoute == "postflop" {
-                    PostflopDrillView()
-                } else {
-                    TrainDashboardView()
-                }
+            NavigationStack(path: $trainPath) {
+                TrainDashboardView()
+                    .navigationDestination(for: DrillCategory.self) { cat in
+                        DrillTrainerView(category: cat)
+                    }
             }
             .tabItem { Label("Train", systemImage: "play.fill") }
             .tag(0)

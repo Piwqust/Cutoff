@@ -16,8 +16,12 @@ struct RangeChartView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: AppSpacing.lg) {
                     headerCard
-                    RangeGridView(chart: chart) { combo, action in
-                        handDetail = RangeDetailPayload(combo: combo, action: action, chart: chart)
+                    RangeGridView(chart: chart) { combo, _ in
+                        handDetail = RangeDetailPayload(
+                            combo: combo,
+                            frequencies: chart.frequencies(for: combo),
+                            chart: chart
+                        )
                     }
                     frequencyCard
                     RangeLegendView()
@@ -111,51 +115,3 @@ struct RangeChartView: View {
     }
 }
 
-struct RangeDetailPayload: Identifiable {
-    var id: String { combo.notation + chart.id }
-    let combo: HandCombo
-    let action: RangeAction
-    let chart: RangeChart
-}
-
-struct RangeDetailSheet: View {
-    let payload: RangeDetailPayload
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.md) {
-            HStack(spacing: AppSpacing.sm) {
-                HandCardView(hand: payload.combo.notation, size: .compact)
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(payload.combo.notation)
-                        .font(AppTypography.numericLarge)
-                        .foregroundStyle(AppColors.textPrimary)
-                    Text("\(payload.chart.spot.position.displayName) · \(payload.chart.spot.stackDepthBB) BB · \(payload.chart.spot.facingAction.displayName)")
-                        .font(AppTypography.subheadline)
-                        .foregroundStyle(AppColors.textSecondary)
-                }
-            }
-
-            HStack(spacing: 6) {
-                Image(systemName: payload.action.systemImage)
-                Text(payload.action.displayName)
-            }
-            .font(AppTypography.bodyBold)
-            .foregroundStyle(payload.action.prefersDarkForeground ? AppColors.backgroundDeep : AppColors.textPrimary)
-            .padding(.horizontal, AppSpacing.sm)
-            .padding(.vertical, 6)
-            .background(Capsule().fill(payload.action.tint))
-
-            Text(ExplanationBuilder.explain(spot: payload.chart.trainingSpot, combo: payload.combo, correct: payload.action))
-                .font(AppTypography.body)
-                .foregroundStyle(AppColors.textPrimary)
-                .fixedSize(horizontal: false, vertical: true)
-
-            Text(payload.chart.source.fullDisclaimer)
-                .font(AppTypography.caption)
-                .foregroundStyle(AppColors.textSecondary)
-        }
-        .padding(AppSpacing.xl)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(AppColors.cardSurface.ignoresSafeArea(edges: .bottom))
-    }
-}

@@ -12,76 +12,19 @@ import SwiftUI
 struct RangesView: View {
     @Environment(RangeService.self) private var rangeService
     @State private var vm = RangesViewModel()
-    @State private var detail: RangeDetailPayload?
-    @State private var detailHeight: CGFloat = 280
+    @StateObject private var browsing = RangeBrowsingStore()
 
     var body: some View {
-        ZStack {
-            AppBackground()
-            VStack(spacing: AppSpacing.md) {
-                filterRow
-                gridContainer
-                legendAndDisclaimer
-            }
-            .padding(.horizontal, AppSpacing.pageHorizontal)
-            .padding(.top, AppSpacing.sm)
-            .padding(.bottom, AppSpacing.lg)
-        }
-        .navigationTitle("Ranges")
-        .navigationBarTitleDisplayMode(.large)
-        .toolbarBackground(.hidden, for: .navigationBar)
-        .dynamicTypeSize(...DynamicTypeSize.accessibility2)
-        .onAppear { vm.load(using: rangeService) }
-        .sheet(item: $detail) { payload in
-            RangeDetailSheet(payload: payload)
-                .background(
-                    GeometryReader { geo in
-                        Color.clear.preference(key: RangeDetailHeightKey.self, value: geo.size.height)
-                    }
-                )
-                .onPreferenceChange(RangeDetailHeightKey.self) { h in
-                    if h > 0 { detailHeight = h }
-                }
-                .presentationDetents([.height(detailHeight)])
-                .presentationBackground(AppColors.cardSurface)
-                .presentationDragIndicator(.visible)
-        }
-    }
-
-    /// Convenience for the tab root: wraps `RangesView` in a NavigationStack
-    /// and installs the shared model/store at the stack level so all pushed
-    /// destinations inherit them.
-    static func tabRoot() -> some View {
-        TabRoot()
-    }
-
-    private var gridContainer: some View {
-        GeometryReader { geo in
-            let _ = geo
-            RangeGridView(chart: vm.activeChart) { combo, freqs in
-                guard let chart = vm.activeChart else { return }
-                detail = RangeDetailPayload(combo: combo, frequencies: freqs, chart: chart)
-            }
+        RangeLibraryView()
             .environment(vm)
             .environmentObject(browsing)
-        }
-        .aspectRatio(1, contentMode: .fit)
+            .onAppear { vm.load(using: rangeService) }
     }
 
-    private var legendAndDisclaimer: some View {
-        VStack(spacing: AppSpacing.xs) {
-            RangeLegendView()
-            if let chart = vm.activeChart {
-                Text("\(chart.source.humanLabel) · \(chart.position.displayName) · \(chart.stackDepth) BB · \(chart.facingAction.displayName)")
-                    .font(AppTypography.caption)
-                    .foregroundStyle(AppColors.textSecondary)
-                    .multilineTextAlignment(.center)
-            }
-            Text(AppTheme.fullLegalLine)
-                .font(AppTypography.caption)
-                .foregroundStyle(AppColors.textSecondary)
-                .multilineTextAlignment(.center)
-        }
+    /// Tab-root wrapper: hosts the navigation stack and shared state so the
+    /// pushed destinations (matrix / chart) inherit them.
+    static func tabRoot() -> some View {
+        NavigationStack { RangesView() }
     }
 }
 

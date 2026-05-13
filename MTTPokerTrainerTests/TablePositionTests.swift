@@ -11,11 +11,16 @@ final class TablePositionTests: XCTestCase {
     }
 
     func test_utg1_decodesFromJSONRawValue() throws {
-        // JSON files use "UTG1" (no plus sign). Make sure it round-trips.
+        // Canonical raw value is "UTG+1"; legacy "UTG1" still decodes via the
+        // custom Codable bridge.
         let data = try JSONEncoder().encode(TablePosition.utg1)
         let decoded = try JSONDecoder().decode(TablePosition.self, from: data)
         XCTAssertEqual(decoded, .utg1)
-        XCTAssertEqual(TablePosition.utg1.rawValue, "UTG1")
+        XCTAssertEqual(TablePosition.utg1.rawValue, "UTG+1")
         XCTAssertEqual(TablePosition.utg1.displayName, "UTG+1")
+
+        // Legacy form ("UTG1") still decodes.
+        let legacyData = "\"UTG1\"".data(using: .utf8)!
+        XCTAssertEqual(try JSONDecoder().decode(TablePosition.self, from: legacyData), .utg1)
     }
 }

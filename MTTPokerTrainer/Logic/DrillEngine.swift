@@ -26,8 +26,9 @@ struct DrillEngine {
 
         let pick = SpotGenerator(chart: chart).next(rng: &rng)
         let villain = category.defaultVillain
+        let baseCoarse = RangeAction(pick.frequencies.dominantAction)
         let mappedCorrect = mapCorrectAction(
-            base: pick.correctAction,
+            base: baseCoarse,
             available: category.availableActions,
             villain: villain
         )

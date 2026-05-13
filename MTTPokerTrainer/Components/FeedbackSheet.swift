@@ -3,7 +3,7 @@ import SwiftUI
 /// Bottom-sheet feedback shown after the user answers a preflop spot.
 struct FeedbackSheet: View {
     let outcome: AnswerOutcome
-    let correctAction: PreflopAction
+    let correctAction: RangeAction
     let explanation: String
     var dataLabel: String? = "Demo training range — not solver-verified."
     let onNext: () -> Void
@@ -130,7 +130,7 @@ extension View {
             .overlay(alignment: .bottom) {
                 FeedbackSheet(
                     outcome: .correct,
-                    correctAction: .raise25x,
+                    correctAction: .raise,
                     explanation: "Open. CO at 100 BB can lead with this hand.",
                     onNext: {}, onViewRange: {}
                 )

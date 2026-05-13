@@ -50,27 +50,4 @@ final class ChartCatalogTests: XCTestCase {
         }
     }
 
-    func test_viewModel_doesNotPivotOnInvalidSelection() {
-        let vm = RangesViewModel()
-        vm.load()
-        // Start from a known-good state.
-        vm.selectedPosition = .bb
-        vm.selectedFacing = .blindDefense
-        vm.selectedDepthBucket = .bb100
-        // Try to pick UTG with blindDefense — impossible, must be rejected.
-        vm.selectPosition(.utg)
-        XCTAssertEqual(vm.selectedPosition, .bb, "Invalid position selection must not stick")
-    }
-
-    func test_chipEnabled_reflectsAvailability() {
-        let vm = RangesViewModel()
-        vm.load()
-        vm.selectedPosition = .bb
-        vm.selectedFacing = .blindDefense
-        vm.selectedDepthBucket = .bb100
-        // Only BB is enabled when facing == blindDefense
-        XCTAssertTrue(vm.isPositionEnabled(.bb))
-        XCTAssertFalse(vm.isPositionEnabled(.utg))
-        XCTAssertFalse(vm.isPositionEnabled(.co))
-    }
 }
