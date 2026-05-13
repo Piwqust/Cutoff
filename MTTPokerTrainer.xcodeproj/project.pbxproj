@@ -47,7 +47,16 @@
 		2F0CFE9B6E14CA8D3BE95E21 /* AnteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A191471A5F7276438F274C3 /* AnteType.swift */; };
 		2F3072BF1372E19820170784 /* MTT_8max_30bb_BB_vsopencall.json in Resources */ = {isa = PBXBuildFile; fileRef = 81AF920C5EC301F1A9CEE838 /* MTT_8max_30bb_BB_vsopencall.json */; };
 		3357C0FFBC0F37684FDB8DD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8109EE80FB42EC0FC454DD19 /* Assets.xcassets */; };
-		3A03BB15FF4258BB56E4455F /* MTT_8max_100bb_UTG_RFI.json in Resources */ = {isa = PBXBuildFile; fileRef = 87477DA3828A984AE7F0D6B2 /* MTT_8max_100bb_UTG_RFI.json */; };
+		3448E08AF03E0D476C3BE4C1 /* gto_mtt_9max_75bb_co_vs3bet.json in Resources */ = {isa = PBXBuildFile; fileRef = C2971D67CB1D488EBE4D50CE /* gto_mtt_9max_75bb_co_vs3bet.json */; };
+		35FD8F768896DF77A1DF903F /* gto_mtt_9max_15bb_co_pushfold.json in Resources */ = {isa = PBXBuildFile; fileRef = FEC880CC4B19C925F02FB417 /* gto_mtt_9max_15bb_co_pushfold.json */; };
+		3629E751C9DBDE4BDA03AD72 /* gto_mtt_9max_40bb_co_vs3bet.json in Resources */ = {isa = PBXBuildFile; fileRef = 15BD96FFAB71AACFB2571330 /* gto_mtt_9max_40bb_co_vs3bet.json */; };
+		36C0B650BAA66887272209D7 /* gto_mtt_9max_30bb_sb_vs3bet.json in Resources */ = {isa = PBXBuildFile; fileRef = CF304BD8630DCB22923C6A54 /* gto_mtt_9max_30bb_sb_vs3bet.json */; };
+		38AC3289C08D850DFD8D4485 /* gto_mtt_9max_125bb_utg1_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = 208268F8EBAD4AFE6F32E516 /* gto_mtt_9max_125bb_utg1_unopened.json */; };
+		38B8A22A7CDFBE8715A61A86 /* PokerTableSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB75320733D0A176FBF375 /* PokerTableSnapshot.swift */; };
+		3921BFED03A3895A56BF7026 /* gto_fill_mtt_9max_20bb_co_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = 3E7457E8603BB086A4CD3EE4 /* gto_fill_mtt_9max_20bb_co_vsopen.json */; };
+		3925D43C1F0907E422212233 /* gto_fill_mtt_9max_10bb_co_squeeze.json in Resources */ = {isa = PBXBuildFile; fileRef = 6748915C2A76BA1AC61F6FD6 /* gto_fill_mtt_9max_10bb_co_squeeze.json */; };
+		39EDB0B6E19A1BE96E3078CE /* gto_fill_mtt_9max_30bb_btn_pushfold.json in Resources */ = {isa = PBXBuildFile; fileRef = 70235C32D83ADC7556D64AA3 /* gto_fill_mtt_9max_30bb_btn_pushfold.json */; };
+		3A9848FFDC5AA53404C65CFE /* gto_mtt_9max_125bb_bb_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = 4BE2306EF07B6DEBDB07C5B6 /* gto_mtt_9max_125bb_bb_vsopen.json */; };
 		3C0C97715DB96C97469CD6E6 /* QuizResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A622F3BFCC95CBD7247B612C /* QuizResult.swift */; };
 		3C2C707FF83B9AC236EAFD99 /* MTT_8max_30bb_BTN_RFI.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AEF0F487D10FAF6B17EC134 /* MTT_8max_30bb_BTN_RFI.json */; };
 		3F022FA38B7A2A9947D88BA3 /* AppBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = B407A4AFDF980B2D9D1C45B8 /* AppBackground.swift */; };
@@ -119,7 +128,16 @@
 		E571CF55C37FAB34B0200B7B /* RangeCoverageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA10CE67053842DBF70633FA /* RangeCoverageTests.swift */; };
 		EA2819F321A51F3F835F2D66 /* PostflopScorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6766084EE94070F1EFB0F77C /* PostflopScorer.swift */; };
 		EB0BCCAEC5605F3884BAD04D /* StackDepthBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21ED46CB809289FE69461467 /* StackDepthBucket.swift */; };
-		EE2BD56FB0926581E037E01B /* PostflopSpot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18B5336FE6D395F1D221C8C /* PostflopSpot.swift */; };
+		EB3A0563CD5134C527A53E91 /* gto_fill_mtt_9max_20bb_hj_vs3bet.json in Resources */ = {isa = PBXBuildFile; fileRef = 9C59F6F7E0F2A7C6832B5CB3 /* gto_fill_mtt_9max_20bb_hj_vs3bet.json */; };
+		EC2874257C47ACACA568B267 /* gto_fill_mtt_9max_40bb_btn_pushfold.json in Resources */ = {isa = PBXBuildFile; fileRef = CF6D2BC23B26D1E526B5A0EC /* gto_fill_mtt_9max_40bb_btn_pushfold.json */; };
+		ECC1D95F8782D688B7E908FC /* gto_fill_mtt_9max_10bb_bb_blinddefense.json in Resources */ = {isa = PBXBuildFile; fileRef = C01D2480773012560E270FDA /* gto_fill_mtt_9max_10bb_bb_blinddefense.json */; };
+		ED6290AAB7CCBAA942E2A56F /* gto_mtt_9max_75bb_sb_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = A8A17546B11EF3D43981D157 /* gto_mtt_9max_75bb_sb_vsopen.json */; };
+		ED94742A43702BB9F327EAA4 /* gto_mtt_9max_125bb_co_vs3bet.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A503C28C074DE4C18F5A91E /* gto_mtt_9max_125bb_co_vs3bet.json */; };
+		EDB3B7AF0B480421A8D69A32 /* gto_fill_mtt_9max_40bb_co_squeeze.json in Resources */ = {isa = PBXBuildFile; fileRef = 8C928A512D3C653B64F778F5 /* gto_fill_mtt_9max_40bb_co_squeeze.json */; };
+		EE2E6E0920C4288A050BC1E6 /* PokerTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39B022CE918CBF3FA861D58 /* PokerTableView.swift */; };
+		EE423138F50F38AB089D2B22 /* gto_mtt_9max_100bb_btn_vs3bet.json in Resources */ = {isa = PBXBuildFile; fileRef = 81147878754C6C1A37706AAC /* gto_mtt_9max_100bb_btn_vs3bet.json */; };
+		EE635424E60603203083EED8 /* gto_fill_mtt_9max_50bb_utg1_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BC7B336A0F3AE3F9A032A59 /* gto_fill_mtt_9max_50bb_utg1_vsopen.json */; };
+		EE8F641998ACE23B4FE8286E /* gto_mtt_9max_30bb_co_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = 7D122A605E0DCF0F189C1615 /* gto_mtt_9max_30bb_co_vsopen.json */; };
 		EEAFCB322E0A9D17193E6985 /* RangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5656DAC810437D88F6575FB /* RangeCell.swift */; };
 		F2B652DF7ABC9C9676823C0F /* TrainingSpot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160B1B6CBAAF4A432C3EF930 /* TrainingSpot.swift */; };
 		F4EB9CD6A556085E120A384E /* BoardTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BF8D9018D378CF8EE9945F /* BoardTexture.swift */; };
@@ -235,6 +253,8 @@
 		A1F473C8916973D53D4977FD /* gto_fill_mtt_9max_20bb_bb_squeeze.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gto_fill_mtt_9max_20bb_bb_squeeze.json; sourceTree = "<group>"; };
 		A243F58AB3A9842C642FB7A6 /* gto_fill_mtt_9max_25bb_hj_squeeze.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gto_fill_mtt_9max_25bb_hj_squeeze.json; sourceTree = "<group>"; };
 		A2A82B1D96E0E65A1A0BC0FE /* gto_mtt_9max_50bb_lj_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gto_mtt_9max_50bb_lj_unopened.json; sourceTree = "<group>"; };
+		A39B022CE918CBF3FA861D58 /* PokerTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerTableView.swift; sourceTree = "<group>"; };
+		A3BB75320733D0A176FBF375 /* PokerTableSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerTableSnapshot.swift; sourceTree = "<group>"; };
 		A562F7149C3590635487A1C0 /* gto_mtt_9max_50bb_utg_vs3bet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gto_mtt_9max_50bb_utg_vs3bet.json; sourceTree = "<group>"; };
 		A57A755DEFFE0E686502AA5A /* gto_fill_mtt_9max_15bb_lj_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gto_fill_mtt_9max_15bb_lj_unopened.json; sourceTree = "<group>"; };
 		A622F3BFCC95CBD7247B612C /* QuizResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResult.swift; sourceTree = "<group>"; };
@@ -308,8 +328,7 @@
 				2737A7357E2C5ED17040794A /* HandCombo.swift */,
 				F0DA8C5A39707E9E5E43D924 /* HandFrequencies.swift */,
 				9CFD370436D10247CA3FAEEB /* PlayerLevel.swift */,
-				1126421087A51E76CB89352C /* PostflopAction.swift */,
-				F18B5336FE6D395F1D221C8C /* PostflopSpot.swift */,
+				A3BB75320733D0A176FBF375 /* PokerTableSnapshot.swift */,
 				A622F3BFCC95CBD7247B612C /* QuizResult.swift */,
 				7B55B3004AFD3D3FE4809F18 /* RangeAction.swift */,
 				F5656DAC810437D88F6575FB /* RangeCell.swift */,
@@ -477,6 +496,7 @@
 				3FFBF9108B10FF3115B9C4CA /* GlassCard.swift */,
 				8DD85B056F075734D708790B /* HandCardView.swift */,
 				BE0387458DF268357615F160 /* LeakCard.swift */,
+				A39B022CE918CBF3FA861D58 /* PokerTableView.swift */,
 				3EE04F95A47AE7A227B95AC4 /* PrimaryButton.swift */,
 				8F733E0FA6F92B2B0FEBDA48 /* RangeCellView.swift */,
 				C2D12233F777AECC298BCCE2 /* RangeGridView.swift */,
@@ -702,12 +722,8 @@
 				C399811CBA002031906A7B52 /* ModelContainer+App.swift in Sources */,
 				E3D46E0856D9F6F475A76745 /* OnboardingView.swift in Sources */,
 				85EE680D8A64FF706CCEA88D /* PlayerLevel.swift in Sources */,
-				E4988B5F71953435CBB28E98 /* PostflopAction.swift in Sources */,
-				C2B5791E98CB2F27ABCE7EB7 /* PostflopDrillView.swift in Sources */,
-				CDA635B5AF2A1AF9AE78BAD8 /* PostflopDrillViewModel.swift in Sources */,
-				D666C1383166A8C4BA455112 /* PostflopLoader.swift in Sources */,
-				EA2819F321A51F3F835F2D66 /* PostflopScorer.swift in Sources */,
-				EE2BD56FB0926581E037E01B /* PostflopSpot.swift in Sources */,
+				38B8A22A7CDFBE8715A61A86 /* PokerTableSnapshot.swift in Sources */,
+				EE2E6E0920C4288A050BC1E6 /* PokerTableView.swift in Sources */,
 				223460FF74471C3DD0A72ED4 /* PreflopTrainerView.swift in Sources */,
 				9E9D71B58870E4284B530E30 /* PreflopTrainerViewModel.swift in Sources */,
 				C095F2725F4FD059CDE1D940 /* PrimaryButton.swift in Sources */,

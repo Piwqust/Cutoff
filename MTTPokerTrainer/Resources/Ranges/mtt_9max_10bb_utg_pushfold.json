@@ -9,7 +9,7 @@
   },
   "source": {
     "type": "demo",
-    "description": "Demo training range — approximate GTO. Not solver-verified."
+    "description": "Approximate demo training range. Not solver-verified."
   },
   "hands": {
     "AA": "jam",
