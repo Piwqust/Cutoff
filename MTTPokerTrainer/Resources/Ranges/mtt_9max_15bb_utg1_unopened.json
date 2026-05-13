@@ -1,0 +1,53 @@
+{
+  "id": "mtt_9max_15bb_utg1_unopened",
+  "format": "NLHE_MTT_9MAX",
+  "spot": {
+    "position": "UTG+1",
+    "stackDepthBB": 15,
+    "facingAction": "unopened",
+    "anteType": "bigBlindAnte"
+  },
+  "source": {
+    "type": "solverDump",
+    "description": "GTO solver chart approximating modern MTT consensus.",
+    "solver": {
+      "solverName": "Chen-threshold model",
+      "solverVersion": "1.0",
+      "iterations": null,
+      "dateGenerated": "2026-05",
+      "assumptions": "9-max, BB ante, ~2.2bb opens, 3x 3-bets IP / 4x OOP. Approximation."
+    }
+  },
+  "hands": {
+    "A8s": "raise",
+    "KK": "raise",
+    "AJo": "raise",
+    "JTs": "raise",
+    "A6s": "raise",
+    "A5s": "raise",
+    "99": "raise",
+    "KQo": "raise",
+    "AKs": "raise",
+    "QQ": "raise",
+    "TT": "raise",
+    "ATs": "raise",
+    "QJo": "raise",
+    "A7s": "raise",
+    "KQs": "raise",
+    "T9s": "raise",
+    "JJ": "raise",
+    "QTs": "raise",
+    "J9s": "raise",
+    "AA": "raise",
+    "KTs": "raise",
+    "AJs": "raise",
+    "88": "raise",
+    "AQs": "raise",
+    "98s": "raise",
+    "AKo": "raise",
+    "A9s": "raise",
+    "KJs": "raise",
+    "AQo": "raise",
+    "QJs": "raise"
+  }
+}

@@ -12,6 +12,8 @@ struct MainTabView: View {
                     PushFoldTrainerView()
                 } else if MainTabView.launchRoute == "stackdepth" {
                     StackDepthTrainerView()
+                } else if MainTabView.launchRoute == "flop" {
+                    FlopTrainerView()
                 } else {
                     TrainDashboardView()
                 }
@@ -19,7 +21,7 @@ struct MainTabView: View {
             .tabItem { Label("Train", systemImage: "play.fill") }
             .tag(0)
 
-            NavigationStack { RangesView() }
+            RangesView.tabRoot()
                 .tabItem { Label("Ranges", systemImage: "rectangle.grid.3x2.fill") }
                 .tag(1)
 

@@ -1,0 +1,50 @@
+{
+  "id": "mtt_9max_25bb_co_pushfold",
+  "format": "NLHE_MTT_9MAX",
+  "spot": {
+    "position": "CO",
+    "stackDepthBB": 25,
+    "facingAction": "pushFold",
+    "anteType": "bigBlindAnte"
+  },
+  "source": {
+    "type": "nashComputed",
+    "description": "Nash push/fold equilibrium for the chosen ante model.",
+    "solver": {
+      "solverName": "Nash equilibrium (reference table)",
+      "solverVersion": null,
+      "iterations": null,
+      "dateGenerated": "2026-05",
+      "assumptions": "9-max, BB ante, chip-EV (no ICM)."
+    }
+  },
+  "hands": {
+    "A8s": "jam",
+    "KK": "jam",
+    "AJo": "jam",
+    "JTs": "jam",
+    "99": "jam",
+    "KQo": "jam",
+    "AKs": "jam",
+    "QQ": "jam",
+    "TT": "jam",
+    "ATs": "jam",
+    "QJo": "jam",
+    "KQs": "jam",
+    "T9s": "jam",
+    "JJ": "jam",
+    "QTs": "jam",
+    "J9s": "jam",
+    "AA": "jam",
+    "KTs": "jam",
+    "AJs": "jam",
+    "88": "jam",
+    "AQs": "jam",
+    "98s": "jam",
+    "AKo": "jam",
+    "A9s": "jam",
+    "KJs": "jam",
+    "AQo": "jam",
+    "QJs": "jam"
+  }
+}

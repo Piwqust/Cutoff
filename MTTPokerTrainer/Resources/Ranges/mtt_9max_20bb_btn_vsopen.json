@@ -1,0 +1,63 @@
+{
+  "id": "mtt_9max_20bb_btn_vsopen",
+  "format": "NLHE_MTT_9MAX",
+  "spot": {
+    "position": "BTN",
+    "stackDepthBB": 20,
+    "facingAction": "vsOpen",
+    "anteType": "bigBlindAnte"
+  },
+  "source": {
+    "type": "solverDump",
+    "description": "GTO solver chart approximating modern MTT consensus.",
+    "solver": {
+      "solverName": "Chen-threshold model",
+      "solverVersion": "1.0",
+      "iterations": null,
+      "dateGenerated": "2026-05",
+      "assumptions": "9-max, BB ante, ~2.2bb opens, 3x 3-bets IP / 4x OOP. Approximation."
+    }
+  },
+  "hands": {
+    "A8s": "call",
+    "KK": "jam",
+    "Q9s": "call",
+    "AJo": "threeBet",
+    "A3s": "call",
+    "JTs": "threeBet",
+    "A6s": "call",
+    "A5s": "threeBet",
+    "99": "threeBet",
+    "QTo": "call",
+    "87s": "call",
+    "KQo": "threeBet",
+    "AKs": "jam",
+    "QQ": "jam",
+    "TT": "jam",
+    "ATs": "threeBet",
+    "KJo": "call",
+    "QJo": "threeBet",
+    "A2s": "call",
+    "77": "call",
+    "A4s": "call",
+    "A7s": "call",
+    "T8s": "call",
+    "KQs": "jam",
+    "T9s": "threeBet",
+    "JJ": "jam",
+    "QTs": "threeBet",
+    "J9s": "threeBet",
+    "AA": "jam",
+    "KTs": "threeBet",
+    "AJs": "jam",
+    "88": "threeBet",
+    "AQs": "jam",
+    "98s": "call",
+    "AKo": "jam",
+    "A9s": "call",
+    "JTo": "call",
+    "KJs": "jam",
+    "AQo": "jam",
+    "QJs": "jam"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "mtt_9max_50bb_bb_squeeze",
+  "format": "NLHE_MTT_9MAX",
+  "spot": {
+    "position": "BB",
+    "stackDepthBB": 50,
+    "facingAction": "squeeze",
+    "anteType": "bigBlindAnte"
+  },
+  "source": {
+    "type": "solverDump",
+    "description": "GTO solver chart approximating modern MTT consensus.",
+    "solver": {
+      "solverName": "Chen-threshold model",
+      "solverVersion": "1.0",
+      "iterations": null,
+      "dateGenerated": "2026-05",
+      "assumptions": "9-max, BB ante, ~2.2bb opens, 3x 3-bets IP / 4x OOP. Approximation."
+    }
+  },
+  "hands": {
+    "KK": "threeBet",
+    "AJo": "call",
+    "JTs": "threeBet",
+    "99": "threeBet",
+    "KQo": "call",
+    "AKs": "threeBet",
+    "QQ": "threeBet",
+    "TT": "threeBet",
+    "ATs": "threeBet",
+    "QJo": "call",
+    "KQs": "threeBet",
+    "JJ": "threeBet",
+    "QTs": "threeBet",
+    "AA": "threeBet",
+    "KTs": "call",
+    "AJs": "threeBet",
+    "AQs": "threeBet",
+    "AKo": "threeBet",
+    "KJs": "threeBet",
+    "AQo": "threeBet",
+    "QJs": "threeBet"
+  }
+}

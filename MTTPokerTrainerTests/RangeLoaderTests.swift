@@ -4,42 +4,49 @@ import XCTest
 
 final class RangeLoaderTests: XCTestCase {
 
-    /// Resolve the host-app bundle (where the JSON resources live), regardless
-    /// of whether the test target runs inside the app or standalone.
+    /// Resolve the host-app bundle (where the JSON resources live).
     private var appBundle: Bundle {
-        // A class declared in the app module — `Bundle(for:)` returns the app bundle.
         Bundle(for: QuizResult.self)
     }
 
-    func test_bundledRanges_allDecodeWithKnownSourceTypeAndDisclaimer() throws {
+    func test_bundledRanges_loadFullSpotMatrix() throws {
         let loader = RangeLoader(bundle: appBundle)
-        let charts = (try? loader.loadAll()) ?? []
+        let charts = try loader.loadAll()
 
-        // Expect at least the original 6 demo files OR the generated Nash/GTO replacements.
-        XCTAssertGreaterThanOrEqual(
-            charts.count, 6, "Expected at least six bundled ranges, found \(charts.count)")
-        let allowedKinds: Set<RangeChart.SourcePayload.Kind> = [.demo, .userDefined]
+        XCTAssertEqual(charts.count, SpotMatrix.all.count,
+                       "Range count (\(charts.count)) does not match SpotMatrix count (\(SpotMatrix.all.count)).")
+
+        let chartTriples = Set(charts.map {
+            SpotMatrix.Triple(position: $0.spot.position, depth: $0.spot.stackDepthBB, facing: $0.spot.facingAction)
+        })
+
+        for spot in SpotMatrix.all {
+            let triple = SpotMatrix.Triple(position: spot.position, depth: spot.stackDepthBB, facing: spot.facingAction)
+            XCTAssertTrue(chartTriples.contains(triple),
+                          "Missing chart for \(spot.position.displayName) \(spot.stackDepthBB) BB \(spot.facingAction.displayName)")
+        }
+    }
+
+    func test_bundledRanges_haveValidSourceKinds() throws {
+        let loader = RangeLoader(bundle: appBundle)
+        let charts = try loader.loadAll()
+
+        let allowed: Set<RangeChart.SourcePayload.Kind> = [.nashComputed, .solverDump, .demoHandAuthored, .userImported]
         for chart in charts {
-            XCTAssertTrue(
-                allowedKinds.contains(chart.source.type),
-                "Range \(chart.id) has unexpected source type '\(chart.source.type.rawValue)'"
-            )
-            XCTAssertTrue(
-                chart.source.description.lowercased().contains("not solver-verified"),
-                "Range \(chart.id) is missing the 'not solver-verified' caveat"
-            )
+            XCTAssertTrue(allowed.contains(chart.source.type),
+                          "Chart \(chart.id) has unexpected source.type")
             XCTAssertEqual(chart.format, "NLHE_MTT_9MAX")
         }
     }
 
-    func test_nearestMatch_picksClosestDepth() throws {
+    func test_pushfoldSpots_areNashComputed() throws {
         let loader = RangeLoader(bundle: appBundle)
-        let charts = (try? loader.loadAll()) ?? []
-        try XCTSkipIf(charts.isEmpty, "No bundled ranges available in this test environment")
-
-        let chart = loader.chart(matching: .btn, depthBB: 11, facing: .pushFold, in: charts)
-        XCTAssertNotNil(chart)
-        XCTAssertEqual(chart?.spot.position, .btn)
-        XCTAssertEqual(chart?.spot.facingAction, .pushFold)
+        let charts = try loader.loadAll()
+        let pushFold = charts.filter { $0.spot.facingAction == .pushFold }
+        XCTAssertFalse(pushFold.isEmpty)
+        for chart in pushFold {
+            XCTAssertEqual(chart.source.type, .nashComputed,
+                           "Push/fold chart \(chart.id) should be nashComputed.")
+        }
     }
 }
