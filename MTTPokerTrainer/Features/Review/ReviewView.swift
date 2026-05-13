@@ -16,10 +16,19 @@ struct ReviewView: View {
                     if allResults.isEmpty {
                         emptyState
                     } else {
-                        summaryCard
-                        leaksSection
-                        filterRow
-                        historyList
+                        let leaks = LeakAnalyzer.leaks(from: allResults)
+                        if leaks.isEmpty {
+                            noLeaksState
+                        } else {
+                            ForEach(leaks) { leak in
+                                LeakCard(
+                                    title: leak.title,
+                                    detail: leak.detail,
+                                    severity: leak.severity,
+                                    onDrill: {}
+                                )
+                            }
+                        }
                     }
 
                     Text(AppTheme.fullLegalLine)

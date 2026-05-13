@@ -108,19 +108,47 @@ struct TrainDashboardView: View {
         }
     }
 
-    // MARK: - Drill grid
-
-    private var drillGrid: some View {
-        let drills: [DrillCategory] = [.firstInJam, .reJam, .callJam, .stealBlinds, .vsManiac]
-        return VStack(spacing: AppSpacing.sm) {
-            ForEach(drills) { drill in
-                NavigationLink {
-                    DrillTrainerView(category: drill)
-                } label: {
-                    DrillRow(category: drill, rating: progress.rating(for: drill))
-                }
-                .buttonStyle(.plain)
-            }
+    private var modeGrid: some View {
+        VStack(spacing: AppSpacing.sm) {
+            NavigationLink { PreflopTrainerView() } label: {
+                TrainingModeCard(
+                    title: TrainingMode.preflop.title,
+                    subtitle: TrainingMode.preflop.subtitle,
+                    systemImage: TrainingMode.preflop.systemImage
+                )
+            }.buttonStyle(.plain)
+            NavigationLink { StackDepthTrainerView() } label: {
+                TrainingModeCard(
+                    title: TrainingMode.stackDepth.title,
+                    subtitle: TrainingMode.stackDepth.subtitle,
+                    systemImage: TrainingMode.stackDepth.systemImage,
+                    tint: AppColors.accentLime
+                )
+            }.buttonStyle(.plain)
+            NavigationLink { PushFoldTrainerView() } label: {
+                TrainingModeCard(
+                    title: TrainingMode.pushFold.title,
+                    subtitle: TrainingMode.pushFold.subtitle,
+                    systemImage: TrainingMode.pushFold.systemImage,
+                    tint: AppColors.accentCoral
+                )
+            }.buttonStyle(.plain)
+            NavigationLink { FlopTrainerView() } label: {
+                TrainingModeCard(
+                    title: TrainingMode.flop.title,
+                    subtitle: TrainingMode.flop.subtitle,
+                    systemImage: TrainingMode.flop.systemImage,
+                    tint: AppColors.accentGreen
+                )
+            }.buttonStyle(.plain)
+            NavigationLink { ReviewView() } label: {
+                TrainingModeCard(
+                    title: TrainingMode.mistakes.title,
+                    subtitle: TrainingMode.mistakes.subtitle,
+                    systemImage: TrainingMode.mistakes.systemImage,
+                    tint: AppColors.accentPeach
+                )
+            }.buttonStyle(.plain)
         }
     }
 

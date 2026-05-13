@@ -1,0 +1,5098 @@
+{
+  "format": "NLHE_MTT_FLOP_PACK",
+  "version": "1.0",
+  "generatedAt": "2026-05",
+  "source": {
+    "type": "solverDump",
+    "solverName": "Hand-authored flop consensus table",
+    "assumptions": "9-max MTT, BB ante, ~2.2bb opens, 3x 3-bets IP / 4x OOP. Single-bet, single-raiser scenarios. Frequencies approximate modern GTO consensus per texture.",
+    "description": "Compact flop training library covering 4 preflop scenarios \u00d7 3 depths \u00d7 9 board textures \u00d7 2 decision points."
+  },
+  "spots": [
+    {
+      "id": "flop_srp_ip_40bb_dry_high_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.85,
+        "check": 0.15
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_srp_ip_40bb_dry_high_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_srp_ip_40bb_dry_low_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.55,
+        "check": 0.45
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_srp_ip_40bb_dry_low_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.7,
+        "fold": 0.2,
+        "raise": 0.1
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_srp_ip_40bb_wet_connected_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.45,
+        "bet66": 0.1,
+        "check": 0.45
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_srp_ip_40bb_wet_connected_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.2,
+        "raise": 0.15
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_srp_ip_40bb_monotone_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.65,
+        "bet33": 0.35
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_srp_ip_40bb_monotone_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.4,
+        "raise": 0.1
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_srp_ip_40bb_two_tone_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.7,
+        "check": 0.3
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_srp_ip_40bb_two_tone_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_srp_ip_40bb_paired_high_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.55,
+        "check": 0.45
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_srp_ip_40bb_paired_high_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_srp_ip_40bb_paired_low_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.75,
+        "check": 0.25
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_srp_ip_40bb_paired_low_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.3,
+        "raise": 0.05
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_srp_ip_40bb_broadway_heavy_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.8,
+        "check": 0.2
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_srp_ip_40bb_broadway_heavy_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.45,
+        "raise": 0.05
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_srp_ip_40bb_middle_mixed_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.5,
+        "check": 0.5
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_srp_ip_40bb_middle_mixed_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_srp_ip_75bb_dry_high_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.85,
+        "check": 0.15
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_srp_ip_75bb_dry_high_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_srp_ip_75bb_dry_low_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.55,
+        "check": 0.45
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_srp_ip_75bb_dry_low_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.7,
+        "fold": 0.2,
+        "raise": 0.1
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_srp_ip_75bb_wet_connected_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.45,
+        "bet66": 0.1,
+        "check": 0.45
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_srp_ip_75bb_wet_connected_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.2,
+        "raise": 0.15
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_srp_ip_75bb_monotone_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.65,
+        "bet33": 0.35
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_srp_ip_75bb_monotone_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.4,
+        "raise": 0.1
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_srp_ip_75bb_two_tone_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.7,
+        "check": 0.3
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_srp_ip_75bb_two_tone_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_srp_ip_75bb_paired_high_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.55,
+        "check": 0.45
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_srp_ip_75bb_paired_high_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_srp_ip_75bb_paired_low_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.75,
+        "check": 0.25
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_srp_ip_75bb_paired_low_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.3,
+        "raise": 0.05
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_srp_ip_75bb_broadway_heavy_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.8,
+        "check": 0.2
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_srp_ip_75bb_broadway_heavy_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.45,
+        "raise": 0.05
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_srp_ip_75bb_middle_mixed_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.5,
+        "check": 0.5
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_srp_ip_75bb_middle_mixed_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_srp_ip_125bb_dry_high_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.85,
+        "check": 0.15
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_srp_ip_125bb_dry_high_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_srp_ip_125bb_dry_low_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.55,
+        "check": 0.45
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_srp_ip_125bb_dry_low_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.7,
+        "fold": 0.2,
+        "raise": 0.1
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_srp_ip_125bb_wet_connected_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.45,
+        "bet66": 0.1,
+        "check": 0.45
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_srp_ip_125bb_wet_connected_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.2,
+        "raise": 0.15
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_srp_ip_125bb_monotone_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.65,
+        "bet33": 0.35
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_srp_ip_125bb_monotone_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.4,
+        "raise": 0.1
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_srp_ip_125bb_two_tone_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.7,
+        "check": 0.3
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_srp_ip_125bb_two_tone_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_srp_ip_125bb_paired_high_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.55,
+        "check": 0.45
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_srp_ip_125bb_paired_high_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_srp_ip_125bb_paired_low_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.75,
+        "check": 0.25
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_srp_ip_125bb_paired_low_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.3,
+        "raise": 0.05
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_srp_ip_125bb_broadway_heavy_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.8,
+        "check": 0.2
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_srp_ip_125bb_broadway_heavy_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.45,
+        "raise": 0.05
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_srp_ip_125bb_middle_mixed_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.5,
+        "check": 0.5
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_srp_ip_125bb_middle_mixed_vs_cbet",
+      "scenario": "srp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_srp_oop_40bb_dry_high_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.7,
+        "check": 0.3
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_srp_oop_40bb_dry_high_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_srp_oop_40bb_dry_low_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.65,
+        "bet33": 0.35
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_srp_oop_40bb_dry_low_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.7,
+        "fold": 0.2,
+        "raise": 0.1
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_srp_oop_40bb_wet_connected_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.7,
+        "bet33": 0.3
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_srp_oop_40bb_wet_connected_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.2,
+        "raise": 0.15
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_srp_oop_40bb_monotone_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.8,
+        "bet33": 0.2
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_srp_oop_40bb_monotone_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.4,
+        "raise": 0.1
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_srp_oop_40bb_two_tone_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.55,
+        "check": 0.45
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_srp_oop_40bb_two_tone_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_srp_oop_40bb_paired_high_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.55,
+        "bet33": 0.45
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_srp_oop_40bb_paired_high_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_srp_oop_40bb_paired_low_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.6,
+        "check": 0.4
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_srp_oop_40bb_paired_low_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.3,
+        "raise": 0.05
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_srp_oop_40bb_broadway_heavy_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.7,
+        "check": 0.3
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_srp_oop_40bb_broadway_heavy_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.45,
+        "raise": 0.05
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_srp_oop_40bb_middle_mixed_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.55,
+        "bet33": 0.45
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_srp_oop_40bb_middle_mixed_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_srp_oop_75bb_dry_high_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.7,
+        "check": 0.3
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_srp_oop_75bb_dry_high_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_srp_oop_75bb_dry_low_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.65,
+        "bet33": 0.35
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_srp_oop_75bb_dry_low_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.7,
+        "fold": 0.2,
+        "raise": 0.1
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_srp_oop_75bb_wet_connected_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.7,
+        "bet33": 0.3
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_srp_oop_75bb_wet_connected_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.2,
+        "raise": 0.15
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_srp_oop_75bb_monotone_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.8,
+        "bet33": 0.2
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_srp_oop_75bb_monotone_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.4,
+        "raise": 0.1
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_srp_oop_75bb_two_tone_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.55,
+        "check": 0.45
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_srp_oop_75bb_two_tone_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_srp_oop_75bb_paired_high_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.55,
+        "bet33": 0.45
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_srp_oop_75bb_paired_high_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_srp_oop_75bb_paired_low_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.6,
+        "check": 0.4
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_srp_oop_75bb_paired_low_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.3,
+        "raise": 0.05
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_srp_oop_75bb_broadway_heavy_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.7,
+        "check": 0.3
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_srp_oop_75bb_broadway_heavy_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.45,
+        "raise": 0.05
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_srp_oop_75bb_middle_mixed_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.55,
+        "bet33": 0.45
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_srp_oop_75bb_middle_mixed_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_srp_oop_125bb_dry_high_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.7,
+        "check": 0.3
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_srp_oop_125bb_dry_high_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_srp_oop_125bb_dry_low_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.65,
+        "bet33": 0.35
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_srp_oop_125bb_dry_low_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.7,
+        "fold": 0.2,
+        "raise": 0.1
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_srp_oop_125bb_wet_connected_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.7,
+        "bet33": 0.3
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_srp_oop_125bb_wet_connected_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.2,
+        "raise": 0.15
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_srp_oop_125bb_monotone_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.8,
+        "bet33": 0.2
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_srp_oop_125bb_monotone_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.4,
+        "raise": 0.1
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_srp_oop_125bb_two_tone_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.55,
+        "check": 0.45
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_srp_oop_125bb_two_tone_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_srp_oop_125bb_paired_high_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.55,
+        "bet33": 0.45
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_srp_oop_125bb_paired_high_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_srp_oop_125bb_paired_low_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.6,
+        "check": 0.4
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_srp_oop_125bb_paired_low_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.3,
+        "raise": 0.05
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_srp_oop_125bb_broadway_heavy_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.7,
+        "check": 0.3
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_srp_oop_125bb_broadway_heavy_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.45,
+        "raise": 0.05
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_srp_oop_125bb_middle_mixed_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.55,
+        "bet33": 0.45
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_srp_oop_125bb_middle_mixed_vs_cbet",
+      "scenario": "srp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BB called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_3bp_ip_40bb_dry_high_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.9,
+        "bet66": 0.05,
+        "check": 0.05
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_3bp_ip_40bb_dry_high_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_3bp_ip_40bb_dry_low_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.7,
+        "check": 0.3
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_3bp_ip_40bb_dry_low_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.7,
+        "fold": 0.2,
+        "raise": 0.1
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_3bp_ip_40bb_wet_connected_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.3,
+        "bet66": 0.15,
+        "check": 0.55
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_3bp_ip_40bb_wet_connected_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.2,
+        "raise": 0.15
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_3bp_ip_40bb_monotone_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.7,
+        "bet33": 0.3
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_3bp_ip_40bb_monotone_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.4,
+        "raise": 0.1
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_3bp_ip_40bb_two_tone_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.75,
+        "check": 0.25
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_3bp_ip_40bb_two_tone_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_3bp_ip_40bb_paired_high_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.55,
+        "check": 0.45
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_3bp_ip_40bb_paired_high_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_3bp_ip_40bb_paired_low_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.75,
+        "check": 0.25
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_3bp_ip_40bb_paired_low_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.3,
+        "raise": 0.05
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_3bp_ip_40bb_broadway_heavy_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.85,
+        "check": 0.15
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_3bp_ip_40bb_broadway_heavy_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.45,
+        "raise": 0.05
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_3bp_ip_40bb_middle_mixed_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.55,
+        "check": 0.45
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_3bp_ip_40bb_middle_mixed_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 40,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 40 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_3bp_ip_75bb_dry_high_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.9,
+        "bet66": 0.05,
+        "check": 0.05
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_3bp_ip_75bb_dry_high_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_3bp_ip_75bb_dry_low_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.7,
+        "check": 0.3
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_3bp_ip_75bb_dry_low_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.7,
+        "fold": 0.2,
+        "raise": 0.1
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_3bp_ip_75bb_wet_connected_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.3,
+        "bet66": 0.15,
+        "check": 0.55
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_3bp_ip_75bb_wet_connected_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.2,
+        "raise": 0.15
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_3bp_ip_75bb_monotone_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.7,
+        "bet33": 0.3
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_3bp_ip_75bb_monotone_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.4,
+        "raise": 0.1
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_3bp_ip_75bb_two_tone_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.75,
+        "check": 0.25
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_3bp_ip_75bb_two_tone_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_3bp_ip_75bb_paired_high_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.55,
+        "check": 0.45
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_3bp_ip_75bb_paired_high_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_3bp_ip_75bb_paired_low_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.75,
+        "check": 0.25
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_3bp_ip_75bb_paired_low_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.3,
+        "raise": 0.05
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_3bp_ip_75bb_broadway_heavy_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.85,
+        "check": 0.15
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_3bp_ip_75bb_broadway_heavy_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.45,
+        "raise": 0.05
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_3bp_ip_75bb_middle_mixed_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.55,
+        "check": 0.45
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_3bp_ip_75bb_middle_mixed_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 75,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 75 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_3bp_ip_125bb_dry_high_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.9,
+        "bet66": 0.05,
+        "check": 0.05
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_3bp_ip_125bb_dry_high_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_3bp_ip_125bb_dry_low_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.7,
+        "check": 0.3
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_3bp_ip_125bb_dry_low_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.7,
+        "fold": 0.2,
+        "raise": 0.1
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_3bp_ip_125bb_wet_connected_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.3,
+        "bet66": 0.15,
+        "check": 0.55
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_3bp_ip_125bb_wet_connected_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.2,
+        "raise": 0.15
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_3bp_ip_125bb_monotone_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.7,
+        "bet33": 0.3
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_3bp_ip_125bb_monotone_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.4,
+        "raise": 0.1
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_3bp_ip_125bb_two_tone_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.75,
+        "check": 0.25
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_3bp_ip_125bb_two_tone_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_3bp_ip_125bb_paired_high_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.55,
+        "check": 0.45
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_3bp_ip_125bb_paired_high_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_3bp_ip_125bb_paired_low_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.75,
+        "check": 0.25
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_3bp_ip_125bb_paired_low_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.3,
+        "raise": 0.05
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_3bp_ip_125bb_broadway_heavy_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.85,
+        "check": 0.15
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_3bp_ip_125bb_broadway_heavy_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.45,
+        "raise": 0.05
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_3bp_ip_125bb_middle_mixed_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.55,
+        "check": 0.45
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_3bp_ip_125bb_middle_mixed_vs_cbet",
+      "scenario": "3bp_ip",
+      "stackDepthBB": 125,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 125 BB",
+        "BTN opened 2.2x, BB 3-bet to 9bb, BTN called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_3bp_oop_40bb_dry_high_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.8,
+        "check": 0.2
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_3bp_oop_40bb_dry_high_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_3bp_oop_40bb_dry_low_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.6,
+        "bet33": 0.4
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_3bp_oop_40bb_dry_low_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.7,
+        "fold": 0.2,
+        "raise": 0.1
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_3bp_oop_40bb_wet_connected_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.65,
+        "bet33": 0.35
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_3bp_oop_40bb_wet_connected_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.2,
+        "raise": 0.15
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_3bp_oop_40bb_monotone_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.8,
+        "bet33": 0.2
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_3bp_oop_40bb_monotone_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.4,
+        "raise": 0.1
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_3bp_oop_40bb_two_tone_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.65,
+        "check": 0.35
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_3bp_oop_40bb_two_tone_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_3bp_oop_40bb_paired_high_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.55,
+        "bet33": 0.45
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_3bp_oop_40bb_paired_high_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_3bp_oop_40bb_paired_low_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.65,
+        "check": 0.35
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_3bp_oop_40bb_paired_low_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.3,
+        "raise": 0.05
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_3bp_oop_40bb_broadway_heavy_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.75,
+        "check": 0.25
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_3bp_oop_40bb_broadway_heavy_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.45,
+        "raise": 0.05
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_3bp_oop_40bb_middle_mixed_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.55,
+        "bet33": 0.45
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_3bp_oop_40bb_middle_mixed_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 40,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 40 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_3bp_oop_75bb_dry_high_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.8,
+        "check": 0.2
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_3bp_oop_75bb_dry_high_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_3bp_oop_75bb_dry_low_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.6,
+        "bet33": 0.4
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_3bp_oop_75bb_dry_low_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.7,
+        "fold": 0.2,
+        "raise": 0.1
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_3bp_oop_75bb_wet_connected_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.65,
+        "bet33": 0.35
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_3bp_oop_75bb_wet_connected_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.2,
+        "raise": 0.15
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_3bp_oop_75bb_monotone_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.8,
+        "bet33": 0.2
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_3bp_oop_75bb_monotone_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.4,
+        "raise": 0.1
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_3bp_oop_75bb_two_tone_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.65,
+        "check": 0.35
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_3bp_oop_75bb_two_tone_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_3bp_oop_75bb_paired_high_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.55,
+        "bet33": 0.45
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_3bp_oop_75bb_paired_high_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_3bp_oop_75bb_paired_low_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.65,
+        "check": 0.35
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_3bp_oop_75bb_paired_low_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.3,
+        "raise": 0.05
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_3bp_oop_75bb_broadway_heavy_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.75,
+        "check": 0.25
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_3bp_oop_75bb_broadway_heavy_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.45,
+        "raise": 0.05
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_3bp_oop_75bb_middle_mixed_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.55,
+        "bet33": 0.45
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_3bp_oop_75bb_middle_mixed_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 75,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 75 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_3bp_oop_125bb_dry_high_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.8,
+        "check": 0.2
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_3bp_oop_125bb_dry_high_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "dry_high",
+      "sampleBoard": "Ks7d2c",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: K\u2660 7\u2666 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "The preflop raiser's range hits top pair more often. C-bet small and often."
+    },
+    {
+      "id": "flop_3bp_oop_125bb_dry_low_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.6,
+        "bet33": 0.4
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_3bp_oop_125bb_dry_low_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "dry_low",
+      "sampleBoard": "8d3c2h",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: 8\u2666 3\u2663 2\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.7,
+        "fold": 0.2,
+        "raise": 0.1
+      },
+      "coachingNote": "Caller's range catches up here. Mix in checks \u2014 not a pure range bet board."
+    },
+    {
+      "id": "flop_3bp_oop_125bb_wet_connected_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.65,
+        "bet33": 0.35
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_3bp_oop_125bb_wet_connected_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "wet_connected",
+      "sampleBoard": "Th9s8d",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: T\u2665 9\u2660 8\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.2,
+        "raise": 0.15
+      },
+      "coachingNote": "Both ranges have many made hands and draws. Bet smaller, check more \u2014 range advantage is thinner."
+    },
+    {
+      "id": "flop_3bp_oop_125bb_monotone_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.8,
+        "bet33": 0.2
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_3bp_oop_125bb_monotone_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "monotone",
+      "sampleBoard": "KsTs5s",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: K\u2660 T\u2660 5\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.4,
+        "raise": 0.1
+      },
+      "coachingNote": "Flushes already exist; bare overpairs lose value. Check more."
+    },
+    {
+      "id": "flop_3bp_oop_125bb_two_tone_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.65,
+        "check": 0.35
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_3bp_oop_125bb_two_tone_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "two_tone",
+      "sampleBoard": "Qh7h2c",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: Q\u2665 7\u2665 2\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Strong c-bet board \u2014 preflop raiser benefits from charging draws."
+    },
+    {
+      "id": "flop_3bp_oop_125bb_paired_high_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.55,
+        "bet33": 0.45
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_3bp_oop_125bb_paired_high_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "paired_high",
+      "sampleBoard": "Kh7d7s",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: K\u2665 7\u2666 7\u2660",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.55,
+        "fold": 0.4,
+        "raise": 0.05
+      },
+      "coachingNote": "Most ranges miss; check more often. When betting, size small for thin value."
+    },
+    {
+      "id": "flop_3bp_oop_125bb_paired_low_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.65,
+        "check": 0.35
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_3bp_oop_125bb_paired_low_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "paired_low",
+      "sampleBoard": "5h5s2d",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: 5\u2665 5\u2660 2\u2666",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.65,
+        "fold": 0.3,
+        "raise": 0.05
+      },
+      "coachingNote": "Range advantage flop. Pairs and overcards dominate. Bet small for cheap protection."
+    },
+    {
+      "id": "flop_3bp_oop_125bb_broadway_heavy_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "bet33": 0.75,
+        "check": 0.25
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_3bp_oop_125bb_broadway_heavy_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "broadway_heavy",
+      "sampleBoard": "AhKsJc",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: A\u2665 K\u2660 J\u2663",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.5,
+        "fold": 0.45,
+        "raise": 0.05
+      },
+      "coachingNote": "Hits the preflop raiser's range hard. C-bet aggressively."
+    },
+    {
+      "id": "flop_3bp_oop_125bb_middle_mixed_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Action on the preflop raiser."
+      ],
+      "availableActions": [
+        "bet33",
+        "bet66",
+        "check"
+      ],
+      "solution": {
+        "check": 0.55,
+        "bet33": 0.45
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    },
+    {
+      "id": "flop_3bp_oop_125bb_middle_mixed_vs_cbet",
+      "scenario": "3bp_oop",
+      "stackDepthBB": 125,
+      "textureClass": "middle_mixed",
+      "sampleBoard": "Td8c5h",
+      "history": [
+        "Effective stack: 125 BB",
+        "CO opened 2.2x, BTN 3-bet to 7bb, CO called",
+        "Flop: T\u2666 8\u2663 5\u2665",
+        "Preflop raiser bets 1/3 pot. Action on you."
+      ],
+      "availableActions": [
+        "call",
+        "fold",
+        "raise"
+      ],
+      "solution": {
+        "call": 0.6,
+        "fold": 0.3,
+        "raise": 0.1
+      },
+      "coachingNote": "Most-balanced texture \u2014 mix bet/check evenly."
+    }
+  ]
+}
