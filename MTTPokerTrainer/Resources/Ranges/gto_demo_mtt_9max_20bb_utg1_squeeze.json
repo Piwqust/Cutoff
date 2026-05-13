@@ -1,0 +1,22 @@
+{
+  "id": "gto_demo_mtt_9max_20bb_utg1_squeeze",
+  "format": "NLHE_MTT_9MAX",
+  "spot": {
+    "position": "UTG+1",
+    "stackDepthBB": 20,
+    "facingAction": "squeeze",
+    "anteType": "bigBlindAnte"
+  },
+  "source": {
+    "type": "demo",
+    "description": "Demo training range — approximate GTO. Not solver-verified."
+  },
+  "hands": {
+    "AA": "jam",
+    "KK": "jam",
+    "QQ": "jam",
+    "JJ": "jam",
+    "AKs": "jam",
+    "AKo": "jam"
+  }
+}

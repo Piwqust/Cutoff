@@ -8,43 +8,18 @@
     "anteType": "bigBlindAnte"
   },
   "source": {
-    "type": "gto",
-    "description": "GTO approximation (cloned from closest spot to fill missing database entry)."
+    "type": "demo",
+    "description": "Demo training range — approximate GTO. Not solver-verified."
   },
   "hands": {
-    "22": "mixed",
-    "33": "mixed",
-    "44": "mixed",
-    "55": "raise",
-    "66": "raise",
-    "77": "raise",
-    "87s": "mixed",
-    "88": "raise",
-    "98s": "raise",
-    "99": "raise",
-    "A2s": "raise",
-    "A3s": "raise",
-    "A4s": "raise",
-    "A5s": "raise",
-    "A6s": "raise",
-    "A7s": "raise",
-    "A8s": "raise",
-    "A9s": "raise",
     "AA": "raise",
-    "AJs": "raise",
+    "KK": "raise",
+    "QQ": "raise",
+    "JJ": "raise",
+    "TT": "raise",
     "AKs": "raise",
     "AQs": "raise",
-    "ATs": "raise",
-    "JJ": "raise",
-    "JTs": "raise",
-    "KJs": "raise",
-    "KK": "raise",
-    "KQs": "raise",
-    "KTs": "raise",
-    "QJs": "raise",
-    "QQ": "raise",
-    "QTs": "raise",
-    "T9s": "raise",
-    "TT": "raise"
+    "AJs": "raise",
+    "AKo": "raise"
   }
 }

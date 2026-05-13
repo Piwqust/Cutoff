@@ -2,7 +2,7 @@
   "id": "gto_mtt_9max_15bb_utg1_pushfold",
   "format": "NLHE_MTT_9MAX",
   "spot": {
-    "position": "UTG1",
+    "position": "UTG+1",
     "stackDepthBB": 15,
     "facingAction": "pushFold",
     "anteType": "bigBlindAnte"

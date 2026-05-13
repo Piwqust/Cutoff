@@ -2,7 +2,7 @@
   "id": "gto_mtt_9max_25bb_utg1_unopened",
   "format": "NLHE_MTT_9MAX",
   "spot": {
-    "position": "UTG1",
+    "position": "UTG+1",
     "stackDepthBB": 25,
     "facingAction": "unopened",
     "anteType": "bigBlindAnte"

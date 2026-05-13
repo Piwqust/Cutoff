@@ -8,23 +8,17 @@
     "anteType": "bigBlindAnte"
   },
   "source": {
-    "type": "gto",
-    "description": "GTO approximation (cloned from closest spot to fill missing database entry)."
+    "type": "demo",
+    "description": "Demo training range — approximate GTO. Not solver-verified."
   },
   "hands": {
-    "99": "call",
-    "A5s": "mixed",
     "AA": "jam",
-    "AJs": "call",
-    "AKs": "jam",
-    "AQs": "call",
-    "ATs": "call",
-    "JJ": "call",
-    "KJs": "call",
     "KK": "jam",
-    "KQs": "call",
-    "KTs": "call",
     "QQ": "jam",
-    "TT": "call"
+    "JJ": "jam",
+    "AKs": "jam",
+    "AKo": "jam",
+    "TT": "call",
+    "AQs": "call"
   }
 }
