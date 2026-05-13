@@ -4,12 +4,14 @@ import SwiftData
 @main
 struct MTTPokerTrainerApp: App {
     @State private var configStore = ConfigStore()
+    @State private var rangeService = RangeService()
     private let modelContainer = AppModelContainer.make()
 
     var body: some Scene {
         WindowGroup {
             RootView()
                 .environment(configStore)
+                .environment(rangeService)
                 .modelContainer(modelContainer)
                 .preferredColorScheme(.dark)
                 .tint(AppColors.primaryMint)

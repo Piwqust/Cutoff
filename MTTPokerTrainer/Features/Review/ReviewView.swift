@@ -18,7 +18,7 @@ struct ReviewView: View {
                             noLeaksState
                         } else {
                             ForEach(leaks) { leak in
-                                LeakCard(leak: leak)
+                                leakCard(for: leak)
                             }
                         }
                     }
@@ -37,6 +37,40 @@ struct ReviewView: View {
         .navigationBarTitleDisplayMode(.large)
         .toolbarBackground(.hidden, for: .navigationBar)
     }
+
+    // MARK: - Leak cards
+
+    @ViewBuilder
+    private func leakCard(for leak: Leak) -> some View {
+        if let spot = leak.suggestedSpot {
+            let filter = TrainingFilter(
+                positions: [spot.position],
+                depthBuckets: [StackDepthBucket.nearest(to: spot.depthBB)],
+                facingActions: [spot.facingAction]
+            )
+            NavigationLink {
+                PreflopTrainerView(filter: filter)
+            } label: {
+                LeakCard(
+                    title: leak.title,
+                    detail: leak.detail,
+                    severity: leak.severity,
+                    drillTitle: "Drill this",
+                    onDrill: {}
+                )
+            }
+            .buttonStyle(.plain)
+        } else {
+            LeakCard(
+                title: leak.title,
+                detail: leak.detail,
+                severity: leak.severity,
+                onDrill: {}
+            )
+        }
+    }
+
+    // MARK: - Empty / no-leak states
 
     private var emptyState: some View {
         GlassCard(padding: AppSpacing.xl) {

@@ -8,15 +8,10 @@ final class RangesViewModel {
     var selectedDepthBucket: StackDepthBucket? = nil
     var selectedFacing: FacingAction? = nil
 
-    private let loader: RangeLoader
-
-    init(loader: RangeLoader = .init()) {
-        self.loader = loader
-    }
-
-    func load() {
+    func load(using service: RangeService) {
+        service.ensureLoaded()
         if charts.isEmpty {
-            charts = (try? loader.loadAll()) ?? []
+            charts = service.charts
             if let first = charts.first {
                 selectedPosition = first.spot.position
                 selectedDepthBucket = StackDepthBucket.nearest(to: first.spot.stackDepthBB)

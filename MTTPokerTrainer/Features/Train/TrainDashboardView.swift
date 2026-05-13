@@ -109,6 +109,14 @@ struct TrainDashboardView: View {
                     tint: AppColors.accentPeach
                 )
             }.buttonStyle(.plain)
+            NavigationLink { DrillPickerView() } label: {
+                TrainingModeCard(
+                    title: "Custom Drill",
+                    subtitle: "Pick position, depth & scenario",
+                    systemImage: "slider.horizontal.3",
+                    tint: AppColors.accentGreen
+                )
+            }.buttonStyle(.plain)
         }
     }
 
@@ -131,5 +139,6 @@ struct TrainDashboardView: View {
 #Preview {
     NavigationStack { TrainDashboardView() }
         .environment(ConfigStore())
+        .environment(RangeService())
         .modelContainer(for: [QuizResult.self, TrainingSession.self], inMemory: true)
 }

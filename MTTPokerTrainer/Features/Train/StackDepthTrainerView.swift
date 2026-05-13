@@ -50,8 +50,7 @@ private struct DepthCard: View {
                     .foregroundStyle(AppColors.textPrimary)
                     .fixedSize(horizontal: false, vertical: true)
                 NavigationLink {
-                    // Drill spots that match this depth
-                    PreflopTrainerView()
+                    PreflopTrainerView(filter: TrainingFilter(depthBuckets: [bucket]))
                 } label: {
                     HStack(spacing: AppSpacing.xs) {
                         Text("Drill this depth")

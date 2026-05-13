@@ -4,6 +4,8 @@ import SwiftData
 @MainActor
 @Observable
 final class PreflopTrainerViewModel {
+    let filter: TrainingFilter
+
     private(set) var charts: [RangeChart] = []
     private(set) var currentChart: RangeChart?
     private(set) var currentCombo: HandCombo?
@@ -13,16 +15,16 @@ final class PreflopTrainerViewModel {
     private(set) var hasAnswered: Bool = false
 
     private var rng = SystemRandomNumberGenerator()
-    private let loader: RangeLoader
     var modelContext: ModelContext?
 
-    init(loader: RangeLoader = .init()) {
-        self.loader = loader
+    init(filter: TrainingFilter = .all) {
+        self.filter = filter
     }
 
-    func load() {
+    func load(using service: RangeService) {
+        service.ensureLoaded()
         if charts.isEmpty {
-            charts = (try? loader.loadAll()) ?? []
+            charts = service.charts(matching: filter)
         }
         next()
     }
@@ -48,7 +50,6 @@ final class PreflopTrainerViewModel {
         lastExplanation = explanation
         hasAnswered = true
 
-        // Persist a QuizResult — best effort.
         if let modelContext {
             let row = QuizResult(
                 combo: combo.notation,

@@ -3,8 +3,13 @@ import SwiftData
 
 struct PreflopTrainerView: View {
     @Environment(\.modelContext) private var modelContext
-    @State private var vm = PreflopTrainerViewModel()
+    @Environment(RangeService.self) private var rangeService
+    @State private var vm: PreflopTrainerViewModel
     @State private var feedbackVisible = false
+
+    init(filter: TrainingFilter = .all) {
+        _vm = State(initialValue: PreflopTrainerViewModel(filter: filter))
+    }
 
     var body: some View {
         ZStack {
@@ -21,7 +26,7 @@ struct PreflopTrainerView: View {
             .padding(.horizontal, AppSpacing.pageHorizontal)
             .padding(.vertical, AppSpacing.lg)
         }
-        .navigationTitle("Preflop")
+        .navigationTitle(navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
         .dynamicTypeSize(...DynamicTypeSize.accessibility3)
         .sheet(isPresented: $feedbackVisible) {
@@ -41,7 +46,7 @@ struct PreflopTrainerView: View {
         }
         .onAppear {
             vm.modelContext = modelContext
-            vm.load()
+            vm.load(using: rangeService)
         }
     }
 
@@ -102,6 +107,11 @@ struct PreflopTrainerView: View {
             .frame(maxWidth: .infinity, alignment: .center)
     }
 
+    private var navigationTitle: String {
+        if let summary = vm.filter.summary { return summary }
+        return "Preflop"
+    }
+
     private func submit(_ action: RangeAction) {
         vm.submit(action)
         feedbackVisible = true
@@ -110,5 +120,6 @@ struct PreflopTrainerView: View {
 
 #Preview {
     NavigationStack { PreflopTrainerView() }
+        .environment(RangeService())
         .modelContainer(for: [QuizResult.self, TrainingSession.self], inMemory: true)
 }

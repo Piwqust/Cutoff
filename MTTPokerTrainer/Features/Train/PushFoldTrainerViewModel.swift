@@ -13,17 +13,12 @@ final class PushFoldTrainerViewModel {
     private(set) var hasAnswered: Bool = false
 
     private var rng = SystemRandomNumberGenerator()
-    private let loader: RangeLoader
     var modelContext: ModelContext?
 
-    init(loader: RangeLoader = .init()) {
-        self.loader = loader
-    }
-
-    func load() {
+    func load(using service: RangeService) {
+        service.ensureLoaded()
         if charts.isEmpty {
-            let all = (try? loader.loadAll()) ?? []
-            charts = all.filter { $0.spot.facingAction == .pushFold }
+            charts = service.charts.filter { $0.spot.facingAction == .pushFold }
         }
         next()
     }

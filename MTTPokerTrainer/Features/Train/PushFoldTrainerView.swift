@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PushFoldTrainerView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(RangeService.self) private var rangeService
     @State private var vm = PushFoldTrainerViewModel()
     @State private var feedbackVisible = false
 
@@ -44,7 +45,7 @@ struct PushFoldTrainerView: View {
         }
         .onAppear {
             vm.modelContext = modelContext
-            vm.load()
+            vm.load(using: rangeService)
         }
     }
 

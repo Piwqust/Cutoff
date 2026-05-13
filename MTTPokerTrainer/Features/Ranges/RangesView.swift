@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct RangesView: View {
+    @Environment(RangeService.self) private var rangeService
     @State private var vm = RangesViewModel()
     @State private var detail: RangeDetailPayload?
 
@@ -20,7 +21,7 @@ struct RangesView: View {
         .navigationBarTitleDisplayMode(.large)
         .toolbarBackground(.hidden, for: .navigationBar)
         .dynamicTypeSize(...DynamicTypeSize.accessibility2)
-        .onAppear { vm.load() }
+        .onAppear { vm.load(using: rangeService) }
         .sheet(item: $detail) { payload in
             RangeDetailSheet(payload: payload)
                 .presentationDetents([.fraction(0.4), .medium])
@@ -141,4 +142,5 @@ struct RangeDetailSheet: View {
 
 #Preview {
     NavigationStack { RangesView() }
+        .environment(RangeService())
 }

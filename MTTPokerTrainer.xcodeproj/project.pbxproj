@@ -11,9 +11,11 @@
 		0032042E9C2FF56D55AA6C95 /* gto_mtt_9max_100bb_co_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = 532E64E9E8257F08AD574750 /* gto_mtt_9max_100bb_co_unopened.json */; };
 		00A04C3D18F0FB2FEFA08C21 /* gto_fill_mtt_9max_10bb_utg1_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = 7FE84040B7713387623F39FE /* gto_fill_mtt_9max_10bb_utg1_vsopen.json */; };
 		0104A5631F6A63F6CEA6BE39 /* gto_fill_mtt_9max_20bb_sb_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = 347D338FC2B0FECFCE6B9A8E /* gto_fill_mtt_9max_20bb_sb_vsopen.json */; };
+		02CB557A678FBC3CFDFF50FE /* DrillPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D9363688C3B97418B47A77 /* DrillPickerView.swift */; };
 		02D6CEFFA48815F25C90AE56 /* gto_mtt_9max_10bb_co_pushfold.json in Resources */ = {isa = PBXBuildFile; fileRef = 654BE0B35094A1910D2D2C4C /* gto_mtt_9max_10bb_co_pushfold.json */; };
 		02EF20D08E4F147B828212BF /* gto_fill_mtt_9max_125bb_utg1_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ACA58A443121E618059AAE9 /* gto_fill_mtt_9max_125bb_utg1_vsopen.json */; };
 		03A3A13FCC2CC5F9E4A6CB3F /* gto_mtt_9max_30bb_hj_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E1CA84C9B9AFC32214FA892 /* gto_mtt_9max_30bb_hj_unopened.json */; };
+		058DA569EAA2E0AE640D4812 /* RangeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1096BD6DDEDB2AD88A6D63D /* RangeService.swift */; };
 		06733F5302BABAF82C7DF913 /* gto_fill_mtt_9max_15bb_hj_squeeze.json in Resources */ = {isa = PBXBuildFile; fileRef = 80B607F2614DE23C07A7BEA0 /* gto_fill_mtt_9max_15bb_hj_squeeze.json */; };
 		06E5945E59F8C21A22D6636E /* gto_mtt_9max_50bb_hj_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = 577361D8C5F3867E73D0EB15 /* gto_mtt_9max_50bb_hj_vsopen.json */; };
 		074AEA2E349E90700A742F97 /* gto_fill_mtt_9max_75bb_utg1_pushfold.json in Resources */ = {isa = PBXBuildFile; fileRef = 2092D8AFCB02E440F1E924F4 /* gto_fill_mtt_9max_75bb_utg1_pushfold.json */; };
@@ -63,6 +65,7 @@
 		1EC04F635F8F7D42CCE5A18A /* gto_fill_mtt_9max_40bb_utg1_pushfold.json in Resources */ = {isa = PBXBuildFile; fileRef = 31AF7C5EE584C9CC4AB3D578 /* gto_fill_mtt_9max_40bb_utg1_pushfold.json */; };
 		1FA49BE30701D27B4FBBD6F2 /* gto_mtt_9max_50bb_co_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = E48F5A6048FF1CAA967A07AE /* gto_mtt_9max_50bb_co_unopened.json */; };
 		223460FF74471C3DD0A72ED4 /* PreflopTrainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF21659E8246473F67A2C /* PreflopTrainerView.swift */; };
+		22E3D8258351701F1EC8AE1C /* TrainingFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160B3806F031C4C60D1D748E /* TrainingFilter.swift */; };
 		230552B3AEA263F2F53FE056 /* gto_fill_mtt_9max_40bb_utg_pushfold.json in Resources */ = {isa = PBXBuildFile; fileRef = 6D0CE499DA6D05ABC103337D /* gto_fill_mtt_9max_40bb_utg_pushfold.json */; };
 		23A53C64F6DD8D165B5FECB8 /* gto_fill_mtt_9max_20bb_utg1_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = D815C9A8DD24C6139C6BE840 /* gto_fill_mtt_9max_20bb_utg1_vsopen.json */; };
 		242DE19FE09564CBD02629BB /* gto_fill_mtt_9max_40bb_bb_squeeze.json in Resources */ = {isa = PBXBuildFile; fileRef = BAE4B492C4B5B26B50473E4D /* gto_fill_mtt_9max_40bb_bb_squeeze.json */; };
@@ -488,6 +491,7 @@
 		14B157BD0741D6E1B81F1EF4 /* gto_fill_mtt_9max_40bb_bb_pushfold.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gto_fill_mtt_9max_40bb_bb_pushfold.json; sourceTree = "<group>"; };
 		15BD96FFAB71AACFB2571330 /* gto_mtt_9max_40bb_co_vs3bet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gto_mtt_9max_40bb_co_vs3bet.json; sourceTree = "<group>"; };
 		160B1B6CBAAF4A432C3EF930 /* TrainingSpot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingSpot.swift; sourceTree = "<group>"; };
+		160B3806F031C4C60D1D748E /* TrainingFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingFilter.swift; sourceTree = "<group>"; };
 		1625219EAA805FCED6F22543 /* gto_mtt_9max_25bb_co_vs3bet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gto_mtt_9max_25bb_co_vs3bet.json; sourceTree = "<group>"; };
 		16D13C6CD90785CAB2FF515A /* gto_fill_mtt_9max_30bb_bb_vs3bet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gto_fill_mtt_9max_30bb_bb_vs3bet.json; sourceTree = "<group>"; };
 		172114CBC1FE3028F70C04E7 /* gto_fill_mtt_9max_15bb_lj_vs3bet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gto_fill_mtt_9max_15bb_lj_vs3bet.json; sourceTree = "<group>"; };
@@ -531,6 +535,7 @@
 		3367660A48AAA3890E9A4F5F /* TrainingSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingSession.swift; sourceTree = "<group>"; };
 		347D338FC2B0FECFCE6B9A8E /* gto_fill_mtt_9max_20bb_sb_vsopen.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gto_fill_mtt_9max_20bb_sb_vsopen.json; sourceTree = "<group>"; };
 		34C584765EE393071A02164C /* gto_fill_mtt_9max_15bb_bb_vsopen.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gto_fill_mtt_9max_15bb_bb_vsopen.json; sourceTree = "<group>"; };
+		34D9363688C3B97418B47A77 /* DrillPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillPickerView.swift; sourceTree = "<group>"; };
 		34DC8F1F1769A47869B32B5F /* gto_fill_mtt_9max_75bb_bb_vs3bet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gto_fill_mtt_9max_75bb_bb_vs3bet.json; sourceTree = "<group>"; };
 		34F0145E1810330A5AA2EEA6 /* TrainingModeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingModeCard.swift; sourceTree = "<group>"; };
 		367BA9867945557991B71307 /* gto_fill_mtt_9max_75bb_bb_squeeze.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gto_fill_mtt_9max_75bb_bb_squeeze.json; sourceTree = "<group>"; };
@@ -729,6 +734,7 @@
 		9E8F30E10A2F01C1BE95B346 /* gto_fill_mtt_9max_20bb_bb_vsopen.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gto_fill_mtt_9max_20bb_bb_vsopen.json; sourceTree = "<group>"; };
 		A023B6585A5EA4F6A86833EC /* gto_fill_mtt_9max_40bb_hj_pushfold.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gto_fill_mtt_9max_40bb_hj_pushfold.json; sourceTree = "<group>"; };
 		A02F2D30BB4D5FC3558C8042 /* PushFoldTrainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushFoldTrainerView.swift; sourceTree = "<group>"; };
+		A1096BD6DDEDB2AD88A6D63D /* RangeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeService.swift; sourceTree = "<group>"; };
 		A1774091C1DE5170C6A125D8 /* gto_fill_mtt_9max_40bb_lj_vsopen.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gto_fill_mtt_9max_40bb_lj_vsopen.json; sourceTree = "<group>"; };
 		A1D4B45CEEAEF8C9EFB9EB1B /* gto_mtt_9max_75bb_utg1_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gto_mtt_9max_75bb_utg1_unopened.json; sourceTree = "<group>"; };
 		A1F473C8916973D53D4977FD /* gto_fill_mtt_9max_20bb_bb_squeeze.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gto_fill_mtt_9max_20bb_bb_squeeze.json; sourceTree = "<group>"; };
@@ -940,6 +946,7 @@
 				D7167B40B556632325482526 /* TablePosition.swift */,
 				995A90A925DCC415577D207F /* TournamentConfig.swift */,
 				D8D48DBAE514AF5081AD6AA3 /* TrainingAnswer.swift */,
+				160B3806F031C4C60D1D748E /* TrainingFilter.swift */,
 				973FB0A4CB853B4920CC1708 /* TrainingMode.swift */,
 				3367660A48AAA3890E9A4F5F /* TrainingSession.swift */,
 				160B1B6CBAAF4A432C3EF930 /* TrainingSpot.swift */,
@@ -984,6 +991,7 @@
 		8BBA619C6CB41AB6CB06D7FD /* Train */ = {
 			isa = PBXGroup;
 			children = (
+				34D9363688C3B97418B47A77 /* DrillPickerView.swift */,
 				765BF21659E8246473F67A2C /* PreflopTrainerView.swift */,
 				E5F72F67B1BF0025165AF725 /* PreflopTrainerViewModel.swift */,
 				A02F2D30BB4D5FC3558C8042 /* PushFoldTrainerView.swift */,
@@ -1090,6 +1098,7 @@
 				189737EACD0203872082E903 /* BBCalculator.swift */,
 				4DD3DB528133C89CF34DB67B /* LeakAnalyzer.swift */,
 				03BD5DA30141C7426C80535B /* RangeLoader.swift */,
+				A1096BD6DDEDB2AD88A6D63D /* RangeService.swift */,
 				9DFCDCE25BE97DF322B1FBD2 /* Scorer.swift */,
 				78127998F7E613C9E5BB63AF /* SpotGenerator.swift */,
 			);
@@ -1963,6 +1972,7 @@
 				5E289B4B5C8C8152082EE552 /* BBCalculator.swift in Sources */,
 				B12199D0A077B91362A73783 /* BlindLevel.swift in Sources */,
 				98E149CCB02B849F2EAF5CA3 /* ConfigStore.swift in Sources */,
+				02CB557A678FBC3CFDFF50FE /* DrillPickerView.swift in Sources */,
 				79EC1FB3E1AFE4752D763ACC /* FeedbackSheet.swift in Sources */,
 				42649C93C7DFEC7D292BCED3 /* FilterChip.swift in Sources */,
 				934BE3A67ACBBE7719FCDB59 /* GlassCard.swift in Sources */,
@@ -1987,6 +1997,7 @@
 				56F7F815D948363229ACBB9D /* RangeChart.swift in Sources */,
 				27B8CE420A7738E811545E32 /* RangeGridView.swift in Sources */,
 				9C3EEE76CD3007D76AC00B94 /* RangeLoader.swift in Sources */,
+				058DA569EAA2E0AE640D4812 /* RangeService.swift in Sources */,
 				0C3E353045D11E5CD920A611 /* RangesView.swift in Sources */,
 				CB3B965482EC683DAB646B58 /* RangesViewModel.swift in Sources */,
 				1B5D7534CC6FF99E3B20EADE /* ReviewView.swift in Sources */,
@@ -2003,6 +2014,7 @@
 				BE5A00B31FDC80694F3E7AE2 /* TournamentSummaryCard.swift in Sources */,
 				6031DB9C9C64EEFE3EEEB1B1 /* TrainDashboardView.swift in Sources */,
 				12CE1FDE13D57EAD9DFBEA51 /* TrainingAnswer.swift in Sources */,
+				22E3D8258351701F1EC8AE1C /* TrainingFilter.swift in Sources */,
 				8192FBD6E693614EC615D92D /* TrainingMode.swift in Sources */,
 				DF63511709B02586F20FE10F /* TrainingModeCard.swift in Sources */,
 				6BF1EC7B130078E081E80E2D /* TrainingSession.swift in Sources */,
