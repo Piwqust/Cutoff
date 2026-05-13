@@ -35,7 +35,11 @@ struct RangesView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: AppSpacing.xs) {
                     ForEach(TablePosition.nineMaxOrder) { pos in
-                        FilterChip(title: pos.displayName, isSelected: vm.selectedPosition == pos) {
+                        FilterChip(
+                            title: pos.displayName,
+                            isSelected: vm.selectedPosition == pos,
+                            isEnabled: vm.isPositionEnabled(pos)
+                        ) {
                             vm.selectPosition(pos)
                         }
                     }
@@ -44,7 +48,11 @@ struct RangesView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: AppSpacing.xs) {
                     ForEach(StackDepthBucket.allCases.reversed()) { bucket in
-                        FilterChip(title: bucket.label, isSelected: vm.selectedDepthBucket == bucket) {
+                        FilterChip(
+                            title: bucket.label,
+                            isSelected: vm.selectedDepthBucket == bucket,
+                            isEnabled: vm.isDepthEnabled(bucket)
+                        ) {
                             vm.selectDepth(bucket)
                         }
                     }
@@ -53,7 +61,11 @@ struct RangesView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: AppSpacing.xs) {
                     ForEach(FacingAction.allCases) { facing in
-                        FilterChip(title: facing.displayName, isSelected: vm.selectedFacing == facing) {
+                        FilterChip(
+                            title: facing.displayName,
+                            isSelected: vm.selectedFacing == facing,
+                            isEnabled: vm.isFacingEnabled(facing)
+                        ) {
                             vm.selectFacing(facing)
                         }
                     }
@@ -63,14 +75,43 @@ struct RangesView: View {
     }
 
     private var gridContainer: some View {
+        // GeometryReader gives the grid a square frame that fills the parent
+        // width — otherwise LazyVGrid shrinks to its intrinsic content size
+        // and the cells truncate.
         GeometryReader { geo in
-            let _ = geo
-            RangeGridView(chart: vm.activeChart) { combo, action in
-                guard let chart = vm.activeChart else { return }
-                detail = RangeDetailPayload(combo: combo, action: action, chart: chart)
+            let side = min(geo.size.width, geo.size.height)
+            Group {
+                if vm.activeChart != nil {
+                    RangeGridView(chart: vm.activeChart) { combo, action in
+                        guard let chart = vm.activeChart else { return }
+                        detail = RangeDetailPayload(combo: combo, action: action, chart: chart)
+                    }
+                } else {
+                    noRangeForCombo
+                }
             }
+            .frame(width: side, height: side)
+            .frame(maxWidth: .infinity)
         }
         .aspectRatio(1, contentMode: .fit)
+    }
+
+    private var noRangeForCombo: some View {
+        GlassCard(padding: AppSpacing.xl) {
+            VStack(spacing: AppSpacing.sm) {
+                Image(systemName: "questionmark.square.dashed")
+                    .font(.system(size: 32))
+                    .foregroundStyle(AppColors.textSecondary)
+                Text("No chart for this combination")
+                    .font(AppTypography.headline)
+                    .foregroundStyle(AppColors.textPrimary)
+                Text("That spot isn't possible at a 9-max table (e.g. facing an open from UTG, or defending blinds anywhere but BB).")
+                    .font(AppTypography.body)
+                    .foregroundStyle(AppColors.textSecondary)
+                    .multilineTextAlignment(.center)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
     }
 
     private var legendAndDisclaimer: some View {

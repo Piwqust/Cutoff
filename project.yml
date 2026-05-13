@@ -42,6 +42,10 @@ targets:
         UIStatusBarStyle: UIStatusBarStyleLightContent
         UIUserInterfaceStyle: Dark
         ITSAppUsesNonExemptEncryption: false
+        CFBundleURLTypes:
+          - CFBundleURLName: com.mttpokertrainer.app.deeplink
+            CFBundleURLSchemes:
+              - mttpoker
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.mttpokertrainer.app

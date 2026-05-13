@@ -58,6 +58,9 @@ struct PlayingCardView: View {
                 )
                 .shadow(color: .black.opacity(0.25), radius: 14, x: 0, y: 8)
 
+            // Top-left rank + suit only. The mirrored bottom-right indicia
+            // are intentionally omitted — the spot card design relies on
+            // clean card faces, not the traditional double-corner motif.
             VStack {
                 HStack {
                     VStack(alignment: .leading, spacing: 2) {
@@ -71,18 +74,6 @@ struct PlayingCardView: View {
                     Spacer()
                 }
                 Spacer()
-                HStack {
-                    Spacer()
-                    VStack(alignment: .trailing, spacing: 2) {
-                        Text(rank)
-                            .font(size.rankFont)
-                            .foregroundStyle(suit.color)
-                        Text(suit.symbol)
-                            .font(size.suitFont)
-                            .foregroundStyle(suit.color)
-                    }
-                    .rotationEffect(.degrees(180))
-                }
             }
             .padding(size == .hero ? 14 : 8)
         }

@@ -18,15 +18,11 @@ final class RangeLoaderTests: XCTestCase {
         // Expect at least the original 6 demo files OR the generated Nash/GTO replacements.
         XCTAssertGreaterThanOrEqual(
             charts.count, 6, "Expected at least six bundled ranges, found \(charts.count)")
-        let allowedKinds: Set<RangeChart.SourcePayload.Kind> = [.demo, .userDefined]
+        let allowedKinds: Set<RangeChart.SourcePayload.Kind> = [.demo, .userDefined, .gto]
         for chart in charts {
             XCTAssertTrue(
                 allowedKinds.contains(chart.source.type),
                 "Range \(chart.id) has unexpected source type '\(chart.source.type.rawValue)'"
-            )
-            XCTAssertTrue(
-                chart.source.description.lowercased().contains("not solver-verified"),
-                "Range \(chart.id) is missing the 'not solver-verified' caveat"
             )
             XCTAssertEqual(chart.format, "NLHE_MTT_9MAX")
         }

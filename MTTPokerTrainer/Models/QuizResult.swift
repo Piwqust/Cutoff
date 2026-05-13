@@ -19,6 +19,13 @@ final class QuizResult {
     var outcomeRaw: String
     var score: Int
 
+    /// Optional fields added with the practical-drill rebuild. Older rows that
+    /// pre-date the schema bump decode with empty strings; the computed
+    /// accessors below fall back to sensible defaults so the UI never crashes.
+    var categoryRaw: String = ""
+    var villainRaw: String  = ""
+    var explanation: String = ""
+
     init(
         combo: String,
         position: TablePosition,
@@ -28,7 +35,10 @@ final class QuizResult {
         rangeChartID: String,
         userAction: RangeAction,
         correctAction: RangeAction,
-        outcome: AnswerOutcome
+        outcome: AnswerOutcome,
+        category: DrillCategory = .mixed,
+        villain: VillainType = .standard,
+        explanation: String = ""
     ) {
         self.id = UUID()
         self.createdAt = .now
@@ -42,6 +52,9 @@ final class QuizResult {
         self.correctActionRaw = correctAction.rawValue
         self.outcomeRaw = outcome.rawValue
         self.score = outcome.score
+        self.categoryRaw = category.rawValue
+        self.villainRaw = villain.rawValue
+        self.explanation = explanation
     }
 
     var position: TablePosition { TablePosition(rawValue: positionRaw) ?? .utg }
@@ -49,4 +62,6 @@ final class QuizResult {
     var outcome: AnswerOutcome { AnswerOutcome(rawValue: outcomeRaw) ?? .mistake }
     var userAction: RangeAction { RangeAction(rawValue: userActionRaw) ?? .fold }
     var correctAction: RangeAction { RangeAction(rawValue: correctActionRaw) ?? .fold }
+    var category: DrillCategory { DrillCategory(rawValue: categoryRaw) ?? .mixed }
+    var villain: VillainType { VillainType(rawValue: villainRaw) ?? .standard }
 }

@@ -4,9 +4,11 @@ import Foundation
 @Observable
 final class RangesViewModel {
     var charts: [RangeChart] = []
-    var selectedPosition: TablePosition? = nil
-    var selectedDepthBucket: StackDepthBucket? = nil
-    var selectedFacing: FacingAction? = nil
+    private(set) var catalog = ChartCatalog(charts: [])
+
+    var selectedPosition: TablePosition = .btn
+    var selectedDepthBucket: StackDepthBucket = .bb100
+    var selectedFacing: FacingAction = .unopened
 
     private let loader: RangeLoader
 
@@ -17,6 +19,8 @@ final class RangesViewModel {
     func load() {
         if charts.isEmpty {
             charts = (try? loader.loadAll()) ?? []
+            catalog = ChartCatalog(charts: charts)
+            // Seed from the first chart so we land on a valid combination.
             if let first = charts.first {
                 selectedPosition = first.spot.position
                 selectedDepthBucket = StackDepthBucket.nearest(to: first.spot.stackDepthBB)
@@ -25,54 +29,47 @@ final class RangesViewModel {
         }
     }
 
-    // MARK: - Filter selection
+    // MARK: - Selection
 
-    /// Selecting a filter pivots to the chart that best matches it. The other
-    /// two filters auto-adjust to that chart so the grid always changes when
-    /// the user taps a chip — even if no chart matches all three filters.
+    /// Selecting a chip only commits if a chart exists for the resulting
+    /// triple. The view layer asks `isPositionEnabled(_:)` etc. before
+    /// offering a tap, so this is mainly a defense in depth.
 
     func selectPosition(_ pos: TablePosition) {
+        guard catalog.isPositionAvailable(pos, depthBB: selectedDepthBucket.bb, facing: selectedFacing) else { return }
         selectedPosition = pos
-        syncOtherFiltersTo(activeChart)
     }
 
     func selectFacing(_ facing: FacingAction) {
+        guard catalog.isFacingAvailable(facing, position: selectedPosition, depthBB: selectedDepthBucket.bb) else { return }
         selectedFacing = facing
-        syncOtherFiltersTo(activeChart)
     }
 
     func selectDepth(_ bucket: StackDepthBucket) {
+        guard catalog.isDepthAvailable(bucket.bb, position: selectedPosition, facing: selectedFacing) else { return }
         selectedDepthBucket = bucket
-        syncOtherFiltersTo(activeChart)
     }
 
-    private func syncOtherFiltersTo(_ chart: RangeChart?) {
-        guard let chart else { return }
-        selectedPosition = chart.spot.position
-        selectedDepthBucket = StackDepthBucket.nearest(to: chart.spot.stackDepthBB)
-        selectedFacing = chart.spot.facingAction
+    // MARK: - Chip enablement (driven by the catalog)
+
+    func isPositionEnabled(_ pos: TablePosition) -> Bool {
+        catalog.isPositionAvailable(pos, depthBB: selectedDepthBucket.bb, facing: selectedFacing)
     }
 
-    /// Best-match chart for the current filters. Prefers an exact triple
-    /// match, then falls back by relaxing constraints in priority order:
-    /// position > facing > depth.
+    func isDepthEnabled(_ bucket: StackDepthBucket) -> Bool {
+        catalog.isDepthAvailable(bucket.bb, position: selectedPosition, facing: selectedFacing)
+    }
+
+    func isFacingEnabled(_ facing: FacingAction) -> Bool {
+        catalog.isFacingAvailable(facing, position: selectedPosition, depthBB: selectedDepthBucket.bb)
+    }
+
+    /// Exact chart for the current triple, if one exists.
     var activeChart: RangeChart? {
-        guard !charts.isEmpty else { return nil }
-        let pos = selectedPosition
-        let facing = selectedFacing
-        let depthBB = selectedDepthBucket?.bb
-
-        let scored = charts.map { chart -> (chart: RangeChart, score: Int, depthDelta: Int) in
-            var score = 0
-            if let pos, chart.spot.position == pos { score += 4 }
-            if let facing, chart.spot.facingAction == facing { score += 2 }
-            let delta = depthBB.map { abs(chart.spot.stackDepthBB - $0) } ?? .max
-            if let depthBB, chart.spot.stackDepthBB == depthBB { score += 1 }
-            return (chart, score, delta)
+        charts.first {
+            $0.spot.position == selectedPosition
+                && $0.spot.stackDepthBB == selectedDepthBucket.bb
+                && $0.spot.facingAction == selectedFacing
         }
-        return scored.max {
-            if $0.score != $1.score { return $0.score < $1.score }
-            return $0.depthDelta > $1.depthDelta
-        }?.chart
     }
 }
