@@ -3,37 +3,65 @@ import SwiftUI
 struct FilterChip: View {
     let title: String
     let isSelected: Bool
+    var isEnabled: Bool = true
     let action: () -> Void
 
     var body: some View {
-        Button(action: action) {
+        Button(action: { if isEnabled { action() } }) {
             Text(title)
                 .font(AppTypography.subheadline)
-                .foregroundStyle(isSelected ? AppColors.backgroundDeep : AppColors.textPrimary)
+                .foregroundStyle(foreground)
                 .padding(.horizontal, AppSpacing.md)
                 .padding(.vertical, AppSpacing.xs)
                 .background(
-                    Capsule().fill(isSelected ? AnyShapeStyle(AppColors.primaryMint) : AnyShapeStyle(.ultraThinMaterial))
+                    Capsule().fill(background)
                 )
                 .overlay(
-                    Capsule().strokeBorder(isSelected ? .clear : AppColors.divider, lineWidth: 1)
+                    Capsule().strokeBorder(borderColor, lineWidth: 1)
                 )
                 .contentShape(Capsule())
+                .opacity(isEnabled ? 1 : 0.35)
         }
         .buttonStyle(.plain)
+        .disabled(!isEnabled)
         .accessibilityLabel(title)
-        .accessibilityValue(isSelected ? "Selected" : "Not selected")
+        .accessibilityValue(accessibilityValueText)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
+    }
+
+    private var foreground: Color {
+        if isSelected { return AppColors.backgroundDeep }
+        return AppColors.textPrimary
+    }
+
+    private var background: AnyShapeStyle {
+        if isSelected { return AnyShapeStyle(AppColors.primaryMint) }
+        return AnyShapeStyle(.ultraThinMaterial)
+    }
+
+    private var borderColor: Color {
+        isSelected ? .clear : AppColors.divider
+    }
+
+    private var accessibilityValueText: String {
+        if !isEnabled { return "Unavailable" }
+        return isSelected ? "Selected" : "Not selected"
     }
 }
 
 #Preview {
     ZStack {
         AppBackground()
-        HStack {
-            FilterChip(title: "UTG", isSelected: true) {}
-            FilterChip(title: "CO", isSelected: false) {}
-            FilterChip(title: "BTN", isSelected: false) {}
+        VStack {
+            HStack {
+                FilterChip(title: "UTG", isSelected: true) {}
+                FilterChip(title: "CO", isSelected: false) {}
+                FilterChip(title: "BTN", isSelected: false) {}
+            }
+            HStack {
+                FilterChip(title: "vsOpen", isSelected: false, isEnabled: false) {}
+                FilterChip(title: "Squeeze", isSelected: false, isEnabled: false) {}
+            }
         }
     }
 }

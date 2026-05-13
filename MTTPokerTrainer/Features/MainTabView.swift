@@ -1,20 +1,17 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State private var selection: Int = MainTabView.initialTab()
+    @State private var selection: Int = 0
+    @State private var trainPath = NavigationPath()
+    @Environment(AppRouter.self) private var router
 
     var body: some View {
         TabView(selection: $selection) {
-            NavigationStack {
-                if MainTabView.launchRoute == "preflop" {
-                    PreflopTrainerView()
-                } else if MainTabView.launchRoute == "pushfold" {
-                    PushFoldTrainerView()
-                } else if MainTabView.launchRoute == "stackdepth" {
-                    StackDepthTrainerView()
-                } else {
-                    TrainDashboardView()
-                }
+            NavigationStack(path: $trainPath) {
+                TrainDashboardView()
+                    .navigationDestination(for: DrillCategory.self) { cat in
+                        DrillTrainerView(category: cat)
+                    }
             }
             .tabItem { Label("Train", systemImage: "play.fill") }
             .tag(0)
@@ -32,30 +29,19 @@ struct MainTabView: View {
                 .tag(3)
         }
         .tint(AppColors.primaryMint)
-    }
-
-    /// Read `-tab <index>` from launch arguments. Used by screenshot tooling
-    /// in `docs/screenshots/`. Falls back to the Train tab.
-    private static func initialTab() -> Int {
-        let args = ProcessInfo.processInfo.arguments
-        if let i = args.firstIndex(of: "-tab"), i + 1 < args.count, let n = Int(args[i + 1]) {
-            return min(max(n, 0), 3)
+        .onChange(of: router.pendingDrill) { _, newValue in
+            guard let cat = newValue else { return }
+            selection = 0
+            trainPath = NavigationPath()
+            trainPath.append(cat)
+            router.pendingDrill = nil
         }
-        return 0
     }
-
-    /// Optional `-route <name>` launch argument used to deep-link the Train tab
-    /// for screenshot tooling. Values: "preflop", "pushfold", "stackdepth".
-    static let launchRoute: String? = {
-        let args = ProcessInfo.processInfo.arguments
-        if let i = args.firstIndex(of: "-route"), i + 1 < args.count {
-            return args[i + 1]
-        }
-        return nil
-    }()
 }
 
 #Preview {
     MainTabView()
         .environment(ConfigStore())
+        .environment(ProgressStore())
+        .environment(AppRouter())
 }

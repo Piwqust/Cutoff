@@ -16,23 +16,30 @@ struct RangeChart: Codable, Identifiable, Hashable {
     }
 
     struct SourcePayload: Codable, Hashable {
-        enum Kind: String, Codable { case demo, userDefined, imported }
+        enum Kind: String, Codable {
+            case demo
+            case userDefined
+            case imported
+            case gto
+        }
         let type: Kind
         let description: String
 
         var humanLabel: String {
             switch type {
-            case .demo: return "Demo training range"
+            case .demo:        return "Demo training range"
             case .userDefined: return "Nash / GTO range"
-            case .imported: return "Imported range"
+            case .imported:    return "Imported range"
+            case .gto:         return "GTO approximation"
             }
         }
 
         var fullDisclaimer: String {
             switch type {
-            case .demo: return "Demo training range — not solver-verified."
+            case .demo:        return "Demo training range — not solver-verified."
             case .userDefined: return "Nash / GTO approximation range — not solver-verified."
-            case .imported: return "Imported range — provenance set by you."
+            case .imported:    return "Imported range — provenance set by you."
+            case .gto:         return "GTO approximation — not solver-verified."
             }
         }
     }

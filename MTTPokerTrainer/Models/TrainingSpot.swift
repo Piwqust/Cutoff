@@ -20,6 +20,31 @@ enum FacingAction: String, Codable, CaseIterable, Identifiable, Hashable {
         case .pushFold:     return "Push/Fold"
         }
     }
+
+    /// Short, sentence-style label used as a headline above the cards.
+    /// Reads more naturally than the chip label.
+    var headline: String {
+        switch self {
+        case .unopened:     return "First in"
+        case .vsOpen:       return "Facing an open"
+        case .vs3Bet:       return "Facing a 3-bet"
+        case .blindDefense: return "Defending the blinds"
+        case .squeeze:      return "Squeeze spot"
+        case .pushFold:     return "Push or fold"
+        }
+    }
+
+    /// SF Symbol used as the situation glyph in the trainer header.
+    var systemImage: String {
+        switch self {
+        case .unopened:     return "play.fill"
+        case .vsOpen:       return "person.fill"
+        case .vs3Bet:       return "arrow.up.right.circle.fill"
+        case .blindDefense: return "shield.fill"
+        case .squeeze:      return "rectangle.compress.vertical"
+        case .pushFold:     return "flame.fill"
+        }
+    }
 }
 
 struct TrainingSpot: Hashable, Codable, Identifiable {
