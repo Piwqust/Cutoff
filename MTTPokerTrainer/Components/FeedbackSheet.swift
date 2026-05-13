@@ -52,11 +52,6 @@ struct FeedbackSheet: View {
         }
         .padding(AppSpacing.xl)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            RoundedRectangle(cornerRadius: AppRadius.sheet, style: .continuous)
-                .fill(AppColors.cardSurface)
-                .ignoresSafeArea(edges: .bottom)
-        )
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(outcome.headline). Best answer is \(correctAction.displayName). \(explanation)")
     }
@@ -80,6 +75,51 @@ struct FeedbackSheet: View {
         .padding(.horizontal, AppSpacing.sm)
         .padding(.vertical, 6)
         .background(Capsule().fill(color.opacity(0.16)))
+    }
+}
+
+/// PreferenceKey used by `feedbackSheet(isPresented:...)` to size the sheet
+/// detent to the content's actual height.
+private struct FeedbackSheetHeightKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
+    }
+}
+
+extension View {
+    /// Presents a `FeedbackSheet` whose bottom-sheet detent matches the content
+    /// height. Sized via a `GeometryReader` preference key on first layout, so
+    /// the sheet hugs its content instead of locking to a fixed fraction.
+    func feedbackSheet(
+        isPresented: Binding<Bool>,
+        outcome: AnswerOutcome?,
+        correctAction: RangeAction,
+        explanation: String,
+        measuredHeight: Binding<CGFloat>,
+        onNext: @escaping () -> Void
+    ) -> some View {
+        self.sheet(isPresented: isPresented) {
+            if let outcome {
+                FeedbackSheet(
+                    outcome: outcome,
+                    correctAction: correctAction,
+                    explanation: explanation,
+                    onNext: onNext
+                )
+                .background(
+                    GeometryReader { geo in
+                        Color.clear.preference(key: FeedbackSheetHeightKey.self, value: geo.size.height)
+                    }
+                )
+                .onPreferenceChange(FeedbackSheetHeightKey.self) { h in
+                    if h > 0 { measuredHeight.wrappedValue = h }
+                }
+                .presentationDetents([.height(measuredHeight.wrappedValue)])
+                .presentationBackground(AppColors.cardSurface)
+                .presentationDragIndicator(.visible)
+            }
+        }
     }
 }
 

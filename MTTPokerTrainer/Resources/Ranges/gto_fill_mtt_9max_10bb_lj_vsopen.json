@@ -8,8 +8,8 @@
     "anteType": "bigBlindAnte"
   },
   "source": {
-    "type": "gto",
-    "description": "GTO approximation (cloned from closest spot to fill missing database entry)."
+    "type": "demo",
+    "description": "Approximate demo training range. Not solver-verified."
   },
   "hands": {
     "66": "mixed",

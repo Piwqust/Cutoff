@@ -10,7 +10,7 @@ enum AnswerOutcome: String, Codable, Hashable {
     var headline: String {
         switch self {
         case .correct: return "Correct"
-        case .close:   return "Close"
+        case .close:   return "Almost"
         case .mistake: return "Mistake"
         case .punt:    return "Big mistake"
         }

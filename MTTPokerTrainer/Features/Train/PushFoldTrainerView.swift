@@ -4,6 +4,7 @@ struct PushFoldTrainerView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var vm = PushFoldTrainerViewModel()
     @State private var feedbackVisible = false
+    @State private var feedbackHeight: CGFloat = 280
 
     var body: some View {
         ZStack {
@@ -27,21 +28,17 @@ struct PushFoldTrainerView: View {
         .navigationTitle("Push/Fold")
         .navigationBarTitleDisplayMode(.inline)
         .dynamicTypeSize(...DynamicTypeSize.accessibility3)
-        .sheet(isPresented: $feedbackVisible) {
-            if let outcome = vm.lastOutcome {
-                FeedbackSheet(
-                    outcome: outcome,
-                    correctAction: vm.correctAction,
-                    explanation: vm.lastExplanation,
-                    onNext: {
-                        feedbackVisible = false
-                        vm.next()
-                    }
-                )
-                .presentationDetents([.fraction(0.45), .medium])
-                .presentationDragIndicator(.visible)
+        .feedbackSheet(
+            isPresented: $feedbackVisible,
+            outcome: vm.lastOutcome,
+            correctAction: vm.correctAction,
+            explanation: vm.lastExplanation,
+            measuredHeight: $feedbackHeight,
+            onNext: {
+                feedbackVisible = false
+                vm.next()
             }
-        }
+        )
         .onAppear {
             vm.modelContext = modelContext
             vm.load()
