@@ -112,6 +112,9 @@ struct RangeDetailSheet: View {
                         .font(AppTypography.subheadline)
                         .foregroundStyle(AppColors.textSecondary)
                 }
+                Spacer()
+                PokerTableView(snapshot: .from(spot: payload.chart.trainingSpot), size: .compact)
+                    .frame(width: 130)
             }
 
             HStack(spacing: 6) {

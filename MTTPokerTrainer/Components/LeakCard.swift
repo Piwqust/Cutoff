@@ -6,6 +6,7 @@ struct LeakCard: View {
     /// 0 = mild, 1 = major
     let severity: Double
     var drillTitle: String = "Drill this"
+    var spot: TrainingSpot? = nil
     let onDrill: () -> Void
 
     var body: some View {
@@ -22,6 +23,11 @@ struct LeakCard: View {
                     .font(AppTypography.subheadline)
                     .foregroundStyle(AppColors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
+                if let spot {
+                    PokerTableView(snapshot: .from(spot: spot), size: .compact)
+                        .frame(maxWidth: 200)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
                 severityBar
                 Button(action: onDrill) {
                     HStack(spacing: AppSpacing.xxs) {
@@ -79,6 +85,30 @@ struct LeakCard: View {
         case ..<0.67: return "Moderate"
         default:      return "Major"
         }
+    }
+}
+
+extension LeakCard {
+    /// Convenience initializer for `Leak` rows produced by `LeakAnalyzer`.
+    /// Renders the suggested drill spot as a compact table diagram when present.
+    init(leak: Leak, onDrill: @escaping () -> Void = {}) {
+        let spot = leak.suggestedSpot.map { suggestion in
+            TrainingSpot(
+                position: suggestion.position,
+                stackDepthBB: suggestion.depthBB,
+                facingAction: suggestion.facingAction,
+                anteType: .bigBlindAnte,
+                tableSize: 9
+            )
+        }
+        self.init(
+            title: leak.title,
+            detail: leak.detail,
+            severity: leak.severity,
+            drillTitle: "Drill this",
+            spot: spot,
+            onDrill: onDrill
+        )
     }
 }
 

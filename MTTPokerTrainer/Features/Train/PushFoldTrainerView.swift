@@ -10,8 +10,8 @@ struct PushFoldTrainerView: View {
             AppBackground()
 
             VStack(alignment: .leading, spacing: AppSpacing.lg) {
-                contextStrip
-                Spacer(minLength: AppSpacing.md)
+                tableDiagram
+                Spacer(minLength: AppSpacing.sm)
                 handDisplay
                 Spacer(minLength: AppSpacing.md)
                 actionRow
@@ -48,23 +48,19 @@ struct PushFoldTrainerView: View {
         }
     }
 
-    private var contextStrip: some View {
-        let spot = vm.currentChart?.trainingSpot
-        return HStack(spacing: AppSpacing.xs) {
-            chip(spot?.position.displayName ?? "—")
-            chip("\(spot?.stackDepthBB ?? 0) BB")
-            chip(spot?.facingAction.displayName ?? "—")
-            Spacer()
+    @ViewBuilder
+    private var tableDiagram: some View {
+        if let spot = vm.currentChart?.trainingSpot {
+            VStack(alignment: .leading, spacing: AppSpacing.xs) {
+                PokerTableView(snapshot: .from(spot: spot))
+                Text(spot.facingAction.displayName)
+                    .font(AppTypography.subheadline)
+                    .foregroundStyle(AppColors.textSecondary)
+                    .frame(maxWidth: .infinity, alignment: .center)
+            }
+        } else {
+            Color.clear.frame(height: 1)
         }
-    }
-
-    private func chip(_ s: String) -> some View {
-        Text(s)
-            .font(AppTypography.subheadline)
-            .foregroundStyle(AppColors.textPrimary)
-            .padding(.horizontal, AppSpacing.sm)
-            .padding(.vertical, 6)
-            .background(Capsule().fill(AppColors.cardSurface))
     }
 
     private var handDisplay: some View {
