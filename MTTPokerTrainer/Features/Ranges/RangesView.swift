@@ -12,7 +12,8 @@ import SwiftUI
 struct RangesView: View {
     @Environment(RangeService.self) private var rangeService
     @State private var vm = RangesViewModel()
-    @StateObject private var browsing = RangeBrowsingStore()
+    @State private var detail: RangeDetailPayload?
+    @State private var detailHeight: CGFloat = 280
 
     var body: some View {
         ZStack {
@@ -33,7 +34,16 @@ struct RangesView: View {
         .onAppear { vm.load(using: rangeService) }
         .sheet(item: $detail) { payload in
             RangeDetailSheet(payload: payload)
-                .presentationDetents([.fraction(0.4), .medium])
+                .background(
+                    GeometryReader { geo in
+                        Color.clear.preference(key: RangeDetailHeightKey.self, value: geo.size.height)
+                    }
+                )
+                .onPreferenceChange(RangeDetailHeightKey.self) { h in
+                    if h > 0 { detailHeight = h }
+                }
+                .presentationDetents([.height(detailHeight)])
+                .presentationBackground(AppColors.cardSurface)
                 .presentationDragIndicator(.visible)
         }
     }
@@ -124,7 +134,13 @@ struct RangeDetailSheet: View {
         }
         .padding(AppSpacing.xl)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(AppColors.cardSurface.ignoresSafeArea(edges: .bottom))
+    }
+}
+
+struct RangeDetailHeightKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
     }
 }
 

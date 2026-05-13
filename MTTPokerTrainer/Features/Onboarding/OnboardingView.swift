@@ -81,10 +81,14 @@ struct OnboardingView: View {
                     config.hasOnboarded = true
                 }
             }
-            .accessibilityLabel(AppTheme.fullLegalLine)
             SecondaryButton(title: "Customize tournament") {
                 showingSetup = true
             }
+            Text(AppTheme.fullLegalLine)
+                .font(AppTypography.caption)
+                .foregroundStyle(AppColors.textSecondary)
+                .multilineTextAlignment(.center)
+                .padding(.top, AppSpacing.sm)
         }
     }
 }

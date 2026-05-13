@@ -8,15 +8,8 @@
     "anteType": "bigBlindAnte"
   },
   "source": {
-    "type": "nashComputed",
-    "description": "Nash push/fold equilibrium for the chosen ante model.",
-    "solver": {
-      "solverName": "Nash equilibrium (reference table)",
-      "solverVersion": null,
-      "iterations": null,
-      "dateGenerated": "2026-05",
-      "assumptions": "9-max, BB ante, chip-EV (no ICM)."
-    }
+    "type": "demo",
+    "description": "Approximate demo training range. Not solver-verified."
   },
   "hands": {
     "KK": "jam",
