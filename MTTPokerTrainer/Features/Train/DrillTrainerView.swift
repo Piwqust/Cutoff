@@ -14,13 +14,13 @@ struct DrillTrainerView: View {
             AppBackground()
 
             VStack(alignment: .leading, spacing: AppSpacing.md) {
-                spotHeader
+                tableDisplay
+                situationRow(vm.current?.spot)
                 villainRow
                 Spacer(minLength: AppSpacing.sm)
                 handDisplay
                 Spacer(minLength: AppSpacing.sm)
                 actionRow
-                disclaimer
             }
             .padding(.horizontal, AppSpacing.pageHorizontal)
             .padding(.vertical, AppSpacing.lg)
@@ -34,12 +34,13 @@ struct DrillTrainerView: View {
                     outcome: outcome,
                     correctAction: question.correctAction,
                     explanation: vm.lastExplanation,
+                    deepDive: vm.lastDeepDive,
                     onNext: {
                         feedbackVisible = false
                         vm.next()
                     }
                 )
-                .presentationDetents([.fraction(0.45), .medium])
+                .presentationDetents([.fraction(0.5), .large])
                 .presentationDragIndicator(.visible)
             }
         }
@@ -50,70 +51,18 @@ struct DrillTrainerView: View {
         }
     }
 
-    // MARK: - Spot header
+    // MARK: - Table display
 
-    /// Two-column stat card: POSITION on the left, STACK on the right, both
-    /// rendered as large bold typography. A thin divider separates the stats
-    /// from a situation row below with an icon-led headline.
-    private var spotHeader: some View {
-        let spot = vm.current?.spot
-        return GlassCard(padding: AppSpacing.lg) {
-            VStack(alignment: .leading, spacing: AppSpacing.md) {
-                HStack(alignment: .center) {
-                    positionColumn(spot)
-                    Spacer()
-                    stackColumn(spot)
-                }
-
-                Rectangle()
-                    .fill(AppColors.divider.opacity(0.45))
-                    .frame(height: 1)
-
-                situationRow(spot)
-            }
-        }
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(
-            "Position \(spot?.position.displayName ?? "?"). " +
-            "Stack \(spot?.stackDepthBB ?? 0) BB. " +
-            "\(spot?.facingAction.headline ?? "")."
-        )
-    }
-
-    /// Position column: small all-caps label on top, then the position name
-    /// next to an inline table mini-map so the user can see at a glance where
-    /// they're seated.
-    private func positionColumn(_ spot: TrainingSpot?) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text("POSITION")
-                .font(.system(size: 10, weight: .heavy, design: .rounded))
-                .tracking(1.6)
-                .foregroundStyle(AppColors.textSecondary)
-            HStack(alignment: .center, spacing: AppSpacing.xs) {
-                Text(spot?.position.displayName ?? "—")
-                    .font(.system(size: 34, weight: .bold, design: .rounded))
-                    .foregroundStyle(AppColors.primaryMint)
-                TableMiniMap(heroPosition: spot?.position ?? .btn)
-                    .frame(width: 56, height: 36)
-            }
-        }
-    }
-
-    private func stackColumn(_ spot: TrainingSpot?) -> some View {
-        VStack(alignment: .trailing, spacing: 2) {
-            Text("STACK")
-                .font(.system(size: 10, weight: .heavy, design: .rounded))
-                .tracking(1.6)
-                .foregroundStyle(AppColors.textSecondary)
-            HStack(alignment: .firstTextBaseline, spacing: 4) {
-                Text("\(spot?.stackDepthBB ?? 0)")
-                    .font(.system(size: 34, weight: .bold, design: .rounded).monospacedDigit())
-                    .foregroundStyle(AppColors.textPrimary)
-                    .contentTransition(.numericText())
-                Text("BB")
-                    .font(.system(size: 15, weight: .heavy, design: .rounded))
-                    .foregroundStyle(AppColors.primaryMint)
-            }
+    /// Minimalist top-down table diagram standing in for a "position +
+    /// stack" header — hero seat ringed in orange, seats labelled with
+    /// position and stack, blinds and dealer marked, pot in the centre.
+    @ViewBuilder
+    private var tableDisplay: some View {
+        if let spot = vm.current?.spot {
+            PokerTableView(snapshot: .from(spot: spot))
+                .padding(.top, AppSpacing.md)
+        } else {
+            Color.clear.frame(height: 220)
         }
     }
 
@@ -220,13 +169,6 @@ struct DrillTrainerView: View {
                 ) { submit(action) }
             }
         }
-    }
-
-    private var disclaimer: some View {
-        Text(AppTheme.demoDataDisclaimer)
-            .font(AppTypography.caption)
-            .foregroundStyle(AppColors.textSecondary)
-            .frame(maxWidth: .infinity, alignment: .center)
     }
 
     private func submit(_ action: RangeAction) {

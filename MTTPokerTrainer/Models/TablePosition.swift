@@ -17,6 +17,15 @@ enum TablePosition: String, CaseIterable, Identifiable, Hashable {
 
     /// Ordered list used by the UI for filter chips.
     static let nineMaxOrder: [TablePosition] = [.utg, .utg1, .lj, .hj, .co, .btn, .sb, .bb]
+
+    /// Seats present at a table of the given size, ordered early-to-late.
+    /// 6-max drops UTG+1 and LJ; 8/9-max use the canonical 8-seat order.
+    static func ordered(for tableSize: Int) -> [TablePosition] {
+        switch tableSize {
+        case ...6: return [.utg, .hj, .co, .btn, .sb, .bb]
+        default:   return nineMaxOrder
+        }
+    }
 }
 
 extension TablePosition: Codable {

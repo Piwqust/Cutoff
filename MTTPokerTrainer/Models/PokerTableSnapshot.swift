@@ -26,7 +26,7 @@ extension PokerTableSnapshot {
     /// The pot includes posted blinds, antes, and any chips put in by the
     /// "action ahead" implied by `facingAction`.
     static func from(spot: TrainingSpot) -> PokerTableSnapshot {
-        let positions = TablePosition.nineMaxOrder
+        let positions = TablePosition.ordered(for: spot.tableSize)
         let stack = Double(spot.stackDepthBB)
 
         let seats: [PokerTableSeat] = positions.map { pos in
@@ -58,8 +58,9 @@ extension PokerTableSnapshot {
     /// hero — except the assumed opener — as folded; the opener stays in.
     /// Keeps the table visually honest without overclaiming a specific story.
     private static func foldedBeforeHero(position: TablePosition, spot: TrainingSpot) -> Bool {
-        guard let heroIdx = TablePosition.nineMaxOrder.firstIndex(of: spot.position),
-              let posIdx  = TablePosition.nineMaxOrder.firstIndex(of: position) else {
+        let order = TablePosition.ordered(for: spot.tableSize)
+        guard let heroIdx = order.firstIndex(of: spot.position),
+              let posIdx  = order.firstIndex(of: position) else {
             return false
         }
         // Hero never folded. Anything after hero is yet to act.
