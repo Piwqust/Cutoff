@@ -13,21 +13,17 @@ struct DrillTrainerView: View {
         ZStack {
             AppBackground()
 
-            ScrollView {
-                VStack(alignment: .leading, spacing: AppSpacing.md) {
-                    tableDisplay
-                    situationRow(vm.current?.spot)
-                    villainRow
-                    Spacer(minLength: AppSpacing.sm)
-                    handDisplay
-                    Spacer(minLength: AppSpacing.sm)
-                    actionRow
-                }
-                .padding(.horizontal, AppSpacing.pageHorizontal)
-                .padding(.vertical, AppSpacing.lg)
+            VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                tableDisplay
+                contextRow
+                Spacer(minLength: 0)
+                handDisplay
+                Spacer(minLength: 0)
+                actionRow
             }
-            .scrollIndicators(.hidden)
-            .scrollBounceBehavior(.basedOnSize)
+            .padding(.horizontal, AppSpacing.pageHorizontal)
+            .padding(.top, AppSpacing.xs)
+            .padding(.bottom, AppSpacing.sm)
         }
         .navigationTitle(category.title)
         .navigationBarTitleDisplayMode(.inline)
@@ -69,15 +65,31 @@ struct DrillTrainerView: View {
         }
     }
 
-    private func situationRow(_ spot: TrainingSpot?) -> some View {
-        HStack(spacing: AppSpacing.xs) {
-            Image(systemName: spot?.facingAction.systemImage ?? "circle")
-                .font(.system(size: 13, weight: .bold))
-                .foregroundStyle(situationTint(for: spot?.facingAction))
-            Text(spot?.facingAction.headline ?? "Loading…")
-                .font(AppTypography.bodyBold)
-                .foregroundStyle(AppColors.textPrimary)
-            Spacer()
+    /// One compact row carrying both "what's happening" (facing action) and
+    /// "who you're against" (villain), replacing the previous two-row stack.
+    private var contextRow: some View {
+        let spot = vm.current?.spot
+        let villain = vm.current?.villain ?? .standard
+        return HStack(spacing: AppSpacing.sm) {
+            HStack(spacing: 6) {
+                Image(systemName: spot?.facingAction.systemImage ?? "circle")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundStyle(situationTint(for: spot?.facingAction))
+                Text(spot?.facingAction.headline ?? "Loading…")
+                    .font(AppTypography.bodyBold)
+                    .foregroundStyle(AppColors.textPrimary)
+                    .lineLimit(1)
+            }
+            Spacer(minLength: AppSpacing.xs)
+            HStack(spacing: 6) {
+                Image(systemName: villain.systemImage)
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundStyle(villainTint(for: villain))
+                Text(villain.displayName)
+                    .font(AppTypography.subheadline)
+                    .foregroundStyle(AppColors.textSecondary)
+                    .lineLimit(1)
+            }
         }
     }
 
@@ -91,33 +103,6 @@ struct DrillTrainerView: View {
         case .pushFold:      return AppColors.actionJam
         case .none:          return AppColors.textSecondary
         }
-    }
-
-    // MARK: - Villain row (full text, no truncation)
-
-    private var villainRow: some View {
-        let villain = vm.current?.villain ?? .standard
-        return HStack(alignment: .center, spacing: AppSpacing.sm) {
-            ZStack {
-                Circle()
-                    .fill(villainTint(for: villain).opacity(0.18))
-                    .frame(width: 36, height: 36)
-                Image(systemName: villain.systemImage)
-                    .font(.system(size: 15, weight: .bold))
-                    .foregroundStyle(villainTint(for: villain))
-            }
-            VStack(alignment: .leading, spacing: 1) {
-                Text(villain.displayName)
-                    .font(AppTypography.bodyBold)
-                    .foregroundStyle(AppColors.textPrimary)
-                Text(villain.shortNote)
-                    .font(AppTypography.caption)
-                    .foregroundStyle(AppColors.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-            Spacer(minLength: 0)
-        }
-        .padding(.horizontal, AppSpacing.xs)
     }
 
     private func villainTint(for v: VillainType) -> Color {
@@ -136,17 +121,17 @@ struct DrillTrainerView: View {
     /// the combo label below the cards never overlaps with the rotated card
     /// bottoms.
     private var handDisplay: some View {
-        VStack(spacing: AppSpacing.xl) {
+        VStack(spacing: AppSpacing.xs) {
             if let combo = vm.current?.combo {
                 HandCardView(hand: combo.notation)
-                    .frame(height: 176)  // 156 card + ~20pt rotation/offset slack
+                    .frame(height: 168)  // 156 card + ~12pt rotation/offset slack
                 Text(combo.notation)
-                    .font(AppTypography.numericLarge)
+                    .font(AppTypography.numericMedium)
                     .foregroundStyle(AppColors.textPrimary)
             } else {
                 ProgressView()
                     .tint(AppColors.primaryMint)
-                    .frame(height: 176)
+                    .frame(height: 168)
             }
         }
         .frame(maxWidth: .infinity)
