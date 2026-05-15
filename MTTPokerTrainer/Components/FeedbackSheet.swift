@@ -11,11 +11,6 @@ struct FeedbackSheet: View {
 
     @AppStorage("feedbackSheet.whyExpanded") private var whyExpanded: Bool = false
 
-    /// Sheet detent — defaults to the compact half-height and animates to
-    /// `.large` when the user opens the "Why?" disclosure so the deep-dive
-    /// body has room. The pinned CTA stays at the bottom regardless.
-    @State private var detent: PresentationDetent = .fraction(0.5)
-
     /// Rich content rendered when the user expands the "Why?" disclosure.
     struct DeepDive: Hashable {
         let frequencies: [RangeAction: Double]
@@ -26,34 +21,22 @@ struct FeedbackSheet: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            ScrollView {
-                VStack(alignment: .leading, spacing: AppSpacing.lg) {
-                    outcomeBadge
-                    answerBlock
-                    if deepDive != nil {
-                        whyDisclosure
-                    }
+        ScrollView {
+            VStack(alignment: .leading, spacing: AppSpacing.md) {
+                outcomeBadge
+                answerBlock
+                if deepDive != nil {
+                    whyDisclosure
                 }
-                .padding(.horizontal, AppSpacing.xl)
-                .padding(.top, AppSpacing.md)
-                .padding(.bottom, AppSpacing.md)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                ctaRow
+                    .padding(.top, AppSpacing.xs)
             }
-            .scrollIndicators(.hidden)
-
-            ctaRow
-                .padding(.horizontal, AppSpacing.xl)
-                .padding(.top, AppSpacing.sm)
-                .padding(.bottom, AppSpacing.md)
-                .background(AppColors.cardSurface)
+            .padding(.horizontal, AppSpacing.xl)
+            .padding(.top, AppSpacing.md)
+            .padding(.bottom, AppSpacing.md)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .presentationDetents([.fraction(0.5), .large], selection: $detent)
-        .onChange(of: whyExpanded) { _, expanded in
-            withAnimation(AppMotion.quick) {
-                detent = expanded ? .large : .fraction(0.5)
-            }
-        }
+        .scrollIndicators(.hidden)
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(outcome.headline). Best answer is \(correctAction.displayName). \(explanation)")
     }
@@ -148,42 +131,41 @@ struct FeedbackSheet: View {
         }
     }
 
+    /// Skip the first "verdict" paragraph (e.g. "43s wants fold.") — it's
+    /// already implied by the big answer headline, so showing it again just
+    /// fills vertical space.
+    private func deepDiveParagraphs(_ deep: DeepDive) -> ArraySlice<String> {
+        deep.paragraphs.count > 1 ? deep.paragraphs.dropFirst() : deep.paragraphs[...]
+    }
+
     private func deepDiveBody(_ deep: DeepDive) -> some View {
         VStack(alignment: .leading, spacing: AppSpacing.sm) {
-            HStack {
+            HStack(alignment: .center, spacing: AppSpacing.xs) {
                 MistakeReasonChip(reason: deep.mistakeReason)
-                Spacer()
+                Spacer(minLength: 0)
             }
             FrequencyDistributionView(
                 frequencies: deep.frequencies,
                 userAction: deep.userAction,
                 compact: true
             )
-            ForEach(Array(deep.paragraphs.enumerated()), id: \.offset) { _, p in
+            ForEach(Array(deepDiveParagraphs(deep).enumerated()), id: \.offset) { _, p in
                 Text(p)
-                    .font(AppTypography.subheadline)
+                    .font(AppTypography.footnote)
                     .foregroundStyle(AppColors.textPrimary)
                     .fixedSize(horizontal: false, vertical: true)
+                    .lineSpacing(1)
             }
             if !deep.siblingHands.isEmpty {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Plays the same way")
-                        .font(AppTypography.caption)
-                        .foregroundStyle(AppColors.textSecondary)
-                    HStack(spacing: AppSpacing.xs) {
-                        ForEach(deep.siblingHands, id: \.self) { combo in
-                            Text(combo)
-                                .font(AppTypography.caption.weight(.semibold))
-                                .foregroundStyle(AppColors.textPrimary)
-                                .padding(.horizontal, AppSpacing.xs)
-                                .padding(.vertical, 3)
-                                .background(Capsule().fill(AppColors.cardSurfaceGreen.opacity(0.5)))
-                        }
-                    }
-                }
+                Text("Same line: ")
+                    .font(AppTypography.caption)
+                    .foregroundStyle(AppColors.textSecondary)
+                + Text(deep.siblingHands.joined(separator: " · "))
+                    .font(AppTypography.caption.weight(.semibold))
+                    .foregroundStyle(AppColors.textPrimary)
             }
         }
-        .padding(.top, AppSpacing.xs)
+        .padding(.top, AppSpacing.xxs)
     }
 
     private var outcomeBadge: some View {
