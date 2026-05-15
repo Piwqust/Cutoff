@@ -144,11 +144,6 @@ struct FeedbackSheet: View {
                 MistakeReasonChip(reason: deep.mistakeReason)
                 Spacer(minLength: 0)
             }
-            FrequencyDistributionView(
-                frequencies: deep.frequencies,
-                userAction: deep.userAction,
-                compact: true
-            )
             ForEach(Array(deepDiveParagraphs(deep).enumerated()), id: \.offset) { _, p in
                 Text(p)
                     .font(AppTypography.footnote)
