@@ -21,63 +21,68 @@ struct FeedbackSheet: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.md) {
-            headerRow
-            explanationBlock
+        VStack(alignment: .leading, spacing: AppSpacing.lg) {
+            outcomeBadge
+            answerBlock
             if deepDive != nil {
                 whyDisclosure
             }
-            Spacer(minLength: AppSpacing.xs)
             ctaRow
         }
         .padding(.horizontal, AppSpacing.xl)
-        .padding(.top, AppSpacing.lg)
+        .padding(.top, AppSpacing.md)
         .padding(.bottom, AppSpacing.md)
         .frame(maxWidth: .infinity, alignment: .leading)
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(outcome.headline). Best answer is \(correctAction.displayName). \(explanation)")
     }
 
-    // MARK: - Header
+    // MARK: - Answer block
 
-    /// Outcome (how you did) on the left, best action (what was right) on the
-    /// right — paired so the reveal reads as one beat.
-    private var headerRow: some View {
-        HStack(alignment: .center, spacing: AppSpacing.sm) {
-            outcomeBadge
-            Spacer(minLength: AppSpacing.xs)
-            bestActionPill
-        }
-    }
+    /// Big, featured "what was the right play" headline followed by the
+    /// supporting explanation. Replaces the older two-pill header that
+    /// awkwardly paired the outcome and the answer side-by-side.
+    private var answerBlock: some View {
+        VStack(alignment: .leading, spacing: AppSpacing.xs) {
+            Text("The right move")
+                .font(AppTypography.caption.weight(.semibold))
+                .foregroundStyle(AppColors.textSecondary)
+                .textCase(.uppercase)
+                .tracking(0.6)
 
-    private var bestActionPill: some View {
-        HStack(spacing: 6) {
-            Image(systemName: correctAction.systemImage)
-                .font(.system(size: 13, weight: .bold))
-            Text(correctAction.displayName)
-                .font(AppTypography.bodyBold)
-        }
-        .foregroundStyle(correctAction.prefersDarkForeground ? AppColors.backgroundDeep : AppColors.textPrimary)
-        .padding(.horizontal, AppSpacing.md)
-        .padding(.vertical, 8)
-        .background(Capsule().fill(correctAction.tint))
-        .accessibilityLabel("Best play: \(correctAction.displayName)")
-    }
+            HStack(spacing: AppSpacing.sm) {
+                Image(systemName: correctAction.systemImage)
+                    .font(.system(size: 22, weight: .bold))
+                Text(correctAction.displayName)
+                    .font(.system(.title, design: .rounded).weight(.bold))
+            }
+            .foregroundStyle(answerTint)
 
-    // MARK: - Explanation
-
-    /// Explanation with a thin left accent bar tinted by outcome — visually
-    /// links the body copy to the result above.
-    private var explanationBlock: some View {
-        HStack(alignment: .top, spacing: AppSpacing.sm) {
-            RoundedRectangle(cornerRadius: 1.5, style: .continuous)
-                .fill(outcomeTint.opacity(0.55))
-                .frame(width: 3)
-            Text(explanation)
+            Text(supportingExplanation)
                 .font(AppTypography.body)
                 .foregroundStyle(AppColors.textPrimary)
                 .fixedSize(horizontal: false, vertical: true)
+                .padding(.top, AppSpacing.xxs)
         }
+    }
+
+    /// Fold's tint is intentionally muted (passive action), but using it as
+    /// large-text foreground reads as faded on a dark sheet. Promote to a
+    /// readable primary text color while still distinguishing it from the
+    /// other actions via the icon shape.
+    private var answerTint: Color {
+        correctAction == .fold ? AppColors.textPrimary : correctAction.tint
+    }
+
+    /// The engine-generated explanation always leads with "<Action>." (e.g.
+    /// "Fold. Not strong enough at this depth from UTG."). The action is
+    /// already shown as the big headline, so strip the redundant prefix
+    /// when displaying the body copy.
+    private var supportingExplanation: String {
+        let prefix = "\(correctAction.displayName)."
+        let trimmed = explanation.trimmingCharacters(in: .whitespaces)
+        guard trimmed.hasPrefix(prefix) else { return trimmed }
+        return String(trimmed.dropFirst(prefix.count)).trimmingCharacters(in: .whitespaces)
     }
 
     // MARK: - CTA row
@@ -100,29 +105,18 @@ struct FeedbackSheet: View {
             } label: {
                 HStack(spacing: AppSpacing.xs) {
                     Image(systemName: "lightbulb.fill")
-                        .font(.system(size: 13, weight: .bold))
+                        .font(.system(size: 12, weight: .semibold))
                         .foregroundStyle(AppColors.primaryMint)
-                    Text(whyExpanded ? "Hide the why" : "Why?")
-                        .font(AppTypography.bodyBold)
-                        .foregroundStyle(AppColors.textPrimary)
-                    Spacer()
+                    Text(whyExpanded ? "Hide the why" : "Why this hand?")
+                        .font(AppTypography.subheadline)
+                        .foregroundStyle(AppColors.textSecondary)
                     Image(systemName: "chevron.down")
-                        .font(.system(size: 12, weight: .bold))
+                        .font(.system(size: 10, weight: .bold))
                         .foregroundStyle(AppColors.textSecondary)
                         .rotationEffect(.degrees(whyExpanded ? 180 : 0))
+                    Spacer(minLength: 0)
                 }
-                .padding(.horizontal, AppSpacing.sm)
-                .padding(.vertical, 10)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(
-                    RoundedRectangle(cornerRadius: AppRadius.chip, style: .continuous)
-                        .fill(AppColors.cardSurface.opacity(0.55))
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: AppRadius.chip, style: .continuous)
-                        .strokeBorder(AppColors.divider.opacity(0.35), lineWidth: 0.5)
-                )
-                .contentShape(RoundedRectangle(cornerRadius: AppRadius.chip, style: .continuous))
+                .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
 
@@ -174,15 +168,20 @@ struct FeedbackSheet: View {
     private var outcomeBadge: some View {
         HStack(spacing: 6) {
             Image(systemName: outcomeGlyph)
-                .font(.system(size: 15, weight: .bold))
+                .font(.system(size: 12, weight: .bold))
             Text(outcome.headline)
-                .font(AppTypography.headline)
+                .font(AppTypography.footnote.weight(.semibold))
                 .lineLimit(1)
+                .textCase(.uppercase)
+                .tracking(0.4)
         }
         .foregroundStyle(outcomeTint)
-        .padding(.horizontal, AppSpacing.sm)
-        .padding(.vertical, 7)
-        .background(Capsule().fill(outcomeTint.opacity(0.16)))
+        .padding(.horizontal, 10)
+        .padding(.vertical, 5)
+        .background(Capsule().fill(outcomeTint.opacity(0.14)))
+        .overlay(
+            Capsule().strokeBorder(outcomeTint.opacity(0.25), lineWidth: 0.5)
+        )
     }
 
     private var outcomeTint: Color {
