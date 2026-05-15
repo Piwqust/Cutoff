@@ -11,6 +11,11 @@ struct FeedbackSheet: View {
 
     @AppStorage("feedbackSheet.whyExpanded") private var whyExpanded: Bool = false
 
+    /// Sheet detent — defaults to the compact half-height and animates to
+    /// `.large` when the user opens the "Why?" disclosure so the deep-dive
+    /// body has room. The pinned CTA stays at the bottom regardless.
+    @State private var detent: PresentationDetent = .fraction(0.5)
+
     /// Rich content rendered when the user expands the "Why?" disclosure.
     struct DeepDive: Hashable {
         let frequencies: [RangeAction: Double]
@@ -21,18 +26,34 @@ struct FeedbackSheet: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.lg) {
-            outcomeBadge
-            answerBlock
-            if deepDive != nil {
-                whyDisclosure
+        VStack(spacing: 0) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: AppSpacing.lg) {
+                    outcomeBadge
+                    answerBlock
+                    if deepDive != nil {
+                        whyDisclosure
+                    }
+                }
+                .padding(.horizontal, AppSpacing.xl)
+                .padding(.top, AppSpacing.md)
+                .padding(.bottom, AppSpacing.md)
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
+            .scrollIndicators(.hidden)
+
             ctaRow
+                .padding(.horizontal, AppSpacing.xl)
+                .padding(.top, AppSpacing.sm)
+                .padding(.bottom, AppSpacing.md)
+                .background(AppColors.cardSurface)
         }
-        .padding(.horizontal, AppSpacing.xl)
-        .padding(.top, AppSpacing.md)
-        .padding(.bottom, AppSpacing.md)
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .presentationDetents([.fraction(0.5), .large], selection: $detent)
+        .onChange(of: whyExpanded) { _, expanded in
+            withAnimation(AppMotion.quick) {
+                detent = expanded ? .large : .fraction(0.5)
+            }
+        }
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(outcome.headline). Best answer is \(correctAction.displayName). \(explanation)")
     }
@@ -199,51 +220,6 @@ struct FeedbackSheet: View {
         case .close:   return "circle.lefthalf.filled"
         case .mistake: return "exclamationmark.circle.fill"
         case .punt:    return "xmark.octagon.fill"
-        }
-    }
-}
-
-/// PreferenceKey used by `feedbackSheet(isPresented:...)` to size the sheet
-/// detent to the content's actual height.
-private struct FeedbackSheetHeightKey: PreferenceKey {
-    static var defaultValue: CGFloat = 0
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = max(value, nextValue())
-    }
-}
-
-extension View {
-    /// Presents a `FeedbackSheet` whose bottom-sheet detent matches the content
-    /// height. Sized via a `GeometryReader` preference key on first layout, so
-    /// the sheet hugs its content instead of locking to a fixed fraction.
-    func feedbackSheet(
-        isPresented: Binding<Bool>,
-        outcome: AnswerOutcome?,
-        correctAction: RangeAction,
-        explanation: String,
-        measuredHeight: Binding<CGFloat>,
-        onNext: @escaping () -> Void
-    ) -> some View {
-        self.sheet(isPresented: isPresented) {
-            if let outcome {
-                FeedbackSheet(
-                    outcome: outcome,
-                    correctAction: correctAction,
-                    explanation: explanation,
-                    onNext: onNext
-                )
-                .background(
-                    GeometryReader { geo in
-                        Color.clear.preference(key: FeedbackSheetHeightKey.self, value: geo.size.height)
-                    }
-                )
-                .onPreferenceChange(FeedbackSheetHeightKey.self) { h in
-                    if h > 0 { measuredHeight.wrappedValue = h }
-                }
-                .presentationDetents([.height(measuredHeight.wrappedValue)])
-                .presentationBackground(AppColors.cardSurface)
-                .presentationDragIndicator(.visible)
-            }
         }
     }
 }

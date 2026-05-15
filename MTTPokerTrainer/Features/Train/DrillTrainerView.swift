@@ -40,7 +40,6 @@ struct DrillTrainerView: View {
                         vm.next()
                     }
                 )
-                .presentationDetents([.fraction(0.5), .large])
                 .presentationDragIndicator(.visible)
             }
         }
