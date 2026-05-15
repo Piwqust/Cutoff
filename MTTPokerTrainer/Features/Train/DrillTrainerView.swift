@@ -13,17 +13,21 @@ struct DrillTrainerView: View {
         ZStack {
             AppBackground()
 
-            VStack(alignment: .leading, spacing: AppSpacing.md) {
-                tableDisplay
-                situationRow(vm.current?.spot)
-                villainRow
-                Spacer(minLength: AppSpacing.sm)
-                handDisplay
-                Spacer(minLength: AppSpacing.sm)
-                actionRow
+            ScrollView {
+                VStack(alignment: .leading, spacing: AppSpacing.md) {
+                    tableDisplay
+                    situationRow(vm.current?.spot)
+                    villainRow
+                    Spacer(minLength: AppSpacing.sm)
+                    handDisplay
+                    Spacer(minLength: AppSpacing.sm)
+                    actionRow
+                }
+                .padding(.horizontal, AppSpacing.pageHorizontal)
+                .padding(.vertical, AppSpacing.lg)
             }
-            .padding(.horizontal, AppSpacing.pageHorizontal)
-            .padding(.vertical, AppSpacing.lg)
+            .scrollIndicators(.hidden)
+            .scrollBounceBehavior(.basedOnSize)
         }
         .navigationTitle(category.title)
         .navigationBarTitleDisplayMode(.inline)
@@ -60,9 +64,8 @@ struct DrillTrainerView: View {
     private var tableDisplay: some View {
         if let spot = vm.current?.spot {
             PokerTableView(snapshot: .from(spot: spot))
-                .padding(.top, AppSpacing.md)
         } else {
-            Color.clear.frame(height: 220)
+            Color.clear.frame(height: 150)
         }
     }
 
