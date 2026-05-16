@@ -285,14 +285,13 @@ struct ReviewView: View {
     private var historySection: some View {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
             eyebrow("Review your hands")
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: AppSpacing.xs) {
-                    ForEach(HistoryFilter.allCases) { f in
-                        FilterChip(title: f.label, isSelected: historyFilter == f) {
-                            withAnimation(AppMotion.quick) { historyFilter = f }
-                        }
+            HStack(spacing: AppSpacing.xs) {
+                ForEach(HistoryFilter.allCases) { f in
+                    FilterChip(title: f.label, isSelected: historyFilter == f) {
+                        withAnimation(AppMotion.quick) { historyFilter = f }
                     }
                 }
+                Spacer(minLength: 0)
             }
             let rows = Array(historyFilter.apply(to: scopedResults).prefix(50))
             if rows.isEmpty {
