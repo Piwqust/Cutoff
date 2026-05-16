@@ -8,6 +8,9 @@ struct FeedbackSheet: View {
     var deepDive: DeepDive? = nil
     let onNext: () -> Void
     var onViewRange: (() -> Void)? = nil
+    /// Fires when the user interacts with the sheet in a way that signals
+    /// "I want to read this." Lets the parent cancel any auto-dismiss.
+    var onInteraction: (() -> Void)? = nil
 
     @AppStorage("feedbackSheet.whyExpanded") private var whyExpanded: Bool = false
 
@@ -105,6 +108,7 @@ struct FeedbackSheet: View {
     private var whyDisclosure: some View {
         VStack(alignment: .leading, spacing: AppSpacing.sm) {
             Button {
+                onInteraction?()
                 withAnimation(AppMotion.quick) { whyExpanded.toggle() }
             } label: {
                 HStack(spacing: AppSpacing.xs) {
