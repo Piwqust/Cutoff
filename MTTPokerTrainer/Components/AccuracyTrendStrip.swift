@@ -1,27 +1,19 @@
 import SwiftUI
 
 /// Two-week accuracy sparkline + last-7 / last-30 chips + delta arrow.
-/// Renders inside a `GlassCard` shell at the top of the Review dashboard.
+/// Renders flat; the caller decides whether to wrap in a card.
 struct AccuracyTrendStrip: View {
     let trend: ReviewAnalyzer.Trend
 
     var body: some View {
-        GlassCard {
-            VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                HStack(alignment: .firstTextBaseline) {
-                    Text("Trend")
-                        .font(AppTypography.headline)
-                        .foregroundStyle(AppColors.textPrimary)
-                    Spacer()
-                    deltaChip
-                }
-                HStack(spacing: AppSpacing.lg) {
-                    accuracyColumn(title: "Last 7d", value: trend.last7Accuracy)
-                    accuracyColumn(title: "Last 30d", value: trend.last30Accuracy)
-                    Spacer()
-                    sparkline
-                        .frame(width: 120, height: 36)
-                }
+        HStack(alignment: .top, spacing: AppSpacing.md) {
+            accuracyColumn(title: "Last 7d", value: trend.last7Accuracy)
+            accuracyColumn(title: "Last 30d", value: trend.last30Accuracy)
+            Spacer(minLength: AppSpacing.sm)
+            VStack(alignment: .trailing, spacing: AppSpacing.xs) {
+                deltaChip
+                sparkline
+                    .frame(width: 120, height: 36)
             }
         }
         .accessibilityElement(children: .combine)

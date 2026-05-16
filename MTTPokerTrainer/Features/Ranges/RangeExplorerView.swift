@@ -139,10 +139,7 @@ struct RangeExplorerView: View {
         model: @escaping (Item) -> ChipModel
     ) -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(label)
-                .font(AppTypography.caption)
-                .foregroundStyle(AppColors.textSecondary)
-                .textCase(.uppercase)
+            eyebrow(label)
                 .padding(.horizontal, AppSpacing.pageHorizontal)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: AppSpacing.xs) {
@@ -160,7 +157,7 @@ struct RangeExplorerView: View {
     // MARK: - Chart card
 
     private func chartCard(_ chart: RangeChart) -> some View {
-        VStack(alignment: .leading, spacing: AppSpacing.md) {
+        VStack(alignment: .leading, spacing: AppSpacing.xl) {
             VStack(alignment: .leading, spacing: 2) {
                 Text("\(chart.spot.position.displayName) · \(chart.spot.stackDepthBB) BB")
                     .font(AppTypography.numericLarge)
@@ -181,21 +178,11 @@ struct RangeExplorerView: View {
             .offset(x: swipeOffset)
             .gesture(depthSwipeGesture)
 
-            VStack(alignment: .leading, spacing: AppSpacing.xs) {
-                Text("Action mix")
-                    .font(AppTypography.bodyBold)
-                    .foregroundStyle(AppColors.textPrimary)
-                ActionFrequencyBar(frequencies: chart.actionFrequencies())
-            }
-            .padding(AppSpacing.md)
-            .background(
-                RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
-                    .fill(AppColors.cardSurface)
-            )
+            actionMixBlock(chart)
 
             RangeLegendView()
 
-            sourceCard(chart)
+            sourceBlock(chart)
 
             depthHint
         }
@@ -204,13 +191,31 @@ struct RangeExplorerView: View {
         .animation(.easeInOut(duration: 0.2), value: chart.id)
     }
 
-    private func sourceCard(_ chart: RangeChart) -> some View {
+    /// Eyebrow used in the chart pane sections. Same vocabulary the Review
+    /// screen now uses, so the two analysis screens read consistently.
+    private func eyebrow(_ title: String) -> some View {
+        Text(title)
+            .font(AppTypography.caption.weight(.semibold))
+            .foregroundStyle(AppColors.textSecondary)
+            .textCase(.uppercase)
+            .tracking(0.8)
+    }
+
+    private func actionMixBlock(_ chart: RangeChart) -> some View {
         VStack(alignment: .leading, spacing: AppSpacing.xs) {
+            eyebrow("Action mix")
+            ActionFrequencyBar(frequencies: chart.actionFrequencies())
+        }
+    }
+
+    private func sourceBlock(_ chart: RangeChart) -> some View {
+        VStack(alignment: .leading, spacing: AppSpacing.xxs) {
             HStack(spacing: AppSpacing.xs) {
                 Image(systemName: "info.circle.fill")
+                    .font(.system(size: 11))
                     .foregroundStyle(AppColors.textSecondary)
                 Text(chart.source.humanLabel)
-                    .font(AppTypography.bodyBold)
+                    .font(AppTypography.subheadline.weight(.semibold))
                     .foregroundStyle(AppColors.textPrimary)
             }
             Text(chart.source.description)
@@ -238,12 +243,7 @@ struct RangeExplorerView: View {
                 }
             }
         }
-        .padding(AppSpacing.md)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
-                .fill(AppColors.cardSurface.opacity(0.6))
-        )
     }
 
     private var depthHint: some View {

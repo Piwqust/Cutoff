@@ -15,13 +15,13 @@ struct ReviewView: View {
         ZStack {
             AppBackground()
             ScrollView {
-                VStack(alignment: .leading, spacing: AppSpacing.lg) {
+                VStack(alignment: .leading, spacing: AppSpacing.xxl) {
                     if allResults.isEmpty {
                         emptyState
                     } else {
                         scopePicker
-                        snapshotCard
-                        AccuracyTrendStrip(trend: ReviewAnalyzer.trend(scopedResults))
+                        snapshotSection
+                        trendSection
                         leakSpotsSection
                         heatmapSection
                         handClassSection
@@ -31,7 +31,8 @@ struct ReviewView: View {
                     }
                 }
                 .padding(.horizontal, AppSpacing.pageHorizontal)
-                .padding(.vertical, AppSpacing.lg)
+                .padding(.top, AppSpacing.lg)
+                .padding(.bottom, AppSpacing.xxl)
             }
         }
         .navigationTitle("Review")
@@ -43,6 +44,24 @@ struct ReviewView: View {
                 .presentationDragIndicator(.visible)
         }
         .onAppear { rangeService.ensureLoaded() }
+    }
+
+    // MARK: - Section eyebrow
+
+    /// Uppercase tracked caption that introduces each section without a card.
+    /// Space carries the grouping; the eyebrow is a small editorial marker.
+    private func eyebrow(_ title: String) -> some View {
+        Text(title)
+            .font(AppTypography.caption.weight(.semibold))
+            .foregroundStyle(AppColors.textSecondary)
+            .textCase(.uppercase)
+            .tracking(0.8)
+    }
+
+    private var rowDivider: some View {
+        Rectangle()
+            .fill(AppColors.divider.opacity(0.5))
+            .frame(height: 0.5)
     }
 
     // MARK: - Scope picker
@@ -60,19 +79,15 @@ struct ReviewView: View {
 
     // MARK: - Snapshot
 
-    private var snapshotCard: some View {
+    private var snapshotSection: some View {
         let snap = ReviewAnalyzer.snapshot(scopedResults)
-        return GlassCard {
-            VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                Text("Last \(snap.total) hand\(snap.total == 1 ? "" : "s")")
-                    .font(AppTypography.subheadline)
-                    .foregroundStyle(AppColors.textSecondary)
-                HStack(spacing: AppSpacing.md) {
-                    summaryStat("Accuracy", "\(snap.accuracy)%", color: AppColors.primaryMint)
-                    summaryStat("Mistakes", "\(snap.mistakes)", color: AppColors.accentCoral)
-                    summaryStat("Close", "\(snap.close)", color: AppColors.accentLime)
-                    summaryStat("Correct", "\(snap.correct)", color: AppColors.primaryEmerald)
-                }
+        return VStack(alignment: .leading, spacing: AppSpacing.md) {
+            eyebrow("Last \(snap.total) hand\(snap.total == 1 ? "" : "s")")
+            HStack(spacing: AppSpacing.lg) {
+                summaryStat("Accuracy", "\(snap.accuracy)%", color: AppColors.primaryMint)
+                summaryStat("Mistakes", "\(snap.mistakes)", color: AppColors.accentCoral)
+                summaryStat("Close", "\(snap.close)", color: AppColors.accentLime)
+                summaryStat("Correct", "\(snap.correct)", color: AppColors.primaryEmerald)
             }
         }
     }
@@ -89,19 +104,27 @@ struct ReviewView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
+    // MARK: - Trend
+
+    private var trendSection: some View {
+        VStack(alignment: .leading, spacing: AppSpacing.md) {
+            eyebrow("Trend")
+            AccuracyTrendStrip(trend: ReviewAnalyzer.trend(scopedResults))
+        }
+    }
+
     // MARK: - Top leak spots
 
     @ViewBuilder
     private var leakSpotsSection: some View {
         let spots = ReviewAnalyzer.topLeakSpots(scopedResults)
         if !spots.isEmpty {
-            VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                Text("Where you leak")
-                    .font(AppTypography.headline)
-                    .foregroundStyle(AppColors.textPrimary)
-                VStack(spacing: AppSpacing.xs) {
-                    ForEach(spots) { spot in
+            VStack(alignment: .leading, spacing: AppSpacing.md) {
+                eyebrow("Where you leak")
+                VStack(spacing: 0) {
+                    ForEach(Array(spots.enumerated()), id: \.element.id) { idx, spot in
                         leakSpotRow(spot)
+                        if idx < spots.count - 1 { rowDivider }
                     }
                 }
             }
@@ -109,22 +132,21 @@ struct ReviewView: View {
     }
 
     private func leakSpotRow(_ spot: ReviewAnalyzer.LeakSpot) -> some View {
-        GlassCard(padding: AppSpacing.md) {
-            HStack(alignment: .center, spacing: AppSpacing.sm) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("\(spot.position.displayName) · \(spot.bucket.label) · \(spot.facing.displayName)")
-                        .font(AppTypography.bodyBold)
-                        .foregroundStyle(AppColors.textPrimary)
-                    Text("\(spot.mistakes) of \(spot.total) wrong")
-                        .font(AppTypography.caption)
-                        .foregroundStyle(AppColors.textSecondary)
-                }
-                Spacer()
-                Text("\(Int((spot.mistakeRate * 100).rounded()))%")
-                    .font(AppTypography.numericMedium)
-                    .foregroundStyle(AppColors.accentCoral)
+        HStack(alignment: .center, spacing: AppSpacing.sm) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text("\(spot.position.displayName) · \(spot.bucket.label) · \(spot.facing.displayName)")
+                    .font(AppTypography.bodyBold)
+                    .foregroundStyle(AppColors.textPrimary)
+                Text("\(spot.mistakes) of \(spot.total) wrong")
+                    .font(AppTypography.caption)
+                    .foregroundStyle(AppColors.textSecondary)
             }
+            Spacer()
+            Text("\(Int((spot.mistakeRate * 100).rounded()))%")
+                .font(AppTypography.numericMedium)
+                .foregroundStyle(AppColors.accentCoral)
         }
+        .padding(.vertical, AppSpacing.sm)
     }
 
     // MARK: - Heatmap
@@ -133,13 +155,9 @@ struct ReviewView: View {
     private var heatmapSection: some View {
         let cells = ReviewAnalyzer.heatmap(scopedResults)
         if cells.count >= 3 {
-            VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                Text("Accuracy by spot")
-                    .font(AppTypography.headline)
-                    .foregroundStyle(AppColors.textPrimary)
-                GlassCard(padding: AppSpacing.md) {
-                    PositionDepthHeatmap(cells: cells)
-                }
+            VStack(alignment: .leading, spacing: AppSpacing.md) {
+                eyebrow("Accuracy by spot")
+                PositionDepthHeatmap(cells: cells)
             }
         }
     }
@@ -150,11 +168,9 @@ struct ReviewView: View {
     private var handClassSection: some View {
         let buckets = ReviewAnalyzer.byHandClass(scopedResults)
         if buckets.count >= 2 {
-            VStack(alignment: .leading, spacing: AppSpacing.sm) {
+            VStack(alignment: .leading, spacing: AppSpacing.md) {
                 HStack {
-                    Text("By hand class")
-                        .font(AppTypography.headline)
-                        .foregroundStyle(AppColors.textPrimary)
+                    eyebrow("By hand class")
                     Spacer()
                     if let worst = buckets.filter({ $0.total >= 3 }).min(by: { $0.accuracy < $1.accuracy }) {
                         Text("Worst: \(worst.label.lowercased())")
@@ -162,16 +178,14 @@ struct ReviewView: View {
                             .foregroundStyle(AppColors.accentCoral)
                     }
                 }
-                GlassCard(padding: AppSpacing.md) {
-                    VStack(spacing: AppSpacing.xs) {
-                        ForEach(buckets) { b in
-                            AccuracyBarRow(
-                                label: b.label,
-                                total: b.total,
-                                accuracy: b.accuracy,
-                                systemImage: HandClass(rawValue: b.id)?.systemImage
-                            )
-                        }
+                VStack(spacing: AppSpacing.sm) {
+                    ForEach(buckets) { b in
+                        AccuracyBarRow(
+                            label: b.label,
+                            total: b.total,
+                            accuracy: b.accuracy,
+                            systemImage: HandClass(rawValue: b.id)?.systemImage
+                        )
                     }
                 }
             }
@@ -186,23 +200,19 @@ struct ReviewView: View {
             rangeService.chart(byID: id)
         }
         if !shares.isEmpty {
-            VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                Text("Mistake reasons")
-                    .font(AppTypography.headline)
-                    .foregroundStyle(AppColors.textPrimary)
-                GlassCard(padding: AppSpacing.md) {
-                    VStack(alignment: .leading, spacing: AppSpacing.xs) {
-                        ForEach(shares) { share in
-                            HStack {
-                                MistakeReasonChip(reason: share.reason)
-                                Spacer()
-                                Text("\(Int((share.share * 100).rounded()))%")
-                                    .font(AppTypography.numericSmall)
-                                    .foregroundStyle(AppColors.textPrimary)
-                                Text("· \(share.count)")
-                                    .font(AppTypography.caption)
-                                    .foregroundStyle(AppColors.textSecondary)
-                            }
+            VStack(alignment: .leading, spacing: AppSpacing.md) {
+                eyebrow("Mistake reasons")
+                VStack(spacing: AppSpacing.sm) {
+                    ForEach(shares) { share in
+                        HStack {
+                            MistakeReasonChip(reason: share.reason)
+                            Spacer()
+                            Text("\(Int((share.share * 100).rounded()))%")
+                                .font(AppTypography.numericSmall)
+                                .foregroundStyle(AppColors.textPrimary)
+                            Text("· \(share.count)")
+                                .font(AppTypography.caption)
+                                .foregroundStyle(AppColors.textSecondary)
                         }
                     }
                 }
@@ -212,18 +222,21 @@ struct ReviewView: View {
 
     // MARK: - Pattern leak cards (LeakAnalyzer)
 
+    /// The one surface that earns a glass card: each LeakCard is a
+    /// standalone editorialized object with its own CTA. Everything else
+    /// on this screen sits flat against the background.
     @ViewBuilder
     private var leakCardsSection: some View {
         let leaks = LeakAnalyzer.leaks(from: scopedResults) { id in
             rangeService.chart(byID: id)
         }
         if !leaks.isEmpty {
-            VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                Text("Patterns we noticed")
-                    .font(AppTypography.headline)
-                    .foregroundStyle(AppColors.textPrimary)
-                ForEach(leaks) { leak in
-                    LeakCard(leak: leak)
+            VStack(alignment: .leading, spacing: AppSpacing.md) {
+                eyebrow("Patterns we noticed")
+                VStack(spacing: AppSpacing.sm) {
+                    ForEach(leaks) { leak in
+                        LeakCard(leak: leak)
+                    }
                 }
             }
         }
@@ -233,10 +246,8 @@ struct ReviewView: View {
 
     @ViewBuilder
     private var historySection: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.sm) {
-            Text("Review your hands")
-                .font(AppTypography.headline)
-                .foregroundStyle(AppColors.textPrimary)
+        VStack(alignment: .leading, spacing: AppSpacing.md) {
+            eyebrow("Review your hands")
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: AppSpacing.xs) {
                     ForEach(HistoryFilter.allCases) { f in
@@ -246,7 +257,7 @@ struct ReviewView: View {
                     }
                 }
             }
-            let rows = historyFilter.apply(to: scopedResults).prefix(50)
+            let rows = Array(historyFilter.apply(to: scopedResults).prefix(50))
             if rows.isEmpty {
                 Text("Nothing matches this filter yet.")
                     .font(AppTypography.body)
@@ -254,14 +265,15 @@ struct ReviewView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.vertical, AppSpacing.xl)
             } else {
-                VStack(spacing: AppSpacing.xs) {
-                    ForEach(Array(rows)) { row in
+                VStack(spacing: 0) {
+                    ForEach(Array(rows.enumerated()), id: \.element.id) { idx, row in
                         Button {
                             selected = row
                         } label: {
                             HistoryRow(row: row)
                         }
                         .buttonStyle(.plain)
+                        if idx < rows.count - 1 { rowDivider }
                     }
                 }
             }
@@ -270,6 +282,8 @@ struct ReviewView: View {
 
     // MARK: - Empty state
 
+    /// Kept as glass: a centered hero state on an otherwise empty screen
+    /// is the textbook case where a card actually helps anchor the eye.
     private var emptyState: some View {
         GlassCard(padding: AppSpacing.xl) {
             VStack(spacing: AppSpacing.md) {
@@ -324,38 +338,38 @@ private struct HistoryRow: View {
     let row: QuizResult
 
     var body: some View {
-        GlassCard(padding: AppSpacing.md) {
-            HStack(spacing: AppSpacing.md) {
-                outcomeBadge
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(row.combo)
-                        .font(AppTypography.bodyBold)
-                        .foregroundStyle(AppColors.textPrimary)
-                    Text("\(row.position.displayName) · \(row.stackDepthBB) BB · \(row.facingAction.displayName)")
-                        .font(AppTypography.caption)
-                        .foregroundStyle(AppColors.textSecondary)
-                }
-                Spacer()
-                VStack(alignment: .trailing, spacing: 2) {
-                    HStack(spacing: 4) {
-                        Image(systemName: row.userAction.systemImage)
-                            .font(.system(size: 11, weight: .bold))
-                        Text(row.userAction.displayName)
-                            .font(AppTypography.caption)
-                    }
+        HStack(spacing: AppSpacing.md) {
+            outcomeBadge
+            VStack(alignment: .leading, spacing: 2) {
+                Text(row.combo)
+                    .font(AppTypography.bodyBold)
+                    .foregroundStyle(AppColors.textPrimary)
+                Text("\(row.position.displayName) · \(row.stackDepthBB) BB · \(row.facingAction.displayName)")
+                    .font(AppTypography.caption)
                     .foregroundStyle(AppColors.textSecondary)
+            }
+            Spacer()
+            VStack(alignment: .trailing, spacing: 2) {
+                HStack(spacing: 4) {
+                    Image(systemName: row.userAction.systemImage)
+                        .font(.system(size: 11, weight: .bold))
+                    Text(row.userAction.displayName)
+                        .font(AppTypography.caption)
+                }
+                .foregroundStyle(AppColors.textSecondary)
 
-                    HStack(spacing: 4) {
-                        Image(systemName: "arrow.right")
-                            .font(.system(size: 10, weight: .bold))
-                            .foregroundStyle(AppColors.textSecondary)
-                        Text(row.correctAction.displayName)
-                            .font(AppTypography.caption)
-                            .foregroundStyle(row.correctAction.tint)
-                    }
+                HStack(spacing: 4) {
+                    Image(systemName: "arrow.right")
+                        .font(.system(size: 10, weight: .bold))
+                        .foregroundStyle(AppColors.textSecondary)
+                    Text(row.correctAction.displayName)
+                        .font(AppTypography.caption)
+                        .foregroundStyle(row.correctAction.tint)
                 }
             }
         }
+        .padding(.vertical, AppSpacing.sm)
+        .contentShape(Rectangle())
     }
 
     private var outcomeBadge: some View {

@@ -34,9 +34,12 @@ struct FilterChip: View {
         return AppColors.textPrimary
     }
 
+    /// Selected chips fill mint; unselected use a plain tinted surface
+    /// (not Liquid Glass material) so chips read as chips without
+    /// competing with the cards they may sit near.
     private var background: AnyShapeStyle {
         if isSelected { return AnyShapeStyle(AppColors.primaryMint) }
-        return AnyShapeStyle(.ultraThinMaterial)
+        return AnyShapeStyle(AppColors.cardSurface)
     }
 
     private var borderColor: Color {
