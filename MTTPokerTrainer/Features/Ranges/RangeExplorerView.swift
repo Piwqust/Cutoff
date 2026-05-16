@@ -178,13 +178,13 @@ struct RangeExplorerView: View {
             .offset(x: swipeOffset)
             .gesture(depthSwipeGesture)
 
+            depthHint
+
             actionMixBlock(chart)
 
             RangeLegendView()
 
             sourceBlock(chart)
-
-            depthHint
         }
         .padding(.horizontal, AppSpacing.pageHorizontal)
         .transition(.opacity)
@@ -247,12 +247,13 @@ struct RangeExplorerView: View {
     }
 
     private var depthHint: some View {
-        HStack(spacing: 6) {
-            Image(systemName: "hand.draw")
-            Text("Swipe the chart left/right to change stack depth.")
+        HStack(spacing: 4) {
+            Image(systemName: "arrow.left.and.right")
+                .font(.system(size: 10, weight: .semibold))
+            Text("swipe to change depth")
         }
         .font(AppTypography.caption)
-        .foregroundStyle(AppColors.textSecondary)
+        .foregroundStyle(AppColors.textSecondary.opacity(0.7))
         .frame(maxWidth: .infinity, alignment: .center)
     }
 

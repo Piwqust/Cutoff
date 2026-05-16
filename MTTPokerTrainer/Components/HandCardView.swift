@@ -54,7 +54,7 @@ struct PlayingCardView: View {
                 ))
                 .overlay(
                     RoundedRectangle(cornerRadius: 16, style: .continuous)
-                        .strokeBorder(AppColors.divider.opacity(2), lineWidth: 1)
+                        .strokeBorder(AppColors.divider.opacity(0.5), lineWidth: 1)
                 )
                 .shadow(color: .black.opacity(0.25), radius: 14, x: 0, y: 8)
 

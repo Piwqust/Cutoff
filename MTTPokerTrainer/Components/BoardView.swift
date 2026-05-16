@@ -20,12 +20,13 @@ struct HoleCardsView: View {
     let hand: HoleCards
 
     var body: some View {
-        HStack(spacing: AppSpacing.xs) {
+        let label = "Hero hand: \(hand.first.rank.rawValue) of \(hand.first.suit), \(hand.second.rank.rawValue) of \(hand.second.suit)"
+        return HStack(spacing: AppSpacing.xs) {
             CardView(card: hand.first)
             CardView(card: hand.second)
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Hero hand: \(hand.first.rank.rawValue) of \(hand.first.suit), \(hand.second.rank.rawValue) of \(hand.second.suit)")
+        .accessibilityLabel(label)
     }
 }
 

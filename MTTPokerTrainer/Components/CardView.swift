@@ -59,7 +59,11 @@ struct CardView: View {
             }
         }
         .frame(width: size.width, height: size.height)
-        .accessibilityLabel("\(card.rank.rawValue) of \(card.suit)")
+        .accessibilityLabel(accessibilityDescription)
+    }
+
+    private var accessibilityDescription: String {
+        "\(card.rank.rawValue) of \(card.suit)"
     }
 }
 
