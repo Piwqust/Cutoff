@@ -82,4 +82,22 @@ struct TrainingSpot: Hashable, Codable, Identifiable {
     var summary: String {
         "\(position.displayName) · \(stackDepthBB) BB · \(facingAction.displayName)"
     }
+
+    /// Whether this (position, facing) pair represents a real preflop spot.
+    /// The bundled JSON corpus includes a few explanatory placeholder files
+    /// (e.g. "UTG vsOpen" stating UTG acts first) — those need to be excluded
+    /// from the loaded catalog so the filter UI never offers them.
+    var isSemanticallyValid: Bool {
+        Self.isValid(position: position, facing: facingAction)
+    }
+
+    static func isValid(position: TablePosition, facing: FacingAction) -> Bool {
+        switch (position, facing) {
+        case (.bb, .unopened):                                        return false
+        case (.utg, .vsOpen):                                         return false
+        case (.utg, .squeeze), (.utg1, .squeeze):                     return false
+        case (_, .blindDefense) where position != .bb:                return false
+        default:                                                      return true
+        }
+    }
 }

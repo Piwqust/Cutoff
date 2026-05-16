@@ -14,13 +14,30 @@ final class RangesViewModel {
     func load(using service: RangeService) {
         service.ensureLoaded()
         if charts.isEmpty {
-            charts = service.charts
+            charts = Self.normalize(service.charts)
             if let first = charts.first {
                 selectedPosition = first.position
                 selectedDepthBucket = StackDepthBucket.nearest(to: first.stackDepth)
                 selectedFacing = first.facingAction
             }
         }
+    }
+
+    /// Drop semantically-impossible placeholder spots (UTG squeeze, SB
+    /// blindDefense, etc.) and dedup by (position, depth, facing) — preferring
+    /// the 9-max bundled chart when both 8-max and 9-max files exist for the
+    /// same spot.
+    private static func normalize(_ source: [RangeChart]) -> [RangeChart] {
+        var byKey: [String: RangeChart] = [:]
+        for c in source where TrainingSpot.isValid(position: c.position, facing: c.facingAction) {
+            let key = "\(c.position.rawValue)_\(c.stackDepth)_\(c.facingAction.rawValue)"
+            if let existing = byKey[key] {
+                if c.tableSize == 9 && existing.tableSize != 9 { byKey[key] = c }
+            } else {
+                byKey[key] = c
+            }
+        }
+        return byKey.values.sorted { $0.id < $1.id }
     }
 
     func charts(forDepth depth: Int) -> [RangeChart] {

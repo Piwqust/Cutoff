@@ -1,31 +1,23 @@
 import SwiftUI
 
-/// Root of the Ranges tab. Hosts a drill-down: library → matrix → chart.
-/// Root of the Ranges tab.
-///
-/// The shared `RangesViewModel` and `RangeBrowsingStore` must be installed on
-/// the *enclosing* `NavigationStack` rather than on `RangeLibraryView`, because
-/// SwiftUI's `.navigationDestination(for:)` resolves its destination view in
-/// the environment of the NavigationStack — not the view where the modifier
-/// is attached. Without this, every push (position / depth / facing / chart)
-/// crashes when the pushed view tries to read those environment values.
+/// Tab root for the Ranges section. A single explorer screen (no drilldown):
+/// chip rails for position/depth/scenario pivot the active chart in place,
+/// search and bookmarks live in the toolbar.
 struct RangesView: View {
     @Environment(RangeService.self) private var rangeService
     @State private var vm = RangesViewModel()
     @StateObject private var browsing = RangeBrowsingStore()
 
     var body: some View {
-        RangeLibraryView()
-            .environment(vm)
-            .environmentObject(browsing)
-            .onAppear { vm.load(using: rangeService) }
+        NavigationStack {
+            RangeExplorerView()
+        }
+        .environment(vm)
+        .environmentObject(browsing)
+        .onAppear { vm.load(using: rangeService) }
     }
 
-    /// Tab-root wrapper: hosts the navigation stack and shared state so the
-    /// pushed destinations (matrix / chart) inherit them.
-    static func tabRoot() -> some View {
-        NavigationStack { RangesView() }
-    }
+    static func tabRoot() -> some View { RangesView() }
 }
 
 struct RangeDetailPayload: Identifiable {
@@ -71,12 +63,6 @@ struct RangeDetailSheet: View {
                 .foregroundStyle(AppColors.textPrimary)
                 .fixedSize(horizontal: false, vertical: true)
 
-            Text(payload.chart.source.fullDisclaimer)
-                .font(AppTypography.caption)
-                .foregroundStyle(AppColors.textSecondary)
-            Text(AppTheme.disclaimer)
-                .font(AppTypography.caption)
-                .foregroundStyle(AppColors.textSecondary)
         }
         .padding(AppSpacing.xl)
         .frame(maxWidth: .infinity, alignment: .leading)

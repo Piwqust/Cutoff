@@ -20,7 +20,6 @@ struct PostflopDrillView: View {
                     } else {
                         ProgressView().tint(AppColors.primaryMint)
                     }
-                    disclaimer
                 }
                 .padding(.horizontal, AppSpacing.pageHorizontal)
                 .padding(.vertical, AppSpacing.lg)
@@ -100,17 +99,6 @@ struct PostflopDrillView: View {
         }
     }
 
-    private var disclaimer: some View {
-        VStack(spacing: 4) {
-            Text(AppTheme.demoDataDisclaimer)
-            Text(AppTheme.disclaimer)
-        }
-        .font(AppTypography.caption)
-        .foregroundStyle(AppColors.textSecondary)
-        .multilineTextAlignment(.center)
-        .frame(maxWidth: .infinity)
-    }
-
     private func submit(_ action: PostflopAction) {
         vm.submit(action)
         feedbackVisible = true
@@ -136,14 +124,7 @@ struct PostflopFeedbackSheet: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
-            HStack {
-                outcomeBadge
-                Spacer()
-                Text(AppTheme.demoDataDisclaimer)
-                    .font(AppTypography.caption)
-                    .foregroundStyle(AppColors.textSecondary)
-                    .multilineTextAlignment(.trailing)
-            }
+            outcomeBadge
             HStack(alignment: .center, spacing: AppSpacing.sm) {
                 Text("Best answer")
                     .font(AppTypography.subheadline)

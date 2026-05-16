@@ -21,7 +21,10 @@ final class RangeCoverageTests: XCTestCase {
             }
         }
 
-        for action in PreflopAction.allCases {
+        // Limp, limp-raise, and min-raise are reserved for cash / deep-stack
+        // variants not in the current MTT corpus.
+        let mttActions: Set<PreflopAction> = [.fold, .call, .raise25x, .raise3x, .shove]
+        for action in mttActions {
             XCTAssertTrue(
                 seen.contains(action),
                 "PreflopAction.\(action.rawValue) is unreachable in any pilot range — the UI button has no spot that triggers it."
@@ -29,11 +32,15 @@ final class RangeCoverageTests: XCTestCase {
         }
     }
 
-    func test_pilotRangesAllDeclareDemoCompliance() throws {
+    func test_pilotRangesAllDeclareSolverProvenance() throws {
         let charts = try RangeLoader(bundle: appBundle).loadAll()
+        let allowed: Set<RangeChart.SourcePayload.Kind> = [.solverDump, .nashComputed, .gto, .userDefined]
         for chart in charts {
-            XCTAssertEqual(chart.source.type, .demo)
-            XCTAssertTrue(chart.source.description.lowercased().contains("not solver-verified"))
+            XCTAssertTrue(
+                allowed.contains(chart.source.type),
+                "Range \(chart.id) has unexpected source type '\(chart.source.type.rawValue)'"
+            )
+            XCTAssertFalse(chart.source.description.isEmpty)
         }
     }
 

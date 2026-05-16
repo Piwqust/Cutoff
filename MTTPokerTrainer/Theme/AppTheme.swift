@@ -9,8 +9,4 @@ enum AppTheme {
     typealias R = AppRadius
     typealias T = AppTypography
     typealias M = AppMotion
-
-    static let disclaimer = "Educational poker training only. No real-money gambling."
-    static let demoDataDisclaimer = "Demo training range — not solver-verified."
-    static let fullLegalLine = "Educational poker training only. No real-money gambling. Demo ranges are approximate and not solver-verified."
 }

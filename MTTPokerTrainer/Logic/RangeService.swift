@@ -34,6 +34,13 @@ final class RangeService {
         loader.chart(matching: position, depthBB: depthBB, facing: facing, in: charts)
     }
 
+    /// Lookup by the stable chart id stored on `QuizResult.rangeChartID`. Used
+    /// by the Review tab to reconstruct the frequency distribution for a past
+    /// answer without paying for a fuzzy spot match.
+    func chart(byID id: String) -> RangeChart? {
+        charts.first { $0.id == id }
+    }
+
     // MARK: - Available dimensions (for building filter UIs)
 
     var availablePositions: [TablePosition] {

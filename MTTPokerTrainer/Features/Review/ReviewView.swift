@@ -5,7 +5,10 @@ struct ReviewView: View {
     @Query(sort: [SortDescriptor(\QuizResult.createdAt, order: .reverse)])
     private var allResults: [QuizResult]
 
-    @State private var filter: ReviewFilter = .mistakes
+    @Environment(RangeService.self) private var rangeService
+
+    @State private var scope: ReviewAnalyzer.Scope = .all
+    @State private var historyFilter: HistoryFilter = .mistakes
     @State private var selected: QuizResult?
 
     var body: some View {
@@ -16,26 +19,16 @@ struct ReviewView: View {
                     if allResults.isEmpty {
                         emptyState
                     } else {
-                        let leaks = LeakAnalyzer.leaks(from: allResults)
-                        if leaks.isEmpty {
-                            noLeaksState
-                        } else {
-                            ForEach(leaks) { leak in
-                                LeakCard(
-                                    title: leak.title,
-                                    detail: leak.detail,
-                                    severity: leak.severity,
-                                    onDrill: {}
-                                )
-                            }
-                        }
+                        scopePicker
+                        snapshotCard
+                        AccuracyTrendStrip(trend: ReviewAnalyzer.trend(scopedResults))
+                        leakSpotsSection
+                        heatmapSection
+                        handClassSection
+                        mistakeReasonsSection
+                        leakCardsSection
+                        historySection
                     }
-
-                    Text(AppTheme.fullLegalLine)
-                        .font(AppTypography.caption)
-                        .foregroundStyle(AppColors.textSecondary)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, AppSpacing.xl)
                 }
                 .padding(.horizontal, AppSpacing.pageHorizontal)
                 .padding(.vertical, AppSpacing.lg)
@@ -45,64 +38,237 @@ struct ReviewView: View {
         .navigationBarTitleDisplayMode(.large)
         .toolbarBackground(.hidden, for: .navigationBar)
         .sheet(item: $selected) { row in
-            ReviewDetailSheet(row: row)
-                .presentationDetents([.fraction(0.5), .large])
+            MistakeDetailSheet(row: row)
+                .presentationDetents([.fraction(0.7), .large])
                 .presentationDragIndicator(.visible)
         }
+        .onAppear { rangeService.ensureLoaded() }
     }
 
-    // MARK: - Leak cards
+    // MARK: - Scope picker
+
+    private var scopePicker: some View {
+        HStack(spacing: AppSpacing.xs) {
+            ForEach(ReviewAnalyzer.Scope.allCases) { s in
+                FilterChip(title: s.label, isSelected: scope == s) {
+                    withAnimation(AppMotion.quick) { scope = s }
+                }
+            }
+            Spacer()
+        }
+    }
+
+    // MARK: - Snapshot
+
+    private var snapshotCard: some View {
+        let snap = ReviewAnalyzer.snapshot(scopedResults)
+        return GlassCard {
+            VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                Text("Last \(snap.total) hand\(snap.total == 1 ? "" : "s")")
+                    .font(AppTypography.subheadline)
+                    .foregroundStyle(AppColors.textSecondary)
+                HStack(spacing: AppSpacing.md) {
+                    summaryStat("Accuracy", "\(snap.accuracy)%", color: AppColors.primaryMint)
+                    summaryStat("Mistakes", "\(snap.mistakes)", color: AppColors.accentCoral)
+                    summaryStat("Close", "\(snap.close)", color: AppColors.accentLime)
+                    summaryStat("Correct", "\(snap.correct)", color: AppColors.primaryEmerald)
+                }
+            }
+        }
+    }
+
+    private func summaryStat(_ label: String, _ value: String, color: Color) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(value)
+                .font(AppTypography.numericMedium)
+                .foregroundStyle(color)
+            Text(label)
+                .font(AppTypography.caption)
+                .foregroundStyle(AppColors.textSecondary)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    // MARK: - Top leak spots
 
     @ViewBuilder
-    private func leakCard(for leak: Leak) -> some View {
-        if let spot = leak.suggestedSpot {
-            let filter = TrainingFilter(
-                positions: [spot.position],
-                depthBuckets: [StackDepthBucket.nearest(to: spot.depthBB)],
-                facingActions: [spot.facingAction]
-            )
-            let _ = filter
-            NavigationLink {
-                DrillTrainerView(category: .mixed)
-            } label: {
-                LeakCard(
-                    title: leak.title,
-                    detail: leak.detail,
-                    severity: leak.severity,
-                    drillTitle: "Drill this",
-                    onDrill: {}
-                )
-            }
-            .buttonStyle(.plain)
-        } else {
-            LeakCard(
-                title: leak.title,
-                detail: leak.detail,
-                severity: leak.severity,
-                onDrill: {}
-            )
-        }
-    }
-
-    // MARK: - Empty / no-leak states
-
-    private var noLeaksState: some View {
-        GlassCard(padding: AppSpacing.xl) {
-            VStack(spacing: AppSpacing.md) {
-                Image(systemName: "checkmark.seal.fill")
-                    .font(.system(size: 32))
-                    .foregroundStyle(AppColors.primaryMint)
-                Text("No leaks detected")
+    private var leakSpotsSection: some View {
+        let spots = ReviewAnalyzer.topLeakSpots(scopedResults)
+        if !spots.isEmpty {
+            VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                Text("Where you leak")
                     .font(AppTypography.headline)
                     .foregroundStyle(AppColors.textPrimary)
-                Text("Keep drilling — patterns surface once you've played enough hands in a given spot.")
-                    .font(AppTypography.body)
-                    .foregroundStyle(AppColors.textSecondary)
-                    .multilineTextAlignment(.center)
+                VStack(spacing: AppSpacing.xs) {
+                    ForEach(spots) { spot in
+                        leakSpotRow(spot)
+                    }
+                }
             }
-            .frame(maxWidth: .infinity)
         }
     }
+
+    private func leakSpotRow(_ spot: ReviewAnalyzer.LeakSpot) -> some View {
+        GlassCard(padding: AppSpacing.md) {
+            HStack(alignment: .center, spacing: AppSpacing.sm) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("\(spot.position.displayName) · \(spot.bucket.label) · \(spot.facing.displayName)")
+                        .font(AppTypography.bodyBold)
+                        .foregroundStyle(AppColors.textPrimary)
+                    Text("\(spot.mistakes) of \(spot.total) wrong")
+                        .font(AppTypography.caption)
+                        .foregroundStyle(AppColors.textSecondary)
+                }
+                Spacer()
+                Text("\(Int((spot.mistakeRate * 100).rounded()))%")
+                    .font(AppTypography.numericMedium)
+                    .foregroundStyle(AppColors.accentCoral)
+            }
+        }
+    }
+
+    // MARK: - Heatmap
+
+    @ViewBuilder
+    private var heatmapSection: some View {
+        let cells = ReviewAnalyzer.heatmap(scopedResults)
+        if cells.count >= 3 {
+            VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                Text("Accuracy by spot")
+                    .font(AppTypography.headline)
+                    .foregroundStyle(AppColors.textPrimary)
+                GlassCard(padding: AppSpacing.md) {
+                    PositionDepthHeatmap(cells: cells)
+                }
+            }
+        }
+    }
+
+    // MARK: - Hand class breakdown
+
+    @ViewBuilder
+    private var handClassSection: some View {
+        let buckets = ReviewAnalyzer.byHandClass(scopedResults)
+        if buckets.count >= 2 {
+            VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                HStack {
+                    Text("By hand class")
+                        .font(AppTypography.headline)
+                        .foregroundStyle(AppColors.textPrimary)
+                    Spacer()
+                    if let worst = buckets.filter({ $0.total >= 3 }).min(by: { $0.accuracy < $1.accuracy }) {
+                        Text("Worst: \(worst.label.lowercased())")
+                            .font(AppTypography.caption)
+                            .foregroundStyle(AppColors.accentCoral)
+                    }
+                }
+                GlassCard(padding: AppSpacing.md) {
+                    VStack(spacing: AppSpacing.xs) {
+                        ForEach(buckets) { b in
+                            AccuracyBarRow(
+                                label: b.label,
+                                total: b.total,
+                                accuracy: b.accuracy,
+                                systemImage: HandClass(rawValue: b.id)?.systemImage
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: - Mistake reason mix
+
+    @ViewBuilder
+    private var mistakeReasonsSection: some View {
+        let shares = ReviewAnalyzer.mistakeReasonMix(scopedResults) { id in
+            rangeService.chart(byID: id)
+        }
+        if !shares.isEmpty {
+            VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                Text("Mistake reasons")
+                    .font(AppTypography.headline)
+                    .foregroundStyle(AppColors.textPrimary)
+                GlassCard(padding: AppSpacing.md) {
+                    VStack(alignment: .leading, spacing: AppSpacing.xs) {
+                        ForEach(shares) { share in
+                            HStack {
+                                MistakeReasonChip(reason: share.reason)
+                                Spacer()
+                                Text("\(Int((share.share * 100).rounded()))%")
+                                    .font(AppTypography.numericSmall)
+                                    .foregroundStyle(AppColors.textPrimary)
+                                Text("· \(share.count)")
+                                    .font(AppTypography.caption)
+                                    .foregroundStyle(AppColors.textSecondary)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: - Pattern leak cards (LeakAnalyzer)
+
+    @ViewBuilder
+    private var leakCardsSection: some View {
+        let leaks = LeakAnalyzer.leaks(from: scopedResults) { id in
+            rangeService.chart(byID: id)
+        }
+        if !leaks.isEmpty {
+            VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                Text("Patterns we noticed")
+                    .font(AppTypography.headline)
+                    .foregroundStyle(AppColors.textPrimary)
+                ForEach(leaks) { leak in
+                    LeakCard(leak: leak)
+                }
+            }
+        }
+    }
+
+    // MARK: - History
+
+    @ViewBuilder
+    private var historySection: some View {
+        VStack(alignment: .leading, spacing: AppSpacing.sm) {
+            Text("Review your hands")
+                .font(AppTypography.headline)
+                .foregroundStyle(AppColors.textPrimary)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: AppSpacing.xs) {
+                    ForEach(HistoryFilter.allCases) { f in
+                        FilterChip(title: f.label, isSelected: historyFilter == f) {
+                            withAnimation(AppMotion.quick) { historyFilter = f }
+                        }
+                    }
+                }
+            }
+            let rows = historyFilter.apply(to: scopedResults).prefix(50)
+            if rows.isEmpty {
+                Text("Nothing matches this filter yet.")
+                    .font(AppTypography.body)
+                    .foregroundStyle(AppColors.textSecondary)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.vertical, AppSpacing.xl)
+            } else {
+                VStack(spacing: AppSpacing.xs) {
+                    ForEach(Array(rows)) { row in
+                        Button {
+                            selected = row
+                        } label: {
+                            HistoryRow(row: row)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: - Empty state
 
     private var emptyState: some View {
         GlassCard(padding: AppSpacing.xl) {
@@ -122,100 +288,16 @@ struct ReviewView: View {
         }
     }
 
-    private var summaryCard: some View {
-        let total = allResults.count
-        let mistakes = allResults.filter { $0.outcome == .mistake || $0.outcome == .punt }.count
-        let close = allResults.filter { $0.outcome == .close }.count
-        let correct = allResults.filter { $0.outcome == .correct }.count
-        let acc = total == 0 ? 0 : Int(round(Double(allResults.map(\.score).reduce(0, +)) / Double(total)))
-        return GlassCard {
-            VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                Text("Last \(total) hand\(total == 1 ? "" : "s")")
-                    .font(AppTypography.subheadline)
-                    .foregroundStyle(AppColors.textSecondary)
-                HStack(spacing: AppSpacing.md) {
-                    summaryStat("Accuracy", "\(acc)%", color: AppColors.primaryMint)
-                    summaryStat("Mistakes", "\(mistakes)", color: AppColors.accentCoral)
-                    summaryStat("Close", "\(close)", color: AppColors.accentLime)
-                    summaryStat("Correct", "\(correct)", color: AppColors.primaryEmerald)
-                }
-            }
-        }
-    }
+    // MARK: - Derived
 
-    private func summaryStat(_ label: String, _ value: String, color: Color) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text(value)
-                .font(AppTypography.numericMedium)
-                .foregroundStyle(color)
-            Text(label)
-                .font(AppTypography.caption)
-                .foregroundStyle(AppColors.textSecondary)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
-
-    private var leaksSection: some View {
-        let leaks = LeakAnalyzer.leaks(from: allResults)
-        return Group {
-            if !leaks.isEmpty {
-                VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                    Text("Patterns we noticed")
-                        .font(AppTypography.headline)
-                        .foregroundStyle(AppColors.textPrimary)
-                    ForEach(leaks) { leak in
-                        LeakCard(leak: leak)
-                    }
-                }
-            }
-        }
-    }
-
-    private var filterRow: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.xs) {
-            Text("History")
-                .font(AppTypography.headline)
-                .foregroundStyle(AppColors.textPrimary)
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: AppSpacing.xs) {
-                    ForEach(ReviewFilter.allCases) { f in
-                        FilterChip(title: f.label, isSelected: filter == f) {
-                            withAnimation(AppMotion.quick) { filter = f }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private var filteredResults: [QuizResult] {
-        filter.apply(to: allResults)
-    }
-
-    private var historyList: some View {
-        let list = Array(filteredResults.prefix(50))
-        return VStack(spacing: AppSpacing.xs) {
-            if list.isEmpty {
-                Text("Nothing matches this filter yet.")
-                    .font(AppTypography.body)
-                    .foregroundStyle(AppColors.textSecondary)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding(.vertical, AppSpacing.xl)
-            } else {
-                ForEach(list) { row in
-                    Button {
-                        selected = row
-                    } label: {
-                        HistoryRow(row: row)
-                    }
-                    .buttonStyle(.plain)
-                }
-            }
-        }
+    private var scopedResults: [QuizResult] {
+        ReviewAnalyzer.apply(scope: scope, to: allResults)
     }
 }
 
-private enum ReviewFilter: String, CaseIterable, Identifiable {
+// MARK: - History filter
+
+private enum HistoryFilter: String, CaseIterable, Identifiable {
     case mistakes, close, correct, all
     var id: String { rawValue }
     var label: String {
@@ -235,6 +317,8 @@ private enum ReviewFilter: String, CaseIterable, Identifiable {
         }
     }
 }
+
+// MARK: - History row
 
 private struct HistoryRow: View {
     let row: QuizResult
@@ -288,87 +372,5 @@ private struct HistoryRow: View {
             .foregroundStyle(color)
             .frame(width: 28, height: 28)
             .background(Circle().fill(color.opacity(0.15)))
-    }
-}
-
-private struct ReviewDetailSheet: View {
-    let row: QuizResult
-
-    var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: AppSpacing.md) {
-                HStack(spacing: AppSpacing.sm) {
-                    HandCardView(hand: row.combo, size: .compact)
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(row.combo)
-                            .font(AppTypography.numericLarge)
-                            .foregroundStyle(AppColors.textPrimary)
-                        Text("\(row.position.displayName) · \(row.stackDepthBB) BB · \(row.facingAction.displayName)")
-                            .font(AppTypography.subheadline)
-                            .foregroundStyle(AppColors.textSecondary)
-                    }
-                }
-
-                HStack(spacing: AppSpacing.sm) {
-                    actionPill(label: "You", action: row.userAction)
-                    Image(systemName: "arrow.right")
-                        .foregroundStyle(AppColors.textSecondary)
-                    actionPill(label: "Best", action: row.correctAction)
-                    Spacer()
-                    outcomeChip
-                }
-
-                if !row.explanation.isEmpty {
-                    Text(row.explanation)
-                        .font(AppTypography.body)
-                        .foregroundStyle(AppColors.textPrimary)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-
-                if let cat = DrillCategory(rawValue: row.categoryRaw) {
-                    HStack(spacing: 6) {
-                        Image(systemName: cat.systemImage)
-                        Text(cat.title)
-                    }
-                    .font(AppTypography.caption)
-                    .foregroundStyle(AppColors.textSecondary)
-                }
-
-                Spacer(minLength: AppSpacing.lg)
-                Text(AppTheme.fullLegalLine)
-                    .font(AppTypography.caption)
-                    .foregroundStyle(AppColors.textSecondary)
-            }
-            .padding(AppSpacing.xl)
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }
-        .background(AppColors.cardSurface.ignoresSafeArea())
-    }
-
-    private func actionPill(label: String, action: RangeAction) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text(label)
-                .font(AppTypography.caption)
-                .foregroundStyle(AppColors.textSecondary)
-            HStack(spacing: 4) {
-                Image(systemName: action.systemImage)
-                    .font(.system(size: 11, weight: .bold))
-                Text(action.displayName)
-                    .font(AppTypography.bodyBold)
-            }
-            .foregroundStyle(action.prefersDarkForeground ? AppColors.backgroundDeep : AppColors.textPrimary)
-            .padding(.horizontal, AppSpacing.sm)
-            .padding(.vertical, 4)
-            .background(Capsule().fill(action.tint))
-        }
-    }
-
-    private var outcomeChip: some View {
-        Text(row.outcome.headline)
-            .font(AppTypography.caption)
-            .foregroundStyle(AppColors.textPrimary)
-            .padding(.horizontal, AppSpacing.sm)
-            .padding(.vertical, 4)
-            .background(Capsule().fill(AppColors.cardSurfaceGreen))
     }
 }

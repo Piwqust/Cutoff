@@ -20,7 +20,19 @@ enum LeakAnalyzer {
         .call, .raise, .threeBet, .jam
     ]
 
-    static func leaks(from results: [QuizResult]) -> [Leak] {
+    /// Hand-class accuracy threshold below which a class is flagged as a leak.
+    private static let handClassAccuracyFloor = 55
+
+    /// Minimum sample for hand-class leaks.
+    private static let handClassMinSample = 5
+
+    /// Headline-level leak emitted when one direction of error dominates the
+    /// user's mistakes overall. Requires a chart-resolver so reasons can be
+    /// reconstructed against the played combo's true frequency distribution.
+    static func leaks(
+        from results: [QuizResult],
+        chartByID: (String) -> RangeChart? = { _ in nil }
+    ) -> [Leak] {
         guard results.count >= 8 else { return [] }
 
         var leaks: [Leak] = []
@@ -93,6 +105,62 @@ enum LeakAnalyzer {
             }
         }
 
+        // 5) Hand-class accuracy leaks — class-level patterns the user
+        //    misplays across positions/depths.
+        var byClass: [HandClass: [QuizResult]] = [:]
+        for row in results {
+            guard let combo = HandCombo.parse(row.combo) else { continue }
+            byClass[HandClass.of(combo), default: []].append(row)
+        }
+        for (hc, slice) in byClass where slice.count >= handClassMinSample {
+            let snap = ReviewAnalyzer.snapshot(slice)
+            if snap.accuracy < handClassAccuracyFloor {
+                let severity = min(1.0, Double(handClassAccuracyFloor - snap.accuracy) / 40.0)
+                leaks.append(Leak(
+                    id: "handclass_\(hc.rawValue)",
+                    title: "Leaks in \(hc.displayName.lowercased())",
+                    detail: "Accuracy on \(hc.displayName.lowercased()) is \(snap.accuracy)% across \(snap.total) hands — work on this class.",
+                    severity: severity,
+                    suggestedSpot: nil
+                ))
+            }
+        }
+
+        // 6) Direction-of-error leak — looks at *why* you miss, not just where.
+        let mistakes = results.filter { $0.outcome == .mistake || $0.outcome == .punt }
+        if mistakes.count >= 6 {
+            var reasonCounts: [MistakeReason: Int] = [:]
+            for row in mistakes {
+                let reason = ReviewAnalyzer.classify(row: row, chartByID: chartByID)
+                reasonCounts[reason, default: 0] += 1
+            }
+            let total = Double(mistakes.count)
+            if let (topReason, topCount) = reasonCounts.max(by: { $0.value < $1.value }) {
+                let share = Double(topCount) / total
+                if share >= 0.45 {
+                    leaks.append(Leak(
+                        id: "direction_\(topReason.rawValue)",
+                        title: directionLeakTitle(topReason),
+                        detail: "\(Int((share * 100).rounded()))% of your mistakes are \(topReason.displayName.lowercased()) — work in the opposite direction.",
+                        severity: min(1, share * 1.2),
+                        suggestedSpot: nil
+                    ))
+                }
+            }
+        }
+
         return leaks.sorted { $0.severity > $1.severity }
+    }
+
+    private static func directionLeakTitle(_ reason: MistakeReason) -> String {
+        switch reason {
+        case .tooTight:     return "You play too tight"
+        case .tooLoose:     return "You play too loose"
+        case .overcommit:   return "Over-commitment leak"
+        case .undercommit:  return "Under-commitment leak"
+        case .wrongLine:    return "Wrong-line bias"
+        case .missedMix:    return "Missing mixed-strategy lines"
+        case .correct:      return "Calibration check"
+        }
     }
 }

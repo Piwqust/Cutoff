@@ -17,6 +17,10 @@ struct ChartCatalog {
         var facings: Set<FacingAction> = []
         for c in charts {
             let s = c.spot
+            // Drop semantically-impossible spots (e.g. SB blindDefense, UTG
+            // squeeze). The bundled corpus carries a few explanatory
+            // placeholders for these — they must never reach the filter UI.
+            guard TrainingSpot.isValid(position: s.position, facing: s.facingAction) else { continue }
             triples.insert(Triple(s.position, s.stackDepthBB, s.facingAction))
             positions.insert(s.position)
             depths.insert(s.stackDepthBB)

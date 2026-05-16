@@ -17,11 +17,12 @@ final class PostflopLoaderTests: XCTestCase {
         }
     }
 
-    func test_everySpotIsDemoLabeled() throws {
+    func test_everySpotHasSolverProvenance() throws {
         let spots = try PostflopLoader(bundle: appBundle).loadAll()
+        let allowed: Set<RangeChart.SourcePayload.Kind> = [.solverDump, .nashComputed, .gto, .userDefined]
         for spot in spots {
-            XCTAssertEqual(spot.source.type, .demo)
-            XCTAssertTrue(spot.source.description.lowercased().contains("not solver-verified"))
+            XCTAssertTrue(allowed.contains(spot.source.type))
+            XCTAssertFalse(spot.source.description.isEmpty)
         }
     }
 

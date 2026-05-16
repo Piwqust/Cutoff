@@ -20,11 +20,6 @@ struct OnboardingView: View {
                         levelMinutes: config.config.blindLevelDuration.minutes
                     )
                     actions
-                    Text(AppTheme.fullLegalLine)
-                        .font(AppTypography.caption)
-                        .foregroundStyle(AppColors.textSecondary)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, AppSpacing.xl)
                 }
                 .padding(.horizontal, AppSpacing.pageHorizontal)
                 .padding(.top, AppSpacing.xxl)
@@ -84,11 +79,6 @@ struct OnboardingView: View {
             SecondaryButton(title: "Customize tournament") {
                 showingSetup = true
             }
-            Text(AppTheme.fullLegalLine)
-                .font(AppTypography.caption)
-                .foregroundStyle(AppColors.textSecondary)
-                .multilineTextAlignment(.center)
-                .padding(.top, AppSpacing.sm)
         }
     }
 }

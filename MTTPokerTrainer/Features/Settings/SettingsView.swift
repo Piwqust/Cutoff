@@ -28,12 +28,6 @@ struct SettingsView: View {
                         }
                     }
 
-                    Text(AppTheme.fullLegalLine)
-                        .font(AppTypography.caption)
-                        .foregroundStyle(AppColors.textSecondary)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, AppSpacing.xl)
-                        .padding(.top, AppSpacing.xl)
                 }
                 .padding(.horizontal, AppSpacing.pageHorizontal)
                 .padding(.top, AppSpacing.lg)

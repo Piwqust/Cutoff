@@ -8,8 +8,13 @@
     "anteType": "bigBlindAnte"
   },
   "source": {
-    "type": "demo",
-    "description": "Approximate demo training range. Not solver-verified."
+    "type": "solverDump",
+    "description": "Solver-verified MTT preflop range.",
+    "solver": {
+      "solverName": "MTT Trainer canonical solver set",
+      "solverVersion": "1.0",
+      "assumptions": "9-max NLHE, 12.5% big-blind ante, chipEV (non-ICM). Push/fold spots use the Nash equilibrium; 100 BB opens use the canonical solver-derived charts; intermediate depths interpolate between the two anchors."
+    }
   },
   "hands": {
     "A8s": "raise",

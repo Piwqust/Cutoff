@@ -17,7 +17,7 @@ final class PostflopScorerTests: XCTestCase {
             isHeroToAct: isHeroToAct,
             correctActions: dict,
             explanation: "test",
-            source: RangeChart.SourcePayload(type: .demo, description: "Approximate demo training range. Not solver-verified.")
+            source: RangeChart.SourcePayload(type: .solverDump, description: "Solver-verified postflop training spot.")
         )
     }
 

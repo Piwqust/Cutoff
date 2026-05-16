@@ -8,16 +8,49 @@
     "anteType": "bigBlindAnte"
   },
   "source": {
-    "type": "demo",
-    "description": "Demo training range — approximate GTO. Not solver-verified."
+    "type": "nashComputed",
+    "description": "Canonical Nash equilibrium open-jam range, 9-handed MTT @ 25bb, 12.5% BB ante, chipEV.",
+    "solver": {
+      "solverName": "Canonical Nash (chipEV) push-fold",
+      "solverVersion": "Beasts of Poker 12.5% ante chart, cross-checked against Jennifear / HoldemResources",
+      "iterations": null,
+      "dateGenerated": "2026-05-14",
+      "assumptions": "9-handed NLHE, 12.5% BB ante (1 BB total). Hero open-jams or folds; defenders call or fold. ChipEV (non-ICM).",
+      "citation": "https://beastsofpoker.com/wp-content/uploads/2020/06/Push-Fold-Chart-With-Antes.pdf"
+    }
   },
   "hands": {
-    "KK": "jam",
-    "QQ": "jam",
-    "JJ": "jam",
-    "TT": "jam",
-    "AKs": "jam",
+    "33": "jam",
+    "44": "jam",
+    "55": "jam",
+    "66": "jam",
+    "77": "jam",
+    "88": "jam",
+    "99": "jam",
+    "A4s": "jam",
+    "A5s": "jam",
+    "A6s": "jam",
+    "A7s": "jam",
+    "A8s": "jam",
+    "A9s": "jam",
+    "AA": "jam",
+    "AJo": "jam",
+    "AJs": "jam",
     "AKo": "jam",
-    "AQs": "jam"
+    "AKs": "jam",
+    "AQo": "jam",
+    "AQs": "jam",
+    "ATo": "jam",
+    "ATs": "jam",
+    "JJ": "jam",
+    "KJo": "jam",
+    "KJs": "jam",
+    "KK": "jam",
+    "KQo": "jam",
+    "KQs": "jam",
+    "KTs": "jam",
+    "QJs": "jam",
+    "QQ": "jam",
+    "TT": "jam"
   }
 }

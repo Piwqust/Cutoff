@@ -19,7 +19,7 @@ struct PokerTableView: View {
         // GeometryReader inside a flexible VStack can collapse to 0×0; give it
         // an explicit height and let it fill the available width so seats lay
         // out against a known canvas.
-        let height: CGFloat = (size == .hero) ? 220 : 90
+        let height: CGFloat = (size == .hero) ? 150 : 90
         return GeometryReader { geo in
             ZStack {
                 tableOval(in: geo.size)
@@ -66,14 +66,14 @@ struct PokerTableView: View {
         case .hero:
             return Metrics(
                 aspect: 1.55,
-                seatDiameter: 44,
-                heroDiameter: 50,
-                positionFont: .system(size: 10, weight: .semibold, design: .rounded),
-                stackFont:    .system(size: 13, weight: .bold,     design: .rounded).monospacedDigit(),
-                potFont:      .system(size: 16, weight: .bold,     design: .rounded).monospacedDigit(),
-                chipDiameter: 22,
-                chipFont:     .system(size: 9,  weight: .bold,     design: .rounded).monospacedDigit(),
-                ovalInset: 40
+                seatDiameter: 34,
+                heroDiameter: 38,
+                positionFont: .system(size: 8,  weight: .semibold, design: .rounded),
+                stackFont:    .system(size: 10, weight: .bold,     design: .rounded).monospacedDigit(),
+                potFont:      .system(size: 13, weight: .bold,     design: .rounded).monospacedDigit(),
+                chipDiameter: 16,
+                chipFont:     .system(size: 7,  weight: .bold,     design: .rounded).monospacedDigit(),
+                ovalInset: 26
             )
         case .compact:
             return Metrics(
