@@ -5,12 +5,9 @@ struct DrillTrainerView: View {
     let category: DrillCategory
 
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(ProgressStore.self) private var progress
     @State private var vm = DrillTrainerViewModel()
     @State private var feedbackVisible = false
-    @State private var flashOutcome: AnswerOutcome? = nil
-    @State private var feedbackTick: Int = 0
 
     var body: some View {
         ZStack {
@@ -31,18 +28,6 @@ struct DrillTrainerView: View {
         .navigationTitle(category.title)
         .navigationBarTitleDisplayMode(.inline)
         .dynamicTypeSize(...DynamicTypeSize.accessibility3)
-        .sensoryFeedback(trigger: feedbackTick) { _, _ in
-            haptic(for: vm.lastOutcome)
-        }
-        // Tap anywhere above the sheet to advance. When the sheet is up,
-        // the action row is occluded so this never fights button taps.
-        .simultaneousGesture(
-            TapGesture().onEnded {
-                guard feedbackVisible else { return }
-                feedbackVisible = false
-                vm.next()
-            }
-        )
         .sheet(isPresented: $feedbackVisible) {
             if let outcome = vm.lastOutcome, let question = vm.current {
                 FeedbackSheet(
@@ -57,7 +42,6 @@ struct DrillTrainerView: View {
                 )
                 .presentationDetents([.fraction(0.6)])
                 .presentationDragIndicator(.visible)
-                .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.6)))
             }
         }
         .onAppear {
@@ -135,8 +119,7 @@ struct DrillTrainerView: View {
     /// Full cards (never cropped). The HandCardView's rotated layout has a
     /// taller-than-natural bounding box; we reserve explicit vertical room so
     /// the combo label below the cards never overlaps with the rotated card
-    /// bottoms. The flash overlay anchors here because this is where the
-    /// player's eye already is at decision time.
+    /// bottoms.
     private var handDisplay: some View {
         VStack(spacing: AppSpacing.xs) {
             if let combo = vm.current?.combo {
@@ -152,60 +135,6 @@ struct DrillTrainerView: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .overlay { flashOverlay }
-    }
-
-    // MARK: - Flash overlay (correct + close path)
-
-    /// Centered glyph on the hand cards. Single SF Symbol with a soft halo,
-    /// no copy. Held just long enough for the player to register, then
-    /// auto-advance fires before the fade-out completes so the new spot is
-    /// already laying in when the overlay clears.
-    @ViewBuilder
-    private var flashOverlay: some View {
-        if let outcome = flashOutcome, let style = flashStyle(outcome) {
-            ZStack {
-                Circle()
-                    .fill(style.tint.opacity(0.18))
-                    .frame(width: 160, height: 160)
-                    .blur(radius: 10)
-                Image(systemName: style.glyph)
-                    .font(.system(size: 96, weight: .bold))
-                    .foregroundStyle(style.tint)
-                    .shadow(color: style.tint.opacity(0.45), radius: 16, x: 0, y: 0)
-            }
-            .transition(.opacity)
-            .allowsHitTesting(false)
-            .accessibilityHidden(true)
-        }
-    }
-
-    private struct FlashStyle {
-        let tint: Color
-        let glyph: String
-    }
-
-    private func flashStyle(_ outcome: AnswerOutcome) -> FlashStyle? {
-        switch outcome {
-        case .correct: return FlashStyle(tint: AppColors.primaryMint, glyph: "checkmark.circle.fill")
-        case .close:   return FlashStyle(tint: AppColors.accentLime,  glyph: "circle.lefthalf.filled")
-        default:       return nil
-        }
-    }
-
-    // MARK: - Haptics
-
-    /// Map outcomes to the iOS sensory feedback vocabulary. `.success` /
-    /// `.warning` / `.error` are notification-class haptics that carry
-    /// semantics; `.impact` is for the gentler "close" nudge.
-    private func haptic(for outcome: AnswerOutcome?) -> SensoryFeedback? {
-        switch outcome {
-        case .correct: return .success
-        case .close:   return .impact(weight: .medium, intensity: 0.7)
-        case .mistake: return .warning
-        case .punt:    return .error
-        case .none:    return nil
-        }
     }
 
     // MARK: - Actions
@@ -230,28 +159,8 @@ struct DrillTrainerView: View {
         }
     }
 
-    /// Branch on outcome:
-    ///   - correct / close → silent flash + auto-advance, no sheet
-    ///   - mistake / punt  → present the full feedback sheet
     private func submit(_ action: RangeAction) {
         vm.submit(action)
-        feedbackTick &+= 1
-        guard let outcome = vm.lastOutcome else { return }
-
-        switch outcome {
-        case .correct, .close:
-            withAnimation(AppMotion.respecting(reduceMotion, .easeOut(duration: 0.06))) {
-                flashOutcome = outcome
-            }
-            Task { @MainActor in
-                try? await Task.sleep(nanoseconds: 410_000_000) // 60 in + 350 hold
-                vm.next()
-                withAnimation(AppMotion.respecting(reduceMotion, .easeOut(duration: 0.09))) {
-                    flashOutcome = nil
-                }
-            }
-        case .mistake, .punt:
-            feedbackVisible = true
-        }
+        feedbackVisible = true
     }
 }
