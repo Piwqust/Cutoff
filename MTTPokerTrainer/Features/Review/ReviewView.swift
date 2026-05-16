@@ -9,6 +9,7 @@ struct ReviewView: View {
 
     @State private var scope: ReviewAnalyzer.Scope = .all
     @State private var historyFilter: HistoryFilter = .mistakes
+    @State private var deepDiveExpanded: Bool = false
     @State private var selected: QuizResult?
 
     var body: some View {
@@ -22,11 +23,7 @@ struct ReviewView: View {
                         scopePicker
                         snapshotSection
                         trendSection
-                        leakSpotsSection
-                        heatmapSection
-                        handClassSection
-                        mistakeReasonsSection
-                        leakCardsSection
+                        deepDiveSection
                         historySection
                     }
                 }
@@ -111,6 +108,46 @@ struct ReviewView: View {
             eyebrow("Trend")
             AccuracyTrendStrip(trend: ReviewAnalyzer.trend(scopedResults))
         }
+    }
+
+    // MARK: - Deep dive
+
+    /// One toggle gates four analysis sections plus the LeakAnalyzer cards.
+    /// Collapsed by default each visit. The screen reads as snapshot +
+    /// trend until the player explicitly asks for the breakdown.
+    private var deepDiveSection: some View {
+        VStack(alignment: .leading, spacing: AppSpacing.lg) {
+            deepDiveToggle
+            if deepDiveExpanded {
+                VStack(alignment: .leading, spacing: AppSpacing.xxl) {
+                    leakSpotsSection
+                    heatmapSection
+                    handClassSection
+                    mistakeReasonsSection
+                    leakCardsSection
+                }
+                .transition(.opacity.combined(with: .move(edge: .top)))
+            }
+        }
+    }
+
+    private var deepDiveToggle: some View {
+        Button {
+            withAnimation(AppMotion.standard) { deepDiveExpanded.toggle() }
+        } label: {
+            HStack(spacing: AppSpacing.xs) {
+                eyebrow(deepDiveExpanded ? "Hide deep dive" : "Deep dive")
+                Image(systemName: "chevron.down")
+                    .font(.system(size: 10, weight: .bold))
+                    .foregroundStyle(AppColors.textSecondary)
+                    .rotationEffect(.degrees(deepDiveExpanded ? 180 : 0))
+                Spacer(minLength: 0)
+            }
+            .padding(.vertical, AppSpacing.sm)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(deepDiveExpanded ? "Hide deep dive" : "Show deep dive")
     }
 
     // MARK: - Top leak spots
@@ -223,8 +260,8 @@ struct ReviewView: View {
     // MARK: - Pattern leak cards (LeakAnalyzer)
 
     /// The one surface that earns a glass card: each LeakCard is a
-    /// standalone editorialized object with its own CTA. Everything else
-    /// on this screen sits flat against the background.
+    /// standalone editorialized object with its own CTA. Inside Deep dive
+    /// because the player asked for the breakdown.
     @ViewBuilder
     private var leakCardsSection: some View {
         let leaks = LeakAnalyzer.leaks(from: scopedResults) { id in
