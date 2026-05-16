@@ -126,14 +126,14 @@ struct ReviewView: View {
                     mistakeReasonsSection
                     leakCardsSection
                 }
-                .transition(.opacity.combined(with: .move(edge: .top)))
+                .transition(.opacity)
             }
         }
     }
 
     private var deepDiveToggle: some View {
         Button {
-            withAnimation(AppMotion.standard) { deepDiveExpanded.toggle() }
+            withAnimation(.easeOut(duration: 0.22)) { deepDiveExpanded.toggle() }
         } label: {
             HStack(spacing: AppSpacing.xs) {
                 eyebrow(deepDiveExpanded ? "Hide deep dive" : "Deep dive")
