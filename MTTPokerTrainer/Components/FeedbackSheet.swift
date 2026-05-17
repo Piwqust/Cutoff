@@ -2,9 +2,9 @@ import SwiftUI
 
 /// Native iOS sheet shown after a non-correct answer in either trainer.
 ///
-/// System chrome (drag indicator, rounded top, dim-behind backdrop) handles
-/// the framing — the body just lays out the feedback content as a tight
-/// vertical stack. Postflop spots degrade gracefully: no reason chip, no
+/// Five vertical zones, separated by clear whitespace rather than dividers:
+/// hero (badge + headline + verdict), action diff, explanation, sibling
+/// chips, CTAs. Postflop spots degrade gracefully — no reason chip, no
 /// sibling chips, no "View range" button.
 struct FeedbackSheet: View {
     let payload: FeedbackPayload
@@ -18,11 +18,11 @@ struct FeedbackSheet: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: AppSpacing.md) {
-                outcomeHeader
+            VStack(alignment: .leading, spacing: AppSpacing.lg) {
+                hero
                 actionDiff
-                if hasBody {
-                    reasonAndBody
+                if hasExplanation {
+                    explanation
                 }
                 if !payload.siblingHands.isEmpty {
                     siblings
@@ -31,10 +31,11 @@ struct FeedbackSheet: View {
                     .padding(.top, AppSpacing.xs)
             }
             .padding(.horizontal, AppSpacing.xl)
-            .padding(.top, AppSpacing.sm)
-            .padding(.bottom, AppSpacing.lg)
+            .padding(.top, AppSpacing.md)
+            .padding(.bottom, AppSpacing.xl)
         }
         .scrollIndicators(.hidden)
+        .presentationBackground(.regularMaterial)
         .sheet(isPresented: $showRange) {
             if let rangePayload {
                 RangeDetailSheet(payload: rangePayload)
@@ -45,27 +46,34 @@ struct FeedbackSheet: View {
         .accessibilityElement(children: .contain)
     }
 
-    // MARK: - Outcome header
+    // MARK: - Hero
 
-    /// Two compact rows: glyph + headline on the first, verdict beneath.
-    /// Splitting them means the icon never collides with the headline text
-    /// the way the previous overlay did when both shared an HStack.
-    private var outcomeHeader: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack(spacing: AppSpacing.xs) {
+    /// Tinted circular badge (notification-style) paired with the outcome
+    /// headline and the chart's one-line verdict. Switching from a bare SF
+    /// Symbol to a filled badge gives the header an anchor weight and stops
+    /// the icon and headline from competing for the eye.
+    private var hero: some View {
+        HStack(alignment: .center, spacing: AppSpacing.sm) {
+            ZStack {
+                Circle()
+                    .fill(outcomeTint.opacity(0.18))
                 Image(systemName: outcomeGlyph)
-                    .font(.system(size: 18, weight: .bold))
+                    .font(.system(size: 20, weight: .bold))
                     .foregroundStyle(outcomeTint)
-                    .accessibilityHidden(true)
-                Text(payload.outcome.headline)
-                    .font(.system(.title3, design: .rounded).weight(.bold))
-                    .foregroundStyle(outcomeTint)
-                Spacer(minLength: 0)
             }
-            Text(payload.verdict)
-                .font(AppTypography.subheadline)
-                .foregroundStyle(AppColors.textSecondary)
-                .fixedSize(horizontal: false, vertical: true)
+            .frame(width: 44, height: 44)
+            .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(payload.outcome.headline)
+                    .font(.system(.title2, design: .rounded).weight(.bold))
+                    .foregroundStyle(outcomeTint)
+                Text(payload.verdict)
+                    .font(AppTypography.subheadline)
+                    .foregroundStyle(AppColors.textPrimary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer(minLength: 0)
         }
     }
 
@@ -89,83 +97,91 @@ struct FeedbackSheet: View {
 
     // MARK: - Action diff
 
-    /// "You ▸ Chart" pills with an arrow between. The user pill is always
-    /// rendered in the error palette so the contrast against the chart pill
-    /// is unambiguous regardless of which actions the spot allowed.
+    /// "You played → Chart wants" — labelled pills with a clear arrow. The
+    /// user pill is always in the error palette so the contrast against the
+    /// chart pill is unambiguous regardless of which actions the spot
+    /// allowed. Pills have body-weight typography and generous padding so
+    /// they read as a primary unit, not a secondary detail.
     private var actionDiff: some View {
-        HStack(spacing: AppSpacing.sm) {
-            actionPill(label: "You", desc: payload.userAction, role: .userMistake)
+        HStack(alignment: .bottom, spacing: AppSpacing.sm) {
+            pillColumn(label: "You played", desc: payload.userAction, role: .userMistake)
             Image(systemName: "arrow.right")
-                .font(.system(size: 12, weight: .bold))
+                .font(.system(size: 14, weight: .bold))
                 .foregroundStyle(AppColors.textSecondary)
+                .padding(.bottom, 10)
                 .accessibilityHidden(true)
-            actionPill(label: "Chart", desc: payload.correctAction, role: .correct)
+            pillColumn(label: "Chart wants", desc: payload.correctAction, role: .correct)
             Spacer(minLength: 0)
         }
     }
 
     private enum PillRole { case userMistake, correct }
 
-    private func actionPill(label: String, desc: ActionDescriptor, role: PillRole) -> some View {
+    private func pillColumn(label: String, desc: ActionDescriptor, role: PillRole) -> some View {
         let tint: Color = (role == .userMistake) ? AppColors.accentPeach : desc.tint
         let foreground: Color = (role == .userMistake) ? tint : (desc.isFold ? AppColors.textPrimary : tint)
-        return VStack(alignment: .leading, spacing: 3) {
+        return VStack(alignment: .leading, spacing: 6) {
             Text(label)
                 .font(.system(size: 10, weight: .semibold))
                 .foregroundStyle(AppColors.textSecondary)
                 .textCase(.uppercase)
-                .tracking(0.5)
-            HStack(spacing: 5) {
+                .tracking(0.6)
+            HStack(spacing: 6) {
                 Image(systemName: desc.systemImage)
-                    .font(.system(size: 12, weight: .bold))
+                    .font(.system(size: 13, weight: .bold))
                 Text(desc.displayName)
                     .font(AppTypography.subheadline.weight(.semibold))
             }
             .foregroundStyle(foreground)
-            .padding(.horizontal, AppSpacing.sm)
-            .padding(.vertical, 5)
-            .background(Capsule().fill(tint.opacity(0.16)))
-            .overlay(Capsule().strokeBorder(tint.opacity(0.32), lineWidth: 0.5))
+            .padding(.horizontal, AppSpacing.md)
+            .padding(.vertical, 8)
+            .background(Capsule().fill(tint.opacity(0.18)))
+            .overlay(Capsule().strokeBorder(tint.opacity(0.36), lineWidth: 0.5))
             .accessibilityLabel("\(label): \(desc.displayName)")
         }
     }
 
-    // MARK: - Reason + body
+    // MARK: - Explanation
 
-    private var hasBody: Bool {
+    private var hasExplanation: Bool {
         payload.mistakeReason != nil || !payload.paragraphs.isEmpty
     }
 
-    private var reasonAndBody: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.xs) {
+    /// Reason chip acts as a tag-line header for the body copy beneath.
+    /// Tight spacing between the chip and the first paragraph makes the
+    /// association clear without needing a literal "Reason:" label.
+    private var explanation: some View {
+        VStack(alignment: .leading, spacing: AppSpacing.sm) {
             if let reason = payload.mistakeReason {
-                HStack {
+                HStack(spacing: AppSpacing.xs) {
                     MistakeReasonChip(reason: reason)
                     Spacer(minLength: 0)
                 }
             }
-            ForEach(Array(payload.paragraphs.enumerated()), id: \.offset) { _, p in
-                Text(p)
-                    .font(AppTypography.subheadline)
-                    .foregroundStyle(AppColors.textPrimary)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .lineSpacing(1)
+            VStack(alignment: .leading, spacing: AppSpacing.xs) {
+                ForEach(Array(payload.paragraphs.enumerated()), id: \.offset) { _, p in
+                    Text(p)
+                        .font(AppTypography.subheadline)
+                        .foregroundStyle(AppColors.textPrimary)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .lineSpacing(2)
+                }
             }
         }
     }
 
     // MARK: - Siblings
 
-    /// Tiny text-only pills. The previous design rendered each sibling as a
-    /// full `HandCardView` — visually loud and tall. A monospaced notation
-    /// chip carries the same teaching value at a fraction of the space.
+    /// Tiny text-only chips. A full `HandCardView` per sibling overwhelmed
+    /// the sheet; monospaced notation pills carry the same teaching value
+    /// in a fraction of the space.
     private var siblings: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: AppSpacing.xs) {
             Text("Same line")
                 .font(.system(size: 10, weight: .semibold))
                 .foregroundStyle(AppColors.textSecondary)
                 .textCase(.uppercase)
-                .tracking(0.5)
+                .tracking(0.6)
             HStack(spacing: 6) {
                 ForEach(payload.siblingHands, id: \.self) { combo in
                     siblingChip(combo)
@@ -182,10 +198,10 @@ struct FeedbackSheet: View {
             .font(.system(.footnote, design: .rounded).weight(.semibold))
             .monospacedDigit()
             .foregroundStyle(AppColors.textPrimary)
-            .padding(.horizontal, 10)
-            .padding(.vertical, 4)
+            .padding(.horizontal, AppSpacing.sm)
+            .padding(.vertical, 5)
             .background(Capsule().fill(AppColors.cardSurface))
-            .overlay(Capsule().strokeBorder(AppColors.divider.opacity(0.6), lineWidth: 0.5))
+            .overlay(Capsule().strokeBorder(AppColors.divider.opacity(0.7), lineWidth: 0.5))
     }
 
     // MARK: - CTAs
@@ -207,19 +223,19 @@ struct FeedbackSheet: View {
         .sheet(isPresented: .constant(true)) {
             FeedbackSheet(
                 payload: FeedbackPayload(
-                    outcome: .mistake,
-                    userAction: ActionDescriptor(RangeAction.jam),
-                    correctAction: ActionDescriptor(RangeAction.fold),
-                    verdict: "62o wants fold.",
+                    outcome: .punt,
+                    userAction: ActionDescriptor(RangeAction.fold),
+                    correctAction: ActionDescriptor(RangeAction.jam),
+                    verdict: "KQo wants jam.",
                     paragraphs: [
-                        "62o is the kind of offsuit hand that bleeds chips. Folding from BTN is the simple, profitable move.",
-                        "Offsuit junk is just chip-loss surface area outside of free blind defense — keep it tight, especially out of position."
+                        "Broadway hands hold their equity well against opening ranges. KQo is too live to fold at 12 BB.",
+                        "Offsuit broadway plays better from late position; from early seats they're easy to dominate."
                     ],
-                    mistakeReason: .tooLoose,
+                    mistakeReason: .tooTight,
                     siblingHands: [
-                        HandCombo(highRank: .six, lowRank: .three, category: .offsuit),
-                        HandCombo(highRank: .seven, lowRank: .two, category: .offsuit),
-                        HandCombo(highRank: .five, lowRank: .two, category: .offsuit)
+                        HandCombo(highRank: .king, lowRank: .jack, category: .offsuit),
+                        HandCombo(highRank: .queen, lowRank: .jack, category: .offsuit),
+                        HandCombo(highRank: .king, lowRank: .ten, category: .offsuit)
                     ]
                 ),
                 onNext: {}
