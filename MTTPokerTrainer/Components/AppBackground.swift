@@ -20,12 +20,11 @@ struct AppBackground: View {
 
             RadialGradient(
                 colors: [AppColors.primaryMint.opacity(0.10), .clear],
-                center: UnitPoint(x: 0.15, y: 0.12),
+                center: UnitPoint(x: 0.15, y: 0.12 + drift),
                 startRadius: 0,
                 endRadius: 320
             )
             .blendMode(.plusLighter)
-            .offset(y: drift)
 
             RadialGradient(
                 colors: [AppColors.accentPeach.opacity(0.05), .clear],
@@ -42,7 +41,7 @@ struct AppBackground: View {
     private func startDriftIfAllowed() {
         guard !reduceMotion else { return }
         withAnimation(.easeInOut(duration: 8).repeatForever(autoreverses: true)) {
-            drift = 24
+            drift = 0.03
         }
     }
 }
