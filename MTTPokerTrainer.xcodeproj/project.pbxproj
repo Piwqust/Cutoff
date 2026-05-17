@@ -356,6 +356,7 @@
 		C64D30179A29AA88534F0917 /* mtt_9max_15bb_bb_squeeze.json in Resources */ = {isa = PBXBuildFile; fileRef = FB943C1479872827DA187F82 /* mtt_9max_15bb_bb_squeeze.json */; };
 		C72B0C729DCAEE3515CD6FEF /* mtt_9max_50bb_hj_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EBA54B936565584A5E5681D /* mtt_9max_50bb_hj_unopened.json */; };
 		C745F623358FCC3DFB118C27 /* ChartCatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDC69863C4FE7D9625196A6 /* ChartCatalogTests.swift */; };
+		C8F5EB869630727229E33F52 /* FeedbackPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E861206D8040720D3DECB1F /* FeedbackPayload.swift */; };
 		C958ED96FEC393CD7C344901 /* mtt_9max_15bb_sb_pushfold.json in Resources */ = {isa = PBXBuildFile; fileRef = 1131CF19B5C9E1FCA9B61BA1 /* mtt_9max_15bb_sb_pushfold.json */; };
 		C9F48093733899A8EDA93605 /* mtt_9max_10bb_utg1_pushfold.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B152F97CD5C2F1515F170F2 /* mtt_9max_10bb_utg1_pushfold.json */; };
 		CA445DBB01FCACD1099857ED /* mtt_9max_75bb_btn_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = A5516FB2B4D4CAF431D40C59 /* mtt_9max_75bb_btn_unopened.json */; };
@@ -613,6 +614,7 @@
 		4DCBBD5D43431925CDF6671F /* mtt_9max_25bb_co_pushfold.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_25bb_co_pushfold.json; sourceTree = "<group>"; };
 		4DD3DB528133C89CF34DB67B /* LeakAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeakAnalyzer.swift; sourceTree = "<group>"; };
 		4E301DB7F533F553D0695C60 /* mtt_9max_10bb_btn_squeeze.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_10bb_btn_squeeze.json; sourceTree = "<group>"; };
+		4E861206D8040720D3DECB1F /* FeedbackPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackPayload.swift; sourceTree = "<group>"; };
 		50C02DF1DE5DAA3C87AD0728 /* DrillTrainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillTrainerViewModel.swift; sourceTree = "<group>"; };
 		50C2CE5B3A51CAAA9F9AE953 /* mtt_9max_25bb_sb_vsopen.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_25bb_sb_vsopen.json; sourceTree = "<group>"; };
 		5135DAE6EC65973398C13257 /* mtt_9max_12bb_utg_pushfold.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_12bb_utg_pushfold.json; sourceTree = "<group>"; };
@@ -967,6 +969,7 @@
 				137B905DDBA521F017B7BDC2 /* BoardTextureClass.swift */,
 				708147CF6A25069389D1093F /* Card.swift */,
 				D05B6414A1623A502EA0864A /* DrillCategory.swift */,
+				4E861206D8040720D3DECB1F /* FeedbackPayload.swift */,
 				FB93EE400C2E841E21007BB8 /* HandClass.swift */,
 				2737A7357E2C5ED17040794A /* HandCombo.swift */,
 				F0DA8C5A39707E9E5E43D924 /* HandFrequencies.swift */,
@@ -2019,6 +2022,7 @@
 				E9A3D52BE064392B7384997D /* DrillTrainerView.swift in Sources */,
 				E4A2D7499422E0F08697754F /* DrillTrainerViewModel.swift in Sources */,
 				4B6DB9310F26A087033A875D /* EquityCalculator.swift in Sources */,
+				C8F5EB869630727229E33F52 /* FeedbackPayload.swift in Sources */,
 				79EC1FB3E1AFE4752D763ACC /* FeedbackSheet.swift in Sources */,
 				42649C93C7DFEC7D292BCED3 /* FilterChip.swift in Sources */,
 				F9FF2FF228FFE312BDB4C135 /* FrequencyDistributionView.swift in Sources */,
