@@ -7,7 +7,7 @@ final class PostflopDrillViewModel {
     private(set) var spots: [PostflopSpot] = []
     private(set) var currentSpot: PostflopSpot?
     private(set) var lastOutcome: AnswerOutcome?
-    private(set) var lastExplanation: String = ""
+    private(set) var lastPayload: FeedbackPayload?
     private(set) var hasAnswered: Bool = false
 
     private var rng = SystemRandomNumberGenerator()
@@ -29,7 +29,7 @@ final class PostflopDrillViewModel {
         guard let spot = spots.randomElement(using: &rng) else { return }
         currentSpot = spot
         lastOutcome = nil
-        lastExplanation = ""
+        lastPayload = nil
         hasAnswered = false
     }
 
@@ -40,8 +40,20 @@ final class PostflopDrillViewModel {
     func submit(_ userAction: PostflopAction) {
         guard !hasAnswered, let spot = currentSpot else { return }
         let outcome = PostflopScorer.evaluate(user: userAction, spot: spot)
+        let correct = spot.dominantAction
         lastOutcome = outcome
-        lastExplanation = spot.explanation
+        lastPayload = FeedbackPayload(
+            outcome: outcome,
+            userAction: ActionDescriptor(userAction),
+            correctAction: ActionDescriptor(correct),
+            // Postflop spots ship a single prose explanation; treat it as the
+            // verdict so the overlay's body block stays empty and the layout
+            // stays tight.
+            verdict: spot.explanation,
+            paragraphs: [],
+            mistakeReason: nil,
+            siblingHands: []
+        )
         hasAnswered = true
 
         if let modelContext {
