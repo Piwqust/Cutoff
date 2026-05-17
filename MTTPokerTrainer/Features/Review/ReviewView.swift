@@ -27,6 +27,7 @@ struct ReviewView: View {
                         historySection
                     }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, AppSpacing.pageHorizontal)
                 .padding(.top, AppSpacing.lg)
                 .padding(.bottom, AppSpacing.xxl)
