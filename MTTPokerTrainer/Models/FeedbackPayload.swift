@@ -58,19 +58,11 @@ struct FeedbackPayload {
     let siblingHands: [HandCombo]
 }
 
-/// State machine for the post-answer feedback flow.
-///
-/// Replaces a tangle of booleans (`feedbackVisible`, `tickOutcome`, `tickProgress`,
-/// `tickOpacity`, `autoDismissTask`, …) with a single source of truth: at any
-/// moment the trainer is either accepting a new answer, briefly affirming a
-/// correct one, or holding for the user on a revealed overlay.
-enum FeedbackPhase {
-    /// Awaiting the user's next action.
-    case idle
-    /// Correct answer — silent affirmation (haptic + edge tick). The token
-    /// distinguishes back-to-back correct answers so an in-flight advance
-    /// task can detect cancellation by comparing tokens.
-    case silentCorrect(token: UUID)
-    /// Close, mistake, or punt — the overlay is up and waits for the user.
-    case revealed(FeedbackPayload)
+/// Identifiable wrapper so `FeedbackPayload` can drive `.sheet(item:)`.
+/// Building a fresh wrapper per submit guarantees the system treats each
+/// answer as a new presentation even when two consecutive payloads happen to
+/// be structurally identical.
+struct IdentifiedFeedback: Identifiable {
+    let id = UUID()
+    let payload: FeedbackPayload
 }

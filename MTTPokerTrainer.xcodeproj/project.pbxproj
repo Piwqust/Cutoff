@@ -100,7 +100,6 @@
 		2A019CEEAD79A257FF9E2046 /* mtt_9max_25bb_co_squeeze.json in Resources */ = {isa = PBXBuildFile; fileRef = BD3E7481774A83D86639CD03 /* mtt_9max_25bb_co_squeeze.json */; };
 		2A33DF02F5294AEFACC68274 /* mtt_9max_15bb_hj_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B867BABA2B64400530E056B /* mtt_9max_15bb_hj_unopened.json */; };
 		2A745D1E94A9293821BD3BF4 /* mtt_9max_100bb_bb_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = E16A82F3E32F802C907FB64D /* mtt_9max_100bb_bb_vsopen.json */; };
-		2A7BEFF9D830BC85FD927B1F /* FeedbackOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93490422934FE9F7D3456507 /* FeedbackOverlay.swift */; };
 		2A7F2E62FCA8CF6F1C0DCD9E /* mtt_9max_25bb_lj_pushfold.json in Resources */ = {isa = PBXBuildFile; fileRef = 1CC28748ABA44EF56BF0E1F9 /* mtt_9max_25bb_lj_pushfold.json */; };
 		2AC189F7B7961053F0ECD91C /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C23635984584C71095F247 /* MainTabView.swift */; };
 		2ADB840AA9F1C2616932BF0F /* mtt_9max_125bb_lj_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = 0923BCE3380663D8004137AC /* mtt_9max_125bb_lj_vsopen.json */; };
@@ -233,6 +232,7 @@
 		7902A6CB959186D735DE85E8 /* mtt_9max_125bb_lj_squeeze.json in Resources */ = {isa = PBXBuildFile; fileRef = A31CF9CDF201F89F5ED0EBC2 /* mtt_9max_125bb_lj_squeeze.json */; };
 		79860D9B203347832C8A63B9 /* mtt_9max_10bb_utg1_vs3bet.json in Resources */ = {isa = PBXBuildFile; fileRef = 00E50053B149AB4B5167879A /* mtt_9max_10bb_utg1_vs3bet.json */; };
 		7992342C2F0E390892A6522A /* mtt_9max_50bb_lj_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = 731CD4B813F74924A4614CD5 /* mtt_9max_50bb_lj_unopened.json */; };
+		79EC1FB3E1AFE4752D763ACC /* FeedbackSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D56DDA2F96BFC15648F761 /* FeedbackSheet.swift */; };
 		7A9DCCE0104EA6DC1150A2BC /* mtt_9max_50bb_sb_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = AC6FD14D525DA68C5729D7FF /* mtt_9max_50bb_sb_unopened.json */; };
 		7B5EC42E639167BBC7A7624C /* mtt_9max_20bb_hj_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = D5C8E328407ACB24571CBC82 /* mtt_9max_20bb_hj_unopened.json */; };
 		7BEC882B5092FD8A0AA7CF58 /* mtt_9max_30bb_btn_vs3bet.json in Resources */ = {isa = PBXBuildFile; fileRef = BEDFD5E7C224F36C42F50E24 /* mtt_9max_30bb_btn_vs3bet.json */; };
@@ -508,6 +508,7 @@
 		177C4BBDA92185446CE1FA1C /* DrillEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillEngineTests.swift; sourceTree = "<group>"; };
 		185D24A1A1E43053DA647EB3 /* mtt_9max_25bb_bb_vsopen.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_25bb_bb_vsopen.json; sourceTree = "<group>"; };
 		189737EACD0203872082E903 /* BBCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBCalculator.swift; sourceTree = "<group>"; };
+		18D56DDA2F96BFC15648F761 /* FeedbackSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackSheet.swift; sourceTree = "<group>"; };
 		1916F28829EA1D92DE56E687 /* mtt_9max_10bb_sb_vs3bet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_10bb_sb_vs3bet.json; sourceTree = "<group>"; };
 		196FB014C290AC269E336638 /* mtt_9max_20bb_lj_squeeze.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_20bb_lj_squeeze.json; sourceTree = "<group>"; };
 		1ADCE0110822D1797DBF72E7 /* mtt_9max_25bb_sb_pushfold.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_25bb_sb_pushfold.json; sourceTree = "<group>"; };
@@ -730,7 +731,6 @@
 		9146368E5F9FFCE475DBCDF3 /* mtt_9max_40bb_co_vsopen.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_40bb_co_vsopen.json; sourceTree = "<group>"; };
 		91BE7135D67E12C31F50BB98 /* mtt_9max_20bb_bb_vsopen.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_20bb_bb_vsopen.json; sourceTree = "<group>"; };
 		924494454305718921E08FF0 /* AppTypography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTypography.swift; sourceTree = "<group>"; };
-		93490422934FE9F7D3456507 /* FeedbackOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackOverlay.swift; sourceTree = "<group>"; };
 		93CEE694C43DBCDCE51DAEA8 /* mtt_9max_12bb_bb_pushfold.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_12bb_bb_pushfold.json; sourceTree = "<group>"; };
 		94377FB7498F2CEC3C7B8F98 /* mtt_9max_10bb_hj_vs3bet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_10bb_hj_vs3bet.json; sourceTree = "<group>"; };
 		9452C954E48C85125EB5F065 /* mtt_9max_15bb_utg_vs3bet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_15bb_utg_vs3bet.json; sourceTree = "<group>"; };
@@ -1148,7 +1148,7 @@
 				B407A4AFDF980B2D9D1C45B8 /* AppBackground.swift */,
 				4A61A5E2E6D33708DAD644EE /* BoardView.swift */,
 				55CDD5425C5411800A95F9B5 /* CardView.swift */,
-				93490422934FE9F7D3456507 /* FeedbackOverlay.swift */,
+				18D56DDA2F96BFC15648F761 /* FeedbackSheet.swift */,
 				A8F848BC5784A990F4CACBF1 /* FilterChip.swift */,
 				543971979589E693B3AFD4E7 /* FrequencyDistributionView.swift */,
 				3FFBF9108B10FF3115B9C4CA /* GlassCard.swift */,
@@ -2022,8 +2022,8 @@
 				E9A3D52BE064392B7384997D /* DrillTrainerView.swift in Sources */,
 				E4A2D7499422E0F08697754F /* DrillTrainerViewModel.swift in Sources */,
 				4B6DB9310F26A087033A875D /* EquityCalculator.swift in Sources */,
-				2A7BEFF9D830BC85FD927B1F /* FeedbackOverlay.swift in Sources */,
 				C8F5EB869630727229E33F52 /* FeedbackPayload.swift in Sources */,
+				79EC1FB3E1AFE4752D763ACC /* FeedbackSheet.swift in Sources */,
 				42649C93C7DFEC7D292BCED3 /* FilterChip.swift in Sources */,
 				F9FF2FF228FFE312BDB4C135 /* FrequencyDistributionView.swift in Sources */,
 				934BE3A67ACBBE7719FCDB59 /* GlassCard.swift in Sources */,

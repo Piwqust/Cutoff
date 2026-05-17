@@ -6,9 +6,8 @@ struct PostflopDrillView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var vm = PostflopDrillViewModel()
 
-    /// Same state machine as the preflop trainer — correct answers
-    /// auto-advance silently, mistakes raise the shared overlay.
-    @State private var phase: FeedbackPhase = .idle
+    @State private var silentCorrectToken: UUID?
+    @State private var feedback: IdentifiedFeedback?
     @State private var feedbackTick: Int = 0
 
     var body: some View {
@@ -31,12 +30,16 @@ struct PostflopDrillView: View {
             }
         }
         .overlay(alignment: .top) { edgeTick }
-        .overlay { feedbackOverlay }
         .navigationTitle("Postflop")
         .navigationBarTitleDisplayMode(.inline)
         .dynamicTypeSize(...DynamicTypeSize.accessibility3)
         .sensoryFeedback(trigger: feedbackTick) { _, _ in
             haptic(for: vm.lastOutcome)
+        }
+        .sheet(item: $feedback, onDismiss: { advance() }) { item in
+            FeedbackSheet(payload: item.payload, onNext: { feedback = nil })
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
         }
         .onAppear {
             vm.modelContext = modelContext
@@ -95,11 +98,9 @@ struct PostflopDrillView: View {
         }
     }
 
-    // MARK: - Edge tick + overlay
-
     @ViewBuilder
     private var edgeTick: some View {
-        if case .silentCorrect = phase {
+        if silentCorrectToken != nil {
             RoundedRectangle(cornerRadius: 1, style: .continuous)
                 .fill(AppColors.primaryMint)
                 .frame(height: 2)
@@ -108,19 +109,6 @@ struct PostflopDrillView: View {
                 .allowsHitTesting(false)
                 .accessibilityHidden(true)
         }
-    }
-
-    @ViewBuilder
-    private var feedbackOverlay: some View {
-        if case .revealed(let payload) = phase {
-            FeedbackOverlay(payload: payload, onNext: { advance() })
-                .transition(overlayTransition)
-        }
-    }
-
-    private var overlayTransition: AnyTransition {
-        if reduceMotion { return .opacity }
-        return .opacity.combined(with: .scale(scale: 0.96, anchor: .center))
     }
 
     // MARK: - Submission flow
@@ -134,30 +122,28 @@ struct PostflopDrillView: View {
         if outcome == .correct {
             let token = UUID()
             withAnimation(AppMotion.respecting(reduceMotion, .easeOut(duration: 0.18))) {
-                phase = .silentCorrect(token: token)
+                silentCorrectToken = token
             }
             Task { @MainActor in
                 try? await Task.sleep(nanoseconds: 520_000_000)
-                guard case .silentCorrect(let active) = phase, active == token else { return }
+                guard silentCorrectToken == token else { return }
                 advance()
             }
         } else if let payload = vm.lastPayload {
-            withAnimation(AppMotion.respecting(reduceMotion, .spring(response: 0.35, dampingFraction: 0.85))) {
-                phase = .revealed(payload)
-            }
+            feedback = IdentifiedFeedback(payload: payload)
         }
     }
 
     private func advance() {
         withAnimation(AppMotion.respecting(reduceMotion, .easeOut(duration: 0.22))) {
-            phase = .idle
+            silentCorrectToken = nil
         }
+        feedback = nil
         vm.next()
     }
 
     private var isIdle: Bool {
-        if case .idle = phase { return true }
-        return false
+        silentCorrectToken == nil && feedback == nil
     }
 
     // MARK: - Haptics

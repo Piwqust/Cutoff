@@ -9,18 +9,16 @@ struct DrillTrainerView: View {
     @Environment(ProgressStore.self) private var progress
     @State private var vm = DrillTrainerViewModel()
 
-    /// Single source of truth for the post-answer flow. `.idle` accepts
-    /// taps; `.silentCorrect` shows a brief edge tick and auto-advances;
-    /// `.revealed` puts the overlay up and waits for the user.
-    @State private var phase: FeedbackPhase = .idle
+    /// Two atomic pieces of feedback state. They're independent on purpose —
+    /// `silentCorrectToken` drives the brief edge-tick affirmation on a
+    /// correct answer, `feedback` drives the iOS sheet presentation for
+    /// every other outcome.
+    @State private var silentCorrectToken: UUID?
+    @State private var feedback: IdentifiedFeedback?
 
     /// Counter bumped on every submit so `.sensoryFeedback` fires once per
-    /// answer regardless of how the phase transitions afterwards.
+    /// answer regardless of which path runs afterwards.
     @State private var feedbackTick: Int = 0
-
-    /// Auxiliary sheet for "View range" — built from the current question
-    /// when the user taps the overlay's CTA.
-    @State private var rangeDetail: RangeDetailPayload?
 
     var body: some View {
         ZStack {
@@ -39,17 +37,26 @@ struct DrillTrainerView: View {
             .padding(.bottom, AppSpacing.sm)
         }
         .overlay(alignment: .top) { edgeTick }
-        .overlay { feedbackOverlay }
         .navigationTitle(category.title)
         .navigationBarTitleDisplayMode(.inline)
         .dynamicTypeSize(...DynamicTypeSize.accessibility3)
         .sensoryFeedback(trigger: feedbackTick) { _, _ in
             haptic(for: vm.lastOutcome)
         }
-        .sheet(item: $rangeDetail) { payload in
-            RangeDetailSheet(payload: payload)
-                .presentationDetents([.fraction(0.5), .medium, .large])
-                .presentationDragIndicator(.visible)
+        .sheet(item: $feedback, onDismiss: { advance() }) { item in
+            FeedbackSheet(
+                payload: item.payload,
+                onNext: { feedback = nil },
+                rangePayload: vm.current.map { question in
+                    RangeDetailPayload(
+                        combo: question.combo,
+                        frequencies: question.chart.frequencies(for: question.combo),
+                        chart: question.chart
+                    )
+                }
+            )
+            .presentationDetents([.medium, .large])
+            .presentationDragIndicator(.visible)
         }
         .onAppear {
             vm.modelContext = modelContext
@@ -139,11 +146,10 @@ struct DrillTrainerView: View {
 
     /// Slim mint rule pinned to the top of the safe area. Lights up briefly
     /// on a correct answer (the silent-affirmation path), then fades out as
-    /// the next hand is dealt. No edge tick for mistakes — the overlay
-    /// carries the entire feedback signal in that case.
+    /// the next hand is dealt.
     @ViewBuilder
     private var edgeTick: some View {
-        if case .silentCorrect = phase {
+        if silentCorrectToken != nil {
             RoundedRectangle(cornerRadius: 1, style: .continuous)
                 .fill(AppColors.primaryMint)
                 .frame(height: 2)
@@ -152,33 +158,6 @@ struct DrillTrainerView: View {
                 .allowsHitTesting(false)
                 .accessibilityHidden(true)
         }
-    }
-
-    // MARK: - Feedback overlay
-
-    @ViewBuilder
-    private var feedbackOverlay: some View {
-        if case .revealed(let payload) = phase {
-            FeedbackOverlay(
-                payload: payload,
-                onNext: { advance() },
-                onViewRange: vm.current.map { question in
-                    {
-                        rangeDetail = RangeDetailPayload(
-                            combo: question.combo,
-                            frequencies: question.chart.frequencies(for: question.combo),
-                            chart: question.chart
-                        )
-                    }
-                }
-            )
-            .transition(overlayTransition)
-        }
-    }
-
-    private var overlayTransition: AnyTransition {
-        if reduceMotion { return .opacity }
-        return .opacity.combined(with: .scale(scale: 0.96, anchor: .center))
     }
 
     // MARK: - Haptics
@@ -217,15 +196,14 @@ struct DrillTrainerView: View {
     }
 
     private var isIdle: Bool {
-        if case .idle = phase { return true }
-        return false
+        silentCorrectToken == nil && feedback == nil
     }
 
     // MARK: - Submission flow
 
     /// Submit → haptic → branch on outcome.
-    /// `.correct`            → silent-correct: edge tick + auto-advance.
-    /// `.close/.mistake/.punt` → overlay reveal; user controls advance.
+    /// `.correct`            → edge-tick affirmation, auto-advance.
+    /// `.close/.mistake/.punt` → present sheet; user controls advance.
     private func submit(_ action: RangeAction) {
         guard isIdle else { return }
         vm.submit(action)
@@ -235,27 +213,26 @@ struct DrillTrainerView: View {
         if outcome == .correct {
             let token = UUID()
             withAnimation(AppMotion.respecting(reduceMotion, .easeOut(duration: 0.18))) {
-                phase = .silentCorrect(token: token)
+                silentCorrectToken = token
             }
             Task { @MainActor in
                 try? await Task.sleep(nanoseconds: 520_000_000)
-                guard case .silentCorrect(let active) = phase, active == token else { return }
+                guard silentCorrectToken == token else { return }
                 advance()
             }
         } else if let payload = vm.lastPayload {
-            withAnimation(AppMotion.respecting(reduceMotion, .spring(response: 0.35, dampingFraction: 0.85))) {
-                phase = .revealed(payload)
-            }
+            feedback = IdentifiedFeedback(payload: payload)
         }
     }
 
-    /// Single dismissal / advance path used by every overlay exit
-    /// (Next button, backdrop tap, swipe-down) and by the silent-correct
-    /// timer. Returns the trainer to `.idle` and loads the next spot.
+    /// Single dismissal / advance path used by every sheet exit
+    /// (Next button, drag-down) and by the silent-correct timer.
+    /// Returns the trainer to idle and loads the next spot.
     private func advance() {
         withAnimation(AppMotion.respecting(reduceMotion, .easeOut(duration: 0.22))) {
-            phase = .idle
+            silentCorrectToken = nil
         }
+        feedback = nil
         vm.next()
     }
 }
