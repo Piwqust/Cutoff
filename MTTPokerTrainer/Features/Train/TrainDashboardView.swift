@@ -7,18 +7,21 @@ struct TrainDashboardView: View {
     private var allResults: [QuizResult]
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: AppSpacing.lg) {
-                statStrip
-                heroDrillCard
-                drillGrid
-                customDrillLink
-                reviewLink
+        ZStack {
+            AppBackground()
+            ScrollView {
+                VStack(alignment: .leading, spacing: AppSpacing.lg) {
+                    statStrip
+                    heroDrillCard
+                    drillGrid
+                    customDrillLink
+                    reviewLink
+                }
+                .padding(.horizontal, AppSpacing.pageHorizontal)
+                .padding(.vertical, AppSpacing.lg)
             }
-            .padding(.horizontal, AppSpacing.pageHorizontal)
-            .padding(.vertical, AppSpacing.lg)
+            .scrollContentBackground(.hidden)
         }
-        .background(AppBackground().ignoresSafeArea())
         .navigationTitle("Train")
         .navigationBarTitleDisplayMode(.large)
         .toolbarBackground(.hidden, for: .navigationBar)
