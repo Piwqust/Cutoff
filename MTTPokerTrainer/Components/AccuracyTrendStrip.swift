@@ -42,7 +42,7 @@ struct AccuracyTrendStrip: View {
         }()
         return HStack(spacing: 4) {
             Image(systemName: glyph)
-                .font(.system(size: 11, weight: .bold))
+                .font(AppTypography.caption.weight(.bold))
             Text(label)
                 .font(AppTypography.caption)
         }

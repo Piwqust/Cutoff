@@ -82,7 +82,7 @@ struct DrillTrainerView: View {
         return HStack(spacing: AppSpacing.sm) {
             HStack(spacing: 6) {
                 Image(systemName: spot?.facingAction.systemImage ?? "circle")
-                    .font(.system(size: 12, weight: .bold))
+                    .font(AppTypography.footnote.weight(.bold))
                     .foregroundStyle(situationTint(for: spot?.facingAction))
                 Text(spot?.facingAction.headline ?? "Loading…")
                     .font(AppTypography.bodyBold)
@@ -92,7 +92,7 @@ struct DrillTrainerView: View {
             Spacer(minLength: AppSpacing.xs)
             HStack(spacing: 6) {
                 Image(systemName: villain.systemImage)
-                    .font(.system(size: 12, weight: .bold))
+                    .font(AppTypography.footnote.weight(.bold))
                     .foregroundStyle(villainTint(for: villain))
                 Text(villain.displayName)
                     .font(AppTypography.subheadline)

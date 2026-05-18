@@ -28,7 +28,7 @@ struct TournamentSummaryCard: View {
 
                 HStack(alignment: .firstTextBaseline, spacing: AppSpacing.xs) {
                     Text("\(bbCount)")
-                        .font(.system(size: 56, weight: .bold, design: .rounded).monospacedDigit())
+                        .font(AppTypography.numericHero)
                         .foregroundStyle(AppColors.textPrimary)
                     Text("BB")
                         .font(AppTypography.title2)

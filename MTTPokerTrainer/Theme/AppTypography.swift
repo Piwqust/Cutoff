@@ -12,6 +12,13 @@ enum AppTypography {
     static let footnote    = Font.footnote
     static let caption     = Font.caption
 
+    /// Hero splash — the single biggest readout on a screen (e.g., the
+    /// tournament summary's "125" BB count). Scales with Dynamic Type via
+    /// `.largeTitle` text style.
+    static let numericHero: Font = {
+        Font.system(.largeTitle, design: .rounded).weight(.bold).monospacedDigit()
+    }()
+
     /// Big, stable readouts like "125 BB" or "25,000".
     static let numericLarge: Font = {
         Font.system(.title, design: .rounded).weight(.bold).monospacedDigit()

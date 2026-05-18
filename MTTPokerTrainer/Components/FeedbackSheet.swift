@@ -58,7 +58,7 @@ struct FeedbackSheet: View {
                 Circle()
                     .fill(outcomeTint.opacity(0.18))
                 Image(systemName: outcomeGlyph)
-                    .font(.system(size: 20, weight: .bold))
+                    .font(AppTypography.title3.weight(.bold))
                     .foregroundStyle(outcomeTint)
             }
             .frame(width: 44, height: 44)
@@ -106,7 +106,7 @@ struct FeedbackSheet: View {
         HStack(alignment: .bottom, spacing: AppSpacing.sm) {
             pillColumn(label: "You played", desc: payload.userAction, role: .userMistake)
             Image(systemName: "arrow.right")
-                .font(.system(size: 14, weight: .bold))
+                .font(AppTypography.subheadline.weight(.bold))
                 .foregroundStyle(AppColors.textSecondary)
                 .padding(.bottom, 10)
                 .accessibilityHidden(true)
@@ -122,13 +122,13 @@ struct FeedbackSheet: View {
         let foreground: Color = (role == .userMistake) ? tint : (desc.isFold ? AppColors.textPrimary : tint)
         return VStack(alignment: .leading, spacing: 6) {
             Text(label)
-                .font(.system(size: 10, weight: .semibold))
+                .font(AppTypography.caption.weight(.semibold))
                 .foregroundStyle(AppColors.textSecondary)
                 .textCase(.uppercase)
                 .tracking(0.6)
             HStack(spacing: 6) {
                 Image(systemName: desc.systemImage)
-                    .font(.system(size: 13, weight: .bold))
+                    .font(AppTypography.footnote.weight(.bold))
                 Text(desc.displayName)
                     .font(AppTypography.subheadline.weight(.semibold))
             }
@@ -178,7 +178,7 @@ struct FeedbackSheet: View {
     private var siblings: some View {
         VStack(alignment: .leading, spacing: AppSpacing.xs) {
             Text("Same line")
-                .font(.system(size: 10, weight: .semibold))
+                .font(AppTypography.caption.weight(.semibold))
                 .foregroundStyle(AppColors.textSecondary)
                 .textCase(.uppercase)
                 .tracking(0.6)

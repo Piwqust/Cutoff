@@ -79,6 +79,8 @@ struct TableMinimapView: View {
                     Circle().strokeBorder(isHero ? AppColors.primaryEmerald : AppColors.divider.opacity(0.6), lineWidth: 1)
                 )
             Text(pos.displayName)
+                // Fixed size: minimap seats are tiny circles; Dynamic Type
+                // growth would push labels outside the circle.
                 .font(.system(size: 9, weight: .bold, design: .rounded))
                 .foregroundStyle(isHero ? AppColors.backgroundDeep : AppColors.textPrimary)
                 .minimumScaleFactor(0.7)

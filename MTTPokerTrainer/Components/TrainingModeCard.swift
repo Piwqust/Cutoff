@@ -16,7 +16,7 @@ struct TrainingModeCard: View {
                     .fill(tint.opacity(0.18))
                     .frame(width: 44, height: 44)
                 Image(systemName: systemImage)
-                    .font(.system(size: 19, weight: .semibold))
+                    .font(AppTypography.title3)
                     .foregroundStyle(tint)
             }
             VStack(alignment: .leading, spacing: 2) {
@@ -31,7 +31,7 @@ struct TrainingModeCard: View {
             }
             Spacer(minLength: AppSpacing.xs)
             Image(systemName: "chevron.right")
-                .font(.system(size: 13, weight: .semibold))
+                .font(AppTypography.footnote.weight(.semibold))
                 .foregroundStyle(AppColors.textSecondary)
         }
         .padding(AppSpacing.md)

@@ -13,7 +13,7 @@ struct PrimaryButton: View {
             HStack(spacing: AppSpacing.xs) {
                 if let systemImage {
                     Image(systemName: systemImage)
-                        .font(.system(size: 18, weight: .semibold))
+                        .font(AppTypography.headline)
                 }
                 Text(title)
                     .font(AppTypography.headline)

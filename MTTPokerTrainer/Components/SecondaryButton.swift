@@ -10,7 +10,7 @@ struct SecondaryButton: View {
             HStack(spacing: AppSpacing.xs) {
                 if let systemImage {
                     Image(systemName: systemImage)
-                        .font(.system(size: 17, weight: .medium))
+                        .font(AppTypography.body)
                 }
                 Text(title)
                     .font(AppTypography.headline)

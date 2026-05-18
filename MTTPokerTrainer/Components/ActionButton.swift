@@ -23,7 +23,7 @@ struct ActionButton: View {
         Button(action: action) {
             HStack(spacing: AppSpacing.xs) {
                 Image(systemName: systemImage)
-                    .font(.system(size: 16, weight: .bold))
+                    .font(AppTypography.bodyBold)
                 Text(title)
                     .font(AppTypography.bodyBold)
             }

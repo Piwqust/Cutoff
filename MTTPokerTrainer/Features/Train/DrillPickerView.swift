@@ -72,7 +72,7 @@ struct DrillPickerView: View {
         VStack(alignment: .leading, spacing: AppSpacing.sm) {
             HStack(spacing: AppSpacing.xs) {
                 Image(systemName: systemImage)
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(AppTypography.footnote.weight(.semibold))
                     .foregroundStyle(AppColors.primaryMint)
                 Text(title)
                     .font(AppTypography.headline)
@@ -123,7 +123,7 @@ struct DrillPickerView: View {
                 if matchingCount > 0 {
                     Image(systemName: "checkmark.circle.fill")
                         .foregroundStyle(AppColors.primaryMint)
-                        .font(.system(size: 20))
+                        .font(AppTypography.title3)
                 }
             }
         }
@@ -137,7 +137,7 @@ struct DrillPickerView: View {
                 Text("Start Drill")
                     .font(AppTypography.headline)
                 Image(systemName: "arrow.right")
-                    .font(.system(size: 13, weight: .bold))
+                    .font(AppTypography.footnote.weight(.bold))
             }
             .foregroundStyle(matchingCount == 0 ? AppColors.textSecondary : AppColors.backgroundDeep)
             .frame(maxWidth: .infinity)

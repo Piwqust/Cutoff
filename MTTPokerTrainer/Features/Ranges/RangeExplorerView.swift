@@ -212,7 +212,7 @@ struct RangeExplorerView: View {
         VStack(alignment: .leading, spacing: AppSpacing.xxs) {
             HStack(spacing: AppSpacing.xs) {
                 Image(systemName: "info.circle.fill")
-                    .font(.system(size: 11))
+                    .font(AppTypography.caption)
                     .foregroundStyle(AppColors.textSecondary)
                 Text(chart.source.humanLabel)
                     .font(AppTypography.subheadline.weight(.semibold))
@@ -249,7 +249,7 @@ struct RangeExplorerView: View {
     private var depthHint: some View {
         HStack(spacing: 4) {
             Image(systemName: "arrow.left.and.right")
-                .font(.system(size: 10, weight: .semibold))
+                .font(AppTypography.caption.weight(.semibold))
             Text("swipe to change depth")
         }
         .font(AppTypography.caption)
@@ -260,7 +260,7 @@ struct RangeExplorerView: View {
     private var emptyMatchState: some View {
         VStack(spacing: AppSpacing.sm) {
             Image(systemName: "tray")
-                .font(.system(size: 32))
+                .font(AppTypography.title)
                 .foregroundStyle(AppColors.textSecondary)
             Text("No chart matches these filters.")
                 .font(AppTypography.body)
@@ -464,7 +464,7 @@ struct RangeBookmarksSheet: View {
     private var emptyState: some View {
         VStack(spacing: AppSpacing.xs) {
             Image(systemName: tab == .recents ? "clock" : "star")
-                .font(.system(size: 28))
+                .font(AppTypography.title2)
                 .foregroundStyle(AppColors.textSecondary)
             Text(tab == .recents ? "No charts viewed yet." : "No favorites yet — tap the star on a chart.")
                 .font(AppTypography.subheadline)

@@ -139,7 +139,7 @@ struct ReviewView: View {
             HStack(spacing: AppSpacing.xs) {
                 eyebrow(deepDiveExpanded ? "Hide deep dive" : "Deep dive")
                 Image(systemName: "chevron.down")
-                    .font(.system(size: 10, weight: .bold))
+                    .font(AppTypography.caption.weight(.bold))
                     .foregroundStyle(AppColors.textSecondary)
                     .rotationEffect(.degrees(deepDiveExpanded ? 180 : 0))
                 Spacer(minLength: 0)
@@ -325,7 +325,7 @@ struct ReviewView: View {
         GlassCard(padding: AppSpacing.xl) {
             VStack(spacing: AppSpacing.md) {
                 Image(systemName: "tray")
-                    .font(.system(size: 32))
+                    .font(AppTypography.title)
                     .foregroundStyle(AppColors.textSecondary)
                 Text("No history yet")
                     .font(AppTypography.headline)
@@ -389,7 +389,7 @@ private struct HistoryRow: View {
             VStack(alignment: .trailing, spacing: 2) {
                 HStack(spacing: 4) {
                     Image(systemName: row.userAction.systemImage)
-                        .font(.system(size: 11, weight: .bold))
+                        .font(AppTypography.caption.weight(.bold))
                     Text(row.userAction.displayName)
                         .font(AppTypography.caption)
                 }
@@ -397,7 +397,7 @@ private struct HistoryRow: View {
 
                 HStack(spacing: 4) {
                     Image(systemName: "arrow.right")
-                        .font(.system(size: 10, weight: .bold))
+                        .font(AppTypography.caption.weight(.bold))
                         .foregroundStyle(AppColors.textSecondary)
                     Text(row.correctAction.displayName)
                         .font(AppTypography.caption)
@@ -419,7 +419,7 @@ private struct HistoryRow: View {
             }
         }()
         return Image(systemName: glyph)
-            .font(.system(size: 14, weight: .bold))
+            .font(AppTypography.subheadline.weight(.bold))
             .foregroundStyle(color)
             .frame(width: 28, height: 28)
             .background(Circle().fill(color.opacity(0.15)))

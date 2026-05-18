@@ -16,6 +16,8 @@ struct PositionDepthHeatmap: View {
                 Text("")
                     .frame(width: 36, alignment: .leading)
                 ForEach(depths, id: \.self) { d in
+                    // Fixed-size labels: heatmap is a tight grid; Dynamic
+                    // Type growth would push cells off-screen on narrow phones.
                     Text(d.label.replacingOccurrences(of: " BB", with: ""))
                         .font(.system(size: 10, weight: .heavy, design: .rounded))
                         .tracking(0.8)

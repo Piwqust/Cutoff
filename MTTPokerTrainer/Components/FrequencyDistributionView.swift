@@ -30,7 +30,7 @@ struct FrequencyDistributionView: View {
         return HStack(spacing: AppSpacing.xs) {
             HStack(spacing: 4) {
                 Image(systemName: action.systemImage)
-                    .font(.system(size: 10, weight: .bold))
+                    .font(AppTypography.caption.weight(.bold))
                 Text(action.displayName)
                     .font(AppTypography.caption.weight(.semibold))
             }
@@ -77,6 +77,8 @@ struct FrequencyDistributionView: View {
 
     private func tag(_ text: String, color: Color) -> some View {
         Text(text)
+            // Fixed size: badges sit in a 60pt-wide column; growing them
+            // would overflow into adjacent columns at large Dynamic Type.
             .font(.system(size: 8, weight: .heavy, design: .rounded))
             .tracking(0.8)
             .foregroundStyle(color)

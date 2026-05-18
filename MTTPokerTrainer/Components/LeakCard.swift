@@ -50,7 +50,7 @@ struct LeakCard: View {
                         Text(drillTitle)
                             .font(AppTypography.subheadline)
                         Image(systemName: "arrow.right")
-                            .font(.system(size: 12, weight: .bold))
+                            .font(AppTypography.footnote.weight(.bold))
                     }
                     .foregroundStyle(AppColors.primaryMint)
                 }

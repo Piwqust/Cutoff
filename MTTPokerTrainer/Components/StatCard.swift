@@ -19,7 +19,7 @@ struct StatCard: View {
                     HStack(spacing: AppSpacing.xxs) {
                         if let trendUp {
                             Image(systemName: trendUp ? "arrow.up.right" : "arrow.down.right")
-                                .font(.system(size: 11, weight: .bold))
+                                .font(AppTypography.caption.weight(.bold))
                                 .foregroundStyle(trendUp ? AppColors.accentGreen : AppColors.accentPeach)
                         }
                         Text(hint)

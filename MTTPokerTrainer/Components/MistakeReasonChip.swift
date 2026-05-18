@@ -9,7 +9,7 @@ struct MistakeReasonChip: View {
     var body: some View {
         HStack(spacing: 4) {
             Image(systemName: glyph)
-                .font(.system(size: 10, weight: .bold))
+                .font(AppTypography.caption.weight(.bold))
             Text(reason.shortLabel)
                 .font(AppTypography.caption.weight(.semibold))
         }

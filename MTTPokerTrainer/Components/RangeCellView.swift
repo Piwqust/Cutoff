@@ -12,6 +12,9 @@ struct RangeCellView: View {
             RoundedRectangle(cornerRadius: 4, style: .continuous)
                 .fill(dominant.tint.opacity(dominant == .fold ? 0.35 : max(0.4, 0.4 + 0.6 * weight)))
             Text(combo.notation)
+                // Fixed size: 13×13 grid cells are tiny and won't accommodate
+                // Dynamic Type growth. `minimumScaleFactor` below handles the
+                // long "AKo" / "QJs" cases at large container scales.
                 .font(.system(size: 9, weight: .semibold, design: .rounded))
                 .foregroundStyle(dominant.prefersDarkForeground ? AppColors.backgroundDeep : AppColors.textPrimary)
                 .minimumScaleFactor(0.7)

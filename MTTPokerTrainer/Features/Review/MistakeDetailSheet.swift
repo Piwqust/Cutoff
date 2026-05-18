@@ -83,12 +83,12 @@ struct MistakeDetailSheet: View {
     private func actionPill(label: String, action: RangeAction) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(label)
-                .font(.system(size: 9, weight: .heavy, design: .rounded))
+                .font(AppTypography.caption.weight(.heavy))
                 .tracking(0.9)
                 .foregroundStyle(AppColors.textSecondary)
             HStack(spacing: 4) {
                 Image(systemName: action.systemImage)
-                    .font(.system(size: 11, weight: .bold))
+                    .font(AppTypography.caption.weight(.bold))
                 Text(action.displayName)
                     .font(AppTypography.bodyBold)
             }

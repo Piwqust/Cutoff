@@ -81,7 +81,7 @@ struct TrainDashboardView: View {
     private var streakChip: some View {
         HStack(spacing: 4) {
             Image(systemName: "flame.fill")
-                .font(.system(size: 11, weight: .bold))
+                .font(AppTypography.caption.weight(.bold))
             Text("\(progress.streakDays)d")
                 .font(AppTypography.caption.weight(.bold))
                 .monospacedDigit()
@@ -120,7 +120,7 @@ struct TrainDashboardView: View {
                         Text("Start")
                             .font(AppTypography.headline)
                         Image(systemName: "arrow.right")
-                            .font(.system(size: 13, weight: .bold))
+                            .font(AppTypography.footnote.weight(.bold))
                     }
                     .foregroundStyle(AppColors.backgroundDeep)
                     .padding(.horizontal, AppSpacing.lg)

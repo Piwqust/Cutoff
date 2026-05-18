@@ -15,7 +15,7 @@ struct AccuracyBarRow: View {
         HStack(spacing: AppSpacing.sm) {
             if let systemImage {
                 Image(systemName: systemImage)
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(AppTypography.footnote.weight(.semibold))
                     .foregroundStyle(AppColors.textSecondary)
                     .frame(width: 16)
             }

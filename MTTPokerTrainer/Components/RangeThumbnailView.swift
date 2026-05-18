@@ -27,7 +27,7 @@ struct RangeThumbnailView: View {
                         .fill(AppColors.cardSurface.opacity(0.4))
                         .overlay(
                             Image(systemName: "rectangle.dashed")
-                                .font(.system(size: 18, weight: .medium))
+                                .font(AppTypography.body)
                                 .foregroundStyle(AppColors.textSecondary)
                         )
                 }
