@@ -72,6 +72,7 @@
 		1DF3B56F9B503388AC03B59E /* mtt_9max_50bb_bb_squeeze.json in Resources */ = {isa = PBXBuildFile; fileRef = FE11E76C6C2794F784863412 /* mtt_9max_50bb_bb_squeeze.json */; };
 		1E5219CD822E2C96ED6E223C /* mtt_9max_20bb_lj_pushfold.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D63ADF16C3754554B55BD1D /* mtt_9max_20bb_lj_pushfold.json */; };
 		1E6CC594F4EFD91AFC151B72 /* mtt_9max_12bb_co_pushfold.json in Resources */ = {isa = PBXBuildFile; fileRef = 8EE5FE9D27CEC96A672D4087 /* mtt_9max_12bb_co_pushfold.json */; };
+		1F66B516CDE5107591E1967A /* LeakAnalyzerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D441673287AA11252CAEE7E8 /* LeakAnalyzerTests.swift */; };
 		20FF62767C106E7139A7A4C7 /* mtt_9max_100bb_utg_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = 5F30D58BBAF9D596B7749869 /* mtt_9max_100bb_utg_unopened.json */; };
 		213FDC4736089AB80AABA625 /* mtt_9max_50bb_utg_vs3bet.json in Resources */ = {isa = PBXBuildFile; fileRef = B055AC3BEFCC2C108B409E3C /* mtt_9max_50bb_utg_vs3bet.json */; };
 		21546FC0B7AA8234AA86ED63 /* mtt_9max_25bb_utg_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = 356C525464454F6FDEB36263 /* mtt_9max_25bb_utg_unopened.json */; };
@@ -274,6 +275,7 @@
 		8D6727EAF2E3417A14D6F4F0 /* mtt_9max_30bb_sb_blinddefense.json in Resources */ = {isa = PBXBuildFile; fileRef = BCF2719D3BE52A85BB4CF157 /* mtt_9max_30bb_sb_blinddefense.json */; };
 		8E181635E0DB25DAEF196E61 /* mtt_9max_20bb_bb_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = 91BE7135D67E12C31F50BB98 /* mtt_9max_20bb_bb_vsopen.json */; };
 		8F094C8098A80ED42D93AC19 /* mtt_9max_75bb_sb_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E7E4794F7620C056FFEA7EF /* mtt_9max_75bb_sb_vsopen.json */; };
+		8F243828F4F7386D595AFD2A /* RangeServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215A6F94ECB5B7F1E10C2CFD /* RangeServiceTests.swift */; };
 		8F3DA981F23CBA4402C93F70 /* mtt_9max_12bb_bb_pushfold.json in Resources */ = {isa = PBXBuildFile; fileRef = 93CEE694C43DBCDCE51DAEA8 /* mtt_9max_12bb_bb_pushfold.json */; };
 		8F60644AF662EC540CEEC3C6 /* PostflopScorerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F42DF8DA03ED43BADBE493 /* PostflopScorerTests.swift */; };
 		90B16D0893BF576DFB6A0D23 /* flop_library.json in Resources */ = {isa = PBXBuildFile; fileRef = A415EC2F16E52512780E8978 /* flop_library.json */; };
@@ -528,6 +530,7 @@
 		207898CA00CD9EC0E2FCF9B1 /* mtt_9max_20bb_btn_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_20bb_btn_unopened.json; sourceTree = "<group>"; };
 		20D32EFDB1F63513BFB7F8F0 /* mtt_9max_25bb_btn_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_25bb_btn_unopened.json; sourceTree = "<group>"; };
 		21457D7DA2940655BA5C8F0C /* mtt_9max_12bb_hj_pushfold.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_12bb_hj_pushfold.json; sourceTree = "<group>"; };
+		215A6F94ECB5B7F1E10C2CFD /* RangeServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeServiceTests.swift; sourceTree = "<group>"; };
 		219AAC381C53131F7E153532 /* NashSmellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NashSmellTests.swift; sourceTree = "<group>"; };
 		21DBC163A4C1218AA380BA22 /* mtt_9max_75bb_utg1_vs3bet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_75bb_utg1_vs3bet.json; sourceTree = "<group>"; };
 		21ED46CB809289FE69461467 /* StackDepthBucket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackDepthBucket.swift; sourceTree = "<group>"; };
@@ -849,6 +852,7 @@
 		D1751D02ABCC9F5AEA483C3E /* mtt_9max_40bb_sb_vsopen.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_40bb_sb_vsopen.json; sourceTree = "<group>"; };
 		D2E25A381AB7B75E0CDBFAA4 /* mtt_9max_50bb_sb_squeeze.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_50bb_sb_squeeze.json; sourceTree = "<group>"; };
 		D4195218148F02083FEFD952 /* mtt_9max_10bb_btn_pushfold.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_10bb_btn_pushfold.json; sourceTree = "<group>"; };
+		D441673287AA11252CAEE7E8 /* LeakAnalyzerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeakAnalyzerTests.swift; sourceTree = "<group>"; };
 		D450D510C084DD9ADCAB0F56 /* mtt_9max_100bb_btn_vs3bet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_100bb_btn_vs3bet.json; sourceTree = "<group>"; };
 		D5039DA6AED8BDE29368F2E1 /* mtt_9max_15bb_hj_vsopen.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_15bb_hj_vsopen.json; sourceTree = "<group>"; };
 		D5C8E328407ACB24571CBC82 /* mtt_9max_20bb_hj_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_20bb_hj_unopened.json; sourceTree = "<group>"; };
@@ -1077,6 +1081,7 @@
 				F2DB22568B8291BC9CD010F1 /* HandClassTests.swift */,
 				B65289A0A80870E51A3D9D69 /* HandComboTests.swift */,
 				5E2E7C4D463B832283AC682E /* HandEvaluatorTests.swift */,
+				D441673287AA11252CAEE7E8 /* LeakAnalyzerTests.swift */,
 				B729322264AFA24055575A2B /* MistakeExplainerTests.swift */,
 				9893F2002A5449442BB7723B /* MistakeReasonTests.swift */,
 				219AAC381C53131F7E153532 /* NashSmellTests.swift */,
@@ -1085,6 +1090,7 @@
 				49B7440AAB1E83A857B2C81E /* PushfoldSemanticTests.swift */,
 				FA10CE67053842DBF70633FA /* RangeCoverageTests.swift */,
 				C254FE94AE80EA58E99F9AA9 /* RangeLoaderTests.swift */,
+				215A6F94ECB5B7F1E10C2CFD /* RangeServiceTests.swift */,
 				DB079E5659F33B4653F9E94D /* ReviewAnalyzerTests.swift */,
 				ED9415EF31FEC1558D5AFFD2 /* ScorerTests.swift */,
 				BE4A7BD6148BC034FDA03EBC /* SpotGeneratorTests.swift */,
@@ -1983,6 +1989,7 @@
 				1CFD0E12E81ACADB0E0D6959 /* HandClassTests.swift in Sources */,
 				64E24C0AD579BD1C16E4681E /* HandComboTests.swift in Sources */,
 				D708D5A67CF0013CDF56C341 /* HandEvaluatorTests.swift in Sources */,
+				1F66B516CDE5107591E1967A /* LeakAnalyzerTests.swift in Sources */,
 				1BAC8FEF9A26AC389113DE4A /* MistakeExplainerTests.swift in Sources */,
 				EAEEC545C058401C07F61C9A /* MistakeReasonTests.swift in Sources */,
 				E7A6AA650757DA49D8F60138 /* NashSmellTests.swift in Sources */,
@@ -1991,6 +1998,7 @@
 				E2ACF4161567348BC18D9F52 /* PushfoldSemanticTests.swift in Sources */,
 				E571CF55C37FAB34B0200B7B /* RangeCoverageTests.swift in Sources */,
 				6247F4BA548D736A34FDC2D2 /* RangeLoaderTests.swift in Sources */,
+				8F243828F4F7386D595AFD2A /* RangeServiceTests.swift in Sources */,
 				88C70F774ED6293D97EB229C /* ReviewAnalyzerTests.swift in Sources */,
 				E13B40292238100C4E948815 /* ScorerTests.swift in Sources */,
 				A061B30DD1BC87145AE226B3 /* SpotGeneratorTests.swift in Sources */,
