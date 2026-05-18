@@ -40,17 +40,24 @@ enum EquityCalculator {
             dead.insert(villain[0].index52)
             dead.insert(villain[1].index52)
 
-            var runout = board
-            var attempts = 0
-            while runout.count < 5 && attempts < 100 {
-                let idx = Int.random(in: 0..<52, using: &rng)
-                if !dead.contains(idx) {
-                    dead.insert(idx)
-                    runout.append(Card.deck[idx])
-                }
-                attempts += 1
+            // Build the live deck (52 minus everything already accounted for)
+            // and partially Fisher–Yates-shuffle the first N positions where N
+            // is the number of board cards still to deal. Avoids the previous
+            // rejection-sampling loop, which could silently undersample when
+            // the live deck was small and the RNG kept hitting dead cards.
+            var live: [Int] = []
+            live.reserveCapacity(52 - dead.count)
+            for idx in 0..<52 where !dead.contains(idx) {
+                live.append(idx)
             }
-            guard runout.count == 5 else { continue }
+            let needed = 5 - board.count
+            guard live.count >= needed else { continue }
+            for i in 0..<needed {
+                let swap = Int.random(in: i..<live.count, using: &rng)
+                live.swapAt(i, swap)
+            }
+            var runout = board
+            for i in 0..<needed { runout.append(Card.deck[live[i]]) }
 
             let heroScore   = HandEvaluator.bestFive(of: heroHand + runout)
             let villainScore = HandEvaluator.bestFive(of: villain + runout)
