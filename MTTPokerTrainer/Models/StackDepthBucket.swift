@@ -34,6 +34,12 @@ enum StackDepthBucket: Int, Codable, CaseIterable, Identifiable, Hashable {
 
     /// Snap an arbitrary BB count to the nearest bucket — used when matching
     /// the user's chosen stack to a bundled range file.
+    ///
+    /// **Tie-breaking:** when an input is exactly midway between two buckets
+    /// (e.g. 17 BB sits between 15 and 20), the smaller bucket wins because
+    /// `min(by:)` keeps the first element on a strict `<` comparator. For an
+    /// MTT trainer this is the conservative choice — when in doubt, train
+    /// the shorter-stack chart, which has a higher cost-of-error.
     static func nearest(to bb: Int) -> StackDepthBucket {
         StackDepthBucket.allCases.min(by: { abs($0.bb - bb) < abs($1.bb - bb) }) ?? .bb100
     }
