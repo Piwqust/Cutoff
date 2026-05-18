@@ -35,10 +35,10 @@ extension ActionDescriptor {
     }
 }
 
-/// Everything the feedback overlay renders for a single answered spot.
+/// Everything the feedback sheet renders for a single answered spot.
 ///
-/// Built by each trainer's view model and handed to `FeedbackOverlay`. Keeps
-/// the overlay free of action-enum knowledge so preflop and postflop share
+/// Built by each trainer's view model and handed to `FeedbackSheet`. Keeps
+/// the sheet free of action-enum knowledge so preflop and postflop share
 /// the same view.
 struct FeedbackPayload {
     let outcome: AnswerOutcome

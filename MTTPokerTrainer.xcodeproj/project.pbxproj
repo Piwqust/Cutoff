@@ -163,7 +163,6 @@
 		4EF5FAEB0ADC3D7828CEC112 /* mtt_9max_10bb_sb_blinddefense.json in Resources */ = {isa = PBXBuildFile; fileRef = A86D0D8D5278308A3B17CFD9 /* mtt_9max_10bb_sb_blinddefense.json */; };
 		4F3D8AF9AE34D0B471ADF444 /* mtt_9max_10bb_co_pushfold.json in Resources */ = {isa = PBXBuildFile; fileRef = E0EE2DF2846C1497140C2EF9 /* mtt_9max_10bb_co_pushfold.json */; };
 		511E94513C5A81622F4CC4D7 /* mtt_9max_40bb_bb_squeeze.json in Resources */ = {isa = PBXBuildFile; fileRef = 723F5AAA2716C6AB825EC1FB /* mtt_9max_40bb_bb_squeeze.json */; };
-		519A1D09D2C9BA5D829206AE /* TableMiniMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3205F125165C74C4B0C6C3E /* TableMiniMap.swift */; };
 		5217B5FCAB3072385FE93ADD /* mtt_9max_125bb_sb_blinddefense.json in Resources */ = {isa = PBXBuildFile; fileRef = B2A80FD32B819D92A99EE3B5 /* mtt_9max_125bb_sb_blinddefense.json */; };
 		53AA1DF77F610766D879476A /* RangeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B55B3004AFD3D3FE4809F18 /* RangeAction.swift */; };
 		542223BE588852F98747CFA3 /* HandFrequencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DA8C5A39707E9E5E43D924 /* HandFrequencies.swift */; };
@@ -900,7 +899,6 @@
 		F290FA4E13BC46154D5CCDB7 /* mtt_9max_30bb_utg_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_30bb_utg_unopened.json; sourceTree = "<group>"; };
 		F2DAF59AA694B792CF403D00 /* mtt_9max_100bb_hj_squeeze.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_100bb_hj_squeeze.json; sourceTree = "<group>"; };
 		F2DB22568B8291BC9CD010F1 /* HandClassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandClassTests.swift; sourceTree = "<group>"; };
-		F3205F125165C74C4B0C6C3E /* TableMiniMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableMiniMap.swift; sourceTree = "<group>"; };
 		F3F57D31843ED6D0CD2BB6F6 /* mtt_9max_75bb_utg_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_75bb_utg_unopened.json; sourceTree = "<group>"; };
 		F436B3D3EB4746F7B3E10432 /* mtt_9max_125bb_hj_vs3bet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_125bb_hj_vs3bet.json; sourceTree = "<group>"; };
 		F44E35CCB92B7516307CF592 /* mtt_9max_75bb_sb_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_75bb_sb_unopened.json; sourceTree = "<group>"; };
@@ -1164,7 +1162,6 @@
 				C5A33EBC7396A04A0268D616 /* SecondaryButton.swift */,
 				B7BA58A46521E181C7700FBD /* SiblingHandsRow.swift */,
 				045268DA84B23946E7B57DB0 /* StatCard.swift */,
-				F3205F125165C74C4B0C6C3E /* TableMiniMap.swift */,
 				D90E46309CBCA1DDD045CDAF /* TableMinimapView.swift */,
 				68997D87631678EB76979174 /* TournamentSummaryCard.swift */,
 				34F0145E1810330A5AA2EEA6 /* TrainingModeCard.swift */,
@@ -2077,7 +2074,6 @@
 				087233D520F2D2EFEB3BF396 /* SpotMatrix.swift in Sources */,
 				EB0BCCAEC5605F3884BAD04D /* StackDepthBucket.swift in Sources */,
 				58AF38827A56388A3C3B2644 /* StatCard.swift in Sources */,
-				519A1D09D2C9BA5D829206AE /* TableMiniMap.swift in Sources */,
 				D6B1A38FDCCAAD9355A82EE5 /* TableMinimapView.swift in Sources */,
 				07BF8FB6090950D77ADABFF2 /* TablePosition.swift in Sources */,
 				DB79BD090AA94B1D1B1A96F8 /* TournamentConfig.swift in Sources */,
