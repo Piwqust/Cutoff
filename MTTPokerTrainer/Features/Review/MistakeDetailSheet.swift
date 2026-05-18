@@ -94,7 +94,7 @@ struct MistakeDetailSheet: View {
             }
             .foregroundStyle(action.prefersDarkForeground ? AppColors.backgroundDeep : AppColors.textPrimary)
             .padding(.horizontal, AppSpacing.sm)
-            .padding(.vertical, 4)
+            .padding(.vertical, AppSpacing.xxs)
             .background(Capsule().fill(action.tint))
         }
     }

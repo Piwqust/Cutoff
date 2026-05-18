@@ -70,7 +70,7 @@ struct PostflopDrillView: View {
             .font(AppTypography.subheadline)
             .foregroundStyle(AppColors.textPrimary)
             .padding(.horizontal, AppSpacing.sm)
-            .padding(.vertical, 6)
+            .padding(.vertical, AppSpacing.xs)
             .background(Capsule().fill(AppColors.cardSurface))
     }
 

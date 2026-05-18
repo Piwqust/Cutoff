@@ -11,6 +11,7 @@ struct ReviewView: View {
     @State private var historyFilter: HistoryFilter = .mistakes
     @State private var deepDiveExpanded: Bool = false
     @State private var selected: QuizResult?
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         ZStack {
@@ -134,7 +135,9 @@ struct ReviewView: View {
 
     private var deepDiveToggle: some View {
         Button {
-            withAnimation(.easeOut(duration: 0.22)) { deepDiveExpanded.toggle() }
+            withAnimation(AppMotion.respecting(reduceMotion, .easeOut(duration: 0.22))) {
+                deepDiveExpanded.toggle()
+            }
         } label: {
             HStack(spacing: AppSpacing.xs) {
                 eyebrow(deepDiveExpanded ? "Hide deep dive" : "Deep dive")
