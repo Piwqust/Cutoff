@@ -216,7 +216,12 @@ struct RangeChart: Codable, Identifiable, Hashable {
         case "raise":    return .raise25x
         case "threeBet": return .raise3x
         case "jam":      return .shove
-        default:         return .fold
+        default:
+            // A bundled chart shipping an unknown coarse-action string is a
+            // packaging bug. Trip the debug build so we catch it in tests;
+            // fall through to `.fold` in release to keep the app usable.
+            assertionFailure("Unknown coarse range action '\(raw)' — falling back to .fold")
+            return .fold
         }
     }
 

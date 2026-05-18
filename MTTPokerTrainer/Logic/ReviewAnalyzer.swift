@@ -255,8 +255,7 @@ enum ReviewAnalyzer {
         var out: [LeakSpot] = []
         for (key, slice) in grouped where slice.count >= minSample {
             let mistakes = slice.filter { $0.outcome == .mistake || $0.outcome == .punt }.count
-            guard mistakes > 0 else { continue }
-            let row = slice.first!
+            guard mistakes > 0, let row = slice.first else { continue }
             let bucket = StackDepthBucket.nearest(to: row.stackDepthBB)
             out.append(LeakSpot(
                 id: key,

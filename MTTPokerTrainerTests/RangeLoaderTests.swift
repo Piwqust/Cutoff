@@ -13,8 +13,11 @@ final class RangeLoaderTests: XCTestCase {
         let loader = RangeLoader(bundle: appBundle)
         let charts = try loader.loadAll()
 
+        // Bundle ships ~330 charts across all position/depth/scenario
+        // combinations. A regression that wipes most of them should fail
+        // loudly, not silently slip under a single-digit threshold.
         XCTAssertGreaterThanOrEqual(
-            charts.count, 6, "Expected at least six bundled ranges, found \(charts.count)")
+            charts.count, 300, "Expected ~330 bundled ranges, found \(charts.count)")
 
         let allowedKinds: Set<RangeChart.SourcePayload.Kind> = [.solverDump, .nashComputed, .gto, .userDefined]
         for chart in charts {
