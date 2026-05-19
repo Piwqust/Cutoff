@@ -31,6 +31,7 @@ enum LeakAnalyzer {
     /// reconstructed against the played combo's true frequency distribution.
     static func leaks(
         from results: [QuizResult],
+        in lang: AppLanguage = .english,
         chartByID: (String) -> RangeChart? = { _ in nil }
     ) -> [Leak] {
         guard results.count >= 8 else { return [] }
@@ -47,8 +48,8 @@ enum LeakAnalyzer {
             if ratio > 0.18 {
                 leaks.append(Leak(
                     id: "too_loose_utg",
-                    title: "Too loose UTG",
-                    detail: "You're opening hands from early position that play badly out of position.",
+                    title: looseUTGTitle(in: lang),
+                    detail: looseUTGDetail(in: lang),
                     severity: min(1, ratio * 2),
                     suggestedSpot: (.utg, 100, .unopened)
                 ))
@@ -65,8 +66,8 @@ enum LeakAnalyzer {
             if ratio > 0.25 {
                 leaks.append(Leak(
                     id: "overfolding_bb",
-                    title: "Overfolding the Big Blind",
-                    detail: "You're folding to opens too often. The blinds are already in — defend wider.",
+                    title: overfoldBBTitle(in: lang),
+                    detail: overfoldBBDetail(in: lang),
                     severity: min(1, ratio * 1.6),
                     suggestedSpot: (.bb, 30, .vsOpen)
                 ))
@@ -81,8 +82,8 @@ enum LeakAnalyzer {
             if ratio > 0.3 {
                 leaks.append(Leak(
                     id: "loose_call_vs3",
-                    title: "Calling too much vs 3-bet",
-                    detail: "Flatting 3-bets out of position with marginal hands loses chips.",
+                    title: looseCallVs3Title(in: lang),
+                    detail: looseCallVs3Detail(in: lang),
                     severity: min(1, ratio * 1.4),
                     suggestedSpot: (.btn, 100, .vs3Bet)
                 ))
@@ -97,8 +98,8 @@ enum LeakAnalyzer {
             if ratio > 0.3 {
                 leaks.append(Leak(
                     id: "missed_reshoves",
-                    title: "Missing reshove spots",
-                    detail: "You're folding short-stack hands that have enough fold equity to jam.",
+                    title: missedReshoveTitle(in: lang),
+                    detail: missedReshoveDetail(in: lang),
                     severity: min(1, ratio * 1.3),
                     suggestedSpot: (.btn, 15, .pushFold)
                 ))
@@ -116,10 +117,11 @@ enum LeakAnalyzer {
             let snap = ReviewAnalyzer.snapshot(slice)
             if snap.accuracy < handClassAccuracyFloor {
                 let severity = min(1.0, Double(handClassAccuracyFloor - snap.accuracy) / 40.0)
+                let hcName = hc.displayName(in: lang)
                 leaks.append(Leak(
                     id: "handclass_\(hc.rawValue)",
-                    title: "Leaks in \(hc.displayName.lowercased())",
-                    detail: "Accuracy on \(hc.displayName.lowercased()) is \(snap.accuracy)% across \(snap.total) hands — work on this class.",
+                    title: L10n.handClassLeakTitle(hcName, in: lang),
+                    detail: L10n.handClassLeakDetail(name: hcName, accuracy: snap.accuracy, total: snap.total, in: lang),
                     severity: severity,
                     suggestedSpot: nil
                 ))
@@ -140,8 +142,12 @@ enum LeakAnalyzer {
                 if share >= 0.45 {
                     leaks.append(Leak(
                         id: "direction_\(topReason.rawValue)",
-                        title: directionLeakTitle(topReason),
-                        detail: "\(Int((share * 100).rounded()))% of your mistakes are \(topReason.displayName.lowercased()) — work in the opposite direction.",
+                        title: directionLeakTitle(topReason, in: lang),
+                        detail: L10n.directionLeakDetail(
+                            share: Int((share * 100).rounded()),
+                            reason: topReason.displayName(in: lang),
+                            in: lang
+                        ),
                         severity: min(1, share * 1.2),
                         suggestedSpot: nil
                     ))
@@ -152,15 +158,97 @@ enum LeakAnalyzer {
         return leaks.sorted { $0.severity > $1.severity }
     }
 
-    private static func directionLeakTitle(_ reason: MistakeReason) -> String {
-        switch reason {
-        case .tooTight:     return "You play too tight"
-        case .tooLoose:     return "You play too loose"
-        case .overcommit:   return "Over-commitment leak"
-        case .undercommit:  return "Under-commitment leak"
-        case .wrongLine:    return "Wrong-line bias"
-        case .missedMix:    return "Missing mixed-strategy lines"
-        case .correct:      return "Calibration check"
+    private static func directionLeakTitle(_ reason: MistakeReason, in lang: AppLanguage) -> String {
+        switch lang {
+        case .english:
+            switch reason {
+            case .tooTight:     return "You play too tight"
+            case .tooLoose:     return "You play too loose"
+            case .overcommit:   return "Over-commitment leak"
+            case .undercommit:  return "Under-commitment leak"
+            case .wrongLine:    return "Wrong-line bias"
+            case .missedMix:    return "Missing mixed-strategy lines"
+            case .correct:      return "Calibration check"
+            }
+        case .russian:
+            switch reason {
+            case .tooTight:     return "Играешь слишком тайтово"
+            case .tooLoose:     return "Играешь слишком лузово"
+            case .overcommit:   return "Перекомитмент"
+            case .undercommit:  return "Недокомитмент"
+            case .wrongLine:    return "Уход в неверную линию"
+            case .missedMix:    return "Пропуск миксов"
+            case .correct:      return "Калибровка"
+            }
+        case .russianGenZ:
+            switch reason {
+            case .tooTight:     return "ты тайтуешь как дед"
+            case .tooLoose:     return "ты сливаешь луз-стайл"
+            case .overcommit:   return "перекомитишь, бро"
+            case .undercommit:  return "не докомичиваешь — кринж"
+            case .wrongLine:    return "уходишь не в ту линию"
+            case .missedMix:    return "пропускаешь миксы"
+            case .correct:      return "калибровка"
+            }
+        }
+    }
+
+    // MARK: - Static leak strings (the four pattern leaks have fixed copy)
+
+    private static func looseUTGTitle(in lang: AppLanguage) -> String {
+        switch lang {
+        case .english:     return "Too loose UTG"
+        case .russian:     return "Слишком лузово с UTG"
+        case .russianGenZ: return "лузишь с UTG — кринж"
+        }
+    }
+    private static func looseUTGDetail(in lang: AppLanguage) -> String {
+        switch lang {
+        case .english:     return "You're opening hands from early position that play badly out of position."
+        case .russian:     return "Открываешь руки с ранней позиции, которые плохо играют OOP."
+        case .russianGenZ: return "открываешь с ранней позы трэшак, который OOP не катит. подумой."
+        }
+    }
+    private static func overfoldBBTitle(in lang: AppLanguage) -> String {
+        switch lang {
+        case .english:     return "Overfolding the Big Blind"
+        case .russian:     return "Перефолд большого блайнда"
+        case .russianGenZ: return "сливаешь BB слишком часто"
+        }
+    }
+    private static func overfoldBBDetail(in lang: AppLanguage) -> String {
+        switch lang {
+        case .english:     return "You're folding to opens too often. The blinds are already in — defend wider."
+        case .russian:     return "Слишком часто фолдишь на опен. Блайнды уже в банке — защищайся шире."
+        case .russianGenZ: return "фолдишь на опен как нит. блайнды уже в банке — го дефендить шире."
+        }
+    }
+    private static func looseCallVs3Title(in lang: AppLanguage) -> String {
+        switch lang {
+        case .english:     return "Calling too much vs 3-bet"
+        case .russian:     return "Слишком часто колишь 3-беты"
+        case .russianGenZ: return "колишь 3-беты на изи — пас"
+        }
+    }
+    private static func looseCallVs3Detail(in lang: AppLanguage) -> String {
+        switch lang {
+        case .english:     return "Flatting 3-bets out of position with marginal hands loses chips."
+        case .russian:     return "Флэт 3-бета OOP с маргинальными руками сливает фишки."
+        case .russianGenZ: return "флэтить 3-бет OOP с трэшем — лютый слив фишек. не делай так."
+        }
+    }
+    private static func missedReshoveTitle(in lang: AppLanguage) -> String {
+        switch lang {
+        case .english:     return "Missing reshove spots"
+        case .russian:     return "Пропускаешь решовы"
+        case .russianGenZ: return "пропускаешь решовы — фолд эквити мимо"
+        }
+    }
+    private static func missedReshoveDetail(in lang: AppLanguage) -> String {
+        switch lang {
+        case .english:     return "You're folding short-stack hands that have enough fold equity to jam."
+        case .russian:     return "Фолдишь короткостековые руки, в которых хватает fold equity на джем."
+        case .russianGenZ: return "фолдишь короткий стек, хотя fold equity вагон — джемить надо, бро."
         }
     }
 }

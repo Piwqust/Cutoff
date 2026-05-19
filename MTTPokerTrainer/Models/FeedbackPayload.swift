@@ -11,6 +11,13 @@ struct ActionDescriptor {
     /// Fold's tint is muted; promote its body text to the primary foreground
     /// so it doesn't read as faded against a dark glass surface.
     let isFold: Bool
+    /// Localized lookup. Built per-action so the descriptor stays
+    /// rendering-only without knowing about action enums.
+    let localizedDisplayName: (AppLanguage) -> String
+
+    func displayName(in lang: AppLanguage) -> String {
+        localizedDisplayName(lang)
+    }
 }
 
 extension ActionDescriptor {
@@ -20,7 +27,8 @@ extension ActionDescriptor {
             systemImage: action.systemImage,
             tint: action.tint,
             prefersDarkForeground: action.prefersDarkForeground,
-            isFold: action == .fold
+            isFold: action == .fold,
+            localizedDisplayName: { action.displayName(in: $0) }
         )
     }
 
@@ -30,7 +38,8 @@ extension ActionDescriptor {
             systemImage: action.systemImage,
             tint: action.tint,
             prefersDarkForeground: action.prefersDarkForeground,
-            isFold: action == .fold
+            isFold: action == .fold,
+            localizedDisplayName: { action.displayName(in: $0) }
         )
     }
 }

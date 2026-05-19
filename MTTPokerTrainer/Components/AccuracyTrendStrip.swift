@@ -4,11 +4,12 @@ import SwiftUI
 /// Renders flat; the caller decides whether to wrap in a card.
 struct AccuracyTrendStrip: View {
     let trend: ReviewAnalyzer.Trend
+    @Environment(LocalizationManager.self) private var l10n
 
     var body: some View {
         HStack(alignment: .top, spacing: AppSpacing.md) {
-            accuracyColumn(title: "Last 7d", value: trend.last7Accuracy)
-            accuracyColumn(title: "Last 30d", value: trend.last30Accuracy)
+            accuracyColumn(title: l10n.t(.last7d), value: trend.last7Accuracy)
+            accuracyColumn(title: l10n.t(.last30d), value: trend.last30Accuracy)
             Spacer(minLength: AppSpacing.sm)
             VStack(alignment: .trailing, spacing: AppSpacing.xs) {
                 deltaChip
@@ -38,7 +39,7 @@ struct AccuracyTrendStrip: View {
         let (glyph, color, label): (String, Color, String) = {
             if delta > 1 { return ("arrow.up.right", AppColors.primaryMint, "+\(delta)%") }
             if delta < -1 { return ("arrow.down.right", AppColors.accentCoral, "\(delta)%") }
-            return ("equal", AppColors.textSecondary, "Flat")
+            return ("equal", AppColors.textSecondary, l10n.t(.flatLabel))
         }()
         return HStack(spacing: 4) {
             Image(systemName: glyph)
@@ -90,7 +91,7 @@ struct AccuracyTrendStrip: View {
             .opacity(presentIndices.isEmpty ? 0.25 : 1)
             .overlay(alignment: .center) {
                 if presentIndices.isEmpty {
-                    Text("Drill a few hands")
+                    Text(l10n.t(.drillAFewHands))
                         .font(AppTypography.caption)
                         .foregroundStyle(AppColors.textSecondary)
                 }
@@ -118,4 +119,5 @@ struct AccuracyTrendStrip: View {
         ))
         .padding(AppSpacing.lg)
     }
+    .environment(LocalizationManager())
 }

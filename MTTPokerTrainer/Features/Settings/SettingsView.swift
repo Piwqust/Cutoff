@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(ConfigStore.self) private var config
+    @Environment(LocalizationManager.self) private var l10n
     @State private var showingSetup = false
     @State private var showingResetConfirm = false
 
@@ -19,11 +20,13 @@ struct SettingsView: View {
                         levelMinutes: config.config.blindLevelDuration.minutes
                     )
 
+                    languageCard
+
                     VStack(spacing: AppSpacing.md) {
-                        SecondaryButton(title: "Edit tournament rules") {
+                        SecondaryButton(title: l10n.t(.editTournamentRules)) {
                             showingSetup = true
                         }
-                        SecondaryButton(title: "Reset onboarding") {
+                        SecondaryButton(title: l10n.t(.resetOnboarding)) {
                             config.hasOnboarded = false
                         }
                     }
@@ -34,13 +37,48 @@ struct SettingsView: View {
                 .padding(.bottom, AppSpacing.xxxl)
             }
         }
-        .navigationTitle("Settings")
+        .navigationTitle(l10n.t(.settingsTitle))
         .navigationBarTitleDisplayMode(.large)
         .toolbarBackground(.hidden, for: .navigationBar)
         .dynamicTypeSize(...DynamicTypeSize.accessibility3)
         .sheet(isPresented: $showingSetup) {
             TournamentSetupView()
                 .environment(config)
+                .environment(l10n)
+        }
+    }
+
+    private var languageCard: some View {
+        GlassCard {
+            VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                Text(l10n.t(.language))
+                    .font(AppTypography.subheadline)
+                    .foregroundStyle(AppColors.textSecondary)
+                VStack(spacing: 0) {
+                    ForEach(AppLanguage.allCases) { lang in
+                        Button {
+                            l10n.language = lang
+                        } label: {
+                            HStack {
+                                Text(lang.displayName)
+                                    .font(AppTypography.body)
+                                    .foregroundStyle(AppColors.textPrimary)
+                                Spacer()
+                                if l10n.language == lang {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .foregroundStyle(AppColors.primaryMint)
+                                }
+                            }
+                            .padding(.vertical, AppSpacing.sm)
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        if lang != AppLanguage.allCases.last {
+                            Divider().overlay(AppColors.divider)
+                        }
+                    }
+                }
+            }
         }
     }
 }

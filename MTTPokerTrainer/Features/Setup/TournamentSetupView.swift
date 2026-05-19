@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TournamentSetupView: View {
     @Environment(ConfigStore.self) private var config
+    @Environment(LocalizationManager.self) private var l10n
     @Environment(\.dismiss) private var dismiss
 
     @State private var draft: TournamentConfig = .default
@@ -29,7 +30,7 @@ struct TournamentSetupView: View {
                         anteCard
                         heroStackCard
 
-                        PrimaryButton(title: "Save profile", systemImage: "checkmark.circle.fill") {
+                        PrimaryButton(title: l10n.t(.saveProfile), systemImage: "checkmark.circle.fill") {
                             commit()
                         }
                         .padding(.top, AppSpacing.sm)
@@ -38,11 +39,11 @@ struct TournamentSetupView: View {
                     .padding(.vertical, AppSpacing.lg)
                 }
             }
-            .navigationTitle("Tournament profile")
+            .navigationTitle(l10n.t(.tournamentProfile))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
+                    Button(l10n.t(.cancel)) { dismiss() }
                         .tint(AppColors.textSecondary)
                 }
             }
@@ -58,7 +59,7 @@ struct TournamentSetupView: View {
     private var stackCard: some View {
         GlassCard {
             VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                cardTitle("Starting stack")
+                cardTitle(l10n.t(.startingStack))
                 Stepper(value: $draft.startingStack, in: 1_000...500_000, step: 1_000) {
                     Text(draft.startingStack.formatted(.number))
                         .font(AppTypography.numericMedium)
@@ -72,12 +73,12 @@ struct TournamentSetupView: View {
     private var blindsCard: some View {
         GlassCard {
             VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                cardTitle("Blinds")
+                cardTitle(l10n.t(.blinds))
                 HStack(spacing: AppSpacing.md) {
-                    blindStepper(label: "Small", value: $draft.smallBlind, in: 25...10_000, step: 25)
-                    blindStepper(label: "Big",   value: $draft.bigBlind,   in: 50...20_000, step: 50)
+                    blindStepper(label: l10n.t(.blindSmall), value: $draft.smallBlind, in: 25...10_000, step: 25)
+                    blindStepper(label: l10n.t(.blindBig),   value: $draft.bigBlind,   in: 50...20_000, step: 50)
                 }
-                Text("Starting BB: \(draft.startingBB)")
+                Text(L10n.startingBB(draft.startingBB, in: l10n.language))
                     .font(AppTypography.subheadline)
                     .foregroundStyle(AppColors.primaryMint)
             }
@@ -102,11 +103,11 @@ struct TournamentSetupView: View {
     private var tableCard: some View {
         GlassCard {
             VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                cardTitle("Table size")
-                Picker("Table size", selection: $draft.tableSize) {
-                    Text("6-max").tag(6)
-                    Text("8-max").tag(8)
-                    Text("9-max").tag(9)
+                cardTitle(l10n.t(.tableSize))
+                Picker(l10n.t(.tableSize), selection: $draft.tableSize) {
+                    Text(l10n.t(.tableSize6)).tag(6)
+                    Text(l10n.t(.tableSize8)).tag(8)
+                    Text(l10n.t(.tableSize9)).tag(9)
                 }
                 .pickerStyle(.segmented)
             }
@@ -116,8 +117,8 @@ struct TournamentSetupView: View {
     private var levelCard: some View {
         GlassCard {
             VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                cardTitle("Blind level duration")
-                Picker("Level duration", selection: $draft.blindLevelDuration) {
+                cardTitle(l10n.t(.blindLevelDuration))
+                Picker(l10n.t(.blindLevelDuration), selection: $draft.blindLevelDuration) {
                     ForEach(BlindLevelDuration.allCases) { dur in
                         Text(dur.label).tag(dur)
                     }
@@ -130,14 +131,14 @@ struct TournamentSetupView: View {
     private var anteCard: some View {
         GlassCard {
             VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                cardTitle("Ante")
+                cardTitle(l10n.t(.ante))
                 VStack(spacing: 0) {
                     ForEach(AnteType.allCases) { type in
                         Button {
                             draft.anteType = type
                         } label: {
                             HStack {
-                                Text(type.displayName)
+                                Text(type.displayName(in: l10n.language))
                                     .font(AppTypography.body)
                                     .foregroundStyle(AppColors.textPrimary)
                                 Spacer()
@@ -161,9 +162,9 @@ struct TournamentSetupView: View {
     private var heroStackCard: some View {
         GlassCard {
             VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                cardTitle("Current hero stack (optional)")
+                cardTitle(l10n.t(.currentHeroStack))
                 HStack {
-                    TextField("e.g. 18000", text: $heroStackText)
+                    TextField(l10n.t(.heroStackPlaceholder), text: $heroStackText)
                         .keyboardType(.numberPad)
                         .textFieldStyle(.plain)
                         .font(AppTypography.numericMedium)
@@ -172,7 +173,7 @@ struct TournamentSetupView: View {
                         .padding(.horizontal, AppSpacing.sm)
                         .background(RoundedRectangle(cornerRadius: AppRadius.chip).fill(AppColors.cardSurface))
                     if let hero = Int(heroStackText), draft.bigBlind > 0 {
-                        Text("\(BBCalculator.bb(stack: hero, bigBlind: draft.bigBlind)) BB")
+                        Text(L10n.bbValue(BBCalculator.bb(stack: hero, bigBlind: draft.bigBlind), in: l10n.language))
                             .font(AppTypography.numericMedium)
                             .foregroundStyle(AppColors.primaryMint)
                     }
@@ -199,4 +200,5 @@ struct TournamentSetupView: View {
 #Preview {
     TournamentSetupView()
         .environment(ConfigStore())
+        .environment(LocalizationManager())
 }

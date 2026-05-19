@@ -6,6 +6,7 @@ import SwiftUI
 struct PositionDepthHeatmap: View {
     let cells: [ReviewAnalyzer.HeatCell]
     var onSelect: (ReviewAnalyzer.HeatCell) -> Void = { _ in }
+    @Environment(LocalizationManager.self) private var l10n
 
     private let depths: [StackDepthBucket] = [.bb10, .bb15, .bb20, .bb30, .bb50, .bb100]
 
@@ -89,7 +90,7 @@ struct PositionDepthHeatmap: View {
 
     private var legend: some View {
         HStack(spacing: AppSpacing.xs) {
-            Text("Cooler = miss")
+            Text(l10n.t(.coolerEqualsMiss))
                 .font(AppTypography.caption)
                 .foregroundStyle(AppColors.textSecondary)
             HStack(spacing: 2) {

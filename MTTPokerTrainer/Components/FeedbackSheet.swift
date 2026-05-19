@@ -14,6 +14,7 @@ struct FeedbackSheet: View {
     /// stacks `RangeDetailSheet` on top of this sheet.
     var rangePayload: RangeDetailPayload? = nil
 
+    @Environment(LocalizationManager.self) private var l10n
     @State private var showRange = false
 
     var body: some View {
@@ -65,7 +66,7 @@ struct FeedbackSheet: View {
             .accessibilityHidden(true)
 
             VStack(alignment: .leading, spacing: 2) {
-                Text(payload.outcome.headline)
+                Text(payload.outcome.headline(in: l10n.language))
                     .font(.system(.title2, design: .rounded).weight(.bold))
                     .foregroundStyle(outcomeTint)
                 Text(payload.verdict)
@@ -104,13 +105,13 @@ struct FeedbackSheet: View {
     /// they read as a primary unit, not a secondary detail.
     private var actionDiff: some View {
         HStack(alignment: .bottom, spacing: AppSpacing.sm) {
-            pillColumn(label: "You played", desc: payload.userAction, role: .userMistake)
+            pillColumn(label: l10n.t(.youPlayed), desc: payload.userAction, role: .userMistake)
             Image(systemName: "arrow.right")
                 .font(AppTypography.subheadline.weight(.bold))
                 .foregroundStyle(AppColors.textSecondary)
                 .padding(.bottom, 10)
                 .accessibilityHidden(true)
-            pillColumn(label: "Chart wants", desc: payload.correctAction, role: .correct)
+            pillColumn(label: l10n.t(.chartWants), desc: payload.correctAction, role: .correct)
             Spacer(minLength: 0)
         }
     }
@@ -129,7 +130,7 @@ struct FeedbackSheet: View {
             HStack(spacing: 6) {
                 Image(systemName: desc.systemImage)
                     .font(AppTypography.footnote.weight(.bold))
-                Text(desc.displayName)
+                Text(desc.displayName(in: l10n.language))
                     .font(AppTypography.subheadline.weight(.semibold))
             }
             .foregroundStyle(foreground)
@@ -137,7 +138,7 @@ struct FeedbackSheet: View {
             .padding(.vertical, 8)
             .background(Capsule().fill(tint.opacity(0.18)))
             .overlay(Capsule().strokeBorder(tint.opacity(0.36), lineWidth: 0.5))
-            .accessibilityLabel("\(label): \(desc.displayName)")
+            .accessibilityLabel("\(label): \(desc.displayName(in: l10n.language))")
         }
     }
 
@@ -177,7 +178,7 @@ struct FeedbackSheet: View {
     /// in a fraction of the space.
     private var siblings: some View {
         VStack(alignment: .leading, spacing: AppSpacing.xs) {
-            Text("Same line")
+            Text(l10n.t(.sameLine))
                 .font(AppTypography.caption.weight(.semibold))
                 .foregroundStyle(AppColors.textSecondary)
                 .textCase(.uppercase)
@@ -209,11 +210,11 @@ struct FeedbackSheet: View {
     private var ctaRow: some View {
         HStack(spacing: AppSpacing.sm) {
             if rangePayload != nil {
-                SecondaryButton(title: "View range", systemImage: "rectangle.grid.3x2") {
+                SecondaryButton(title: l10n.t(.viewRange), systemImage: "rectangle.grid.3x2") {
                     showRange = true
                 }
             }
-            PrimaryButton(title: "Next hand", systemImage: "arrow.right", action: onNext)
+            PrimaryButton(title: l10n.t(.nextHand), systemImage: "arrow.right", action: onNext)
         }
     }
 }
@@ -243,4 +244,5 @@ struct FeedbackSheet: View {
             .presentationDetents([.medium, .large])
             .presentationDragIndicator(.visible)
         }
+        .environment(LocalizationManager())
 }

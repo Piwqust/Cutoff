@@ -7,6 +7,7 @@ struct MTTPokerTrainerApp: App {
     @State private var rangeService = RangeService()
     @State private var progressStore = ProgressStore()
     @State private var router = AppRouter()
+    @State private var localization = LocalizationManager.shared
     private let modelContainer = AppModelContainer.make()
 
     var body: some Scene {
@@ -16,6 +17,7 @@ struct MTTPokerTrainerApp: App {
                 .environment(rangeService)
                 .environment(progressStore)
                 .environment(router)
+                .environment(localization)
                 .modelContainer(modelContainer)
                 .preferredColorScheme(.dark)
                 .tint(AppColors.primaryMint)
@@ -64,4 +66,5 @@ final class AppRouter {
         .environment(ConfigStore())
         .environment(ProgressStore())
         .environment(AppRouter())
+        .environment(LocalizationManager())
 }

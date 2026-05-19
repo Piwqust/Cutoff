@@ -29,6 +29,7 @@ struct RangeDetailPayload: Identifiable {
 
 struct RangeDetailSheet: View {
     let payload: RangeDetailPayload
+    @Environment(LocalizationManager.self) private var l10n
 
     var body: some View {
         let dominant = payload.frequencies.dominantAction
@@ -39,7 +40,7 @@ struct RangeDetailSheet: View {
                     Text(payload.combo.notation)
                         .font(AppTypography.numericLarge)
                         .foregroundStyle(AppColors.textPrimary)
-                    Text("\(payload.chart.position.displayName) · \(payload.chart.stackDepth) BB · \(payload.chart.facingAction.displayName)")
+                    Text("\(payload.chart.position.displayName) · \(payload.chart.stackDepth) BB · \(payload.chart.facingAction.displayName(in: l10n.language))")
                         .font(AppTypography.subheadline)
                         .foregroundStyle(AppColors.textSecondary)
                 }
@@ -50,7 +51,7 @@ struct RangeDetailSheet: View {
 
             HStack(spacing: 6) {
                 Image(systemName: dominant.systemImage)
-                Text(dominant.displayName)
+                Text(dominant.displayName(in: l10n.language))
             }
             .font(AppTypography.bodyBold)
             .foregroundStyle(dominant.prefersDarkForeground ? AppColors.backgroundDeep : AppColors.textPrimary)
@@ -58,7 +59,7 @@ struct RangeDetailSheet: View {
             .padding(.vertical, 6)
             .background(Capsule().fill(dominant.tint))
 
-            Text(ExplanationBuilder.explain(spot: payload.chart.trainingSpot, combo: payload.combo, frequencies: payload.frequencies))
+            Text(ExplanationBuilder.explain(spot: payload.chart.trainingSpot, combo: payload.combo, frequencies: payload.frequencies, in: l10n.language))
                 .font(AppTypography.body)
                 .foregroundStyle(AppColors.textPrimary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -79,4 +80,5 @@ struct RangeDetailHeightKey: PreferenceKey {
 #Preview {
     NavigationStack { RangesView() }
         .environment(RangeService())
+        .environment(LocalizationManager())
 }

@@ -7,16 +7,17 @@ struct SiblingHandsRow: View {
     let focusCombo: HandCombo
     let expectedAction: RangeAction
     var limit: Int = 6
+    @Environment(LocalizationManager.self) private var l10n
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.xs) {
-            Text("Plays the same way")
+            Text(l10n.t(.playsSameWay))
                 .font(AppTypography.caption)
                 .foregroundStyle(AppColors.textSecondary)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: AppSpacing.xs) {
                     if siblings.isEmpty {
-                        Text("No close peers in this chart.")
+                        Text(l10n.t(.noClosePeers))
                             .font(AppTypography.caption)
                             .foregroundStyle(AppColors.textSecondary)
                     } else {

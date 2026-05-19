@@ -25,7 +25,11 @@ struct TrainingFilter: Hashable {
     }
 
     /// Short human-readable description of active constraints, or nil if unconstrained.
-    var summary: String? {
+    var summary: String? { localizedSummary(in: .english) }
+
+    /// Language-aware summary. Position and depth labels are universal poker
+    /// tokens (UTG, 100 BB) — only the facing-action chunk needs translation.
+    func localizedSummary(in lang: AppLanguage) -> String? {
         var parts: [String] = []
         if let positions {
             let names = TablePosition.nineMaxOrder.filter { positions.contains($0) }.map(\.displayName)
@@ -36,7 +40,7 @@ struct TrainingFilter: Hashable {
             parts.append(labels.joined(separator: "/"))
         }
         if let facingActions {
-            let names = FacingAction.allCases.filter { facingActions.contains($0) }.map(\.displayName)
+            let names = FacingAction.allCases.filter { facingActions.contains($0) }.map { $0.displayName(in: lang) }
             parts.append(names.joined(separator: "/"))
         }
         return parts.isEmpty ? nil : parts.joined(separator: " · ")

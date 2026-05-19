@@ -4,6 +4,7 @@ import SwiftData
 struct TrainDashboardView: View {
     @Environment(ProgressStore.self) private var progress
     @Environment(RangeService.self) private var rangeService
+    @Environment(LocalizationManager.self) private var l10n
     @Query(sort: [SortDescriptor(\QuizResult.createdAt, order: .reverse)])
     private var allResults: [QuizResult]
 
@@ -26,7 +27,7 @@ struct TrainDashboardView: View {
             }
             .scrollContentBackground(.hidden)
         }
-        .navigationTitle("Train")
+        .navigationTitle(l10n.t(.tabTrain))
         .navigationBarTitleDisplayMode(.large)
         .toolbarBackground(.hidden, for: .navigationBar)
         .dynamicTypeSize(...DynamicTypeSize.accessibility3)
@@ -46,16 +47,16 @@ struct TrainDashboardView: View {
 
         return HStack(spacing: AppSpacing.sm) {
             if totalHands == 0 {
-                Text("Start a drill to track accuracy.")
+                Text(l10n.t(.startToTrack))
                     .font(AppTypography.subheadline)
                     .foregroundStyle(AppColors.textSecondary)
             } else {
-                statSegment(value: "\(accuracy)%", label: "accuracy")
+                statSegment(value: "\(accuracy)%", label: l10n.t(.statAccuracy))
                 statDot
-                statSegment(value: "\(totalHands)", label: totalHands == 1 ? "hand" : "hands")
+                statSegment(value: "\(totalHands)", label: totalHands == 1 ? l10n.t(.statHand) : l10n.t(.statHands))
                 if today > 0 {
                     statDot
-                    statSegment(value: "\(today)", label: "today")
+                    statSegment(value: "\(today)", label: l10n.t(.statToday))
                 }
             }
             Spacer(minLength: 0)
@@ -95,7 +96,7 @@ struct TrainDashboardView: View {
         .padding(.horizontal, AppSpacing.xs)
         .padding(.vertical, 3)
         .background(Capsule().fill(AppColors.actionJam.opacity(0.14)))
-        .accessibilityLabel("\(progress.streakDays) day streak")
+        .accessibilityLabel(L10n.dayStreak(progress.streakDays, in: l10n.language))
     }
 
     // MARK: - Continue chip
@@ -115,12 +116,12 @@ struct TrainDashboardView: View {
                     .font(AppTypography.footnote.weight(.bold))
                     .foregroundStyle(AppColors.accentGreen)
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Continue")
+                    Text(l10n.t(.continueLabel))
                         .font(AppTypography.caption)
                         .foregroundStyle(AppColors.textSecondary)
                         .textCase(.uppercase)
                         .tracking(1.5)
-                    Text(category.title)
+                    Text(category.title(in: l10n.language))
                         .font(AppTypography.bodyBold)
                         .foregroundStyle(AppColors.textPrimary)
                         .lineLimit(1)
@@ -142,7 +143,7 @@ struct TrainDashboardView: View {
             )
         }
         .buttonStyle(.plain)
-        .accessibilityLabel("Continue \(category.title)")
+        .accessibilityLabel(L10n.continueWith(category.title(in: l10n.language), in: l10n.language))
     }
 
     // MARK: - Hero drill (adaptive: top leak when present, otherwise Mixed)
@@ -153,9 +154,9 @@ struct TrainDashboardView: View {
     private var heroDrillCard: some View {
         let leak = topLeak()
         let category = leak.map { drillCategory(for: $0) } ?? .standardRoutine
-        let kicker  = leak == nil ? "Today's warmup" : "Today's leak"
-        let title   = leak?.title    ?? category.title
-        let subtitle = leak?.detail  ?? category.subtitle
+        let kicker  = leak == nil ? l10n.t(.warmupKicker) : l10n.t(.leakKicker)
+        let title   = leak?.title    ?? category.title(in: l10n.language)
+        let subtitle = leak?.detail  ?? category.subtitle(in: l10n.language)
 
         return GlassCard(cornerRadius: AppRadius.hero, padding: AppSpacing.xl) {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
@@ -178,7 +179,7 @@ struct TrainDashboardView: View {
                     DrillTrainerView(category: category)
                 } label: {
                     HStack(spacing: AppSpacing.xs) {
-                        Text("Start")
+                        Text(l10n.t(.start))
                             .font(AppTypography.headline)
                         Image(systemName: "arrow.right")
                             .font(AppTypography.footnote.weight(.bold))
@@ -197,7 +198,7 @@ struct TrainDashboardView: View {
     /// threshold ReviewView's leak cards use. Returns nil for new users
     /// (fewer than the analyzer's internal sample floor).
     private func topLeak() -> Leak? {
-        let leaks = LeakAnalyzer.leaks(from: allResults) { id in
+        let leaks = LeakAnalyzer.leaks(from: allResults, in: l10n.language) { id in
             rangeService.chart(byID: id)
         }
         return leaks.first
@@ -223,8 +224,8 @@ struct TrainDashboardView: View {
             ForEach(DrillCategory.allCases.filter { $0 != .mixed }) { category in
                 NavigationLink { DrillTrainerView(category: category) } label: {
                     TrainingModeCard(
-                        title: category.title,
-                        subtitle: category.subtitle,
+                        title: category.title(in: l10n.language),
+                        subtitle: category.subtitle(in: l10n.language),
                         systemImage: category.systemImage
                     )
                 }
@@ -245,7 +246,7 @@ struct TrainDashboardView: View {
                 }
             } label: {
                 HStack(spacing: AppSpacing.xs) {
-                    Text(moreExpanded ? "Hide more" : "More")
+                    Text(moreExpanded ? l10n.t(.hideMore) : l10n.t(.more))
                         .font(AppTypography.caption.weight(.semibold))
                         .foregroundStyle(AppColors.textSecondary)
                         .textCase(.uppercase)
@@ -260,14 +261,14 @@ struct TrainDashboardView: View {
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .accessibilityLabel(moreExpanded ? "Hide more" : "Show more")
+            .accessibilityLabel(moreExpanded ? l10n.t(.hideMore) : l10n.t(.showMore))
 
             if moreExpanded {
                 VStack(spacing: AppSpacing.sm) {
                     NavigationLink { DrillPickerView() } label: {
                         TrainingModeCard(
-                            title: "Custom Drill",
-                            subtitle: "Pick position, depth & scenario",
+                            title: l10n.t(.customDrillTitle),
+                            subtitle: l10n.t(.customDrillSubtitle),
                             systemImage: "slider.horizontal.3",
                             tint: AppColors.accentGreen
                         )
@@ -276,8 +277,8 @@ struct TrainDashboardView: View {
 
                     NavigationLink { ReviewView() } label: {
                         TrainingModeCard(
-                            title: "Review mistakes",
-                            subtitle: "Replay spots where you lost EV",
+                            title: l10n.t(.reviewMistakesTitle),
+                            subtitle: l10n.t(.reviewMistakesSubtitle),
                             systemImage: "magnifyingglass",
                             tint: AppColors.accentPeach
                         )
@@ -295,5 +296,6 @@ struct TrainDashboardView: View {
         .environment(ConfigStore())
         .environment(ProgressStore())
         .environment(RangeService())
+        .environment(LocalizationManager())
         .modelContainer(for: [QuizResult.self, TrainingSession.self], inMemory: true)
 }

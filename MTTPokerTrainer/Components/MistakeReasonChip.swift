@@ -5,19 +5,20 @@ import SwiftUI
 /// outcome palette.
 struct MistakeReasonChip: View {
     let reason: MistakeReason
+    @Environment(LocalizationManager.self) private var l10n
 
     var body: some View {
         HStack(spacing: 4) {
             Image(systemName: glyph)
                 .font(AppTypography.caption.weight(.bold))
-            Text(reason.shortLabel)
+            Text(reason.shortLabel(in: l10n.language))
                 .font(AppTypography.caption.weight(.semibold))
         }
         .foregroundStyle(tint)
         .padding(.horizontal, AppSpacing.xs)
         .padding(.vertical, 3)
         .background(Capsule().fill(tint.opacity(0.16)))
-        .accessibilityLabel("Mistake reason: \(reason.displayName)")
+        .accessibilityLabel(reason.displayName(in: l10n.language))
     }
 
     private var tint: Color {
@@ -55,4 +56,5 @@ struct MistakeReasonChip: View {
         }
         .padding(AppSpacing.lg)
     }
+    .environment(LocalizationManager())
 }

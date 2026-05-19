@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0000AC85D0794866A70F3E6A /* mtt_9max_20bb_bb_pushfold.json in Resources */ = {isa = PBXBuildFile; fileRef = CF848744FEB7D48A2782F7B0 /* mtt_9max_20bb_bb_pushfold.json */; };
 		003E86D3A19370FD4880A068 /* mtt_9max_40bb_bb_blinddefense.json in Resources */ = {isa = PBXBuildFile; fileRef = 34BD45B2ACFD8F62C39CFA94 /* mtt_9max_40bb_bb_blinddefense.json */; };
+		007738CCF75706148F3EC747 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0BFACBA13B510A128B51F4 /* LocalizationManager.swift */; };
 		00B713587271E613F652AB84 /* mtt_9max_75bb_hj_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DE3723E4A8724DE6323BA15 /* mtt_9max_75bb_hj_unopened.json */; };
 		00D3CAA29E2A7E4081028A1A /* mtt_9max_20bb_hj_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = C129134E2034A50BEE21B563 /* mtt_9max_20bb_hj_vsopen.json */; };
 		020E67305EA219E8BDEC8928 /* mtt_9max_20bb_btn_squeeze.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B62B36B8F50779C439D8D8D /* mtt_9max_20bb_btn_squeeze.json */; };
@@ -264,6 +265,7 @@
 		85EE680D8A64FF706CCEA88D /* PlayerLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFD370436D10247CA3FAEEB /* PlayerLevel.swift */; };
 		867180098F629073D4010061 /* mtt_9max_10bb_sb_vs3bet.json in Resources */ = {isa = PBXBuildFile; fileRef = 1916F28829EA1D92DE56E687 /* mtt_9max_10bb_sb_vs3bet.json */; };
 		86E8EF5BB9E85441F94A62A1 /* mtt_9max_125bb_hj_vs3bet.json in Resources */ = {isa = PBXBuildFile; fileRef = F436B3D3EB4746F7B3E10432 /* mtt_9max_125bb_hj_vs3bet.json */; };
+		870B180C5AC0D8FBEF78F06D /* LocalizedNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771104F0878624C19119AD68 /* LocalizedNames.swift */; };
 		87DD1074E47349ED9BEE59C6 /* mtt_9max_15bb_lj_vs3bet.json in Resources */ = {isa = PBXBuildFile; fileRef = 112EA58862A70D3942F356C3 /* mtt_9max_15bb_lj_vs3bet.json */; };
 		882403374267CA56B9C17851 /* mtt_9max_15bb_sb_vs3bet.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EFABB12D5A069DA81D87429 /* mtt_9max_15bb_sb_vs3bet.json */; };
 		88C70F774ED6293D97EB229C /* ReviewAnalyzerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB079E5659F33B4653F9E94D /* ReviewAnalyzerTests.swift */; };
@@ -309,6 +311,7 @@
 		A34E3188CBB0A5008F5F5944 /* mtt_9max_50bb_co_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = C72B3B91D747F00A51571262 /* mtt_9max_50bb_co_unopened.json */; };
 		A41702B3D8726B65D5D41561 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708147CF6A25069389D1093F /* Card.swift */; };
 		A42596B41025D7B53E7E35E7 /* mtt_9max_15bb_hj_vs3bet.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B35D4A4254595961C6FA5B2 /* mtt_9max_15bb_hj_vs3bet.json */; };
+		A427A559BF40872A389C3D84 /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897072CD3B25EF38438EFB47 /* AppLanguage.swift */; };
 		A5530F4F45987F0ED1D1F591 /* mtt_9max_125bb_sb_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AA83586150A5018AC298041 /* mtt_9max_125bb_sb_unopened.json */; };
 		A6065A1BD1F964D6E4EE9152 /* mtt_9max_75bb_lj_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = 59E102FAC0027C7CAAF52A7C /* mtt_9max_75bb_lj_vsopen.json */; };
 		A7AF8FED7B6D6F549D1A2AC9 /* mtt_9max_30bb_hj_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = A0F52BD54754A1A967FEC05D /* mtt_9max_30bb_hj_vsopen.json */; };
@@ -324,6 +327,7 @@
 		AC681A580D609BEBB9A13F87 /* mtt_9max_25bb_bb_pushfold.json in Resources */ = {isa = PBXBuildFile; fileRef = 5639C106B43EFFABC19E4CF2 /* mtt_9max_25bb_bb_pushfold.json */; };
 		AD807920BFA2FF3B5CCA37BC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4183D90792606B64C7536631 /* SettingsView.swift */; };
 		AD88150D1E42CDCF769F9335 /* mtt_9max_20bb_utg_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = 36A91F69FD53AE286670C999 /* mtt_9max_20bb_utg_unopened.json */; };
+		AE8EC489E06B6901C5561DA1 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579E9B0CD1D6853184F12616 /* L10n.swift */; };
 		AE963468748EFEF042E8D6C9 /* mtt_9max_100bb_utg1_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EA8A5DCECF14B3536B1D7E5 /* mtt_9max_100bb_utg1_vsopen.json */; };
 		AFFA899B4467F82DA0B2FC8B /* mtt_9max_75bb_bb_blinddefense.json in Resources */ = {isa = PBXBuildFile; fileRef = BD27F1795CAD8FFE9F32808E /* mtt_9max_75bb_bb_blinddefense.json */; };
 		B09604BD86BF8ADFDBDE8A6C /* mtt_9max_10bb_hj_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = 0DAF2EB823A384D80B930E8B /* mtt_9max_10bb_hj_vsopen.json */; };
@@ -492,6 +496,7 @@
 		0923BCE3380663D8004137AC /* mtt_9max_125bb_lj_vsopen.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_125bb_lj_vsopen.json; sourceTree = "<group>"; };
 		09F673C7E414B1170BAD04B1 /* mtt_9max_50bb_btn_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_50bb_btn_unopened.json; sourceTree = "<group>"; };
 		0BC8B92BC1783DE5EF3B4831 /* mtt_9max_15bb_btn_vs3bet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_15bb_btn_vs3bet.json; sourceTree = "<group>"; };
+		0D0BFACBA13B510A128B51F4 /* LocalizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
 		0DAF2EB823A384D80B930E8B /* mtt_9max_10bb_hj_vsopen.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_10bb_hj_vsopen.json; sourceTree = "<group>"; };
 		0DF786041963D6FDA885CF83 /* mtt_9max_40bb_btn_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_40bb_btn_unopened.json; sourceTree = "<group>"; };
 		0EBA54B936565584A5E5681D /* mtt_9max_50bb_hj_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_50bb_hj_unopened.json; sourceTree = "<group>"; };
@@ -638,6 +643,7 @@
 		5639C106B43EFFABC19E4CF2 /* mtt_9max_25bb_bb_pushfold.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_25bb_bb_pushfold.json; sourceTree = "<group>"; };
 		568DB0CEEBCF684F8052193F /* mtt_9max_50bb_lj_vs3bet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_50bb_lj_vs3bet.json; sourceTree = "<group>"; };
 		57046B8A394BC48FDE7DEE5D /* mtt_9max_10bb_hj_pushfold.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_10bb_hj_pushfold.json; sourceTree = "<group>"; };
+		579E9B0CD1D6853184F12616 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		57C77EE4BFFD4153989D7BE6 /* mtt_9max_75bb_sb_blinddefense.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_75bb_sb_blinddefense.json; sourceTree = "<group>"; };
 		57E861D148A2FAAF2508CA1C /* mtt_9max_40bb_utg_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_40bb_utg_unopened.json; sourceTree = "<group>"; };
 		5840E2FAD05D4C290B25C8B3 /* mtt_9max_10bb_btn_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_10bb_btn_unopened.json; sourceTree = "<group>"; };
@@ -696,6 +702,7 @@
 		749A0E3EB07F1AB2E893C563 /* mtt_9max_125bb_lj_vs3bet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_125bb_lj_vs3bet.json; sourceTree = "<group>"; };
 		754D18C019C8BAB454E86FD8 /* mtt_9max_10bb_sb_vsopen.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_10bb_sb_vsopen.json; sourceTree = "<group>"; };
 		769DD950792381A7A7DE0D85 /* PostflopLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostflopLoaderTests.swift; sourceTree = "<group>"; };
+		771104F0878624C19119AD68 /* LocalizedNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedNames.swift; sourceTree = "<group>"; };
 		78127998F7E613C9E5BB63AF /* SpotGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotGenerator.swift; sourceTree = "<group>"; };
 		78E77501EA9BAF4EBB8454DC /* mtt_9max_100bb_btn_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_100bb_btn_unopened.json; sourceTree = "<group>"; };
 		79660D45CD5757597CC18D90 /* mtt_9max_125bb_btn_vsopen.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_125bb_btn_vsopen.json; sourceTree = "<group>"; };
@@ -724,6 +731,7 @@
 		880795F92B95A243A0D2CF4D /* mtt_9max_12bb_sb_pushfold.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_12bb_sb_pushfold.json; sourceTree = "<group>"; };
 		890CAD9FC79A07B66B5F4D43 /* mtt_9max_20bb_sb_vs3bet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_20bb_sb_vs3bet.json; sourceTree = "<group>"; };
 		8956F2EA4C80284ABE20731A /* mtt_9max_30bb_utg1_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_30bb_utg1_unopened.json; sourceTree = "<group>"; };
+		897072CD3B25EF38438EFB47 /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
 		8976AD81FB2012A99BAE7D45 /* AppMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMotion.swift; sourceTree = "<group>"; };
 		89E8CBCC82D8B5F5774362C3 /* mtt_9max_100bb_sb_blinddefense.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_100bb_sb_blinddefense.json; sourceTree = "<group>"; };
 		8A4FDF32A10198B56434E779 /* mtt_9max_20bb_btn_pushfold.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_20bb_btn_pushfold.json; sourceTree = "<group>"; };
@@ -951,6 +959,17 @@
 			);
 			sourceTree = "<group>";
 		};
+		0FFEA294CE2A07D8DA27626F /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				897072CD3B25EF38438EFB47 /* AppLanguage.swift */,
+				579E9B0CD1D6853184F12616 /* L10n.swift */,
+				0D0BFACBA13B510A128B51F4 /* LocalizationManager.swift */,
+				771104F0878624C19119AD68 /* LocalizedNames.swift */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		349AA07832B56516E400CA9E /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -962,6 +981,7 @@
 		590F61BF7430EDFA1F69500E /* Theme */ = {
 			isa = PBXGroup;
 			children = (
+				0FFEA294CE2A07D8DA27626F /* Localization */,
 				F51EACE871C101493EAEFA79 /* AppColors.swift */,
 				60BED4EAFD8A68A8597F2A39 /* AppGlass.swift */,
 				8976AD81FB2012A99BAE7D45 /* AppMotion.swift */,
@@ -2027,6 +2047,7 @@
 				3F022FA38B7A2A9947D88BA3 /* AppBackground.swift in Sources */,
 				FEE5FE6BFFBCA0B162C168D3 /* AppColors.swift in Sources */,
 				65272797427605126EBA31FE /* AppGlass.swift in Sources */,
+				A427A559BF40872A389C3D84 /* AppLanguage.swift in Sources */,
 				58D908AFEE6C3C2DAD0D5D76 /* AppMotion.swift in Sources */,
 				D83A3C774DE6F401F33F64B1 /* AppRadius.swift in Sources */,
 				09F84E8CE8D590FB3024AA78 /* AppSpacing.swift in Sources */,
@@ -2058,8 +2079,11 @@
 				22974EF6F72F0B064E5BCFAC /* HandClass.swift in Sources */,
 				7DA5D3C18E10A0AC0226563A /* HandCombo.swift in Sources */,
 				542223BE588852F98747CFA3 /* HandFrequencies.swift in Sources */,
+				AE8EC489E06B6901C5561DA1 /* L10n.swift in Sources */,
 				69905550A662FE324F780725 /* LeakAnalyzer.swift in Sources */,
 				5FA5AC102BEA4A031D8E31D8 /* LeakCard.swift in Sources */,
+				007738CCF75706148F3EC747 /* LocalizationManager.swift in Sources */,
+				870B180C5AC0D8FBEF78F06D /* LocalizedNames.swift in Sources */,
 				76EBC17C5B3E8A08C81A4A1F /* MTTPokerTrainerApp.swift in Sources */,
 				2AC189F7B7961053F0ECD91C /* MainTabView.swift in Sources */,
 				F076F5FE68657E2884800EC4 /* MistakeDetailSheet.swift in Sources */,

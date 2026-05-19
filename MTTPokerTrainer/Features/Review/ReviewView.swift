@@ -6,6 +6,7 @@ struct ReviewView: View {
     private var allResults: [QuizResult]
 
     @Environment(RangeService.self) private var rangeService
+    @Environment(LocalizationManager.self) private var l10n
 
     @State private var scope: ReviewAnalyzer.Scope = .all
     @State private var historyFilter: HistoryFilter = .mistakes
@@ -35,7 +36,7 @@ struct ReviewView: View {
             }
             .scrollIndicators(.hidden, axes: .horizontal)
         }
-        .navigationTitle("Review")
+        .navigationTitle(l10n.t(.reviewTitle))
         .navigationBarTitleDisplayMode(.large)
         .toolbarBackground(.hidden, for: .navigationBar)
         .dynamicTypeSize(...DynamicTypeSize.accessibility3)
@@ -70,7 +71,7 @@ struct ReviewView: View {
     private var scopePicker: some View {
         HStack(spacing: AppSpacing.xs) {
             ForEach(ReviewAnalyzer.Scope.allCases) { s in
-                FilterChip(title: s.label, isSelected: scope == s) {
+                FilterChip(title: s.label(in: l10n.language), isSelected: scope == s) {
                     withAnimation(AppMotion.quick) { scope = s }
                 }
             }
@@ -83,12 +84,12 @@ struct ReviewView: View {
     private var snapshotSection: some View {
         let snap = ReviewAnalyzer.snapshot(scopedResults)
         return VStack(alignment: .leading, spacing: AppSpacing.md) {
-            eyebrow("Last \(snap.total) hand\(snap.total == 1 ? "" : "s")")
+            eyebrow(L10n.lastNHands(snap.total, in: l10n.language))
             HStack(spacing: AppSpacing.lg) {
-                summaryStat("Accuracy", "\(snap.accuracy)%", color: AppColors.primaryMint)
-                summaryStat("Mistakes", "\(snap.mistakes)", color: AppColors.accentCoral)
-                summaryStat("Close", "\(snap.close)", color: AppColors.accentLime)
-                summaryStat("Correct", "\(snap.correct)", color: AppColors.primaryEmerald)
+                summaryStat(l10n.t(.statAccuracy).capitalized, "\(snap.accuracy)%", color: AppColors.primaryMint)
+                summaryStat(l10n.t(.mistakesLabel), "\(snap.mistakes)", color: AppColors.accentCoral)
+                summaryStat(l10n.t(.closeLabel), "\(snap.close)", color: AppColors.accentLime)
+                summaryStat(l10n.t(.correctLabel), "\(snap.correct)", color: AppColors.primaryEmerald)
             }
         }
     }
@@ -109,7 +110,7 @@ struct ReviewView: View {
 
     private var trendSection: some View {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
-            eyebrow("Trend")
+            eyebrow(l10n.t(.trend))
             AccuracyTrendStrip(trend: ReviewAnalyzer.trend(scopedResults))
         }
     }
@@ -142,7 +143,7 @@ struct ReviewView: View {
             }
         } label: {
             HStack(spacing: AppSpacing.xs) {
-                eyebrow(deepDiveExpanded ? "Hide deep dive" : "Deep dive")
+                eyebrow(deepDiveExpanded ? l10n.t(.hideDeepDive) : l10n.t(.deepDive))
                 Image(systemName: "chevron.down")
                     .font(AppTypography.caption.weight(.bold))
                     .foregroundStyle(AppColors.textSecondary)
@@ -153,7 +154,7 @@ struct ReviewView: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(deepDiveExpanded ? "Hide deep dive" : "Show deep dive")
+        .accessibilityLabel(deepDiveExpanded ? l10n.t(.hideDeepDive) : l10n.t(.showDeepDive))
     }
 
     // MARK: - Top leak spots
@@ -163,7 +164,7 @@ struct ReviewView: View {
         let spots = ReviewAnalyzer.topLeakSpots(scopedResults)
         if !spots.isEmpty {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
-                eyebrow("Where you leak")
+                eyebrow(l10n.t(.whereYouLeak))
                 VStack(spacing: 0) {
                     ForEach(Array(spots.enumerated()), id: \.element.id) { idx, spot in
                         leakSpotRow(spot)
@@ -177,10 +178,10 @@ struct ReviewView: View {
     private func leakSpotRow(_ spot: ReviewAnalyzer.LeakSpot) -> some View {
         HStack(alignment: .center, spacing: AppSpacing.sm) {
             VStack(alignment: .leading, spacing: 2) {
-                Text("\(spot.position.displayName) · \(spot.bucket.label) · \(spot.facing.displayName)")
+                Text("\(spot.position.displayName) · \(spot.bucket.label) · \(spot.facing.displayName(in: l10n.language))")
                     .font(AppTypography.bodyBold)
                     .foregroundStyle(AppColors.textPrimary)
-                Text("\(spot.mistakes) of \(spot.total) wrong")
+                Text(L10n.ofWrong(mistakes: spot.mistakes, total: spot.total, in: l10n.language))
                     .font(AppTypography.caption)
                     .foregroundStyle(AppColors.textSecondary)
             }
@@ -199,7 +200,7 @@ struct ReviewView: View {
         let cells = ReviewAnalyzer.heatmap(scopedResults)
         if cells.count >= 3 {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
-                eyebrow("Accuracy by spot")
+                eyebrow(l10n.t(.accuracyBySpot))
                 PositionDepthHeatmap(cells: cells)
             }
         }
@@ -213,10 +214,11 @@ struct ReviewView: View {
         if buckets.count >= 2 {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
                 HStack {
-                    eyebrow("By hand class")
+                    eyebrow(l10n.t(.byHandClass))
                     Spacer()
                     if let worst = buckets.filter({ $0.total >= 3 }).min(by: { $0.accuracy < $1.accuracy }) {
-                        Text("Worst: \(worst.label.lowercased())")
+                        let worstLabel = HandClass(rawValue: worst.id)?.displayName(in: l10n.language) ?? worst.label
+                        Text(L10n.worstLabel(worstLabel.lowercased(), in: l10n.language))
                             .font(AppTypography.caption)
                             .foregroundStyle(AppColors.accentCoral)
                     }
@@ -224,7 +226,7 @@ struct ReviewView: View {
                 VStack(spacing: AppSpacing.sm) {
                     ForEach(buckets) { b in
                         AccuracyBarRow(
-                            label: b.label,
+                            label: HandClass(rawValue: b.id)?.displayName(in: l10n.language) ?? b.label,
                             total: b.total,
                             accuracy: b.accuracy,
                             systemImage: HandClass(rawValue: b.id)?.systemImage
@@ -244,7 +246,7 @@ struct ReviewView: View {
         }
         if !shares.isEmpty {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
-                eyebrow("Mistake reasons")
+                eyebrow(l10n.t(.mistakeReasons))
                 VStack(spacing: AppSpacing.sm) {
                     ForEach(shares) { share in
                         HStack {
@@ -270,12 +272,12 @@ struct ReviewView: View {
     /// because the player asked for the breakdown.
     @ViewBuilder
     private var leakCardsSection: some View {
-        let leaks = LeakAnalyzer.leaks(from: scopedResults) { id in
+        let leaks = LeakAnalyzer.leaks(from: scopedResults, in: l10n.language) { id in
             rangeService.chart(byID: id)
         }
         if !leaks.isEmpty {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
-                eyebrow("Patterns we noticed")
+                eyebrow(l10n.t(.patternsWeNoticed))
                 VStack(spacing: AppSpacing.sm) {
                     ForEach(leaks) { leak in
                         LeakCard(leak: leak)
@@ -290,10 +292,10 @@ struct ReviewView: View {
     @ViewBuilder
     private var historySection: some View {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
-            eyebrow("Review your hands")
+            eyebrow(l10n.t(.reviewYourHands))
             HStack(spacing: AppSpacing.xs) {
                 ForEach(HistoryFilter.allCases) { f in
-                    FilterChip(title: f.label, isSelected: historyFilter == f) {
+                    FilterChip(title: f.label(in: l10n.language), isSelected: historyFilter == f) {
                         withAnimation(AppMotion.quick) { historyFilter = f }
                     }
                 }
@@ -301,7 +303,7 @@ struct ReviewView: View {
             }
             let rows = Array(historyFilter.apply(to: scopedResults).prefix(50))
             if rows.isEmpty {
-                Text("Nothing matches this filter yet.")
+                Text(l10n.t(.nothingMatchesFilter))
                     .font(AppTypography.body)
                     .foregroundStyle(AppColors.textSecondary)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -312,7 +314,7 @@ struct ReviewView: View {
                         Button {
                             selected = row
                         } label: {
-                            HistoryRow(row: row)
+                            HistoryRow(row: row, language: l10n.language)
                         }
                         .buttonStyle(.plain)
                         if idx < rows.count - 1 { rowDivider }
@@ -332,10 +334,10 @@ struct ReviewView: View {
                 Image(systemName: "tray")
                     .font(AppTypography.title)
                     .foregroundStyle(AppColors.textSecondary)
-                Text("No history yet")
+                Text(l10n.t(.noHistoryYet))
                     .font(AppTypography.headline)
                     .foregroundStyle(AppColors.textPrimary)
-                Text("Answer a few drills and your mistakes and patterns will show up here.")
+                Text(l10n.t(.noHistoryHint))
                     .font(AppTypography.body)
                     .foregroundStyle(AppColors.textSecondary)
                     .multilineTextAlignment(.center)
@@ -356,12 +358,12 @@ struct ReviewView: View {
 private enum HistoryFilter: String, CaseIterable, Identifiable {
     case mistakes, close, correct, all
     var id: String { rawValue }
-    var label: String {
+    func label(in lang: AppLanguage) -> String {
         switch self {
-        case .mistakes: return "Mistakes"
-        case .close:    return "Close"
-        case .correct:  return "Correct"
-        case .all:      return "All"
+        case .mistakes: return L10n.string(.mistakesLabel, in: lang)
+        case .close:    return L10n.string(.closeLabel, in: lang)
+        case .correct:  return L10n.string(.correctLabel, in: lang)
+        case .all:      return L10n.string(.allLabel, in: lang)
         }
     }
     func apply(to rows: [QuizResult]) -> [QuizResult] {
@@ -378,6 +380,7 @@ private enum HistoryFilter: String, CaseIterable, Identifiable {
 
 private struct HistoryRow: View {
     let row: QuizResult
+    let language: AppLanguage
 
     var body: some View {
         HStack(spacing: AppSpacing.md) {
@@ -386,7 +389,7 @@ private struct HistoryRow: View {
                 Text(row.combo)
                     .font(AppTypography.bodyBold)
                     .foregroundStyle(AppColors.textPrimary)
-                Text("\(row.position.displayName) · \(row.stackDepthBB) BB · \(row.facingAction.displayName)")
+                Text("\(row.position.displayName) · \(row.stackDepthBB) BB · \(row.facingAction.displayName(in: language))")
                     .font(AppTypography.caption)
                     .foregroundStyle(AppColors.textSecondary)
             }
@@ -395,7 +398,7 @@ private struct HistoryRow: View {
                 HStack(spacing: 4) {
                     Image(systemName: row.userAction.systemImage)
                         .font(AppTypography.caption.weight(.bold))
-                    Text(row.userAction.displayName)
+                    Text(row.userAction.displayName(in: language))
                         .font(AppTypography.caption)
                 }
                 .foregroundStyle(AppColors.textSecondary)
@@ -404,7 +407,7 @@ private struct HistoryRow: View {
                     Image(systemName: "arrow.right")
                         .font(AppTypography.caption.weight(.bold))
                         .foregroundStyle(AppColors.textSecondary)
-                    Text(row.correctAction.displayName)
+                    Text(row.correctAction.displayName(in: language))
                         .font(AppTypography.caption)
                         .foregroundStyle(row.correctAction.tint)
                 }

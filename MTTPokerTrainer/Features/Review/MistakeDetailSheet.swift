@@ -6,6 +6,7 @@ import SwiftUI
 struct MistakeDetailSheet: View {
     let row: QuizResult
     @Environment(RangeService.self) private var rangeService
+    @Environment(LocalizationManager.self) private var l10n
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -16,7 +17,7 @@ struct MistakeDetailSheet: View {
                 if let chart, let combo {
                     GlassCard(padding: AppSpacing.lg) {
                         VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                            Text("Frequencies")
+                            Text(l10n.t(.frequencies))
                                 .font(AppTypography.caption)
                                 .foregroundStyle(AppColors.textSecondary)
                             FrequencyDistributionView(
@@ -54,11 +55,11 @@ struct MistakeDetailSheet: View {
                 Text(row.combo)
                     .font(AppTypography.numericLarge)
                     .foregroundStyle(AppColors.textPrimary)
-                Text("\(row.position.displayName) · \(row.stackDepthBB) BB · \(row.facingAction.displayName)")
+                Text("\(row.position.displayName) · \(row.stackDepthBB) BB · \(row.facingAction.displayName(in: l10n.language))")
                     .font(AppTypography.subheadline)
                     .foregroundStyle(AppColors.textSecondary)
                 if let combo {
-                    Text(HandClass.of(combo).displayName)
+                    Text(HandClass.of(combo).displayName(in: l10n.language))
                         .font(AppTypography.caption)
                         .foregroundStyle(AppColors.textSecondary)
                 }
@@ -71,10 +72,10 @@ struct MistakeDetailSheet: View {
 
     private var actionLine: some View {
         HStack(spacing: AppSpacing.sm) {
-            actionPill(label: "YOU", action: row.userAction)
+            actionPill(label: l10n.t(.youLabel), action: row.userAction)
             Image(systemName: "arrow.right")
                 .foregroundStyle(AppColors.textSecondary)
-            actionPill(label: "CHART", action: row.correctAction)
+            actionPill(label: l10n.t(.chartLabel), action: row.correctAction)
             Spacer(minLength: AppSpacing.xs)
             MistakeReasonChip(reason: explanation.mistakeReason)
         }
@@ -89,7 +90,7 @@ struct MistakeDetailSheet: View {
             HStack(spacing: 4) {
                 Image(systemName: action.systemImage)
                     .font(AppTypography.caption.weight(.bold))
-                Text(action.displayName)
+                Text(action.displayName(in: l10n.language))
                     .font(AppTypography.bodyBold)
             }
             .foregroundStyle(action.prefersDarkForeground ? AppColors.backgroundDeep : AppColors.textPrimary)
@@ -104,7 +105,7 @@ struct MistakeDetailSheet: View {
     private var explanationCard: some View {
         GlassCard(padding: AppSpacing.lg) {
             VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                Text("Why")
+                Text(l10n.t(.whyLabel))
                     .font(AppTypography.caption)
                     .foregroundStyle(AppColors.textSecondary)
                 ForEach(Array(explanation.paragraphs.enumerated()), id: \.offset) { _, text in
@@ -121,7 +122,7 @@ struct MistakeDetailSheet: View {
 
     private var footer: some View {
         VStack(spacing: AppSpacing.sm) {
-            PrimaryButton(title: "Drill this spot", systemImage: "target") {
+            PrimaryButton(title: l10n.t(.drillThisSpot), systemImage: "target") {
                 dismiss()
                 // Routing is shallow — the dashboard's "Drill" entry points handle the actual filter.
             }
@@ -144,6 +145,6 @@ struct MistakeDetailSheet: View {
     }
 
     private var explanation: MistakeExplainer.Explanation {
-        MistakeExplainer.explain(result: row, chart: chart)
+        MistakeExplainer.explain(result: row, chart: chart, in: l10n.language)
     }
 }

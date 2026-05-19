@@ -8,6 +8,7 @@ import SwiftUI
 /// (position, facing).
 struct RangeExplorerView: View {
     @Environment(RangesViewModel.self) private var vm
+    @Environment(LocalizationManager.self) private var l10n
     @EnvironmentObject private var browsing: RangeBrowsingStore
 
     @State private var handDetail: RangeDetailPayload?
@@ -35,7 +36,7 @@ struct RangeExplorerView: View {
                 emptyMatchState
             }
         }
-        .navigationTitle("Ranges")
+        .navigationTitle(l10n.t(.rangesTitle))
         .navigationBarTitleDisplayMode(.large)
         .dynamicTypeSize(...DynamicTypeSize.accessibility3)
         .toolbar { toolbar }
@@ -74,14 +75,14 @@ struct RangeExplorerView: View {
                 Image(systemName: "magnifyingglass")
                     .foregroundStyle(AppColors.textPrimary)
             }
-            .accessibilityLabel("Search ranges")
+            .accessibilityLabel(l10n.t(.searchRanges))
         }
         ToolbarItem(placement: .topBarTrailing) {
             Button { showBookmarks = true } label: {
                 Image(systemName: "bookmark")
                     .foregroundStyle(AppColors.textPrimary)
             }
-            .accessibilityLabel("Recents and favorites")
+            .accessibilityLabel(l10n.t(.recentsAndFavorites))
         }
         if let chart = vm.activeChart {
             ToolbarItem(placement: .topBarTrailing) {
@@ -91,7 +92,7 @@ struct RangeExplorerView: View {
                     Image(systemName: browsing.isFavorite(chart.id) ? "star.fill" : "star")
                         .foregroundStyle(browsing.isFavorite(chart.id) ? AppColors.accentLime : AppColors.textPrimary)
                 }
-                .accessibilityLabel(browsing.isFavorite(chart.id) ? "Unfavorite this chart" : "Favorite this chart")
+                .accessibilityLabel(browsing.isFavorite(chart.id) ? l10n.t(.unfavoriteThisChart) : l10n.t(.favoriteThisChart))
             }
         }
     }
@@ -108,7 +109,7 @@ struct RangeExplorerView: View {
 
     private var positionSection: some View {
         VStack(alignment: .leading, spacing: 6) {
-            eyebrow("Position")
+            eyebrow(l10n.t(.position))
                 .padding(.horizontal, AppSpacing.pageHorizontal)
             PositionPickerMinimap(
                 positions: TablePosition.nineMaxOrder,
@@ -122,7 +123,7 @@ struct RangeExplorerView: View {
 
     private var depthSection: some View {
         VStack(alignment: .leading, spacing: 6) {
-            eyebrow("Depth")
+            eyebrow(l10n.t(.depth))
                 .padding(.horizontal, AppSpacing.pageHorizontal)
 
             StackDepthSlider(
@@ -138,13 +139,13 @@ struct RangeExplorerView: View {
     private var scenarioSection: some View {
         let facings = scenariosForCurrentPosition
         return VStack(alignment: .leading, spacing: 6) {
-            eyebrow("Scenario")
+            eyebrow(l10n.t(.scenario))
                 .padding(.horizontal, AppSpacing.pageHorizontal)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: AppSpacing.xs) {
                     ForEach(facings, id: \.self) { facing in
                         FilterChip(
-                            title: facing.displayName,
+                            title: facing.displayName(in: l10n.language),
                             isSelected: vm.selectedFacing == facing,
                             isEnabled: true,
                             action: { vm.selectFacing(facing) }
@@ -165,7 +166,7 @@ struct RangeExplorerView: View {
                 Text("\(chart.spot.position.displayName) · \(chart.spot.stackDepthBB) BB")
                     .font(AppTypography.numericLarge)
                     .foregroundStyle(AppColors.textPrimary)
-                Text(chart.spot.facingAction.displayName)
+                Text(chart.spot.facingAction.displayName(in: l10n.language))
                     .font(AppTypography.subheadline)
                     .foregroundStyle(AppColors.textSecondary)
             }
@@ -206,7 +207,7 @@ struct RangeExplorerView: View {
 
     private func actionMixBlock(_ chart: RangeChart) -> some View {
         VStack(alignment: .leading, spacing: AppSpacing.xs) {
-            eyebrow("Action mix")
+            eyebrow(l10n.t(.actionMix))
             ActionFrequencyBar(frequencies: chart.actionFrequencies())
         }
     }
@@ -253,7 +254,7 @@ struct RangeExplorerView: View {
         HStack(spacing: 4) {
             Image(systemName: "arrow.left.and.right")
                 .font(AppTypography.caption.weight(.semibold))
-            Text("swipe to change depth")
+            Text(l10n.t(.swipeToChangeDepth))
         }
         .font(AppTypography.caption)
         .foregroundStyle(AppColors.textSecondary.opacity(0.7))
@@ -265,7 +266,7 @@ struct RangeExplorerView: View {
             Image(systemName: "tray")
                 .font(AppTypography.title)
                 .foregroundStyle(AppColors.textSecondary)
-            Text("No chart matches these filters.")
+            Text(l10n.t(.noChartMatches))
                 .font(AppTypography.body)
                 .foregroundStyle(AppColors.textSecondary)
         }
@@ -341,6 +342,7 @@ struct RangeSearchSheet: View {
     let onPick: (RangeChart) -> Void
 
     @Environment(RangesViewModel.self) private var vm
+    @Environment(LocalizationManager.self) private var l10n
     @Environment(\.dismiss) private var dismiss
     @State private var query: String = ""
     @FocusState private var fieldFocused: Bool
@@ -353,7 +355,7 @@ struct RangeSearchSheet: View {
                     HStack(spacing: AppSpacing.xs) {
                         Image(systemName: "magnifyingglass")
                             .foregroundStyle(AppColors.textSecondary)
-                        TextField("e.g. \"BTN 100\" or \"squeeze\"", text: $query)
+                        TextField(l10n.t(.rangeSearchPlaceholder), text: $query)
                             .textInputAutocapitalization(.never)
                             .autocorrectionDisabled(true)
                             .foregroundStyle(AppColors.textPrimary)
@@ -377,12 +379,12 @@ struct RangeSearchSheet: View {
                         LazyVStack(spacing: AppSpacing.xs) {
                             ForEach(results) { chart in
                                 Button { onPick(chart) } label: {
-                                    chartRow(chart)
+                                    chartRow(chart, language: l10n.language)
                                 }
                                 .buttonStyle(.plain)
                             }
                             if results.isEmpty && !query.isEmpty {
-                                Text("No charts match.")
+                                Text(l10n.t(.noChartsMatch))
                                     .font(AppTypography.subheadline)
                                     .foregroundStyle(AppColors.textSecondary)
                                     .padding(.top, AppSpacing.lg)
@@ -393,11 +395,11 @@ struct RangeSearchSheet: View {
                 .padding(.horizontal, AppSpacing.pageHorizontal)
                 .padding(.top, AppSpacing.md)
             }
-            .navigationTitle("Search")
+            .navigationTitle(l10n.t(.search))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done") { dismiss() }
+                    Button(l10n.t(.done)) { dismiss() }
                         .foregroundStyle(AppColors.textPrimary)
                 }
             }
@@ -413,13 +415,20 @@ struct RangeSearchSheet: View {
 // MARK: - Bookmarks sheet
 
 struct RangeBookmarksSheet: View {
-    enum Tab: String, CaseIterable, Identifiable { case recents = "Recents", favorites = "Favorites"
+    enum Tab: String, CaseIterable, Identifiable { case recents, favorites
         var id: String { rawValue }
+        func label(in lang: AppLanguage) -> String {
+            switch self {
+            case .recents:   return L10n.string(.recents, in: lang)
+            case .favorites: return L10n.string(.favorites, in: lang)
+            }
+        }
     }
 
     let onPick: (RangeChart) -> Void
 
     @Environment(RangesViewModel.self) private var vm
+    @Environment(LocalizationManager.self) private var l10n
     @EnvironmentObject private var browsing: RangeBrowsingStore
     @Environment(\.dismiss) private var dismiss
     @State private var tab: Tab = .recents
@@ -430,7 +439,7 @@ struct RangeBookmarksSheet: View {
                 AppBackground()
                 VStack(spacing: AppSpacing.md) {
                     Picker("", selection: $tab) {
-                        ForEach(Tab.allCases) { t in Text(t.rawValue).tag(t) }
+                        ForEach(Tab.allCases) { t in Text(t.label(in: l10n.language)).tag(t) }
                     }
                     .pickerStyle(.segmented)
                     .padding(.horizontal, AppSpacing.pageHorizontal)
@@ -442,7 +451,7 @@ struct RangeBookmarksSheet: View {
                             } else {
                                 ForEach(charts) { chart in
                                     Button { onPick(chart) } label: {
-                                        chartRow(chart)
+                                        chartRow(chart, language: l10n.language)
                                     }
                                     .buttonStyle(.plain)
                                 }
@@ -453,11 +462,11 @@ struct RangeBookmarksSheet: View {
                 }
                 .padding(.top, AppSpacing.md)
             }
-            .navigationTitle("Bookmarks")
+            .navigationTitle(l10n.t(.bookmarksTitle))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done") { dismiss() }
+                    Button(l10n.t(.done)) { dismiss() }
                         .foregroundStyle(AppColors.textPrimary)
                 }
             }
@@ -479,7 +488,7 @@ struct RangeBookmarksSheet: View {
             Image(systemName: tab == .recents ? "clock" : "star")
                 .font(AppTypography.title2)
                 .foregroundStyle(AppColors.textSecondary)
-            Text(tab == .recents ? "No charts viewed yet." : "No favorites yet — tap the star on a chart.")
+            Text(tab == .recents ? l10n.t(.noChartsViewed) : l10n.t(.noFavoritesYet))
                 .font(AppTypography.subheadline)
                 .foregroundStyle(AppColors.textSecondary)
                 .multilineTextAlignment(.center)
@@ -491,7 +500,7 @@ struct RangeBookmarksSheet: View {
 
 // MARK: - Shared chart row used by both sheets
 
-private func chartRow(_ chart: RangeChart) -> some View {
+private func chartRow(_ chart: RangeChart, language: AppLanguage) -> some View {
     HStack(spacing: AppSpacing.sm) {
         RangeThumbnailView(chart: chart)
             .frame(width: 48, height: 48)
@@ -499,7 +508,7 @@ private func chartRow(_ chart: RangeChart) -> some View {
             Text("\(chart.spot.position.displayName) · \(chart.spot.stackDepthBB) BB")
                 .font(AppTypography.bodyBold)
                 .foregroundStyle(AppColors.textPrimary)
-            Text(chart.spot.facingAction.displayName)
+            Text(chart.spot.facingAction.displayName(in: language))
                 .font(AppTypography.subheadline)
                 .foregroundStyle(AppColors.textSecondary)
         }

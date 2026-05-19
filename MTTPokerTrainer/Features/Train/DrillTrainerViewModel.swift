@@ -16,6 +16,9 @@ final class DrillTrainerViewModel {
 
     var modelContext: ModelContext?
     var progress: ProgressStore?
+    /// Language used for generated `MistakeExplainer` text. Set by the view
+    /// on appear / language change so the feedback sheet matches the picker.
+    var language: AppLanguage = .english
 
     init(loader: RangeLoader = .init()) {
         self.loader = loader
@@ -59,7 +62,8 @@ final class DrillTrainerViewModel {
             userAction: userAction,
             chart: question.chart,
             chartAction: question.correctAction,
-            coarseFrequencies: projected
+            coarseFrequencies: projected,
+            in: language
         )
         let payload = buildPayload(
             question: question,

@@ -7,6 +7,7 @@ struct DrillTrainerView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(ProgressStore.self) private var progress
+    @Environment(LocalizationManager.self) private var l10n
     @State private var vm = DrillTrainerViewModel()
 
     /// Two atomic pieces of feedback state. They're independent on purpose —
@@ -37,7 +38,7 @@ struct DrillTrainerView: View {
             .padding(.bottom, AppSpacing.sm)
         }
         .overlay(alignment: .top) { edgeTick }
-        .navigationTitle(category.title)
+        .navigationTitle(category.title(in: l10n.language))
         .navigationBarTitleDisplayMode(.inline)
         .dynamicTypeSize(...DynamicTypeSize.accessibility3)
         .sensoryFeedback(trigger: feedbackTick) { _, _ in
@@ -61,7 +62,11 @@ struct DrillTrainerView: View {
         .onAppear {
             vm.modelContext = modelContext
             vm.progress = progress
+            vm.language = l10n.language
             vm.load(category: category)
+        }
+        .onChange(of: l10n.language) { _, new in
+            vm.language = new
         }
     }
 
@@ -84,7 +89,7 @@ struct DrillTrainerView: View {
                 Image(systemName: spot?.facingAction.systemImage ?? "circle")
                     .font(AppTypography.footnote.weight(.bold))
                     .foregroundStyle(situationTint(for: spot?.facingAction))
-                Text(spot?.facingAction.headline ?? "Loading…")
+                Text(spot?.facingAction.headline(in: l10n.language) ?? l10n.t(.loading))
                     .font(AppTypography.bodyBold)
                     .foregroundStyle(AppColors.textPrimary)
                     .lineLimit(1)
@@ -94,7 +99,7 @@ struct DrillTrainerView: View {
                 Image(systemName: villain.systemImage)
                     .font(AppTypography.footnote.weight(.bold))
                     .foregroundStyle(villainTint(for: villain))
-                Text(villain.displayName)
+                Text(villain.displayName(in: l10n.language))
                     .font(AppTypography.subheadline)
                     .foregroundStyle(AppColors.textSecondary)
                     .lineLimit(1)
@@ -185,7 +190,7 @@ struct DrillTrainerView: View {
         ) {
             ForEach(actions, id: \.self) { action in
                 ActionButton(
-                    title: action.displayName,
+                    title: action.displayName(in: l10n.language),
                     systemImage: action.systemImage,
                     tint: action.tint,
                     darkForeground: action.prefersDarkForeground,

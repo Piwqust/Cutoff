@@ -4,6 +4,7 @@ import SwiftUI
 /// profile lives behind that link, not in the user's face on day one.
 struct OnboardingView: View {
     @Environment(ConfigStore.self) private var config
+    @Environment(LocalizationManager.self) private var l10n
     @State private var showingSetup = false
 
     var body: some View {
@@ -13,18 +14,18 @@ struct OnboardingView: View {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
                 Spacer(minLength: AppSpacing.huge)
 
-                Text("MTT Poker Trainer")
+                Text(l10n.t(.appName))
                     .font(AppTypography.largeTitle)
                     .foregroundStyle(AppColors.textPrimary)
 
-                Text("Drill the preflop spots you see in live MTTs.")
+                Text(l10n.t(.onboardingSubtitle))
                     .font(AppTypography.body)
                     .foregroundStyle(AppColors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
 
                 Spacer(minLength: 0)
 
-                PrimaryButton(title: "Start training") {
+                PrimaryButton(title: l10n.t(.startTraining)) {
                     withAnimation(AppMotion.quick) {
                         config.hasOnboarded = true
                     }
@@ -33,7 +34,7 @@ struct OnboardingView: View {
                 Button {
                     showingSetup = true
                 } label: {
-                    Text("Customize tournament")
+                    Text(l10n.t(.customizeTournament))
                         .font(AppTypography.subheadline)
                         .foregroundStyle(AppColors.textSecondary)
                         .frame(maxWidth: .infinity)
@@ -41,7 +42,7 @@ struct OnboardingView: View {
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("Customize tournament")
+                .accessibilityLabel(l10n.t(.customizeTournament))
             }
             .padding(.horizontal, AppSpacing.pageHorizontal)
             .padding(.bottom, AppSpacing.xxl)
@@ -58,4 +59,5 @@ struct OnboardingView: View {
 #Preview {
     OnboardingView()
         .environment(ConfigStore())
+        .environment(LocalizationManager())
 }

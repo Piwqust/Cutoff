@@ -4,6 +4,7 @@ import SwiftUI
 /// `PreflopTrainerView`. Any dimension left unchecked means "all values".
 struct DrillPickerView: View {
     @Environment(RangeService.self) private var rangeService
+    @Environment(LocalizationManager.self) private var l10n
 
     @State private var selectedPositions: Set<TablePosition> = []
     @State private var selectedDepths: Set<StackDepthBucket> = []
@@ -27,25 +28,25 @@ struct DrillPickerView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: AppSpacing.xl) {
                     filterSection(
-                        title: "Position",
+                        title: l10n.t(.position),
                         systemImage: "person.fill",
                         items: rangeService.availablePositions,
                         selected: $selectedPositions,
-                        label: \.displayName
+                        label: { $0.displayName }
                     )
                     filterSection(
-                        title: "Stack Depth",
+                        title: l10n.t(.stackDepth),
                         systemImage: "chart.bar.fill",
                         items: rangeService.availableDepthBuckets.reversed(),
                         selected: $selectedDepths,
-                        label: \.label
+                        label: { $0.label }
                     )
                     filterSection(
-                        title: "Scenario",
+                        title: l10n.t(.scenario),
                         systemImage: "arrow.triangle.branch",
                         items: rangeService.availableFacingActions,
                         selected: $selectedFacings,
-                        label: \.displayName
+                        label: { $0.displayName(in: l10n.language) }
                     )
 
                     matchSummary
@@ -55,7 +56,7 @@ struct DrillPickerView: View {
                 .padding(.vertical, AppSpacing.lg)
             }
         }
-        .navigationTitle("Build a Drill")
+        .navigationTitle(l10n.t(.buildADrill))
         .navigationBarTitleDisplayMode(.inline)
         .dynamicTypeSize(...DynamicTypeSize.accessibility3)
         .onAppear { rangeService.ensureLoaded() }
@@ -68,7 +69,7 @@ struct DrillPickerView: View {
         systemImage: String,
         items: [T],
         selected: Binding<Set<T>>,
-        label: KeyPath<T, String>
+        label: @escaping (T) -> String
     ) -> some View {
         VStack(alignment: .leading, spacing: AppSpacing.sm) {
             HStack(spacing: AppSpacing.xs) {
@@ -80,16 +81,16 @@ struct DrillPickerView: View {
                     .foregroundStyle(AppColors.textPrimary)
                 Spacer()
                 if !selected.wrappedValue.isEmpty {
-                    Button("Clear") { selected.wrappedValue.removeAll() }
+                    Button(l10n.t(.clear)) { selected.wrappedValue.removeAll() }
                         .font(AppTypography.caption)
                         .foregroundStyle(AppColors.textSecondary)
                 }
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: AppSpacing.xs) {
-                    ForEach(items, id: label) { item in
+                    ForEach(items, id: \.self) { item in
                         let isSelected = selected.wrappedValue.contains(item)
-                        FilterChip(title: item[keyPath: label], isSelected: isSelected) {
+                        FilterChip(title: label(item), isSelected: isSelected) {
                             if isSelected {
                                 selected.wrappedValue.remove(item)
                             } else {
@@ -106,16 +107,16 @@ struct DrillPickerView: View {
         GlassCard(padding: AppSpacing.md) {
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("\(matchingCount) range\(matchingCount == 1 ? "" : "s") available")
+                    Text(L10n.rangesAvailable(matchingCount, in: l10n.language))
                         .font(AppTypography.bodyBold)
                         .foregroundStyle(matchingCount == 0 ? AppColors.errorSoft : AppColors.textPrimary)
-                    if let summary = activeFilter.summary {
+                    if let summary = activeFilter.localizedSummary(in: l10n.language) {
                         Text(summary)
                             .font(AppTypography.caption)
                             .foregroundStyle(AppColors.textSecondary)
                             .lineLimit(2)
                     } else {
-                        Text("All positions · all depths · all scenarios")
+                        Text(l10n.t(.allPositionsAllDepthsAllScenarios))
                             .font(AppTypography.caption)
                             .foregroundStyle(AppColors.textSecondary)
                     }
@@ -135,7 +136,7 @@ struct DrillPickerView: View {
             DrillTrainerView(category: .mixed)
         } label: {
             HStack(spacing: AppSpacing.xs) {
-                Text("Start Drill")
+                Text(l10n.t(.startDrill))
                     .font(AppTypography.headline)
                 Image(systemName: "arrow.right")
                     .font(AppTypography.footnote.weight(.bold))
@@ -155,4 +156,5 @@ struct DrillPickerView: View {
 #Preview {
     NavigationStack { DrillPickerView() }
         .environment(RangeService())
+        .environment(LocalizationManager())
 }

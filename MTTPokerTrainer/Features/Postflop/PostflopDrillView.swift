@@ -4,6 +4,7 @@ import SwiftData
 struct PostflopDrillView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(LocalizationManager.self) private var l10n
     @State private var vm = PostflopDrillViewModel()
 
     @State private var silentCorrectToken: UUID?
@@ -30,7 +31,7 @@ struct PostflopDrillView: View {
             }
         }
         .overlay(alignment: .top) { edgeTick }
-        .navigationTitle("Postflop")
+        .navigationTitle(l10n.t(.postflopTitle))
         .navigationBarTitleDisplayMode(.inline)
         .dynamicTypeSize(...DynamicTypeSize.accessibility3)
         .sensoryFeedback(trigger: feedbackTick) { _, _ in
@@ -53,13 +54,13 @@ struct PostflopDrillView: View {
         VStack(alignment: .leading, spacing: AppSpacing.xs) {
             HStack(spacing: AppSpacing.xs) {
                 chip(spot.heroPosition.displayName)
-                chip(spot.isInPosition ? "IP" : "OOP")
-                chip(spot.boardTexture.displayName)
+                chip(spot.isInPosition ? l10n.t(.inPosition) : l10n.t(.outOfPosition))
+                chip(spot.boardTexture.displayName(in: l10n.language))
                 Spacer()
             }
             HStack(spacing: AppSpacing.xs) {
-                chip("Pot \(formatted(spot.potSizeBB)) BB")
-                chip("Eff \(formatted(spot.effectiveStackBB)) BB")
+                chip("\(l10n.t(.potChip)) \(formatted(spot.potSizeBB)) BB")
+                chip("\(l10n.t(.effChip)) \(formatted(spot.effectiveStackBB)) BB")
                 Spacer()
             }
         }
@@ -81,7 +82,7 @@ struct PostflopDrillView: View {
                 HStack(spacing: AppSpacing.xs) {
                     ForEach(pairs[i], id: \.self) { action in
                         ActionButton(
-                            title: action.displayName,
+                            title: action.displayName(in: l10n.language),
                             systemImage: action.systemImage,
                             tint: action.tint,
                             darkForeground: action.prefersDarkForeground,
@@ -173,5 +174,6 @@ struct PostflopDrillView: View {
 
 #Preview {
     NavigationStack { PostflopDrillView() }
+        .environment(LocalizationManager())
         .modelContainer(for: [PostflopDrillSession.self, PostflopResult.self], inMemory: true)
 }
