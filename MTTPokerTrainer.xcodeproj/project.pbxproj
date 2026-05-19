@@ -224,6 +224,7 @@
 		7035B0557735EB36B626AA8E /* mtt_9max_40bb_bb_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = EA2AB286EB9E602B0F5B9F82 /* mtt_9max_40bb_bb_vsopen.json */; };
 		70867DA0514085EBEF630421 /* mtt_9max_100bb_co_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = B105861DBCBD84300DDFF4F1 /* mtt_9max_100bb_co_vsopen.json */; };
 		71567D3B8E06C9AAB63A1D0B /* mtt_9max_25bb_sb_squeeze.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A2102CF726B9B0288004C7F /* mtt_9max_25bb_sb_squeeze.json */; };
+		72B3A9DBDC98B5E15EA86D28 /* PositionPickerMinimap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C89EF0293A459D9C6437E3 /* PositionPickerMinimap.swift */; };
 		75BE10FD1E1C0895FE409770 /* HandCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD85B056F075734D708790B /* HandCardView.swift */; };
 		76855079B4A0D02989072EF2 /* mtt_9max_20bb_utg_vs3bet.json in Resources */ = {isa = PBXBuildFile; fileRef = AD29E0BC4F16CF40983266C1 /* mtt_9max_20bb_utg_vs3bet.json */; };
 		76ADE6BAE1E4BD2879EED022 /* mtt_9max_125bb_sb_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = C8C6D540A68EB86E74B98D57 /* mtt_9max_125bb_sb_vsopen.json */; };
@@ -319,6 +320,7 @@
 		AB9BA6BABCBAD9319A721BDC /* mtt_9max_30bb_co_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = 42FE14AA42F79C153E7E1595 /* mtt_9max_30bb_co_unopened.json */; };
 		ABD818B847582C4FA1504180 /* mtt_9max_10bb_hj_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = 6D64DD7BC1EAEBB788D9B0DA /* mtt_9max_10bb_hj_unopened.json */; };
 		ABDD0F588EAF33BBFCC39A3C /* mtt_9max_15bb_co_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = 81D75102EEFFC79C2E03CE72 /* mtt_9max_15bb_co_vsopen.json */; };
+		AC620051AB084BF12D7B3588 /* StackDepthSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCA2E7B93252F393F8C45C /* StackDepthSlider.swift */; };
 		AC681A580D609BEBB9A13F87 /* mtt_9max_25bb_bb_pushfold.json in Resources */ = {isa = PBXBuildFile; fileRef = 5639C106B43EFFABC19E4CF2 /* mtt_9max_25bb_bb_pushfold.json */; };
 		AD807920BFA2FF3B5CCA37BC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4183D90792606B64C7536631 /* SettingsView.swift */; };
 		AD88150D1E42CDCF769F9335 /* mtt_9max_20bb_utg_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = 36A91F69FD53AE286670C999 /* mtt_9max_20bb_utg_unopened.json */; };
@@ -480,6 +482,7 @@
 		02BF8D9018D378CF8EE9945F /* BoardTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTexture.swift; sourceTree = "<group>"; };
 		03BD5DA30141C7426C80535B /* RangeLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeLoader.swift; sourceTree = "<group>"; };
 		045268DA84B23946E7B57DB0 /* StatCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatCard.swift; sourceTree = "<group>"; };
+		06C89EF0293A459D9C6437E3 /* PositionPickerMinimap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionPickerMinimap.swift; sourceTree = "<group>"; };
 		06FB0C72725E37620919B62B /* mtt_9max_50bb_hj_vsopen.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_50bb_hj_vsopen.json; sourceTree = "<group>"; };
 		078AC53D2E07C4FF9E4F47C1 /* mtt_9max_25bb_co_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_25bb_co_unopened.json; sourceTree = "<group>"; };
 		07A1836CB025CD575FE33346 /* mtt_9max_75bb_co_squeeze.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_75bb_co_squeeze.json; sourceTree = "<group>"; };
@@ -802,6 +805,7 @@
 		B4C08A4EB9ADD1B822A0EA83 /* mtt_9max_10bb_utg1_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_10bb_utg1_unopened.json; sourceTree = "<group>"; };
 		B589F237E55DC3D3C5DB3213 /* mtt_9max_25bb_lj_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_25bb_lj_unopened.json; sourceTree = "<group>"; };
 		B5BC72E36B262F17FEFBBD25 /* AccuracyTrendStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccuracyTrendStrip.swift; sourceTree = "<group>"; };
+		B5FCA2E7B93252F393F8C45C /* StackDepthSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackDepthSlider.swift; sourceTree = "<group>"; };
 		B65289A0A80870E51A3D9D69 /* HandComboTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandComboTests.swift; sourceTree = "<group>"; };
 		B6A6C31C852687E938410C4F /* mtt_9max_100bb_co_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_100bb_co_unopened.json; sourceTree = "<group>"; };
 		B729322264AFA24055575A2B /* MistakeExplainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MistakeExplainerTests.swift; sourceTree = "<group>"; };
@@ -1173,12 +1177,14 @@
 				3CCF05D66D02ADEA7517B6CF /* MistakeReasonChip.swift */,
 				A39B022CE918CBF3FA861D58 /* PokerTableView.swift */,
 				FACFA38C577A50DE2DD08A1F /* PositionDepthHeatmap.swift */,
+				06C89EF0293A459D9C6437E3 /* PositionPickerMinimap.swift */,
 				3EE04F95A47AE7A227B95AC4 /* PrimaryButton.swift */,
 				8F733E0FA6F92B2B0FEBDA48 /* RangeCellView.swift */,
 				C2D12233F777AECC298BCCE2 /* RangeGridView.swift */,
 				606F6028AC5F3A0ABFB26FF2 /* RangeThumbnailView.swift */,
 				C5A33EBC7396A04A0268D616 /* SecondaryButton.swift */,
 				B7BA58A46521E181C7700FBD /* SiblingHandsRow.swift */,
+				B5FCA2E7B93252F393F8C45C /* StackDepthSlider.swift */,
 				045268DA84B23946E7B57DB0 /* StatCard.swift */,
 				D90E46309CBCA1DDD045CDAF /* TableMinimapView.swift */,
 				68997D87631678EB76979174 /* TournamentSummaryCard.swift */,
@@ -2066,6 +2072,7 @@
 				38B8A22A7CDFBE8715A61A86 /* PokerTableSnapshot.swift in Sources */,
 				EE2E6E0920C4288A050BC1E6 /* PokerTableView.swift in Sources */,
 				CED8C78A526688E02FE29F6C /* PositionDepthHeatmap.swift in Sources */,
+				72B3A9DBDC98B5E15EA86D28 /* PositionPickerMinimap.swift in Sources */,
 				E4988B5F71953435CBB28E98 /* PostflopAction.swift in Sources */,
 				C2B5791E98CB2F27ABCE7EB7 /* PostflopDrillView.swift in Sources */,
 				CDA635B5AF2A1AF9AE78BAD8 /* PostflopDrillViewModel.swift in Sources */,
@@ -2097,6 +2104,7 @@
 				13578266B888F69581E4EC6B /* SpotGenerator.swift in Sources */,
 				087233D520F2D2EFEB3BF396 /* SpotMatrix.swift in Sources */,
 				EB0BCCAEC5605F3884BAD04D /* StackDepthBucket.swift in Sources */,
+				AC620051AB084BF12D7B3588 /* StackDepthSlider.swift in Sources */,
 				58AF38827A56388A3C3B2644 /* StatCard.swift in Sources */,
 				D6B1A38FDCCAAD9355A82EE5 /* TableMinimapView.swift in Sources */,
 				07BF8FB6090950D77ADABFF2 /* TablePosition.swift in Sources */,

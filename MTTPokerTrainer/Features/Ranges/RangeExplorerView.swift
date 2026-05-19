@@ -99,54 +99,65 @@ struct RangeExplorerView: View {
     // MARK: - Filter rails
 
     private var filterRails: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.sm) {
-            chipRail(label: "Position", items: TablePosition.nineMaxOrder) { pos in
-                ChipModel(
-                    title: pos.displayName,
-                    isSelected: vm.selectedPosition == pos,
-                    isEnabled: availablePositions.contains(pos),
-                    onTap: { vm.selectPosition(pos) }
-                )
-            }
-            chipRail(label: "Depth", items: StackDepthBucket.allCases) { bucket in
-                ChipModel(
-                    title: "\(bucket.bb)",
-                    isSelected: vm.selectedDepthBucket == bucket,
-                    isEnabled: availableDepthBuckets.contains(bucket),
-                    onTap: { vm.selectDepth(bucket) }
-                )
-            }
-            chipRail(label: "Scenario", items: FacingAction.allCases) { facing in
-                ChipModel(
-                    title: facing.displayName,
-                    isSelected: vm.selectedFacing == facing,
-                    isEnabled: availableFacings.contains(facing),
-                    onTap: { vm.selectFacing(facing) }
-                )
-            }
+        VStack(alignment: .leading, spacing: AppSpacing.md) {
+            positionSection
+            depthSection
+            scenarioSection
         }
     }
 
-    private struct ChipModel {
-        let title: String
-        let isSelected: Bool
-        let isEnabled: Bool
-        let onTap: () -> Void
+    private var positionSection: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            eyebrow("Position")
+                .padding(.horizontal, AppSpacing.pageHorizontal)
+            PositionPickerMinimap(
+                positions: TablePosition.nineMaxOrder,
+                selected: vm.selectedPosition,
+                enabled: availablePositions,
+                onSelect: { vm.selectPosition($0) }
+            )
+            .padding(.horizontal, AppSpacing.pageHorizontal)
+        }
     }
 
-    private func chipRail<Item: Hashable>(
-        label: String,
-        items: [Item],
-        model: @escaping (Item) -> ChipModel
-    ) -> some View {
+    private var depthSection: some View {
         VStack(alignment: .leading, spacing: 6) {
-            eyebrow(label)
+            HStack {
+                eyebrow("Depth")
+                Spacer()
+                if let d = vm.selectedDepthBucket {
+                    Text(d.label)
+                        .font(AppTypography.caption.weight(.semibold))
+                        .foregroundStyle(AppColors.textPrimary)
+                        .monospacedDigit()
+                }
+            }
+            .padding(.horizontal, AppSpacing.pageHorizontal)
+
+            StackDepthSlider(
+                buckets: StackDepthBucket.allCases,
+                selected: vm.selectedDepthBucket,
+                available: Set(availableDepthBuckets),
+                onSelect: { vm.selectDepth($0) }
+            )
+            .padding(.horizontal, AppSpacing.pageHorizontal)
+        }
+    }
+
+    private var scenarioSection: some View {
+        let facings = scenariosForCurrentPosition
+        return VStack(alignment: .leading, spacing: 6) {
+            eyebrow("Scenario")
                 .padding(.horizontal, AppSpacing.pageHorizontal)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: AppSpacing.xs) {
-                    ForEach(items, id: \.self) { item in
-                        let m = model(item)
-                        FilterChip(title: m.title, isSelected: m.isSelected, isEnabled: m.isEnabled, action: m.onTap)
+                    ForEach(facings, id: \.self) { facing in
+                        FilterChip(
+                            title: facing.displayName,
+                            isSelected: vm.selectedFacing == facing,
+                            isEnabled: true,
+                            action: { vm.selectFacing(facing) }
+                        )
                     }
                 }
                 .padding(.horizontal, AppSpacing.pageHorizontal)
@@ -310,6 +321,16 @@ struct RangeExplorerView: View {
 
     private var availableFacings: Set<FacingAction> {
         Set(vm.charts.map(\.facingAction))
+    }
+
+    /// Scenario buttons we render for the current position. Drops any
+    /// `FacingAction` for which there's no chart at the selected position —
+    /// so e.g. BB never shows RFI and UTG never shows blind defense.
+    /// Ordered to match the canonical `FacingAction.allCases` sequence.
+    private var scenariosForCurrentPosition: [FacingAction] {
+        guard let pos = vm.selectedPosition else { return [] }
+        let present = Set(vm.charts.filter { $0.position == pos }.map(\.facingAction))
+        return FacingAction.allCases.filter { present.contains($0) }
     }
 
     // MARK: - Sheet callbacks
