@@ -37,24 +37,65 @@ final class ScorerTests: XCTestCase {
     func test_foldWhenDominantIsRaiseIsMistakeNotPunt() {
         // Fold vs minRaise dominant — passive direction, adjacent tiers (2→0 = 2).
         let f = freqs((.minRaise, 1.0))
-        XCTAssertEqual(Scorer.evaluate(user: .fold, frequencies: f), .mistake)
+        XCTAssertEqual(Scorer.evaluate(user: PreflopAction.fold, frequencies: f), .mistake)
     }
 
     func test_shoveWhenDominantIsFoldIsPunt() {
         // Shove tier 6 vs fold tier 0 = distance 6, far.
         let f = freqs((.fold, 1.0))
-        XCTAssertEqual(Scorer.evaluate(user: .shove, frequencies: f), .punt)
+        XCTAssertEqual(Scorer.evaluate(user: PreflopAction.shove, frequencies: f), .punt)
     }
 
     func test_callWhenDominantIsShoveIsPunt() {
         // call tier 1 vs shove tier 6 = distance 5, far.
         let f = freqs((.shove, 1.0))
-        XCTAssertEqual(Scorer.evaluate(user: .call, frequencies: f), .punt)
+        XCTAssertEqual(Scorer.evaluate(user: PreflopAction.call, frequencies: f), .punt)
     }
 
     func test_legacySingleActionOverloadStillWorks() {
         XCTAssertEqual(Scorer.evaluate(user: PreflopAction.fold,     correct: PreflopAction.fold), .correct)
         XCTAssertEqual(Scorer.evaluate(user: PreflopAction.minRaise, correct: PreflopAction.minRaise), .correct)
         XCTAssertEqual(Scorer.evaluate(user: PreflopAction.shove,    correct: PreflopAction.fold), .punt)
+    }
+
+    // MARK: - RangeAction (coarse) overload — frequency-aware
+
+    func test_rangeAction_neighborMixIsClose() {
+        // 60% raise25x / 40% call should grade either coarse choice as .close
+        // — the same as the PreflopAction overload on the same distribution.
+        let f = freqs((.raise25x, 0.6), (.call, 0.4))
+        XCTAssertEqual(Scorer.evaluate(user: RangeAction.raise, frequencies: f), .close)
+        XCTAssertEqual(Scorer.evaluate(user: RangeAction.call,  frequencies: f), .close)
+    }
+
+    func test_rangeAction_dominantIsCorrect() {
+        let f = freqs((.shove, 1.0))
+        XCTAssertEqual(Scorer.evaluate(user: RangeAction.jam, frequencies: f), .correct)
+    }
+
+    func test_rangeAction_farAggressionDistanceIsPunt() {
+        // jam vs fold-dominated chart — distance 4, far.
+        let f = freqs((.fold, 1.0))
+        XCTAssertEqual(Scorer.evaluate(user: RangeAction.jam, frequencies: f), .punt)
+    }
+
+    func test_rangeAction_collapsesMixedRaiseSizings() {
+        // 50% minRaise / 50% raise25x → both collapse to .raise. The
+        // collapsed bucket has freq 1.0 → .correct.
+        let f = freqs((.minRaise, 0.5), (.raise25x, 0.5))
+        XCTAssertEqual(Scorer.evaluate(user: RangeAction.raise, frequencies: f), .correct)
+    }
+
+    func test_legacyAndFrequencyAwareAgreeOnPureSpot() {
+        // A 100%-shove spot should grade the same whether you go through
+        // (user, correct) or (user, frequencies). This is the regression
+        // bar for the two-overloads consolidation.
+        let f = freqs((.shove, 1.0))
+        for user in RangeAction.allCases {
+            let viaFreq = Scorer.evaluate(user: user, frequencies: f)
+            let viaCorrect = Scorer.evaluate(user: user, correct: .jam)
+            XCTAssertEqual(viaFreq, viaCorrect,
+                           "Disagreement on \(user): freq=\(viaFreq), correct=\(viaCorrect)")
+        }
     }
 }

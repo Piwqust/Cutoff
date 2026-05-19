@@ -154,8 +154,22 @@ struct RangeChart: Codable, Identifiable, Hashable {
             self.position = spot.position
             self.stackDepth = spot.stackDepthBB
             self.facingAction = spot.facingAction
-            let fmt = (try? c.decodeIfPresent(String.self, forKey: .format)) ?? ""
-            self.tableSize = fmt.contains("8MAX") ? 8 : 9
+            // Prefer an explicit tableSize if present; otherwise parse a known
+            // token out of `format`. A bundled file with neither is a
+            // packaging bug — throw rather than silently defaulting to 9-max
+            // (the May incident was exactly this class of silent fallback).
+            if let explicit = try c.decodeIfPresent(Int.self, forKey: .tableSize) {
+                self.tableSize = explicit
+            } else if let fmt = try c.decodeIfPresent(String.self, forKey: .format),
+                      let parsed = Self.tableSize(fromFormat: fmt) {
+                self.tableSize = parsed
+            } else {
+                throw DecodingError.dataCorruptedError(
+                    forKey: .tableSize,
+                    in: c,
+                    debugDescription: "Nested chart requires explicit `tableSize` or a recognized `format` token (6MAX/8MAX/9MAX)."
+                )
+            }
             self.antePercent = (try? c.decodeIfPresent(Double.self, forKey: .antePercent)) ?? 12.5
             self.isICM = try c.decodeIfPresent(Bool.self, forKey: .isICM)
 
@@ -204,6 +218,16 @@ struct RangeChart: Codable, Identifiable, Hashable {
             return out
         }
         return [:]
+    }
+
+    /// Recognized table-size tokens inside a nested-schema `format` string.
+    /// Substring match is fine here — bundled formats look like
+    /// `NLHE_MTT_9MAX` — but the set of acceptable tokens is closed.
+    private static func tableSize(fromFormat fmt: String) -> Int? {
+        if fmt.contains("9MAX") { return 9 }
+        if fmt.contains("8MAX") { return 8 }
+        if fmt.contains("6MAX") { return 6 }
+        return nil
     }
 
     /// Map a coarse-action string from the nested JSON schema to its

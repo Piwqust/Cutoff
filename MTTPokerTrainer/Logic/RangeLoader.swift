@@ -1,4 +1,7 @@
 import Foundation
+import os.log
+
+private let rangeLog = Logger(subsystem: "com.mttpokertrainer.app", category: "RangeLoader")
 
 enum RangeLoaderError: Error, LocalizedError {
     case fileNotFound(String)
@@ -33,13 +36,28 @@ struct RangeLoader {
 
         let decoder = JSONDecoder()
         var charts: [RangeChart] = []
+        var decodeFailures = 0
         for url in urls {
             let data: Data
             do { data = try Data(contentsOf: url) }
-            catch { continue }
-            if let chart = try? decoder.decode(RangeChart.self, from: data) {
-                charts.append(chart)
+            catch {
+                rangeLog.error("range read failed: \(url.lastPathComponent, privacy: .public) — \(String(describing: error), privacy: .public)")
+                continue
             }
+            do {
+                let chart = try decoder.decode(RangeChart.self, from: data)
+                charts.append(chart)
+            } catch {
+                // Surface the failure: silent try? once masked all 370 charts
+                // failing to decode. The loop still keeps going — one bad
+                // file shouldn't take the whole library down — but the next
+                // run will scream in the console.
+                decodeFailures += 1
+                rangeLog.error("range decode failed: \(url.lastPathComponent, privacy: .public) — \(String(describing: error), privacy: .public)")
+            }
+        }
+        if decodeFailures > 0 {
+            rangeLog.error("range loader skipped \(decodeFailures, privacy: .public) bundled files due to decode errors")
         }
         charts.sort { $0.id < $1.id }
         if charts.isEmpty { throw RangeLoaderError.noChartsFound }

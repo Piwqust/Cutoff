@@ -39,7 +39,10 @@ final class DrillTrainerViewModel {
 
     func submit(_ userAction: RangeAction) {
         guard !hasAnswered, let question = current else { return }
-        let outcome = Scorer.evaluate(user: userAction, correct: question.correctAction)
+        let outcome = Scorer.evaluate(
+            user: userAction,
+            frequencies: question.chart.frequencies(for: question.combo)
+        )
         let explanation = MistakeExplainer.explain(
             combo: question.combo,
             position: question.spot.position,
