@@ -94,3 +94,19 @@ extension View {
         modifier(LiquidGlass(shape: shape, tint: tint, interactive: interactive))
     }
 }
+
+/// Wrap several Liquid-Glass children so the system can sample and morph
+/// them as a single glass surface (Apple's recommendation when more than
+/// one glass element sits side-by-side). Passes content through unchanged
+/// on iOS versions that pre-date the API.
+struct GlassGroup<Content: View>: View {
+    @ViewBuilder let content: () -> Content
+
+    var body: some View {
+        if #available(iOS 26.0, *) {
+            GlassEffectContainer { content() }
+        } else {
+            content()
+        }
+    }
+}

@@ -33,8 +33,10 @@ struct PositionPickerMinimap: View {
                             .strokeBorder(AppColors.divider.opacity(0.5), lineWidth: 1)
                     )
 
-                ForEach(positions) { pos in
-                    seatGroup(for: pos, center: center, radiusX: radiusX, radiusY: radiusY)
+                GlassGroup {
+                    ForEach(positions) { pos in
+                        seatGroup(for: pos, center: center, radiusX: radiusX, radiusY: radiusY)
+                    }
                 }
             }
         }
@@ -62,19 +64,19 @@ struct PositionPickerMinimap: View {
     private func seatButton(for pos: TablePosition) -> some View {
         let isSelected = pos == selected
         let isEnabled = enabled.contains(pos)
+        let diameter = seatSize * (isSelected ? 1.12 : 1.0)
 
         Button { if isEnabled { onSelect(pos) } } label: {
             ZStack {
-                Circle()
-                    .fill(fill(isSelected: isSelected, isEnabled: isEnabled))
-                    .frame(width: seatSize * (isSelected ? 1.12 : 1.0),
-                           height: seatSize * (isSelected ? 1.12 : 1.0))
-                    .overlay(
-                        Circle().strokeBorder(
-                            isSelected ? AppColors.primaryEmerald : AppColors.divider.opacity(0.6),
-                            lineWidth: isSelected ? 1.5 : 1
-                        )
-                    )
+                if isSelected {
+                    Circle()
+                        .fill(AppColors.primaryMint)
+                        .frame(width: diameter, height: diameter)
+                } else {
+                    Color.clear
+                        .frame(width: diameter, height: diameter)
+                        .liquidGlass(in: Circle(), interactive: isEnabled)
+                }
                 Text(pos.displayName)
                     .font(.system(size: 12, weight: .bold, design: .rounded))
                     .foregroundStyle(isSelected ? AppColors.backgroundDeep : AppColors.textPrimary)
@@ -90,12 +92,6 @@ struct PositionPickerMinimap: View {
         .accessibilityLabel("Position \(pos.displayName)")
         .accessibilityAddTraits(isSelected ? .isSelected : [])
         .accessibilityValue(isEnabled ? (isSelected ? "Selected" : "Not selected") : "Unavailable")
-    }
-
-    private func fill(isSelected: Bool, isEnabled: Bool) -> Color {
-        if isSelected { return AppColors.primaryMint }
-        if !isEnabled { return AppColors.cardSurface.opacity(0.6) }
-        return AppColors.cardSurface
     }
 
     private func dealerButton(at point: CGPoint) -> some View {
