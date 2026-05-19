@@ -33,6 +33,7 @@ struct ReviewView: View {
                 .padding(.top, AppSpacing.lg)
                 .padding(.bottom, AppSpacing.xxl)
             }
+            .scrollIndicators(.hidden, axes: .horizontal)
         }
         .navigationTitle("Review")
         .navigationBarTitleDisplayMode(.large)
