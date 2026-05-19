@@ -152,8 +152,8 @@ struct TrainDashboardView: View {
     /// falls back to the Mixed live drill.
     private var heroDrillCard: some View {
         let leak = topLeak()
-        let category = leak.map { drillCategory(for: $0) } ?? .mixed
-        let kicker  = leak == nil ? "Today's MTT drill" : "Today's leak"
+        let category = leak.map { drillCategory(for: $0) } ?? .standardRoutine
+        let kicker  = leak == nil ? "Today's warmup" : "Today's leak"
         let title   = leak?.title    ?? category.title
         let subtitle = leak?.detail  ?? category.subtitle
 
@@ -220,7 +220,7 @@ struct TrainDashboardView: View {
 
     private var drillGrid: some View {
         VStack(spacing: AppSpacing.sm) {
-            ForEach(DrillCategory.allCases.filter { $0 != .mixed }) { category in
+            ForEach(DrillCategory.allCases.filter { $0 != .mixed && $0 != .standardRoutine }) { category in
                 NavigationLink { DrillTrainerView(category: category) } label: {
                     TrainingModeCard(
                         title: category.title,

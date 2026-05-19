@@ -3,6 +3,7 @@ import Foundation
 /// Practical decision categories tuned for live 9-max MTTs with 15–40 BB stacks.
 /// Each category corresponds to a curated slice of bundled range charts.
 enum DrillCategory: String, Codable, CaseIterable, Identifiable, Hashable {
+    case standardRoutine  // full-coverage warmup: any position, any stack, any scenario
     case firstInJam       // open-jamming 12–25 BB
     case reJam            // 3-bet jam vs an opener at 15–30 BB
     case callJam          // calling an all-in (price-based)
@@ -14,6 +15,7 @@ enum DrillCategory: String, Codable, CaseIterable, Identifiable, Hashable {
 
     var title: String {
         switch self {
+        case .standardRoutine: return "Standard routine"
         case .firstInJam:  return "First-in jam"
         case .reJam:       return "Re-jam over an open"
         case .callJam:     return "Call an all-in"
@@ -25,6 +27,7 @@ enum DrillCategory: String, Codable, CaseIterable, Identifiable, Hashable {
 
     var subtitle: String {
         switch self {
+        case .standardRoutine: return "Random preflop — any position, stack, or scenario."
         case .firstInJam:  return "12–25 BB · find the jam, don't min-raise yourself broke."
         case .reJam:       return "15–30 BB · when someone opens, can you shove?"
         case .callJam:     return "Snap, call, or fold the all-in based on price."
@@ -36,6 +39,7 @@ enum DrillCategory: String, Codable, CaseIterable, Identifiable, Hashable {
 
     var systemImage: String {
         switch self {
+        case .standardRoutine: return "shuffle.circle.fill"
         case .firstInJam:  return "flame.fill"
         case .reJam:       return "arrow.uturn.up"
         case .callJam:     return "hand.raised.fill"
@@ -48,6 +52,7 @@ enum DrillCategory: String, Codable, CaseIterable, Identifiable, Hashable {
     /// BB depths the spot pool will draw from, inclusive.
     var depthRange: ClosedRange<Int> {
         switch self {
+        case .standardRoutine: return 10...125
         case .firstInJam:  return 10...25
         case .reJam:       return 15...30
         case .callJam:     return 10...40
@@ -60,6 +65,7 @@ enum DrillCategory: String, Codable, CaseIterable, Identifiable, Hashable {
     /// Facing actions that count toward this drill.
     var facingActions: Set<FacingAction> {
         switch self {
+        case .standardRoutine: return Set(FacingAction.allCases)
         case .firstInJam:  return [.pushFold, .unopened]
         case .reJam:       return [.vsOpen, .squeeze]
         case .callJam:     return [.pushFold, .vs3Bet]
@@ -72,6 +78,7 @@ enum DrillCategory: String, Codable, CaseIterable, Identifiable, Hashable {
     /// Positions that count toward this drill.
     var positions: Set<TablePosition> {
         switch self {
+        case .standardRoutine: return Set(TablePosition.nineMaxOrder)
         case .firstInJam:  return Set(TablePosition.nineMaxOrder)
         case .reJam:       return Set(TablePosition.nineMaxOrder)
         case .callJam:     return Set(TablePosition.nineMaxOrder)
@@ -86,6 +93,7 @@ enum DrillCategory: String, Codable, CaseIterable, Identifiable, Hashable {
     /// asked to make.
     var availableActions: [RangeAction] {
         switch self {
+        case .standardRoutine: return [.fold, .call, .raise, .threeBet, .jam]
         case .firstInJam:  return [.fold, .jam]
         case .reJam:       return [.fold, .call, .jam]
         case .callJam:     return [.fold, .call]
