@@ -79,31 +79,38 @@ struct StackDepthSlider: View {
         }
     }
 
-    @ViewBuilder
+    /// Wrapped in an explicit ZStack + frame so `.position()` calls inside
+    /// have a concrete coordinate space. Without this, the children all use
+    /// `.position()` (which has no intrinsic size), the surrounding
+    /// `GlassEffectContainer` collapses to zero, and the track / ticks /
+    /// thumb scatter across the screen.
     private func railContent(width: CGFloat, centerY: CGFloat, thumbX: CGFloat, selectedIdx: Int) -> some View {
-        // Glass track: a tall capsule that fills the row horizontally.
-        Color.clear
-            .frame(height: trackHeight)
-            .frame(maxWidth: .infinity)
-            .liquidGlass(in: Capsule())
-            .position(x: width / 2, y: centerY)
+        ZStack(alignment: .topLeading) {
+            // Glass track: a tall capsule that fills the row horizontally.
+            Color.clear
+                .frame(height: trackHeight)
+                .frame(maxWidth: .infinity)
+                .liquidGlass(in: Capsule())
+                .position(x: width / 2, y: centerY)
 
-        // Inner tick dots — embedded inside the track so they read as
-        // engraved guides rather than separate UI elements.
-        ForEach(Array(buckets.enumerated()), id: \.element) { idx, bucket in
-            tickDot(
-                at: trackTickX(idx: idx, width: width),
-                isSelected: bucket == selected,
-                isAvailable: available.contains(bucket),
-                y: centerY
-            )
+            // Inner tick dots — embedded inside the track so they read as
+            // engraved guides rather than separate UI elements.
+            ForEach(Array(buckets.enumerated()), id: \.element) { idx, bucket in
+                tickDot(
+                    at: trackTickX(idx: idx, width: width),
+                    isSelected: bucket == selected,
+                    isAvailable: available.contains(bucket),
+                    y: centerY
+                )
+            }
+
+            // Glass thumb pill carrying the current BB value. Tinted mint so
+            // it reads as the active control; sized larger than the track so
+            // it visibly sits "above" it in z-order.
+            thumbView(selectedIdx: selectedIdx)
+                .position(x: thumbX, y: centerY)
         }
-
-        // Glass thumb pill carrying the current BB value. Tinted mint so
-        // it reads as the active control; sized larger than the track so
-        // it visibly sits "above" it in z-order.
-        thumbView(selectedIdx: selectedIdx)
-            .position(x: thumbX, y: centerY)
+        .frame(width: width, height: thumbHeight, alignment: .topLeading)
     }
 
     @ViewBuilder
