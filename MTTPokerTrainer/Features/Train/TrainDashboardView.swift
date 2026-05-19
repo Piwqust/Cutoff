@@ -220,7 +220,7 @@ struct TrainDashboardView: View {
 
     private var drillGrid: some View {
         VStack(spacing: AppSpacing.sm) {
-            ForEach(DrillCategory.allCases.filter { $0 != .mixed && $0 != .standardRoutine }) { category in
+            ForEach(DrillCategory.allCases.filter { $0 != .mixed }) { category in
                 NavigationLink { DrillTrainerView(category: category) } label: {
                     TrainingModeCard(
                         title: category.title,
