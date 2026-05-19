@@ -36,7 +36,13 @@ enum Scorer {
     /// the `PreflopAction` overload — so a 60/40 raise/call spot grades the
     /// same on both surfaces.
     static func evaluate(user: RangeAction, frequencies: HandFrequencies) -> AnswerOutcome {
-        let coarse = FrequencyCollapser.coarse(frequencies)
+        evaluate(user: user, coarseFrequencies: FrequencyCollapser.coarse(frequencies))
+    }
+
+    /// Coarse projection overload used by drill flows where the chart's
+    /// frequencies have been remapped to the drill's available action space
+    /// (`DrillEngine.project`). Same threshold ladder as the other overloads.
+    static func evaluate(user: RangeAction, coarseFrequencies coarse: [RangeAction: Double]) -> AnswerOutcome {
         let f = coarse[user] ?? 0
         if f >= 0.8 { return .correct }
         if f >= 0.2 { return .close }

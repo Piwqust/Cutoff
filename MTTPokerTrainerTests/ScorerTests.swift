@@ -86,6 +86,44 @@ final class ScorerTests: XCTestCase {
         XCTAssertEqual(Scorer.evaluate(user: RangeAction.raise, frequencies: f), .correct)
     }
 
+    func test_constrainedDrill_projectsRaiseOntoJam_andGradesCorrect() {
+        // Regression test for the firstInJam bug: chart says 100% raise but
+        // the drill only offers Fold/Jam. The projection routes the raise
+        // mass into the jam bucket — picking Jam must grade .correct.
+        let coarse: [RangeAction: Double] = [.raise: 1.0]
+        let projected = DrillEngine.project(
+            coarse: coarse,
+            available: [.fold, .jam],
+            villain: .standard
+        )
+        XCTAssertEqual(projected[.jam], 1.0)
+        XCTAssertEqual(
+            Scorer.evaluate(user: RangeAction.jam, coarseFrequencies: projected),
+            .correct
+        )
+        XCTAssertEqual(
+            Scorer.evaluate(user: RangeAction.fold, coarseFrequencies: projected),
+            .punt
+        )
+    }
+
+    func test_constrainedDrill_mixedRaiseJamProjectsAndGradesClose() {
+        // Chart: 60% raise / 40% jam, firstInJam-style buttons. Raise routes
+        // into jam → all mass on jam → both Jam picks are .correct and Fold
+        // is .punt.
+        let coarse: [RangeAction: Double] = [.raise: 0.6, .jam: 0.4]
+        let projected = DrillEngine.project(
+            coarse: coarse,
+            available: [.fold, .jam],
+            villain: .standard
+        )
+        XCTAssertEqual(projected[.jam], 1.0)
+        XCTAssertEqual(
+            Scorer.evaluate(user: RangeAction.jam, coarseFrequencies: projected),
+            .correct
+        )
+    }
+
     func test_legacyAndFrequencyAwareAgreeOnPureSpot() {
         // A 100%-shove spot should grade the same whether you go through
         // (user, correct) or (user, frequencies). This is the regression

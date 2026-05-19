@@ -59,17 +59,26 @@ enum MistakeExplainer {
 
     /// Live-trainer variant — same logic but takes the in-flight chart and combo
     /// directly so we don't have to round-trip through QuizResult.
+    ///
+    /// When the caller is a drill whose available actions don't include the
+    /// chart's true coarse dominant (e.g. firstInJam offering only Fold/Jam
+    /// against a chart that wants Raise), pass the projected coarse map and
+    /// the mapped `chartAction` so the verdict text and the "Chart wants"
+    /// chip agree.
     static func explain(
         combo: HandCombo,
         position: TablePosition,
         depthBB: Int,
         facing: FacingAction,
         userAction: RangeAction,
-        chart: RangeChart
+        chart: RangeChart,
+        chartAction: RangeAction? = nil,
+        coarseFrequencies: [RangeAction: Double]? = nil
     ) -> Explanation {
-        let frequencies = FrequencyCollapser.coarse(chart.frequencies(for: combo))
+        let frequencies = coarseFrequencies
+            ?? FrequencyCollapser.coarse(chart.frequencies(for: combo))
         let handClass = HandClass.of(combo)
-        let chartAction = chart.action(for: combo)
+        let resolvedChartAction = chartAction ?? chart.action(for: combo)
         let reason = MistakeReason.classify(userAction: userAction, frequencies: frequencies)
         return build(
             combo: combo.notation,
@@ -77,7 +86,7 @@ enum MistakeExplainer {
             depthBB: depthBB,
             facing: facing,
             userAction: userAction,
-            chartAction: chartAction,
+            chartAction: resolvedChartAction,
             frequencies: frequencies,
             handClass: handClass,
             reason: reason

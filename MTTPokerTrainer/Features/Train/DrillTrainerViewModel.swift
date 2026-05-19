@@ -39,17 +39,27 @@ final class DrillTrainerViewModel {
 
     func submit(_ userAction: RangeAction) {
         guard !hasAnswered, let question = current else { return }
-        let outcome = Scorer.evaluate(
-            user: userAction,
-            frequencies: question.chart.frequencies(for: question.combo)
+        // Project the chart's coarse frequencies onto the drill's available
+        // actions so both the scorer and the explainer agree with the
+        // "Chart wants" chip the user saw. Without this, a drill that hides
+        // the chart's true action (e.g. firstInJam folding-or-jamming a
+        // chart that wants Raise) would mark the only sensible answer wrong.
+        let coarse = FrequencyCollapser.coarse(question.chart.frequencies(for: question.combo))
+        let projected = DrillEngine.project(
+            coarse: coarse,
+            available: question.availableActions,
+            villain: question.villain
         )
+        let outcome = Scorer.evaluate(user: userAction, coarseFrequencies: projected)
         let explanation = MistakeExplainer.explain(
             combo: question.combo,
             position: question.spot.position,
             depthBB: question.spot.stackDepthBB,
             facing: question.spot.facingAction,
             userAction: userAction,
-            chart: question.chart
+            chart: question.chart,
+            chartAction: question.correctAction,
+            coarseFrequencies: projected
         )
         let payload = buildPayload(
             question: question,

@@ -27,8 +27,8 @@ struct DrillEngine {
         let pick = SpotGenerator(chart: chart).next(rng: &rng)
         let villain = category.defaultVillain
         let baseCoarse = RangeAction(pick.frequencies.dominantAction)
-        let mappedCorrect = mapCorrectAction(
-            base: baseCoarse,
+        let mappedCorrect = Self.substitute(
+            for: baseCoarse,
             available: category.availableActions,
             villain: villain
         )
@@ -42,11 +42,11 @@ struct DrillEngine {
         )
     }
 
-    /// The chart's underlying action might be e.g. ".raise" but the drill only
-    /// offers Fold/Jam (push-fold drill). Collapse the action to the closest
-    /// allowed option so the user always has a sensible button to press.
-    private func mapCorrectAction(
-        base: RangeAction,
+    /// The chart's underlying action might be e.g. `.raise` but the drill only
+    /// offers Fold/Jam (push-fold drill). Substitute the closest allowed coarse
+    /// action so the user always has a sensible button to press.
+    static func substitute(
+        for base: RangeAction,
         available: [RangeAction],
         villain: VillainType
     ) -> RangeAction {
@@ -70,6 +70,24 @@ struct DrillEngine {
         case .fold:
             return .fold
         }
+    }
+
+    /// Project a coarse-action frequency distribution onto the drill's
+    /// available actions by routing each unavailable bucket through
+    /// `substitute(for:available:villain:)`. The scorer grades the user's
+    /// answer against this projection so the verdict always matches the
+    /// "Chart wants" chip shown in the trainer UI.
+    static func project(
+        coarse: [RangeAction: Double],
+        available: [RangeAction],
+        villain: VillainType
+    ) -> [RangeAction: Double] {
+        var out: [RangeAction: Double] = [:]
+        for (action, freq) in coarse where freq > 0 {
+            let target = substitute(for: action, available: available, villain: villain)
+            out[target, default: 0] += freq
+        }
+        return out
     }
 
     struct Question {
