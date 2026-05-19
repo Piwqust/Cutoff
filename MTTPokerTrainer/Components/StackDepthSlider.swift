@@ -28,16 +28,18 @@ struct StackDepthSlider: View {
             let thumbX = step * CGFloat(selectedIdx)
 
             ZStack(alignment: .leading) {
-                // Track
-                Capsule()
-                    .fill(AppColors.cardSurface)
+                // Track: Liquid Glass capsule so it sits naturally over
+                // whatever surface is behind the explorer.
+                Color.clear
                     .frame(height: trackHeight)
                     .frame(maxWidth: .infinity)
+                    .liquidGlass(in: Capsule())
                     .position(x: width / 2, y: rowHeight / 2)
 
-                // Filled portion up to thumb
+                // Filled portion up to thumb — solid mint so the active
+                // range stays high-contrast against the glass track.
                 Capsule()
-                    .fill(AppColors.primaryMint.opacity(0.55))
+                    .fill(AppColors.primaryMint.opacity(0.75))
                     .frame(width: max(0, thumbX), height: trackHeight)
                     .position(x: max(0, thumbX) / 2, y: rowHeight / 2)
 
@@ -46,11 +48,16 @@ struct StackDepthSlider: View {
                     tick(at: CGFloat(idx) * step, bucket: bucket, isSelected: bucket == selected)
                 }
 
-                // Thumb
-                Circle()
-                    .fill(AppColors.primaryMint)
+                // Thumb: interactive Liquid Glass disc tinted mint. The
+                // mint accent reads as the active control even through the
+                // glass while letting the system handle press/focus.
+                Color.clear
                     .frame(width: thumbDiameter, height: thumbDiameter)
-                    .overlay(Circle().strokeBorder(AppColors.primaryEmerald, lineWidth: 1.5))
+                    .liquidGlass(in: Circle(), tint: AppColors.primaryMint, interactive: true)
+                    .overlay(
+                        Circle()
+                            .strokeBorder(AppColors.primaryEmerald.opacity(0.7), lineWidth: 1)
+                    )
                     .shadow(color: .black.opacity(0.25), radius: 4, x: 0, y: 2)
                     .position(x: thumbX, y: rowHeight / 2)
                     .animation(AppMotion.respecting(reduceMotion, AppMotion.spring), value: selectedIdx)

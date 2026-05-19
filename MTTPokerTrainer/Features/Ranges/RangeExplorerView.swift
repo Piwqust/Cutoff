@@ -70,29 +70,51 @@ struct RangeExplorerView: View {
     @ToolbarContentBuilder
     private var toolbar: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
-            Button { showSearch = true } label: {
-                Image(systemName: "magnifyingglass")
-                    .foregroundStyle(AppColors.textPrimary)
-            }
-            .accessibilityLabel("Search ranges")
+            glassToolbarButton(
+                systemImage: "magnifyingglass",
+                label: "Search ranges"
+            ) { showSearch = true }
         }
         ToolbarItem(placement: .topBarTrailing) {
-            Button { showBookmarks = true } label: {
-                Image(systemName: "bookmark")
-                    .foregroundStyle(AppColors.textPrimary)
-            }
-            .accessibilityLabel("Recents and favorites")
+            glassToolbarButton(
+                systemImage: "bookmark",
+                label: "Recents and favorites"
+            ) { showBookmarks = true }
         }
         if let chart = vm.activeChart {
+            let isFav = browsing.isFavorite(chart.id)
             ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    browsing.toggleFavorite(chart.id)
-                } label: {
-                    Image(systemName: browsing.isFavorite(chart.id) ? "star.fill" : "star")
-                        .foregroundStyle(browsing.isFavorite(chart.id) ? AppColors.accentLime : AppColors.textPrimary)
-                }
-                .accessibilityLabel(browsing.isFavorite(chart.id) ? "Unfavorite this chart" : "Favorite this chart")
+                glassToolbarButton(
+                    systemImage: isFav ? "star.fill" : "star",
+                    tint: isFav ? AppColors.accentLime : AppColors.textPrimary,
+                    label: isFav ? "Unfavorite this chart" : "Favorite this chart"
+                ) { browsing.toggleFavorite(chart.id) }
             }
+        }
+    }
+
+    /// Toolbar icon button that adopts the system Liquid Glass button style
+    /// on iOS 26+ and falls back to a plain glyph button below that.
+    @ViewBuilder
+    private func glassToolbarButton(
+        systemImage: String,
+        tint: Color = AppColors.textPrimary,
+        label: String,
+        action: @escaping () -> Void
+    ) -> some View {
+        if #available(iOS 26.0, *) {
+            Button(action: action) {
+                Image(systemName: systemImage)
+                    .foregroundStyle(tint)
+            }
+            .buttonStyle(.glass)
+            .accessibilityLabel(label)
+        } else {
+            Button(action: action) {
+                Image(systemName: systemImage)
+                    .foregroundStyle(tint)
+            }
+            .accessibilityLabel(label)
         }
     }
 

@@ -42,3 +42,55 @@ extension View {
         modifier(AppGlassBackground(cornerRadius: cornerRadius, tint: tint))
     }
 }
+
+// MARK: - Liquid Glass (iOS 26+)
+
+/// Apply Apple's Liquid Glass treatment to a view, falling back to a
+/// `.ultraThinMaterial` surface on older OS versions and a solid
+/// `cardSurface` when Reduce Transparency is on.
+///
+/// Prefer this over a raw `.glassEffect` so the older iOS-17 fallback path
+/// and the Reduce Transparency branch stay in one place.
+struct LiquidGlass<S: InsettableShape>: ViewModifier {
+    let shape: S
+    let tint: Color?
+    let interactive: Bool
+
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+
+    func body(content: Content) -> some View {
+        if reduceTransparency {
+            content
+                .background(shape.fill(AppColors.cardSurface))
+                .overlay(shape.strokeBorder(AppColors.divider, lineWidth: 0.5))
+        } else if #available(iOS 26.0, *) {
+            content.glassEffect(glass, in: shape)
+        } else {
+            content
+                .background(
+                    ZStack {
+                        shape.fill(.ultraThinMaterial)
+                        if let tint { shape.fill(tint.opacity(0.35)) }
+                    }
+                )
+                .overlay(shape.strokeBorder(AppColors.divider.opacity(0.5), lineWidth: 0.5))
+        }
+    }
+
+    @available(iOS 26.0, *)
+    private var glass: Glass {
+        var g: Glass = .regular
+        if let tint { g = g.tint(tint) }
+        if interactive { g = g.interactive(true) }
+        return g
+    }
+}
+
+extension View {
+    /// Apply Liquid Glass (iOS 26+) with a graceful fallback on older OSes.
+    /// `interactive` should be true for tap targets so the system can do its
+    /// own press / focus styling.
+    func liquidGlass<S: InsettableShape>(in shape: S, tint: Color? = nil, interactive: Bool = false) -> some View {
+        modifier(LiquidGlass(shape: shape, tint: tint, interactive: interactive))
+    }
+}

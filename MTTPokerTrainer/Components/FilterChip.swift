@@ -13,12 +13,7 @@ struct FilterChip: View {
                 .foregroundStyle(foreground)
                 .padding(.horizontal, AppSpacing.md)
                 .padding(.vertical, AppSpacing.xs)
-                .background(
-                    Capsule().fill(background)
-                )
-                .overlay(
-                    Capsule().strokeBorder(borderColor, lineWidth: 1)
-                )
+                .background(chipBackground)
                 .contentShape(Capsule())
                 .opacity(isEnabled ? 1 : 0.35)
         }
@@ -34,16 +29,18 @@ struct FilterChip: View {
         return AppColors.textPrimary
     }
 
-    /// Selected chips fill mint; unselected use a plain tinted surface
-    /// (not Liquid Glass material) so chips read as chips without
-    /// competing with the cards they may sit near.
-    private var background: AnyShapeStyle {
-        if isSelected { return AnyShapeStyle(AppColors.primaryMint) }
-        return AnyShapeStyle(AppColors.cardSurface)
-    }
-
-    private var borderColor: Color {
-        isSelected ? .clear : AppColors.divider
+    /// Selected chips fill mint for high-contrast active state; unselected
+    /// chips use Liquid Glass so they read as inert controls floating over
+    /// the surrounding content.
+    @ViewBuilder
+    private var chipBackground: some View {
+        if isSelected {
+            Capsule().fill(AppColors.primaryMint)
+        } else {
+            Capsule()
+                .fill(Color.clear)
+                .liquidGlass(in: Capsule(), interactive: isEnabled)
+        }
     }
 
     private var accessibilityValueText: String {
