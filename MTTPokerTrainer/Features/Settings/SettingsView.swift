@@ -37,6 +37,7 @@ struct SettingsView: View {
         .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.large)
         .toolbarBackground(.hidden, for: .navigationBar)
+        .dynamicTypeSize(...DynamicTypeSize.accessibility3)
         .sheet(isPresented: $showingSetup) {
             TournamentSetupView()
                 .environment(config)

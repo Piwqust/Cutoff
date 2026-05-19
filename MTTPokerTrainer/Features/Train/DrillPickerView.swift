@@ -57,6 +57,7 @@ struct DrillPickerView: View {
         }
         .navigationTitle("Build a Drill")
         .navigationBarTitleDisplayMode(.inline)
+        .dynamicTypeSize(...DynamicTypeSize.accessibility3)
         .onAppear { rangeService.ensureLoaded() }
     }
 

@@ -37,6 +37,7 @@ struct RangeExplorerView: View {
         }
         .navigationTitle("Ranges")
         .navigationBarTitleDisplayMode(.large)
+        .dynamicTypeSize(...DynamicTypeSize.accessibility3)
         .toolbar { toolbar }
         .sheet(isPresented: $showSearch) {
             RangeSearchSheet(onPick: applyPickedChart)

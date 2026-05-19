@@ -37,6 +37,7 @@ struct ReviewView: View {
         .navigationTitle("Review")
         .navigationBarTitleDisplayMode(.large)
         .toolbarBackground(.hidden, for: .navigationBar)
+        .dynamicTypeSize(...DynamicTypeSize.accessibility3)
         .sheet(item: $selected) { row in
             MistakeDetailSheet(row: row)
                 .presentationDetents([.fraction(0.7), .large])

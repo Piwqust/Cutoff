@@ -47,6 +47,7 @@ struct OnboardingView: View {
             .padding(.bottom, AppSpacing.xxl)
         }
         .preferredColorScheme(.dark)
+        .dynamicTypeSize(...DynamicTypeSize.accessibility3)
         .sheet(isPresented: $showingSetup) {
             TournamentSetupView()
                 .environment(config)
