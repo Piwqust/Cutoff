@@ -33,10 +33,8 @@ struct PositionPickerMinimap: View {
                             .strokeBorder(AppColors.divider.opacity(0.5), lineWidth: 1)
                     )
 
-                GlassGroup {
-                    ForEach(positions) { pos in
-                        seatGroup(for: pos, center: center, radiusX: radiusX, radiusY: radiusY)
-                    }
+                ForEach(positions) { pos in
+                    seatGroup(for: pos, center: center, radiusX: radiusX, radiusY: radiusY)
                 }
             }
         }

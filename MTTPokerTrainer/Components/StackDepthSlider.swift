@@ -27,45 +27,43 @@ struct StackDepthSlider: View {
             let selectedIdx = selected.flatMap { buckets.firstIndex(of: $0) } ?? 0
             let thumbX = step * CGFloat(selectedIdx)
 
-            GlassGroup {
-                ZStack(alignment: .leading) {
-                    // Track: Liquid Glass capsule so it sits naturally over
-                    // whatever surface is behind the explorer.
-                    Color.clear
-                        .frame(height: trackHeight)
-                        .frame(maxWidth: .infinity)
-                        .liquidGlass(in: Capsule())
-                        .position(x: width / 2, y: rowHeight / 2)
+            ZStack(alignment: .leading) {
+                // Track: Liquid Glass capsule so it sits naturally over
+                // whatever surface is behind the explorer.
+                Color.clear
+                    .frame(height: trackHeight)
+                    .frame(maxWidth: .infinity)
+                    .liquidGlass(in: Capsule())
+                    .position(x: width / 2, y: rowHeight / 2)
 
-                    // Filled portion up to thumb — semi-transparent mint
-                    // so the glass still reads through the indicator.
-                    Capsule()
-                        .fill(AppColors.primaryMint.opacity(0.55))
-                        .frame(width: max(0, thumbX), height: trackHeight)
-                        .position(x: max(0, thumbX) / 2, y: rowHeight / 2)
+                // Filled portion up to thumb — semi-transparent mint
+                // so the glass still reads through the indicator.
+                Capsule()
+                    .fill(AppColors.primaryMint.opacity(0.55))
+                    .frame(width: max(0, thumbX), height: trackHeight)
+                    .position(x: max(0, thumbX) / 2, y: rowHeight / 2)
 
-                    // Ticks + labels
-                    ForEach(Array(buckets.enumerated()), id: \.element) { idx, bucket in
-                        tick(at: CGFloat(idx) * step, bucket: bucket, isSelected: bucket == selected)
-                    }
-
-                    // Thumb: clear (untinted) interactive Liquid Glass disc
-                    // so the actual refraction is visible. A small mint dot
-                    // sits inside as the selection indicator — per Apple's
-                    // guidance, tint conveys meaning, not flat color.
-                    Color.clear
-                        .frame(width: thumbDiameter, height: thumbDiameter)
-                        .liquidGlass(in: Circle(), interactive: true)
-                        .overlay(
-                            Circle()
-                                .fill(AppColors.primaryMint)
-                                .frame(width: thumbDiameter * 0.38,
-                                       height: thumbDiameter * 0.38)
-                        )
-                        .shadow(color: .black.opacity(0.35), radius: 6, x: 0, y: 3)
-                        .position(x: thumbX, y: rowHeight / 2)
-                        .animation(AppMotion.respecting(reduceMotion, AppMotion.spring), value: selectedIdx)
+                // Ticks + labels
+                ForEach(Array(buckets.enumerated()), id: \.element) { idx, bucket in
+                    tick(at: CGFloat(idx) * step, bucket: bucket, isSelected: bucket == selected)
                 }
+
+                // Thumb: clear (untinted) interactive Liquid Glass disc
+                // so the actual refraction is visible. A small mint dot
+                // sits inside as the selection indicator — per Apple's
+                // guidance, tint conveys meaning, not flat color.
+                Color.clear
+                    .frame(width: thumbDiameter, height: thumbDiameter)
+                    .liquidGlass(in: Circle(), interactive: true)
+                    .overlay(
+                        Circle()
+                            .fill(AppColors.primaryMint)
+                            .frame(width: thumbDiameter * 0.38,
+                                   height: thumbDiameter * 0.38)
+                    )
+                    .shadow(color: .black.opacity(0.35), radius: 6, x: 0, y: 3)
+                    .position(x: thumbX, y: rowHeight / 2)
+                    .animation(AppMotion.respecting(reduceMotion, AppMotion.spring), value: selectedIdx)
             }
             .frame(width: width, height: rowHeight)
             .contentShape(Rectangle())
