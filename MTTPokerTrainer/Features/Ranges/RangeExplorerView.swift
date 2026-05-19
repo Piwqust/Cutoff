@@ -122,17 +122,8 @@ struct RangeExplorerView: View {
 
     private var depthSection: some View {
         VStack(alignment: .leading, spacing: 6) {
-            HStack {
-                eyebrow("Depth")
-                Spacer()
-                if let d = vm.selectedDepthBucket {
-                    Text(d.label)
-                        .font(AppTypography.caption.weight(.semibold))
-                        .foregroundStyle(AppColors.textPrimary)
-                        .monospacedDigit()
-                }
-            }
-            .padding(.horizontal, AppSpacing.pageHorizontal)
+            eyebrow("Depth")
+                .padding(.horizontal, AppSpacing.pageHorizontal)
 
             StackDepthSlider(
                 buckets: StackDepthBucket.allCases,

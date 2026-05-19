@@ -1,11 +1,13 @@
 import SwiftUI
 
-/// Horizontal slider with discrete tick marks for choosing a stack depth.
+/// Discrete-depth slider rebuilt around Apple's Liquid Glass primitives.
 ///
-/// Each tick is a `StackDepthBucket`. The user can drag the thumb across
-/// ticks or tap a tick directly to snap to it. Ticks for which no chart
-/// exists are rendered muted but remain selectable so the explorer can
-/// fall back to its nearest-match logic.
+/// Track and thumb are both `.glassEffect` surfaces wrapped in a
+/// `GlassEffectContainer` so the system morphs them together as the
+/// thumb travels — the same behavior Apple uses in the iOS 26 system
+/// sliders. The thumb is a tall Liquid Glass pill that carries the
+/// current BB value, so the active depth is legible without a separate
+/// readout. Tap-or-drag anywhere on the row snaps to the nearest tick.
 struct StackDepthSlider: View {
     let buckets: [StackDepthBucket]
     let selected: StackDepthBucket?
@@ -14,67 +16,41 @@ struct StackDepthSlider: View {
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    private let trackHeight: CGFloat = 8
-    private let tickHeight: CGFloat = 12
-    private let thumbDiameter: CGFloat = 32
-    private let rowHeight: CGFloat = 60
+    private let trackHeight: CGFloat = 30
+    private let thumbWidth: CGFloat = 56
+    private let thumbHeight: CGFloat = 42
+    private let labelGap: CGFloat = 6
+    private let labelHeight: CGFloat = 16
+
+    private var rowHeight: CGFloat { thumbHeight + labelGap + labelHeight }
 
     var body: some View {
         GeometryReader { geo in
             let width = geo.size.width
+            // Inset the rail by half a thumb on each end so the thumb
+            // doesn't clip the ends of the track when at the extremes.
+            let inset: CGFloat = thumbWidth / 2
+            let usableWidth = max(0, width - 2 * inset)
             let n = max(buckets.count - 1, 1)
-            let step = width / CGFloat(n)
+            let step = usableWidth / CGFloat(n)
             let selectedIdx = selected.flatMap { buckets.firstIndex(of: $0) } ?? 0
-            let thumbX = step * CGFloat(selectedIdx)
+            let thumbX = inset + step * CGFloat(selectedIdx)
+            let trackCenterY = thumbHeight / 2
 
-            ZStack(alignment: .leading) {
-                // Track: Liquid Glass capsule so it sits naturally over
-                // whatever surface is behind the explorer.
-                Color.clear
-                    .frame(height: trackHeight)
-                    .frame(maxWidth: .infinity)
-                    .liquidGlass(in: Capsule())
-                    .position(x: width / 2, y: rowHeight / 2)
+            ZStack(alignment: .topLeading) {
+                glassRail(width: width, centerY: trackCenterY, thumbX: thumbX, selectedIdx: selectedIdx)
 
-                // Filled portion up to thumb — semi-transparent mint
-                // so the glass still reads through the indicator.
-                Capsule()
-                    .fill(AppColors.primaryMint.opacity(0.55))
-                    .frame(width: max(0, thumbX), height: trackHeight)
-                    .position(x: max(0, thumbX) / 2, y: rowHeight / 2)
-
-                // Ticks + labels
                 ForEach(Array(buckets.enumerated()), id: \.element) { idx, bucket in
-                    tick(at: CGFloat(idx) * step, bucket: bucket, isSelected: bucket == selected)
-                }
-
-                // Thumb: clear (untinted) interactive Liquid Glass disc
-                // so the actual refraction is visible. A small mint dot
-                // sits inside as the selection indicator — per Apple's
-                // guidance, tint conveys meaning, not flat color.
-                Color.clear
-                    .frame(width: thumbDiameter, height: thumbDiameter)
-                    .liquidGlass(in: Circle(), interactive: true)
-                    .overlay(
-                        Circle()
-                            .fill(AppColors.primaryMint)
-                            .frame(width: thumbDiameter * 0.38,
-                                   height: thumbDiameter * 0.38)
+                    tickLabel(
+                        at: inset + step * CGFloat(idx),
+                        bucket: bucket,
+                        isSelected: bucket == selected
                     )
-                    .shadow(color: .black.opacity(0.35), radius: 6, x: 0, y: 3)
-                    .position(x: thumbX, y: rowHeight / 2)
-                    .animation(AppMotion.respecting(reduceMotion, AppMotion.spring), value: selectedIdx)
+                }
             }
-            .frame(width: width, height: rowHeight)
+            .frame(width: width, height: rowHeight, alignment: .topLeading)
             .contentShape(Rectangle())
-            .gesture(
-                DragGesture(minimumDistance: 0)
-                    .onChanged { value in
-                        let idx = nearestIndex(toX: value.location.x, step: step)
-                        let bucket = buckets[idx]
-                        if bucket != selected { onSelect(bucket) }
-                    }
-            )
+            .gesture(dragGesture(inset: inset, step: step))
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Stack depth")
             .accessibilityValue(selected?.label ?? "")
@@ -90,25 +66,92 @@ struct StackDepthSlider: View {
         .frame(height: rowHeight)
     }
 
+    // MARK: - Liquid Glass rail (track + ticks + thumb)
+
     @ViewBuilder
-    private func tick(at x: CGFloat, bucket: StackDepthBucket, isSelected: Bool) -> some View {
-        let isAvailable = available.contains(bucket)
-        VStack(spacing: 4) {
-            RoundedRectangle(cornerRadius: 1, style: .continuous)
-                .fill(tickColor(isSelected: isSelected, isAvailable: isAvailable))
-                .frame(width: 2, height: tickHeight)
-            Text("\(bucket.bb)")
-                .font(AppTypography.caption.weight(isSelected ? .bold : .regular))
-                .foregroundStyle(labelColor(isSelected: isSelected, isAvailable: isAvailable))
-                .monospacedDigit()
+    private func glassRail(width: CGFloat, centerY: CGFloat, thumbX: CGFloat, selectedIdx: Int) -> some View {
+        if #available(iOS 26.0, *) {
+            GlassEffectContainer {
+                railContent(width: width, centerY: centerY, thumbX: thumbX, selectedIdx: selectedIdx)
+            }
+        } else {
+            railContent(width: width, centerY: centerY, thumbX: thumbX, selectedIdx: selectedIdx)
         }
-        .position(x: x, y: rowHeight / 2 + 8)
+    }
+
+    @ViewBuilder
+    private func railContent(width: CGFloat, centerY: CGFloat, thumbX: CGFloat, selectedIdx: Int) -> some View {
+        // Glass track: a tall capsule that fills the row horizontally.
+        Color.clear
+            .frame(height: trackHeight)
+            .frame(maxWidth: .infinity)
+            .liquidGlass(in: Capsule())
+            .position(x: width / 2, y: centerY)
+
+        // Inner tick dots — embedded inside the track so they read as
+        // engraved guides rather than separate UI elements.
+        ForEach(Array(buckets.enumerated()), id: \.element) { idx, bucket in
+            tickDot(
+                at: trackTickX(idx: idx, width: width),
+                isSelected: bucket == selected,
+                isAvailable: available.contains(bucket),
+                y: centerY
+            )
+        }
+
+        // Glass thumb pill carrying the current BB value. Tinted mint so
+        // it reads as the active control; sized larger than the track so
+        // it visibly sits "above" it in z-order.
+        thumbView(selectedIdx: selectedIdx)
+            .position(x: thumbX, y: centerY)
+    }
+
+    @ViewBuilder
+    private func thumbView(selectedIdx: Int) -> some View {
+        Text(selected.map { "\($0.bb)" } ?? "—")
+            .font(.system(size: 15, weight: .bold, design: .rounded))
+            .monospacedDigit()
+            .foregroundStyle(AppColors.backgroundDeep)
+            .padding(.horizontal, AppSpacing.sm)
+            .frame(width: thumbWidth, height: thumbHeight)
+            .background(Capsule().fill(AppColors.primaryMint))
+            .liquidGlass(in: Capsule(), interactive: true)
+            .shadow(color: .black.opacity(0.25), radius: 6, x: 0, y: 3)
+            .animation(AppMotion.respecting(reduceMotion, AppMotion.spring), value: selectedIdx)
+    }
+
+    // MARK: - Tick visuals
+
+    private func trackTickX(idx: Int, width: CGFloat) -> CGFloat {
+        let inset = thumbWidth / 2
+        let usableWidth = max(0, width - 2 * inset)
+        let n = max(buckets.count - 1, 1)
+        let step = usableWidth / CGFloat(n)
+        return inset + step * CGFloat(idx)
+    }
+
+    private func tickDot(at x: CGFloat, isSelected: Bool, isAvailable: Bool, y: CGFloat) -> some View {
+        let size: CGFloat = isSelected ? 6 : 4
+        return Circle()
+            .fill(tickColor(isSelected: isSelected, isAvailable: isAvailable))
+            .frame(width: size, height: size)
+            .position(x: x, y: y)
     }
 
     private func tickColor(isSelected: Bool, isAvailable: Bool) -> Color {
         if isSelected { return AppColors.primaryEmerald }
-        if isAvailable { return AppColors.textSecondary }
-        return AppColors.textSecondary.opacity(0.35)
+        if isAvailable { return AppColors.textSecondary.opacity(0.7) }
+        return AppColors.textSecondary.opacity(0.3)
+    }
+
+    @ViewBuilder
+    private func tickLabel(at x: CGFloat, bucket: StackDepthBucket, isSelected: Bool) -> some View {
+        let isAvailable = available.contains(bucket)
+        Text("\(bucket.bb)")
+            .font(AppTypography.caption.weight(isSelected ? .bold : .regular))
+            .monospacedDigit()
+            .foregroundStyle(labelColor(isSelected: isSelected, isAvailable: isAvailable))
+            .position(x: x, y: thumbHeight + labelGap + labelHeight / 2)
     }
 
     private func labelColor(isSelected: Bool, isAvailable: Bool) -> Color {
@@ -117,9 +160,20 @@ struct StackDepthSlider: View {
         return AppColors.textSecondary.opacity(0.4)
     }
 
-    private func nearestIndex(toX x: CGFloat, step: CGFloat) -> Int {
+    // MARK: - Gesture
+
+    private func dragGesture(inset: CGFloat, step: CGFloat) -> some Gesture {
+        DragGesture(minimumDistance: 0)
+            .onChanged { value in
+                let idx = nearestIndex(toX: value.location.x, inset: inset, step: step)
+                let bucket = buckets[idx]
+                if bucket != selected { onSelect(bucket) }
+            }
+    }
+
+    private func nearestIndex(toX x: CGFloat, inset: CGFloat, step: CGFloat) -> Int {
         guard step > 0 else { return 0 }
-        let raw = Int((x / step).rounded())
+        let raw = Int(((x - inset) / step).rounded())
         return min(max(raw, 0), buckets.count - 1)
     }
 }
@@ -127,14 +181,20 @@ struct StackDepthSlider: View {
 #Preview {
     ZStack {
         AppBackground()
-        VStack {
+        VStack(spacing: AppSpacing.xl) {
             StackDepthSlider(
                 buckets: StackDepthBucket.allCases,
                 selected: .bb40,
                 available: Set(StackDepthBucket.allCases),
                 onSelect: { _ in }
             )
-            .padding(.horizontal, AppSpacing.pageHorizontal)
+            StackDepthSlider(
+                buckets: StackDepthBucket.allCases,
+                selected: .bb100,
+                available: Set(StackDepthBucket.allCases.dropLast(2)),
+                onSelect: { _ in }
+            )
         }
+        .padding(.horizontal, AppSpacing.pageHorizontal)
     }
 }
