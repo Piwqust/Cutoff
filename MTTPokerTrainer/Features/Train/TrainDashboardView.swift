@@ -3,8 +3,12 @@ import SwiftData
 
 struct TrainDashboardView: View {
     @Environment(ProgressStore.self) private var progress
+    @Environment(RangeService.self) private var rangeService
     @Query(sort: [SortDescriptor(\QuizResult.createdAt, order: .reverse)])
     private var allResults: [QuizResult]
+
+    @State private var moreExpanded: Bool = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         ZStack {
@@ -12,10 +16,10 @@ struct TrainDashboardView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: AppSpacing.lg) {
                     statStrip
+                    if let resume = resumeCategory { continueChip(resume) }
                     heroDrillCard
                     drillGrid
-                    customDrillLink
-                    reviewLink
+                    moreSection
                 }
                 .padding(.horizontal, AppSpacing.pageHorizontal)
                 .padding(.vertical, AppSpacing.lg)
@@ -25,6 +29,7 @@ struct TrainDashboardView: View {
         .navigationTitle("Train")
         .navigationBarTitleDisplayMode(.large)
         .toolbarBackground(.hidden, for: .navigationBar)
+        .dynamicTypeSize(...DynamicTypeSize.accessibility3)
     }
 
     // MARK: - Stat strip
@@ -93,28 +98,84 @@ struct TrainDashboardView: View {
         .accessibilityLabel("\(progress.streakDays) day streak")
     }
 
-    // MARK: - Hero drill (Mixed live)
+    // MARK: - Continue chip
 
+    /// The most recent answered drill, if one is recoverable from the last
+    /// QuizResult's categoryRaw. Pre-rebuild rows have an empty categoryRaw
+    /// and intentionally produce no chip — we'd rather hide it than guess.
+    private var resumeCategory: DrillCategory? {
+        guard let last = allResults.first, !last.categoryRaw.isEmpty else { return nil }
+        return DrillCategory(rawValue: last.categoryRaw)
+    }
+
+    private func continueChip(_ category: DrillCategory) -> some View {
+        NavigationLink { DrillTrainerView(category: category) } label: {
+            HStack(spacing: AppSpacing.sm) {
+                Image(systemName: "arrow.uturn.forward")
+                    .font(AppTypography.footnote.weight(.bold))
+                    .foregroundStyle(AppColors.accentGreen)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Continue")
+                        .font(AppTypography.caption)
+                        .foregroundStyle(AppColors.textSecondary)
+                        .textCase(.uppercase)
+                        .tracking(1.5)
+                    Text(category.title)
+                        .font(AppTypography.bodyBold)
+                        .foregroundStyle(AppColors.textPrimary)
+                        .lineLimit(1)
+                }
+                Spacer(minLength: 0)
+                Image(systemName: "chevron.right")
+                    .font(AppTypography.caption.weight(.bold))
+                    .foregroundStyle(AppColors.textSecondary)
+            }
+            .padding(.horizontal, AppSpacing.md)
+            .padding(.vertical, AppSpacing.sm)
+            .background(
+                RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
+                    .fill(AppColors.accentGreen.opacity(0.10))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
+                    .stroke(AppColors.accentGreen.opacity(0.30), lineWidth: 0.5)
+            )
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("Continue \(category.title)")
+    }
+
+    // MARK: - Hero drill (adaptive: top leak when present, otherwise Mixed)
+
+    /// When a high-severity leak exists, the hero card surfaces it and routes
+    /// to the drill most likely to put the user in that spot. Otherwise it
+    /// falls back to the Mixed live drill.
     private var heroDrillCard: some View {
-        GlassCard(cornerRadius: AppRadius.hero, padding: AppSpacing.xl) {
+        let leak = topLeak()
+        let category = leak.map { drillCategory(for: $0) } ?? .mixed
+        let kicker  = leak == nil ? "Today's MTT drill" : "Today's leak"
+        let title   = leak?.title    ?? category.title
+        let subtitle = leak?.detail  ?? category.subtitle
+
+        return GlassCard(cornerRadius: AppRadius.hero, padding: AppSpacing.xl) {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
-                Text("Today's MTT drill")
+                Text(kicker)
                     .font(AppTypography.caption)
                     .foregroundStyle(AppColors.textSecondary)
                     .textCase(.uppercase)
                     .tracking(1.5)
 
-                Text(DrillCategory.mixed.title)
+                Text(title)
                     .font(AppTypography.title2)
                     .foregroundStyle(AppColors.textPrimary)
 
-                Text(DrillCategory.mixed.subtitle)
+                Text(subtitle)
                     .font(AppTypography.subheadline)
                     .foregroundStyle(AppColors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
 
                 NavigationLink {
-                    DrillTrainerView(category: .mixed)
+                    DrillTrainerView(category: category)
                 } label: {
                     HStack(spacing: AppSpacing.xs) {
                         Text("Start")
@@ -129,6 +190,31 @@ struct TrainDashboardView: View {
                 }
                 .buttonStyle(.plain)
             }
+        }
+    }
+
+    /// Highest-severity leak from the analyzer, if it clears the same
+    /// threshold ReviewView's leak cards use. Returns nil for new users
+    /// (fewer than the analyzer's internal sample floor).
+    private func topLeak() -> Leak? {
+        let leaks = LeakAnalyzer.leaks(from: allResults) { id in
+            rangeService.chart(byID: id)
+        }
+        return leaks.first
+    }
+
+    /// Pick the drill category whose facing-action best matches the leak's
+    /// suggested spot. Fallback is .mixed when the leak has no spot hint
+    /// (hand-class and direction-of-error leaks).
+    private func drillCategory(for leak: Leak) -> DrillCategory {
+        guard let spot = leak.suggestedSpot else { return .mixed }
+        switch spot.facingAction {
+        case .pushFold:     return .firstInJam
+        case .vs3Bet:       return .vsManiac
+        case .squeeze:      return .reJam
+        case .unopened:     return .mixed
+        case .vsOpen:       return .mixed
+        case .blindDefense: return .mixed
         }
     }
 
@@ -147,28 +233,60 @@ struct TrainDashboardView: View {
         }
     }
 
-    private var customDrillLink: some View {
-        NavigationLink { DrillPickerView() } label: {
-            TrainingModeCard(
-                title: "Custom Drill",
-                subtitle: "Pick position, depth & scenario",
-                systemImage: "slider.horizontal.3",
-                tint: AppColors.accentGreen
-            )
-        }
-        .buttonStyle(.plain)
-    }
+    // MARK: - More (custom drill + review)
 
-    private var reviewLink: some View {
-        NavigationLink { ReviewView() } label: {
-            TrainingModeCard(
-                title: "Review mistakes",
-                subtitle: "Replay spots where you lost EV",
-                systemImage: "magnifyingglass",
-                tint: AppColors.accentPeach
-            )
+    /// Both secondary destinations hide behind a single toggle so the
+    /// dashboard above the fold is just stats → continue → hero → drills.
+    private var moreSection: some View {
+        VStack(alignment: .leading, spacing: AppSpacing.sm) {
+            Button {
+                withAnimation(AppMotion.respecting(reduceMotion, .easeOut(duration: 0.22))) {
+                    moreExpanded.toggle()
+                }
+            } label: {
+                HStack(spacing: AppSpacing.xs) {
+                    Text(moreExpanded ? "Hide more" : "More")
+                        .font(AppTypography.caption.weight(.semibold))
+                        .foregroundStyle(AppColors.textSecondary)
+                        .textCase(.uppercase)
+                        .tracking(0.8)
+                    Image(systemName: "chevron.down")
+                        .font(AppTypography.caption.weight(.bold))
+                        .foregroundStyle(AppColors.textSecondary)
+                        .rotationEffect(.degrees(moreExpanded ? 180 : 0))
+                    Spacer(minLength: 0)
+                }
+                .padding(.vertical, AppSpacing.sm)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(moreExpanded ? "Hide more" : "Show more")
+
+            if moreExpanded {
+                VStack(spacing: AppSpacing.sm) {
+                    NavigationLink { DrillPickerView() } label: {
+                        TrainingModeCard(
+                            title: "Custom Drill",
+                            subtitle: "Pick position, depth & scenario",
+                            systemImage: "slider.horizontal.3",
+                            tint: AppColors.accentGreen
+                        )
+                    }
+                    .buttonStyle(.plain)
+
+                    NavigationLink { ReviewView() } label: {
+                        TrainingModeCard(
+                            title: "Review mistakes",
+                            subtitle: "Replay spots where you lost EV",
+                            systemImage: "magnifyingglass",
+                            tint: AppColors.accentPeach
+                        )
+                    }
+                    .buttonStyle(.plain)
+                }
+                .transition(.opacity)
+            }
         }
-        .buttonStyle(.plain)
     }
 }
 
