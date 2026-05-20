@@ -32,8 +32,8 @@ targets:
       path: Cutoff/Info.plist
       properties:
         CFBundleDisplayName: Cutoff
-        CFBundleShortVersionString: "0.1.0"
-        CFBundleVersion: "1"
+        CFBundleShortVersionString: "0.0.6"
+        CFBundleVersion: "6"
         UILaunchScreen:
           UIColorName: BackgroundDeep
         UISupportedInterfaceOrientations:
