@@ -1,0 +1,51 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Xcode user-local
+xcuserdata/
+*.xcuserstate
+*.xcuserdatad/
+DerivedData/
+build/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.swiftpm/
+.build/
+Package.resolved
+
+# CocoaPods / Carthage (not used here, but defensive)
+Pods/
+Carthage/Build/
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Logs / coverage
+*.log
+*.xcresult/
+coverage/
+
+# Python (ingest scripts under tools/)
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Scratch
+.tmp/
+tmp/
