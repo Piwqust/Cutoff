@@ -1,4 +1,4 @@
-# Product Plan — MTT Poker Trainer
+# Product Plan — Cutoff
 
 ## One-line product statement
 A premium, dark-mode iPhone app that teaches amateur players the preflop decisions and stack-depth instincts they need to play No-Limit Texas Hold'em **multi-table tournaments** better — using bite-sized drills and clearly-labeled demo ranges. No money. No live assistance. Just practice.

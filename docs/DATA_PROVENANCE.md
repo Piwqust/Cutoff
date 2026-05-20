@@ -6,7 +6,7 @@ This app ships **only demo training data**. No data here is solver-verified, and
 
 | Category | Source | UI label |
 |---|---|---|
-| Demo | Hand-authored approximate ranges shipped in `MTTPokerTrainer/Resources/Ranges/*.json` | "Demo training range — not solver-verified" |
+| Demo | Hand-authored approximate ranges shipped in `Cutoff/Resources/Ranges/*.json` | "Demo training range — not solver-verified" |
 | User-defined | Created locally by the user (future feature; not in MVP) | "Your range — not solver-verified" |
 | Imported | Loaded by the user from a JSON file (future feature; not in MVP) | "Imported range — provenance set by you" |
 

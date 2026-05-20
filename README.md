@@ -1,4 +1,4 @@
-# MTT Poker Trainer
+# Cutoff
 
 A calm, studio-grade iPhone trainer for No-Limit Texas Hold'em **multi-table tournament** preflop decisions. Built in SwiftUI for iOS 17+, dark-mode forced, Liquid Glass on iOS 18.
 
@@ -48,14 +48,14 @@ A calm, studio-grade iPhone trainer for No-Limit Texas Hold'em **multi-table tou
 
 - SwiftUI + MVVM with `@Observable`
 - `SwiftData` for `QuizResult` / `TrainingSession`, `UserDefaults` for config
-- JSON ranges in `MTTPokerTrainer/Resources/Ranges/` (schema v2 with provenance)
+- JSON ranges in `Cutoff/Resources/Ranges/` (schema v2 with provenance)
 - No backend, no third-party dependencies
 - Liquid Glass `@available(iOS 18, *)` with `.ultraThinMaterial` fallback
 
 Layout:
 
 ```
-MTTPokerTrainer/
+Cutoff/
 ├── Theme/          design tokens
 ├── Components/     PrimaryButton, glass surfaces, range grid cells…
 ├── Models/         Hand, Spot, Range, StackDepthBucket…
@@ -71,14 +71,14 @@ Requires Xcode 17+ and `xcodegen` (`brew install xcodegen`).
 
 ```sh
 xcodegen generate
-open MTTPokerTrainer.xcodeproj
+open Cutoff.xcodeproj
 ```
 
 Or from the command line:
 
 ```sh
-xcodebuild -project MTTPokerTrainer.xcodeproj \
-  -scheme MTTPokerTrainer \
+xcodebuild -project Cutoff.xcodeproj \
+  -scheme Cutoff \
   -destination 'platform=iOS Simulator,name=iPhone 17' \
   build test
 ```

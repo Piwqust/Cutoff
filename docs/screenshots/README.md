@@ -4,13 +4,13 @@ Simulator captures live here. To regenerate:
 
 ```sh
 xcrun simctl boot "iPhone 17"
-xcodebuild -project ../../MTTPokerTrainer.xcodeproj \
-  -scheme MTTPokerTrainer \
+xcodebuild -project ../../Cutoff.xcodeproj \
+  -scheme Cutoff \
   -destination 'platform=iOS Simulator,name=iPhone 17' \
   -derivedDataPath ./build install
 
-xcrun simctl install booted ./build/Build/Products/Debug-iphonesimulator/MTTPokerTrainer.app
-xcrun simctl launch booted com.mttpokertrainer.app
+xcrun simctl install booted ./build/Build/Products/Debug-iphonesimulator/Cutoff.app
+xcrun simctl launch booted com.cutoff.app
 # Drive the app to each screen, then for each:
 xcrun simctl io booted screenshot 01_onboarding.png
 xcrun simctl io booted screenshot 02_train_dashboard.png

@@ -1,4 +1,4 @@
-# CLAUDE.md — MTT Poker Trainer
+# CLAUDE.md — Cutoff
 
 iPhone SwiftUI app for NLHE MTT preflop training. **Private — not shipped. Any materials (third-party charts, solver data) may be used freely.**
 
@@ -7,7 +7,7 @@ build & test on simulator & commit after every change
 ## Build
 ```sh
 xcodegen generate
-xcodebuild -project MTTPokerTrainer.xcodeproj -scheme MTTPokerTrainer \
+xcodebuild -project Cutoff.xcodeproj -scheme Cutoff \
   -destination 'platform=iOS Simulator,name=iPhone 17' build   # or `test`
 ```
 iOS 17+, Swift 5.10, Xcode 26.
@@ -23,4 +23,4 @@ Layout: `Theme/`, `Components/`, `Models/`, `Logic/`, `Persistence/`, `Features/
 - `PrimaryButton` (capsule) / `SecondaryButton` (glass). Press scale `0.97`.
 - Actions: Fold=muted, Call=teal, Raise=mint, 3-bet=lime, Jam=coral, Mixed=gradient.
 
-Don't break working features without instruction; update `MTTPokerTrainerTests/` for behavior changes.
+Don't break working features without instruction; update `CutoffTests/` for behavior changes.
