@@ -11,12 +11,15 @@ struct TournamentConfig: Codable, Hashable {
     var averageStack: Int?
     var playerLevel: PlayerLevel
 
-    /// Default profile: 9-max MTT, 25,000 stack at 100/200 = 125 BB.
+    /// Default profile: 8-max MTT, 25,000 stack at 100/200 = 125 BB.
+    /// 8-max is the industry-standard format for modern MTT solver libraries
+    /// (RangeConverter, GTO Wizard, DTO, etc.); 9-max charts are derived by
+    /// adaptation from the 8-max baseline.
     static let `default` = TournamentConfig(
         startingStack: 25_000,
         smallBlind: 100,
         bigBlind: 200,
-        tableSize: 9,
+        tableSize: 8,
         blindLevelDuration: .fifteen,
         anteType: .unknown,
         currentHeroStack: nil,

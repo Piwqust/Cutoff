@@ -39,9 +39,25 @@ struct RangeChart: Codable, Identifiable, Hashable {
         let citation: String?
     }
 
+    struct Publisher: Codable, Hashable {
+        let name: String
+        let product: String?
+        let url: String?
+        let accessedDate: String?
+        let treeParams: String?
+
+        init(name: String, product: String? = nil, url: String? = nil, accessedDate: String? = nil, treeParams: String? = nil) {
+            self.name = name
+            self.product = product
+            self.url = url
+            self.accessedDate = accessedDate
+            self.treeParams = treeParams
+        }
+    }
+
     struct SourcePayload: Codable, Hashable {
         enum Kind: String, Codable {
-            case demo, userDefined, imported, gto, nashComputed, solverDump
+            case demo, userDefined, imported, gto, nashComputed, solverDump, published
 
             init(from decoder: Decoder) throws {
                 let raw = try decoder.singleValueContainer().decode(String.self)
@@ -51,11 +67,13 @@ struct RangeChart: Codable, Identifiable, Hashable {
         let type: Kind
         let description: String
         let solver: SolverConfig?
+        let publisher: Publisher?
 
-        init(type: Kind, description: String, solver: SolverConfig? = nil) {
+        init(type: Kind, description: String, solver: SolverConfig? = nil, publisher: Publisher? = nil) {
             self.type = type
             self.description = description
             self.solver = solver
+            self.publisher = publisher
         }
 
         var humanLabel: String {
@@ -66,6 +84,7 @@ struct RangeChart: Codable, Identifiable, Hashable {
             case .gto:          return "Solver-verified range"
             case .nashComputed: return "Nash-equilibrium range"
             case .solverDump:   return "Solver-verified range"
+            case .published:    return "Published chart"
             }
         }
     }

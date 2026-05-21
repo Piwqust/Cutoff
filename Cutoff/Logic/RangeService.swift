@@ -30,8 +30,10 @@ final class RangeService {
     }
 
     /// Best chart for a specific spot — exact match or nearest stack depth.
-    func bestChart(position: TablePosition, depthBB: Int, facing: FacingAction) -> RangeChart? {
-        loader.chart(matching: position, depthBB: depthBB, facing: facing, in: charts)
+    /// Pass `tableSize` to prefer 8-max or 9-max charts; falls back to any
+    /// table size with a logged warning if no exact match exists.
+    func bestChart(position: TablePosition, depthBB: Int, facing: FacingAction, tableSize: Int? = nil) -> RangeChart? {
+        loader.chart(matching: position, depthBB: depthBB, facing: facing, tableSize: tableSize, in: charts)
     }
 
     /// Lookup by the stable chart id stored on `QuizResult.rangeChartID`. Used

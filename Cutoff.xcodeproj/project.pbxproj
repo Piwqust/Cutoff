@@ -417,6 +417,7 @@
 		E0CFDC7851333F3F8CB5D6A4 /* mtt_9max_15bb_hj_squeeze.json in Resources */ = {isa = PBXBuildFile; fileRef = 39CC40A37B377911EB9DEB37 /* mtt_9max_15bb_hj_squeeze.json */; };
 		E1F81BED04BA46E4358613FF /* HandCombo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494A075910A4FCB271282B12 /* HandCombo.swift */; };
 		E247755AD690C44584D5A3ED /* mtt_9max_50bb_sb_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = 1523E49C498F2FB69C82E194 /* mtt_9max_50bb_sb_vsopen.json */; };
+		E254F28FBE62EF953EBAE67A /* PublishedSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58AAC6F6F1483E1573E858A /* PublishedSourceTests.swift */; };
 		E369B4EE39FFDF032CDC5706 /* mtt_9max_10bb_utg_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = 835CC2B3EA9301D302752C6E /* mtt_9max_10bb_utg_unopened.json */; };
 		E3829EDCC05D08702A0578F8 /* mtt_9max_15bb_co_pushfold.json in Resources */ = {isa = PBXBuildFile; fileRef = CF8A0A0554DAA6FC6133ECE1 /* mtt_9max_15bb_co_pushfold.json */; };
 		E44C02CA8E8E85DFC006FAF0 /* mtt_9max_25bb_sb_pushfold.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E4D2E8832F24483C854366F /* mtt_9max_25bb_sb_pushfold.json */; };
@@ -925,6 +926,7 @@
 		F55B0CF479DCD4FF02DC7988 /* PositionDepthHeatmap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionDepthHeatmap.swift; sourceTree = "<group>"; };
 		F576A6706856780981E67A13 /* mtt_9max_20bb_sb_squeeze.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_20bb_sb_squeeze.json; sourceTree = "<group>"; };
 		F580D87A538DAF24149787E8 /* TrainingSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingSession.swift; sourceTree = "<group>"; };
+		F58AAC6F6F1483E1573E858A /* PublishedSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishedSourceTests.swift; sourceTree = "<group>"; };
 		F6C8B9E8025E3DA01C07C82A /* mtt_9max_40bb_lj_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_40bb_lj_unopened.json; sourceTree = "<group>"; };
 		F7145CC18FB44E184BD7E62B /* mtt_9max_50bb_btn_vs3bet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_50bb_btn_vs3bet.json; sourceTree = "<group>"; };
 		F7C910974996294A506F5F3D /* mtt_9max_20bb_co_vs3bet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_20bb_co_vs3bet.json; sourceTree = "<group>"; };
@@ -1304,6 +1306,7 @@
 				4150CA6696A8D2EE09960C58 /* NashSmellTests.swift */,
 				5605BFB1114802C68D9FC04F /* PostflopLoaderTests.swift */,
 				9ECBA0D393281C8C750309E5 /* PostflopScorerTests.swift */,
+				F58AAC6F6F1483E1573E858A /* PublishedSourceTests.swift */,
 				C69143336746A9F9E98879AC /* PushfoldSemanticTests.swift */,
 				939346D378A06CE539F93BDC /* RangeCoverageTests.swift */,
 				3CCA75E70222378BCD4FCE38 /* RangeLoaderTests.swift */,
@@ -2021,6 +2024,7 @@
 				ED9175CE4A6EA0749CC7FA14 /* NashSmellTests.swift in Sources */,
 				3FA140FF1B3B5908BE13E31B /* PostflopLoaderTests.swift in Sources */,
 				F2E79D6145DE27B0093C4440 /* PostflopScorerTests.swift in Sources */,
+				E254F28FBE62EF953EBAE67A /* PublishedSourceTests.swift in Sources */,
 				49EFAB81418427B6AF0CF7F9 /* PushfoldSemanticTests.swift in Sources */,
 				45C5968A6C851CD9383331AC /* RangeCoverageTests.swift in Sources */,
 				FFAC32A3ED53C4521E32418D /* RangeLoaderTests.swift in Sources */,
