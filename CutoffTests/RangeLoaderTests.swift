@@ -19,7 +19,7 @@ final class RangeLoaderTests: XCTestCase {
         XCTAssertGreaterThanOrEqual(
             charts.count, 300, "Expected ~330 bundled ranges, found \(charts.count)")
 
-        let allowedKinds: Set<RangeChart.SourcePayload.Kind> = [.solverDump, .nashComputed, .gto, .userDefined]
+        let allowedKinds: Set<RangeChart.SourcePayload.Kind> = [.solverDump, .nashComputed, .gto, .userDefined, .published]
         for chart in charts {
             XCTAssertTrue(
                 allowedKinds.contains(chart.source.type),

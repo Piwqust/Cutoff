@@ -1,0 +1,102 @@
+# RangeConverter 8-max MTT 100bb 1bb ante — HJ RFI
+# Source: rangeconverter.com/free-poker-charts → 8-max MTT 100bb PDF, page 3 (HJ RFI panel)
+# Stated VPIP: 27.67% raise / 72.33% fold @ 2.5bb open
+# Transcribed VPIP: 364/1326 = 27.45% (within 0.22pp of stated)
+notation,action,freq
+# pairs pure
+AA,raise,1.0
+KK,raise,1.0
+QQ,raise,1.0
+JJ,raise,1.0
+TT,raise,1.0
+99,raise,1.0
+88,raise,1.0
+77,raise,1.0
+66,raise,1.0
+55,raise,1.0
+44,raise,1.0
+# A-suited pure (AKs through A4s)
+AKs,raise,1.0
+AQs,raise,1.0
+AJs,raise,1.0
+ATs,raise,1.0
+A9s,raise,1.0
+A8s,raise,1.0
+A7s,raise,1.0
+A6s,raise,1.0
+A5s,raise,1.0
+A4s,raise,1.0
+# K-suited pure (KQs through K8s)
+KQs,raise,1.0
+KJs,raise,1.0
+KTs,raise,1.0
+K9s,raise,1.0
+K8s,raise,1.0
+# Q-suited pure (QJs through Q9s)
+QJs,raise,1.0
+QTs,raise,1.0
+Q9s,raise,1.0
+# J/T/lower suited pure
+JTs,raise,1.0
+J9s,raise,1.0
+T9s,raise,1.0
+T8s,raise,1.0
+98s,raise,1.0
+97s,raise,1.0
+87s,raise,1.0
+86s,raise,1.0
+76s,raise,1.0
+65s,raise,1.0
+54s,raise,1.0
+# offsuit pure
+AKo,raise,1.0
+AQo,raise,1.0
+AJo,raise,1.0
+ATo,raise,1.0
+A9o,raise,1.0
+A8o,raise,1.0
+KQo,raise,1.0
+KJo,raise,1.0
+QJo,raise,1.0
+JTo,raise,1.0
+# mixed 50/50
+A3s,raise,0.5
+A3s,fold,0.5
+A2s,raise,0.5
+A2s,fold,0.5
+K7s,raise,0.5
+K7s,fold,0.5
+K6s,raise,0.5
+K6s,fold,0.5
+Q8s,raise,0.5
+Q8s,fold,0.5
+Q7s,raise,0.5
+Q7s,fold,0.5
+J8s,raise,0.5
+J8s,fold,0.5
+T7s,raise,0.5
+T7s,fold,0.5
+96s,raise,0.5
+96s,fold,0.5
+75s,raise,0.5
+75s,fold,0.5
+64s,raise,0.5
+64s,fold,0.5
+53s,raise,0.5
+53s,fold,0.5
+43s,raise,0.5
+43s,fold,0.5
+A7o,raise,0.5
+A7o,fold,0.5
+A6o,raise,0.5
+A6o,fold,0.5
+A5o,raise,0.5
+A5o,fold,0.5
+KTo,raise,0.5
+KTo,fold,0.5
+QTo,raise,0.5
+QTo,fold,0.5
+33,raise,0.5
+33,fold,0.5
+22,raise,0.5
+22,fold,0.5

@@ -225,6 +225,16 @@ struct RangeExplorerView: View {
             Text(chart.source.description)
                 .font(AppTypography.caption)
                 .foregroundStyle(AppColors.textSecondary)
+            if let publisher = chart.source.publisher {
+                HStack(spacing: 4) {
+                    Text(publisher.name)
+                    if let product = publisher.product { Text("· \(product)") }
+                    if let date = publisher.accessedDate { Text("· \(date)") }
+                }
+                .font(AppTypography.caption)
+                .foregroundStyle(AppColors.textSecondary)
+                .lineLimit(2)
+            }
             if let solver = chart.source.solver {
                 if let assumptions = solver.assumptions {
                     Text(assumptions)
@@ -232,7 +242,7 @@ struct RangeExplorerView: View {
                         .foregroundStyle(AppColors.textSecondary)
                 }
                 HStack(spacing: 4) {
-                    Text(solver.solverName)
+                    if let name = solver.solverName { Text(name) }
                     if let version = solver.solverVersion { Text("· v\(version)") }
                     if let date = solver.dateGenerated { Text("· \(date)") }
                 }

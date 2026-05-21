@@ -34,7 +34,7 @@ final class RangeCoverageTests: XCTestCase {
 
     func test_pilotRangesAllDeclareSolverProvenance() throws {
         let charts = try RangeLoader(bundle: appBundle).loadAll()
-        let allowed: Set<RangeChart.SourcePayload.Kind> = [.solverDump, .nashComputed, .gto, .userDefined]
+        let allowed: Set<RangeChart.SourcePayload.Kind> = [.solverDump, .nashComputed, .gto, .userDefined, .published]
         for chart in charts {
             XCTAssertTrue(
                 allowed.contains(chart.source.type),

@@ -31,7 +31,9 @@ struct RangeChart: Codable, Identifiable, Hashable {
     let hands: [String: HandFrequencies]
 
     struct SolverConfig: Codable, Hashable {
-        let solverName: String
+        /// Optional now: `.published` charts use this struct as a carrier for
+        /// `assumptions`/`citation` text but have no solver-name to declare.
+        let solverName: String?
         let solverVersion: String?
         let iterations: Int?
         let dateGenerated: String?

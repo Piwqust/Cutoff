@@ -102,12 +102,24 @@ func runDerive9Max(inputDir: String, outputDir: String) throws {
         guard let sourceSlug = ChartSlug.parse(stem) else { continue }
         let sourceSheet = try cribSheet(fromCanonicalJSON: sourceJSON)
 
-        // Decide target positions to generate. UTG and UTG+1 in 9-max both
-        // pull from 8-max UTG; other seats map 1:1.
+        // Position mapping rationale: our 9-max schema uses 8 positions
+        // (utg/utg1/lj/hj/co/btn/sb/bb), mirroring 8-max naming. 9-max has one
+        // more player than 8-max, so each seat faces one extra opponent. The
+        // canonical mapping (preserving "seats yet to act"):
+        //   9-max UTG    → tighter than 8-max UTG (extra player)
+        //   9-max UTG+1  → 8-max UTG verbatim (same opp count)
+        //   9-max LJ/HJ/CO/BTN/SB/BB → 8-max LJ/HJ/CO/BTN/SB/BB verbatim
+        // 8-max UTG+1 has no slot in our 9-max schema (would be 9-max MP,
+        // which we don't model) — skip it so we don't overwrite UTG+1.
         let targets: [ChartSlug.Position]
-        if sourceSlug.position == .utg {
+        switch sourceSlug.position {
+        case .utg:
             targets = [.utg, .utg1]
-        } else {
+        case .utg1:
+            // No clean 9-max target in our schema. Skip.
+            print("[skip] \(stem): 8-max UTG1 has no 9-max counterpart (closest is MP which our schema doesn't model)")
+            continue
+        default:
             targets = [sourceSlug.position]
         }
 

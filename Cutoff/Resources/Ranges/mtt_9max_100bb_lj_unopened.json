@@ -1,87 +1,122 @@
 {
-  "id": "mtt_9max_100bb_lj_unopened",
-  "format": "NLHE_MTT_9MAX",
-  "spot": {
-    "position": "LJ",
-    "stackDepthBB": 100,
-    "facingAction": "unopened",
-    "anteType": "bigBlindAnte"
+  "format" : "NLHE_MTT_9MAX",
+  "hands" : {
+    "22" : {
+      "fold" : 0.5,
+      "raise25x" : 0.5
+    },
+    "33" : {
+      "fold" : 0.5,
+      "raise25x" : 0.5
+    },
+    "43s" : {
+      "fold" : 0.5,
+      "raise25x" : 0.5
+    },
+    "44" : "raise",
+    "54s" : "raise",
+    "55" : "raise",
+    "64s" : {
+      "fold" : 0.5,
+      "raise25x" : 0.5
+    },
+    "65s" : "raise",
+    "66" : "raise",
+    "75s" : {
+      "fold" : 0.5,
+      "raise25x" : 0.5
+    },
+    "76s" : "raise",
+    "77" : "raise",
+    "86s" : {
+      "fold" : 0.5,
+      "raise25x" : 0.5
+    },
+    "87s" : "raise",
+    "88" : "raise",
+    "97s" : {
+      "fold" : 0.5,
+      "raise25x" : 0.5
+    },
+    "98s" : "raise",
+    "99" : "raise",
+    "A2s" : "raise",
+    "A3s" : "raise",
+    "A4s" : "raise",
+    "A5s" : "raise",
+    "A6s" : "raise",
+    "A7s" : "raise",
+    "A8s" : "raise",
+    "A9s" : "raise",
+    "AA" : "raise",
+    "AJo" : "raise",
+    "AJs" : "raise",
+    "AKo" : "raise",
+    "AKs" : "raise",
+    "AQo" : "raise",
+    "AQs" : "raise",
+    "ATo" : "raise",
+    "ATs" : "raise",
+    "J8s" : {
+      "fold" : 0.5,
+      "raise25x" : 0.5
+    },
+    "J9s" : "raise",
+    "JJ" : "raise",
+    "JTo" : {
+      "fold" : 0.5,
+      "raise25x" : 0.5
+    },
+    "JTs" : "raise",
+    "K5s" : {
+      "fold" : 0.5,
+      "raise25x" : 0.5
+    },
+    "K6s" : "raise",
+    "K7s" : "raise",
+    "K8s" : "raise",
+    "K9s" : "raise",
+    "KJo" : "raise",
+    "KJs" : "raise",
+    "KK" : "raise",
+    "KQo" : "raise",
+    "KQs" : "raise",
+    "KTs" : "raise",
+    "Q8s" : {
+      "fold" : 0.5,
+      "raise25x" : 0.5
+    },
+    "Q9s" : "raise",
+    "QJo" : {
+      "fold" : 0.5,
+      "raise25x" : 0.5
+    },
+    "QJs" : "raise",
+    "QQ" : "raise",
+    "QTs" : "raise",
+    "T8s" : "raise",
+    "T9s" : "raise",
+    "TT" : "raise"
   },
-  "source": {
-    "type": "solverDump",
-    "description": "Solver-verified MTT preflop range.",
-    "solver": {
-      "solverName": "MTT Trainer canonical solver set",
-      "solverVersion": "1.0",
-      "assumptions": "9-max NLHE, 12.5% big-blind ante, chipEV (non-ICM). Push/fold spots use the Nash equilibrium; 100 BB opens use the canonical solver-derived charts; intermediate depths interpolate between the two anchors."
-    }
+  "id" : "mtt_9max_100bb_lj_unopened",
+  "source" : {
+    "description" : "Adapted from RangeConverter 8-max baseline.",
+    "publisher" : {
+      "accessedDate" : "2026-05-21",
+      "name" : "RangeConverter",
+      "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
+      "treeParams" : "2.5x open, 3.5x 3bet IP, 4.5x 3bet OOP, 2.3x 4bet IP, 2.75x 4bet OOP, SB vs BB 3.2bb",
+      "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
+    },
+    "solver" : {
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante. Copied verbatim from 8-max LJ (same effective seat in 9-max)."
+    },
+    "type" : "published"
   },
-  "hands": {
-    "AA": "threeBet",
-    "KK": "threeBet",
-    "QQ": "threeBet",
-    "JJ": "threeBet",
-    "TT": "threeBet",
-    "99": "call",
-    "88": "call",
-    "77": "call",
-    "66": "call",
-    "55": "call",
-    "44": "call",
-    "33": "call",
-    "22": "call",
-    "AKs": "threeBet",
-    "AKo": "threeBet",
-    "AQs": "threeBet",
-    "AQo": "threeBet",
-    "AJs": "call",
-    "AJo": "call",
-    "ATs": "call",
-    "ATo": "call",
-    "A9s": "call",
-    "A9o": "call",
-    "A8s": "call",
-    "A8o": "call",
-    "A7s": "call",
-    "A6s": "call",
-    "A5s": "threeBet",
-    "A4s": "threeBet",
-    "A3s": "threeBet",
-    "A2s": "call",
-    "K5s": "threeBet",
-    "KQs": "call",
-    "KQo": "call",
-    "KJs": "call",
-    "KJo": "call",
-    "KTs": "call",
-    "KTo": "call",
-    "K9s": "call",
-    "K9o": "call",
-    "K8s": "call",
-    "QJs": "call",
-    "QJo": "call",
-    "QTs": "call",
-    "Q9s": "call",
-    "Q9o": "call",
-    "Q8s": "call",
-    "JTs": "call",
-    "JTo": "call",
-    "J9s": "call",
-    "J9o": "call",
-    "J8s": "call",
-    "T9s": "call",
-    "T9o": "call",
-    "T8s": "call",
-    "T7s": "call",
-    "98s": "call",
-    "98o": "call",
-    "97s": "call",
-    "87s": "call",
-    "86s": "call",
-    "76s": "threeBet",
-    "75s": "call",
-    "65s": "threeBet",
-    "64s": "call",
-    "54s": "call"
+  "spot" : {
+    "anteType" : "bigBlindAnte",
+    "facingAction" : "unopened",
+    "position" : "LJ",
+    "stackDepthBB" : 100
   }
 }
