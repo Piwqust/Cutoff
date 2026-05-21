@@ -180,6 +180,7 @@
 		5DED52151C0693D215A96475 /* AppSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7009BE6D89929B442D9FC27D /* AppSpacing.swift */; };
 		5E3F349831DF9AE6DD3A0410 /* HandCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309DF0CA062C8E1ECFB50FAB /* HandCardView.swift */; };
 		5EAA0BA918DF672454784D28 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D3757E2C19E7E3A94C0170 /* Card.swift */; };
+		606D4D0968C4F61FC0812FD4 /* mtt_8max_100bb_utg_unopened.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CCBB87B2BB2835A6FDB98F3 /* mtt_8max_100bb_utg_unopened.json */; };
 		6090918C4110AC11FEC51056 /* mtt_9max_10bb_co_pushfold.json in Resources */ = {isa = PBXBuildFile; fileRef = F924A0668D4D88592D4BA02A /* mtt_9max_10bb_co_pushfold.json */; };
 		6107169C582B38B146AC0570 /* mtt_9max_20bb_bb_squeeze.json in Resources */ = {isa = PBXBuildFile; fileRef = 2EEE02D12F5A6E6119D89F44 /* mtt_9max_20bb_bb_squeeze.json */; };
 		61095FF2B952918EFEA2E438 /* mtt_9max_40bb_sb_squeeze.json in Resources */ = {isa = PBXBuildFile; fileRef = 89722492AA92812B17A986DE /* mtt_9max_40bb_sb_squeeze.json */; };
@@ -564,6 +565,7 @@
 		2AE717019E2A8476C58120F4 /* SpotGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotGenerator.swift; sourceTree = "<group>"; };
 		2C0E96296B6E84D5301DF541 /* flop_library.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = flop_library.json; sourceTree = "<group>"; };
 		2C651FCA28C3D64F06F16152 /* mtt_9max_75bb_btn_vs3bet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_75bb_btn_vs3bet.json; sourceTree = "<group>"; };
+		2CCBB87B2BB2835A6FDB98F3 /* mtt_8max_100bb_utg_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_8max_100bb_utg_unopened.json; sourceTree = "<group>"; };
 		2DB40BEF168C87E099D652B4 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		2E34BA9BB7DD1C2C24DE1498 /* MistakeReasonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MistakeReasonTests.swift; sourceTree = "<group>"; };
 		2E9FDCA8D63D121E5FDE0303 /* MistakeExplainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MistakeExplainerTests.swift; sourceTree = "<group>"; };
@@ -955,6 +957,7 @@
 		12C336A5BEF52426D1092F2F /* Ranges */ = {
 			isa = PBXGroup;
 			children = (
+				2CCBB87B2BB2835A6FDB98F3 /* mtt_8max_100bb_utg_unopened.json */,
 				0826DCE9933D83C4EFF693AE /* mtt_9max_10bb_bb_blinddefense.json */,
 				09068BF70E067CCFA40B2E4E /* mtt_9max_10bb_bb_pushfold.json */,
 				69DADA804EAC6E62B1351295 /* mtt_9max_10bb_bb_squeeze.json */,
@@ -1669,6 +1672,7 @@
 			files = (
 				8459F9A7218F685B63B60C33 /* Assets.xcassets in Resources */,
 				E67729A828F2BF9187C0496C /* flop_library.json in Resources */,
+				606D4D0968C4F61FC0812FD4 /* mtt_8max_100bb_utg_unopened.json in Resources */,
 				6AC98FC2F190624D64AFB1F7 /* mtt_9max_100bb_bb_blinddefense.json in Resources */,
 				635B70F7FE5EEB3BAAA5AA18 /* mtt_9max_100bb_bb_squeeze.json in Resources */,
 				C27E4A91C1E0AAED6329C49D /* mtt_9max_100bb_bb_vsopen.json in Resources */,

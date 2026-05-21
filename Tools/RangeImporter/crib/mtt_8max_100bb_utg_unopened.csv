@@ -1,0 +1,66 @@
+# RangeConverter 8-max MTT 100bb 1bb ante (12.5%) — UTG RFI
+# Source: rangeconverter.com/free-poker-charts → 8-max MTT 100bb PDF, page 3 (UTG RFI panel)
+# Stated VPIP: 14.72% raise / 85.3% fold @ 2.5bb open
+# Frequencies rounded to nearest 50% per source legend ("a mix of colours means take one action half the time")
+# Transcribed VPIP cross-check: 196/1326 = 14.78% (within 0.06pp of stated)
+notation,action,freq
+# --- pure raise: pairs ---
+AA,raise,1.0
+KK,raise,1.0
+QQ,raise,1.0
+JJ,raise,1.0
+TT,raise,1.0
+99,raise,1.0
+88,raise,1.0
+77,raise,1.0
+66,raise,1.0
+55,raise,1.0
+44,raise,1.0
+# --- pure raise: suited ---
+AKs,raise,1.0
+AQs,raise,1.0
+AJs,raise,1.0
+ATs,raise,1.0
+A9s,raise,1.0
+A8s,raise,1.0
+A7s,raise,1.0
+A6s,raise,1.0
+A5s,raise,1.0
+A4s,raise,1.0
+KQs,raise,1.0
+KJs,raise,1.0
+KTs,raise,1.0
+K9s,raise,1.0
+QJs,raise,1.0
+QTs,raise,1.0
+JTs,raise,1.0
+J9s,raise,1.0
+T9s,raise,1.0
+# --- pure raise: offsuit ---
+AKo,raise,1.0
+AQo,raise,1.0
+# --- mixed 50/50 raise/fold ---
+A3s,raise,0.5
+A3s,fold,0.5
+K8s,raise,0.5
+K8s,fold,0.5
+KQo,raise,0.5
+KQo,fold,0.5
+Q9s,raise,0.5
+Q9s,fold,0.5
+T8s,raise,0.5
+T8s,fold,0.5
+98s,raise,0.5
+98s,fold,0.5
+87s,raise,0.5
+87s,fold,0.5
+76s,raise,0.5
+76s,fold,0.5
+65s,raise,0.5
+65s,fold,0.5
+54s,raise,0.5
+54s,fold,0.5
+33,raise,0.5
+33,fold,0.5
+22,raise,0.5
+22,fold,0.5
