@@ -215,8 +215,21 @@ def quantise_to_actions(props: dict[str, float], action_map: dict[str, str]) -> 
     ]
 
 
-# Vocabulary that the Cutoff RangeImporter accepts in CSV crib sheets.
-ACTION_MAP_2WAY = {"R": "raise", "F": "fold", "L": "limp"}
+# Vocabulary mappings selected per chart type — see `--mode` on the CLI.
+# The colour roles are constant (R=orange, L=green, F=blue) but their poker
+# meaning differs by chart context.
+ACTION_MAP_RFI = {"R": "raise", "F": "fold", "L": "limp"}     # opening chart
+ACTION_MAP_VS_RFI = {"R": "threeBet", "L": "call", "F": "fold"}  # defending vs open
+ACTION_MAP_VS_3BET = {"R": "raise", "L": "call", "F": "fold"}    # opener facing 3-bet
+
+ACTION_MAPS = {
+    "rfi": ACTION_MAP_RFI,
+    "vs-rfi": ACTION_MAP_VS_RFI,
+    "vs-3bet": ACTION_MAP_VS_3BET,
+}
+
+# Legacy alias retained for older callers / docstrings.
+ACTION_MAP_2WAY = ACTION_MAP_RFI
 
 
 def vpip_combos(matrix, action_map) -> dict[str, float]:
@@ -263,6 +276,8 @@ def main():
     p.add_argument("--input", required=True, help="cropped 1600x2160 chart PNG")
     p.add_argument("--slug", required=True, help="chart slug, e.g. mtt_8max_100bb_co_unopened")
     p.add_argument("--output", required=True, help="output directory for the crib CSV")
+    p.add_argument("--mode", choices=list(ACTION_MAPS), default="rfi",
+                   help="chart type: rfi (default, fold/limp/raise) | vs-rfi (fold/call/3bet) | vs-3bet (fold/call/raise)")
     p.add_argument("--bounds", help="override grid bounds as 'x0,y0,x1,y1'")
     p.add_argument("--print-matrix", action="store_true", help="also print the classified matrix")
     p.add_argument("--print-vpip", action="store_true", help="print combo-weighted action frequencies for sanity check")
@@ -272,13 +287,14 @@ def main():
     if args.bounds:
         bounds = tuple(int(x) for x in args.bounds.split(","))
 
+    action_map = ACTION_MAPS[args.mode]
     matrix = classify_chart(Path(args.input), bounds)
 
     if args.print_matrix:
         for row in matrix:
             cells = []
             for _hand, props in row:
-                acts = quantise_to_actions(props, ACTION_MAP_2WAY)
+                acts = quantise_to_actions(props, action_map)
                 if not acts:
                     cells.append("F")
                 elif len(acts) == 1:
@@ -290,12 +306,12 @@ def main():
     out_dir = Path(args.output)
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / f"{args.slug}.csv"
-    note = f"Auto-extracted via pixel sampling. Verify against stated VPIP."
-    write_crib(matrix, args.slug, out_path, source_note=note)
+    note = f"Auto-extracted via pixel sampling ({args.mode}). Verify against stated VPIP."
+    write_crib(matrix, args.slug, out_path, action_map=action_map, source_note=note)
     print(f"[ok] {out_path}")
 
     if args.print_vpip:
-        totals = vpip_combos(matrix, ACTION_MAP_2WAY)
+        totals = vpip_combos(matrix, action_map)
         total_combos = 1326
         print("Action breakdown (combo-weighted):")
         for action, combos in totals.items():
