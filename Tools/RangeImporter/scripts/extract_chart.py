@@ -41,9 +41,15 @@ def classify_pixel(px: tuple[int, int, int]) -> str:
     """Map a single pixel to {R, L, F, ?}.
 
     Bands tuned from RangeConverter PDFs at 300 DPI + 200% magick resize.
-    Orange (raise) and yellow (the panel title "UTG RFI" etc.) sit in similar
-    R-G-B neighbourhoods; we discriminate by r/g ratio — orange's r/g is well
-    above 1.5, yellow's is around 1.2.
+
+    Orange (raise) vs yellow (panel title): both have r>180 with low blue.
+    Discriminate by r/g ratio — orange's r/g is well above 1.5.
+
+    Fold (blue) cells come in two shades on the same page: a bright blue for
+    common folds and a darker navy for the deepest-fold cells (visually
+    indistinguishable from the page background). Match both. We avoid
+    confusing dark navy with the true page background by requiring b > 1.5 × g
+    (which holds for both fold shades but not for the (r≈g≈b) page edges).
     """
     r, g, b = px
     if r > 180 and 90 < g < 145 and b < 70 and r / max(g, 1) >= 1.5:
@@ -51,7 +57,10 @@ def classify_pixel(px: tuple[int, int, int]) -> str:
     if r < 110 and 120 < g < 170 and 80 < b < 135:
         return "L"  # limp / call (green)
     if r < 70 and 80 < g < 145 and 100 < b < 175:
-        return "F"  # fold (blue)
+        return "F"  # fold (bright blue)
+    # Dark-navy fold variant. Restricted to r<55 to avoid eating gray text.
+    if r < 55 and 35 < g < 95 and 60 < b < 140 and b > g and (b - g) >= 20:
+        return "F"
     return "?"  # text, border, antialiasing
 
 
@@ -127,29 +136,53 @@ def auto_bounds(im: Image.Image) -> tuple[int, int, int, int]:
     y1 = next((y for y in range(h - 1, -1, -1) if row_has_chart_colour(y)), h - 1)
 
     # The chart's legend bar sits below the matrix on its own line and is also
-    # made of chart colours. The matrix and legend are separated by a thin
-    # navy gap (1-2 rows of `?` pixels). Walk down from y0 and stop at the
-    # first such gap.
+    # made of chart colours. The matrix and legend are separated by a navy
+    # gap of ~30-80 pixels. We walk down from y0 and treat a sustained gap
+    # of ≥40 consecutive background rows as the end of the matrix. Short
+    # gaps (e.g., a single all-fold matrix row whose text dominates the
+    # 6-pixel column sample) are NOT counted as the matrix end.
+    # Walk down from y0 to y1 keeping the last row that had any chart colour.
+    # A short gap (1 row of all-fold cells whose text dominates) doesn't end
+    # the matrix; only a sustained background gap of ≥120 px does.
     matrix_y1 = y1
-    in_chart = True
     last_chart_y = y0
+    GAP_THRESHOLD = 120
+    in_chart = True
     for y in range(y0, y1 + 1):
         is_chart = row_has_chart_colour(y)
         if is_chart:
             last_chart_y = y
             in_chart = True
         elif in_chart:
-            # Look ahead for a sustained gap (≥10 background rows).
-            gap = sum(1 for k in range(1, 25) if y + k < h and not row_has_chart_colour(y + k))
-            if gap >= 10:
+            gap = 0
+            k = 1
+            while k < GAP_THRESHOLD + 10 and y + k < h and not row_has_chart_colour(y + k):
+                gap += 1
+                k += 1
+            if gap >= GAP_THRESHOLD:
                 matrix_y1 = last_chart_y
                 break
             in_chart = False
+    if matrix_y1 == y1:
+        matrix_y1 = last_chart_y
 
-    # Horizontal bounds across the matrix area.
-    midy = (y0 + matrix_y1) // 2
-    x0 = next((x for x in range(w) if classify_pixel(im.getpixel((x, midy))) != "?"), 0)
-    x1 = next((x for x in range(w - 1, -1, -1) if classify_pixel(im.getpixel((x, midy))) != "?"), w - 1)
+    # Horizontal bounds across the matrix area — take the widest x-range
+    # observed across many y-slices, so we're robust to rows whose left or
+    # right cells happen to be all-text-on-fold and produce no chart pixels
+    # at the slice's extremes.
+    x0 = w
+    x1 = 0
+    span = matrix_y1 - y0
+    for frac in (0.05, 0.20, 0.35, 0.50, 0.65, 0.80, 0.95):
+        y_probe = y0 + int(frac * span)
+        for x in range(w):
+            if classify_pixel(im.getpixel((x, y_probe))) != "?":
+                x0 = min(x0, x)
+                break
+        for x in range(w - 1, -1, -1):
+            if classify_pixel(im.getpixel((x, y_probe))) != "?":
+                x1 = max(x1, x)
+                break
 
     # Add a tiny inward padding so the very edge anti-aliasing doesn't bias
     # half-cell sampling.
