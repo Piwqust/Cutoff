@@ -43,7 +43,10 @@ struct CribSheet {
                 continue
             }
             let notation = parts[0]
-            let action = parts[1].lowercased()
+            // Match against the action vocabulary case-insensitively, then
+            // re-resolve to the canonical rawValue so multi-word actions
+            // (`threeBet`) survive lowercasing.
+            let actionRaw = parts[1]
             guard let freq = Double(parts[2]) else {
                 errors.append("\(sourceName):\(lineNumber + 1): freq '\(parts[2])' is not a number")
                 continue
@@ -52,10 +55,11 @@ struct CribSheet {
                 errors.append("\(sourceName):\(lineNumber + 1): '\(notation)' is not a canonical hand notation")
                 continue
             }
-            guard CribAction.allCases.contains(where: { $0.rawValue == action }) else {
-                errors.append("\(sourceName):\(lineNumber + 1): unknown action '\(action)'. Allowed: \(CribAction.allCases.map(\.rawValue).joined(separator: ", "))")
+            guard let canonical = CribAction.allCases.first(where: { $0.rawValue.lowercased() == actionRaw.lowercased() }) else {
+                errors.append("\(sourceName):\(lineNumber + 1): unknown action '\(actionRaw)'. Allowed: \(CribAction.allCases.map(\.rawValue).joined(separator: ", "))")
                 continue
             }
+            let action = canonical.rawValue
             guard freq >= 0 && freq <= 1 else {
                 errors.append("\(sourceName):\(lineNumber + 1): freq \(freq) must be in [0,1]")
                 continue
