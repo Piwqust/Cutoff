@@ -1,16 +1,28 @@
 {
   "format" : "NLHE_MTT_9MAX",
   "hands" : {
-    "22" : "fold",
-    "32o" : "fold",
-    "32s" : "fold",
+    "22" : {
+      "fold" : 1
+    },
+    "32o" : {
+      "fold" : 1
+    },
+    "32s" : {
+      "fold" : 1
+    },
     "33" : {
       "call" : 0.5,
       "fold" : 0.5
     },
-    "42o" : "fold",
-    "42s" : "fold",
-    "43o" : "fold",
+    "42o" : {
+      "fold" : 1
+    },
+    "42s" : {
+      "fold" : 1
+    },
+    "43o" : {
+      "fold" : 1
+    },
     "43s" : {
       "call" : 0.5,
       "fold" : 0.5
@@ -19,11 +31,21 @@
       "call" : 0.5,
       "fold" : 0.5
     },
-    "52o" : "fold",
-    "52s" : "fold",
-    "53o" : "fold",
-    "53s" : "fold",
-    "54o" : "fold",
+    "52o" : {
+      "fold" : 1
+    },
+    "52s" : {
+      "fold" : 1
+    },
+    "53o" : {
+      "fold" : 1
+    },
+    "53s" : {
+      "fold" : 1
+    },
+    "54o" : {
+      "fold" : 1
+    },
     "54s" : {
       "call" : 0.5,
       "fold" : 0.5
@@ -32,13 +54,27 @@
       "call" : 0.5,
       "fold" : 0.5
     },
-    "62o" : "fold",
-    "62s" : "fold",
-    "63o" : "fold",
-    "63s" : "fold",
-    "64o" : "fold",
-    "64s" : "fold",
-    "65o" : "fold",
+    "62o" : {
+      "fold" : 1
+    },
+    "62s" : {
+      "fold" : 1
+    },
+    "63o" : {
+      "fold" : 1
+    },
+    "63s" : {
+      "fold" : 1
+    },
+    "64o" : {
+      "fold" : 1
+    },
+    "64s" : {
+      "fold" : 1
+    },
+    "65o" : {
+      "fold" : 1
+    },
     "65s" : {
       "call" : 0.5,
       "fold" : 0.5
@@ -47,150 +83,438 @@
       "call" : 0.5,
       "fold" : 0.5
     },
-    "72o" : "fold",
-    "72s" : "fold",
-    "73o" : "fold",
-    "73s" : "fold",
-    "74o" : "fold",
-    "74s" : "fold",
-    "75o" : "fold",
-    "75s" : "fold",
-    "76o" : "fold",
-    "76s" : "fold",
-    "77" : "call",
-    "82o" : "fold",
-    "82s" : "fold",
-    "83o" : "fold",
-    "83s" : "fold",
-    "84o" : "fold",
-    "84s" : "fold",
-    "85o" : "fold",
-    "85s" : "fold",
-    "86o" : "fold",
-    "86s" : "fold",
-    "87o" : "fold",
-    "87s" : "fold",
-    "88" : "call",
-    "92o" : "fold",
-    "92s" : "fold",
-    "93o" : "fold",
-    "93s" : "fold",
-    "94o" : "fold",
-    "94s" : "fold",
-    "95o" : "fold",
-    "95s" : "fold",
-    "96o" : "fold",
-    "96s" : "fold",
-    "97o" : "fold",
-    "97s" : "fold",
-    "98o" : "fold",
-    "98s" : "fold",
-    "99" : "call",
-    "A2o" : "fold",
-    "A2s" : "fold",
-    "A3o" : "fold",
-    "A3s" : "fold",
-    "A4o" : "fold",
-    "A4s" : "call",
-    "A5o" : "fold",
-    "A5s" : "call",
-    "A6o" : "fold",
-    "A6s" : "call",
-    "A7o" : "fold",
-    "A7s" : "call",
-    "A8o" : "fold",
-    "A8s" : "call",
-    "A9o" : "call",
-    "A9s" : "call",
-    "AA" : "call",
-    "AJo" : "call",
-    "AJs" : "call",
-    "AKo" : "call",
-    "AKs" : "call",
-    "AQo" : "call",
-    "AQs" : "call",
-    "ATo" : "call",
-    "ATs" : "call",
-    "J2o" : "fold",
-    "J2s" : "fold",
-    "J3o" : "fold",
-    "J3s" : "fold",
-    "J4o" : "fold",
-    "J4s" : "fold",
-    "J5o" : "fold",
-    "J5s" : "fold",
-    "J6o" : "fold",
-    "J6s" : "fold",
-    "J7o" : "fold",
-    "J7s" : "fold",
-    "J8o" : "fold",
-    "J8s" : "fold",
-    "J9o" : "fold",
-    "J9s" : "fold",
-    "JJ" : "call",
-    "JTo" : "fold",
-    "JTs" : "fold",
-    "K2o" : "fold",
-    "K2s" : "fold",
-    "K3o" : "fold",
-    "K3s" : "fold",
-    "K4o" : "fold",
-    "K4s" : "fold",
-    "K5o" : "fold",
-    "K5s" : "fold",
-    "K6o" : "fold",
-    "K6s" : "fold",
-    "K7o" : "fold",
-    "K7s" : "fold",
-    "K8o" : "fold",
-    "K8s" : "fold",
-    "K9o" : "fold",
-    "K9s" : "fold",
-    "KJo" : "fold",
-    "KJs" : "call",
-    "KK" : "call",
-    "KQo" : "call",
-    "KQs" : "call",
-    "KTo" : "fold",
-    "KTs" : "call",
-    "Q2o" : "fold",
-    "Q2s" : "fold",
-    "Q3o" : "fold",
-    "Q3s" : "fold",
-    "Q4o" : "fold",
-    "Q4s" : "fold",
-    "Q5o" : "fold",
-    "Q5s" : "fold",
-    "Q6o" : "fold",
-    "Q6s" : "fold",
-    "Q7o" : "fold",
-    "Q7s" : "fold",
-    "Q8o" : "fold",
-    "Q8s" : "fold",
-    "Q9o" : "fold",
-    "Q9s" : "fold",
-    "QJo" : "fold",
-    "QJs" : "call",
-    "QQ" : "call",
-    "QTo" : "fold",
-    "QTs" : "call",
-    "T2o" : "fold",
-    "T2s" : "fold",
-    "T3o" : "fold",
-    "T3s" : "fold",
-    "T4o" : "fold",
-    "T4s" : "fold",
-    "T5o" : "fold",
-    "T5s" : "fold",
-    "T6o" : "fold",
-    "T6s" : "fold",
-    "T7o" : "fold",
-    "T7s" : "fold",
-    "T8o" : "fold",
-    "T8s" : "fold",
-    "T9o" : "fold",
-    "T9s" : "fold",
-    "TT" : "call"
+    "72o" : {
+      "fold" : 1
+    },
+    "72s" : {
+      "fold" : 1
+    },
+    "73o" : {
+      "fold" : 1
+    },
+    "73s" : {
+      "fold" : 1
+    },
+    "74o" : {
+      "fold" : 1
+    },
+    "74s" : {
+      "fold" : 1
+    },
+    "75o" : {
+      "fold" : 1
+    },
+    "75s" : {
+      "fold" : 1
+    },
+    "76o" : {
+      "fold" : 1
+    },
+    "76s" : {
+      "fold" : 1
+    },
+    "77" : {
+      "call" : 1
+    },
+    "82o" : {
+      "fold" : 1
+    },
+    "82s" : {
+      "fold" : 1
+    },
+    "83o" : {
+      "fold" : 1
+    },
+    "83s" : {
+      "fold" : 1
+    },
+    "84o" : {
+      "fold" : 1
+    },
+    "84s" : {
+      "fold" : 1
+    },
+    "85o" : {
+      "fold" : 1
+    },
+    "85s" : {
+      "fold" : 1
+    },
+    "86o" : {
+      "fold" : 1
+    },
+    "86s" : {
+      "fold" : 1
+    },
+    "87o" : {
+      "fold" : 1
+    },
+    "87s" : {
+      "fold" : 1
+    },
+    "88" : {
+      "call" : 1
+    },
+    "92o" : {
+      "fold" : 1
+    },
+    "92s" : {
+      "fold" : 1
+    },
+    "93o" : {
+      "fold" : 1
+    },
+    "93s" : {
+      "fold" : 1
+    },
+    "94o" : {
+      "fold" : 1
+    },
+    "94s" : {
+      "fold" : 1
+    },
+    "95o" : {
+      "fold" : 1
+    },
+    "95s" : {
+      "fold" : 1
+    },
+    "96o" : {
+      "fold" : 1
+    },
+    "96s" : {
+      "fold" : 1
+    },
+    "97o" : {
+      "fold" : 1
+    },
+    "97s" : {
+      "fold" : 1
+    },
+    "98o" : {
+      "fold" : 1
+    },
+    "98s" : {
+      "fold" : 1
+    },
+    "99" : {
+      "call" : 1
+    },
+    "A2o" : {
+      "fold" : 1
+    },
+    "A2s" : {
+      "fold" : 1
+    },
+    "A3o" : {
+      "fold" : 1
+    },
+    "A3s" : {
+      "fold" : 1
+    },
+    "A4o" : {
+      "fold" : 1
+    },
+    "A4s" : {
+      "call" : 1
+    },
+    "A5o" : {
+      "fold" : 1
+    },
+    "A5s" : {
+      "call" : 1
+    },
+    "A6o" : {
+      "fold" : 1
+    },
+    "A6s" : {
+      "call" : 1
+    },
+    "A7o" : {
+      "fold" : 1
+    },
+    "A7s" : {
+      "call" : 1
+    },
+    "A8o" : {
+      "fold" : 1
+    },
+    "A8s" : {
+      "call" : 1
+    },
+    "A9o" : {
+      "call" : 1
+    },
+    "A9s" : {
+      "call" : 1
+    },
+    "AA" : {
+      "call" : 1
+    },
+    "AJo" : {
+      "call" : 1
+    },
+    "AJs" : {
+      "call" : 1
+    },
+    "AKo" : {
+      "call" : 1
+    },
+    "AKs" : {
+      "call" : 1
+    },
+    "AQo" : {
+      "call" : 1
+    },
+    "AQs" : {
+      "call" : 1
+    },
+    "ATo" : {
+      "call" : 1
+    },
+    "ATs" : {
+      "call" : 1
+    },
+    "J2o" : {
+      "fold" : 1
+    },
+    "J2s" : {
+      "fold" : 1
+    },
+    "J3o" : {
+      "fold" : 1
+    },
+    "J3s" : {
+      "fold" : 1
+    },
+    "J4o" : {
+      "fold" : 1
+    },
+    "J4s" : {
+      "fold" : 1
+    },
+    "J5o" : {
+      "fold" : 1
+    },
+    "J5s" : {
+      "fold" : 1
+    },
+    "J6o" : {
+      "fold" : 1
+    },
+    "J6s" : {
+      "fold" : 1
+    },
+    "J7o" : {
+      "fold" : 1
+    },
+    "J7s" : {
+      "fold" : 1
+    },
+    "J8o" : {
+      "fold" : 1
+    },
+    "J8s" : {
+      "fold" : 1
+    },
+    "J9o" : {
+      "fold" : 1
+    },
+    "J9s" : {
+      "fold" : 1
+    },
+    "JJ" : {
+      "call" : 1
+    },
+    "JTo" : {
+      "fold" : 1
+    },
+    "JTs" : {
+      "fold" : 1
+    },
+    "K2o" : {
+      "fold" : 1
+    },
+    "K2s" : {
+      "fold" : 1
+    },
+    "K3o" : {
+      "fold" : 1
+    },
+    "K3s" : {
+      "fold" : 1
+    },
+    "K4o" : {
+      "fold" : 1
+    },
+    "K4s" : {
+      "fold" : 1
+    },
+    "K5o" : {
+      "fold" : 1
+    },
+    "K5s" : {
+      "fold" : 1
+    },
+    "K6o" : {
+      "fold" : 1
+    },
+    "K6s" : {
+      "fold" : 1
+    },
+    "K7o" : {
+      "fold" : 1
+    },
+    "K7s" : {
+      "fold" : 1
+    },
+    "K8o" : {
+      "fold" : 1
+    },
+    "K8s" : {
+      "fold" : 1
+    },
+    "K9o" : {
+      "fold" : 1
+    },
+    "K9s" : {
+      "fold" : 1
+    },
+    "KJo" : {
+      "fold" : 1
+    },
+    "KJs" : {
+      "call" : 1
+    },
+    "KK" : {
+      "call" : 1
+    },
+    "KQo" : {
+      "call" : 1
+    },
+    "KQs" : {
+      "call" : 1
+    },
+    "KTo" : {
+      "fold" : 1
+    },
+    "KTs" : {
+      "call" : 1
+    },
+    "Q2o" : {
+      "fold" : 1
+    },
+    "Q2s" : {
+      "fold" : 1
+    },
+    "Q3o" : {
+      "fold" : 1
+    },
+    "Q3s" : {
+      "fold" : 1
+    },
+    "Q4o" : {
+      "fold" : 1
+    },
+    "Q4s" : {
+      "fold" : 1
+    },
+    "Q5o" : {
+      "fold" : 1
+    },
+    "Q5s" : {
+      "fold" : 1
+    },
+    "Q6o" : {
+      "fold" : 1
+    },
+    "Q6s" : {
+      "fold" : 1
+    },
+    "Q7o" : {
+      "fold" : 1
+    },
+    "Q7s" : {
+      "fold" : 1
+    },
+    "Q8o" : {
+      "fold" : 1
+    },
+    "Q8s" : {
+      "fold" : 1
+    },
+    "Q9o" : {
+      "fold" : 1
+    },
+    "Q9s" : {
+      "fold" : 1
+    },
+    "QJo" : {
+      "fold" : 1
+    },
+    "QJs" : {
+      "call" : 1
+    },
+    "QQ" : {
+      "call" : 1
+    },
+    "QTo" : {
+      "fold" : 1
+    },
+    "QTs" : {
+      "call" : 1
+    },
+    "T2o" : {
+      "fold" : 1
+    },
+    "T2s" : {
+      "fold" : 1
+    },
+    "T3o" : {
+      "fold" : 1
+    },
+    "T3s" : {
+      "fold" : 1
+    },
+    "T4o" : {
+      "fold" : 1
+    },
+    "T4s" : {
+      "fold" : 1
+    },
+    "T5o" : {
+      "fold" : 1
+    },
+    "T5s" : {
+      "fold" : 1
+    },
+    "T6o" : {
+      "fold" : 1
+    },
+    "T6s" : {
+      "fold" : 1
+    },
+    "T7o" : {
+      "fold" : 1
+    },
+    "T7s" : {
+      "fold" : 1
+    },
+    "T8o" : {
+      "fold" : 1
+    },
+    "T8s" : {
+      "fold" : 1
+    },
+    "T9o" : {
+      "fold" : 1
+    },
+    "T9s" : {
+      "fold" : 1
+    },
+    "TT" : {
+      "call" : 1
+    }
   },
   "id" : "mtt_9max_10bb_bb_vsopen",
   "source" : {

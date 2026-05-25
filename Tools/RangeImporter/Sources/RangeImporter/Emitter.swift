@@ -54,25 +54,23 @@ struct Emitter {
             // Strip near-zero entries before deciding shape.
             let cleaned = bucket.filter { $0.value > 0.001 }
             if cleaned.isEmpty { continue }
-            if cleaned.count == 1, let only = cleaned.first, abs(only.value - 1.0) < 0.001 {
-                // Pure action — emit as string for diff-friendliness. The
-                // crib vocabulary ("raise", "jam") must be mapped through
-                // preflopActionKey so the emitted JSON uses the app's
-                // PreflopAction enum rawValues ("raise25x", "shove").
-                // Without this mapping the app's decoder treats the value
-                // as an unknown action and silently falls back to fold —
-                // which silently broke every sharp-equilibrium chart
-                // (BTN/CO 100bb vsopen, most vs3bet charts) until caught
-                // by visual inspection.
-                hands[notation] = Self.preflopActionKey(forCoarse: only.key)
-            } else {
-                // Mixed — emit object with full-name PreflopAction keys.
-                var obj: [String: Double] = [:]
-                for (action, freq) in cleaned {
-                    obj[Self.preflopActionKey(forCoarse: action)] = freq
-                }
-                hands[notation] = obj
+            // Always emit as a dict — the app's RangeChart.decodeNestedHands
+            // uses `try? c.decode([String: HandFrequencies].self)` which
+            // requires a UNIFORM map shape. HandFrequencies' decoder only
+            // accepts `[String: Double]`, so any bare-string entry causes
+            // the whole-map decode to fail; the fallback then tries
+            // `[String: String]` which also fails (other entries are dicts),
+            // and `decodeNestedHands` returns `[:]` — padding all 169 hands
+            // to fold. Visible symptom: the entire Ranges grid renders as
+            // fold-coloured. Earlier we emitted bare strings for "diff-
+            // friendliness" on pure-action hands; that optimisation was
+            // silently breaking every chart with mixed pure + mixed
+            // strategies (i.e. virtually every chart).
+            var obj: [String: Double] = [:]
+            for (action, freq) in cleaned {
+                obj[Self.preflopActionKey(forCoarse: action)] = freq
             }
+            hands[notation] = obj
         }
 
         let publisherDict: [String: Any] = [
