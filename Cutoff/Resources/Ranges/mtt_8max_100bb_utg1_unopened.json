@@ -1,50 +1,124 @@
 {
   "format" : "NLHE_MTT_8MAX",
   "hands" : {
-    "22" : {
-      "fold" : 0.5,
-      "raise25x" : 0.5
-    },
+    "22" : "fold",
+    "32o" : "fold",
+    "32s" : "fold",
     "33" : {
-      "fold" : 0.5,
-      "raise25x" : 0.5
+      "fold" : 0.99809999999999999,
+      "raise25x" : 0.0019
     },
-    "44" : "raise",
-    "54s" : {
-      "fold" : 0.5,
-      "raise25x" : 0.5
+    "42o" : "fold",
+    "42s" : "fold",
+    "43o" : "fold",
+    "43s" : "fold",
+    "44" : "fold",
+    "52o" : "fold",
+    "52s" : "fold",
+    "53o" : "fold",
+    "53s" : "fold",
+    "54o" : "fold",
+    "54s" : "fold",
+    "55" : {
+      "fold" : 0.6855,
+      "raise25x" : 0.3145
     },
-    "55" : "raise",
-    "65s" : {
-      "fold" : 0.5,
-      "raise25x" : 0.5
+    "62o" : "fold",
+    "62s" : "fold",
+    "63o" : "fold",
+    "63s" : "fold",
+    "64o" : "fold",
+    "64s" : "fold",
+    "65o" : "fold",
+    "65s" : "fold",
+    "66" : {
+      "fold" : 0.1774,
+      "raise25x" : 0.8226
     },
-    "66" : "raise",
-    "76s" : {
-      "fold" : 0.5,
-      "raise25x" : 0.5
-    },
+    "72o" : "fold",
+    "72s" : "fold",
+    "73o" : "fold",
+    "73s" : "fold",
+    "74o" : "fold",
+    "74s" : "fold",
+    "75o" : "fold",
+    "75s" : "fold",
+    "76o" : "fold",
+    "76s" : "fold",
     "77" : "raise",
-    "87s" : {
-      "fold" : 0.5,
-      "raise25x" : 0.5
-    },
+    "82o" : "fold",
+    "82s" : "fold",
+    "83o" : "fold",
+    "83s" : "fold",
+    "84o" : "fold",
+    "84s" : "fold",
+    "85o" : "fold",
+    "85s" : "fold",
+    "86o" : "fold",
+    "86s" : "fold",
+    "87o" : "fold",
+    "87s" : "fold",
     "88" : "raise",
-    "98s" : {
-      "fold" : 0.5,
-      "raise25x" : 0.5
-    },
+    "92o" : "fold",
+    "92s" : "fold",
+    "93o" : "fold",
+    "93s" : "fold",
+    "94o" : "fold",
+    "94s" : "fold",
+    "95o" : "fold",
+    "95s" : "fold",
+    "96o" : "fold",
+    "96s" : "fold",
+    "97o" : "fold",
+    "97s" : "fold",
+    "98o" : "fold",
+    "98s" : "fold",
     "99" : "raise",
-    "A2s" : {
-      "fold" : 0.5,
-      "raise25x" : 0.5
+    "A2o" : {
+      "fold" : 0.99880000000000002,
+      "raise25x" : 0.0011999999999999999
     },
-    "A3s" : "raise",
-    "A4s" : "raise",
-    "A5s" : "raise",
-    "A6s" : "raise",
-    "A7s" : "raise",
+    "A2s" : {
+      "fold" : 0.97199999999999998,
+      "raise25x" : 0.028000000000000001
+    },
+    "A3o" : "fold",
+    "A3s" : {
+      "fold" : 0.98719999999999997,
+      "raise25x" : 0.012800000000000001
+    },
+    "A4o" : "fold",
+    "A4s" : {
+      "fold" : 0.9879,
+      "raise25x" : 0.0121
+    },
+    "A5o" : {
+      "fold" : 0.99860000000000004,
+      "raise25x" : 0.0014
+    },
+    "A5s" : {
+      "fold" : 0.98850000000000005,
+      "raise25x" : 0.0115
+    },
+    "A6o" : "fold",
+    "A6s" : {
+      "fold" : 0.94910000000000005,
+      "raise25x" : 0.050900000000000001
+    },
+    "A7o" : "fold",
+    "A7s" : {
+      "fold" : 0.98770000000000002,
+      "raise25x" : 0.0123
+    },
+    "A8o" : {
+      "fold" : 0.99490000000000001,
+      "raise25x" : 0.0051000000000000004
+    },
     "A8s" : "raise",
+    "A9o" : {
+      "fold" : 0.879,
+      "raise25x" : 0.121
+    },
     "A9s" : "raise",
     "AA" : "raise",
     "AJo" : "raise",
@@ -53,57 +127,151 @@
     "AKs" : "raise",
     "AQo" : "raise",
     "AQs" : "raise",
-    "ATo" : {
-      "fold" : 0.5,
-      "raise25x" : 0.5
-    },
+    "ATo" : "raise",
     "ATs" : "raise",
-    "J9s" : "raise",
+    "J2o" : "fold",
+    "J2s" : "fold",
+    "J3o" : "fold",
+    "J3s" : "fold",
+    "J4o" : "fold",
+    "J4s" : "fold",
+    "J5o" : "fold",
+    "J5s" : "fold",
+    "J6o" : "fold",
+    "J6s" : "fold",
+    "J7o" : "fold",
+    "J7s" : "fold",
+    "J8o" : "fold",
+    "J8s" : {
+      "fold" : 0.99870000000000003,
+      "raise25x" : 0.0012999999999999999
+    },
+    "J9o" : "fold",
+    "J9s" : {
+      "fold" : 0.98640000000000005,
+      "raise25x" : 0.013599999999999999
+    },
     "JJ" : "raise",
-    "JTs" : "raise",
+    "JTo" : "fold",
+    "JTs" : {
+      "fold" : 0.20230000000000001,
+      "raise25x" : 0.79769999999999996
+    },
+    "K2o" : "fold",
+    "K2s" : "fold",
+    "K3o" : "fold",
+    "K3s" : "fold",
+    "K4o" : "fold",
+    "K4s" : "fold",
+    "K5o" : "fold",
+    "K5s" : "fold",
+    "K6o" : "fold",
     "K6s" : {
-      "fold" : 0.5,
-      "raise25x" : 0.5
+      "fold" : 0.99150000000000005,
+      "raise25x" : 0.0085000000000000006
     },
+    "K7o" : "fold",
     "K7s" : {
-      "fold" : 0.5,
-      "raise25x" : 0.5
+      "fold" : 0.99819999999999998,
+      "raise25x" : 0.0018
     },
-    "K8s" : "raise",
+    "K8o" : "fold",
+    "K8s" : {
+      "fold" : 0.99839999999999995,
+      "raise25x" : 0.0016000000000000001
+    },
+    "K9o" : {
+      "fold" : 0.99870000000000003,
+      "raise25x" : 0.0012999999999999999
+    },
     "K9s" : "raise",
     "KJo" : {
-      "fold" : 0.5,
-      "raise25x" : 0.5
+      "fold" : 0.94420000000000004,
+      "raise25x" : 0.055800000000000002
     },
     "KJs" : "raise",
     "KK" : "raise",
-    "KQo" : "raise",
+    "KQo" : {
+      "fold" : 0.061400000000000003,
+      "raise25x" : 0.93859999999999999
+    },
     "KQs" : "raise",
+    "KTo" : {
+      "fold" : 0.9284,
+      "raise25x" : 0.071599999999999997
+    },
     "KTs" : "raise",
+    "Q2o" : "fold",
+    "Q2s" : "fold",
+    "Q3o" : "fold",
+    "Q3s" : "fold",
+    "Q4o" : "fold",
+    "Q4s" : "fold",
+    "Q5o" : "fold",
+    "Q5s" : {
+      "fold" : 0.998,
+      "raise25x" : 0.002
+    },
+    "Q6o" : "fold",
+    "Q6s" : "fold",
+    "Q7o" : "fold",
+    "Q7s" : "fold",
+    "Q8o" : "fold",
     "Q8s" : {
-      "fold" : 0.5,
-      "raise25x" : 0.5
+      "fold" : 0.99370000000000003,
+      "raise25x" : 0.0063
     },
-    "Q9s" : "raise",
+    "Q9o" : "fold",
+    "Q9s" : {
+      "fold" : 0.89019999999999999,
+      "raise25x" : 0.10979999999999999
+    },
     "QJo" : {
-      "fold" : 0.5,
-      "raise25x" : 0.5
+      "fold" : 0.92049999999999998,
+      "raise25x" : 0.079500000000000001
     },
-    "QJs" : "raise",
+    "QJs" : {
+      "fold" : 0.76980000000000004,
+      "raise25x" : 0.23019999999999999
+    },
     "QQ" : "raise",
-    "QTs" : "raise",
-    "T8s" : {
-      "fold" : 0.5,
-      "raise25x" : 0.5
+    "QTo" : {
+      "fold" : 0.99680000000000002,
+      "raise25x" : 0.0032000000000000002
     },
-    "T9s" : "raise",
+    "QTs" : {
+      "fold" : 0.32629999999999998,
+      "raise25x" : 0.67369999999999997
+    },
+    "T2o" : "fold",
+    "T2s" : "fold",
+    "T3o" : "fold",
+    "T3s" : "fold",
+    "T4o" : "fold",
+    "T4s" : "fold",
+    "T5o" : "fold",
+    "T5s" : "fold",
+    "T6o" : "fold",
+    "T6s" : "fold",
+    "T7o" : "fold",
+    "T7s" : "fold",
+    "T8o" : "fold",
+    "T8s" : "fold",
+    "T9o" : {
+      "fold" : 0.99890000000000001,
+      "raise25x" : 0.0011000000000000001
+    },
+    "T9s" : {
+      "fold" : 0.98129999999999995,
+      "raise25x" : 0.018700000000000001
+    },
     "TT" : "raise"
   },
   "id" : "mtt_8max_100bb_utg1_unopened",
   "source" : {
     "description" : "RangeConverter free PDF — 8-max 100bb 1bb ante (12.5%).",
     "publisher" : {
-      "accessedDate" : "2026-05-22",
+      "accessedDate" : "2026-05-25",
       "name" : "RangeConverter",
       "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
       "treeParams" : "2.5x open, 3.5x 3bet IP, 4.5x 3bet OOP, 2.3x 4bet IP, 2.75x 4bet OOP, SB vs BB 3.2bb",
