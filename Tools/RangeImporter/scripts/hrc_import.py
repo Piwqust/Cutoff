@@ -131,7 +131,19 @@ def describe_settings(s: dict) -> dict:
     eff_bb = round(eff_chips / bb_chips, 1) if bb_chips else 0
     eqmodel = s.get("eqmodel", {}).get("id", "unknown")
     tree = s.get("treeconfig", {}).get("preflop", {}).get("settings", {})
-    sizes = tree.get("PREFLOP_SIZES", [])
+    # Simple preset emits PREFLOP_SIZES; Advanced preset emits per-position
+    # SIZES_OPEN_*, SIZES_3BET_*, etc. Surface either schema for provenance.
+    sizes = tree.get("PREFLOP_SIZES")
+    if sizes is None:
+        advanced_keys = [
+            "SIZES_OPEN_OTHERS", "SIZES_OPEN_BU", "SIZES_OPEN_SB",
+            "SIZES_OPEN_BB", "SIZES_OPEN_BB_VS_SB",
+            "SIZES_3BET_IP", "SIZES_3BET_BB_VS_OTHER", "SIZES_3BET_BB_VS_SB",
+            "SIZES_3BET_SB_VS_BB", "SIZES_3BET_SB_VS_OTHER",
+            "SIZES_4BET_IP", "SIZES_4BET_OOP",
+            "SIZES_5BET_IP", "SIZES_5BET_OOP",
+        ]
+        sizes = {k: tree[k] for k in advanced_keys if k in tree}
     return {
         "n_seats": n_seats,
         "bb_chips": bb_chips,

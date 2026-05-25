@@ -1,0 +1,248 @@
+{
+  "format" : "NLHE_MTT_9MAX",
+  "hands" : {
+    "22" : "call",
+    "32o" : "call",
+    "32s" : {
+      "call" : 0.5,
+      "fold" : 0.5
+    },
+    "33" : "call",
+    "42o" : "fold",
+    "42s" : "fold",
+    "43o" : {
+      "call" : 0.5,
+      "fold" : 0.5
+    },
+    "43s" : "call",
+    "44" : "call",
+    "52o" : "fold",
+    "52s" : "fold",
+    "53o" : "fold",
+    "53s" : {
+      "call" : 0.5,
+      "fold" : 0.5
+    },
+    "54o" : {
+      "call" : 0.5,
+      "fold" : 0.5
+    },
+    "54s" : "call",
+    "55" : "call",
+    "62o" : "fold",
+    "62s" : "fold",
+    "63o" : "fold",
+    "63s" : "fold",
+    "64o" : "fold",
+    "64s" : "call",
+    "65o" : {
+      "call" : 0.5,
+      "fold" : 0.5
+    },
+    "65s" : "call",
+    "66" : "call",
+    "72o" : "fold",
+    "72s" : "fold",
+    "73o" : "fold",
+    "73s" : "fold",
+    "74o" : "fold",
+    "74s" : "fold",
+    "75o" : "fold",
+    "75s" : {
+      "call" : 0.5,
+      "fold" : 0.5
+    },
+    "76o" : {
+      "call" : 0.5,
+      "fold" : 0.5
+    },
+    "76s" : "call",
+    "77" : "call",
+    "82o" : "fold",
+    "82s" : "fold",
+    "83o" : "fold",
+    "83s" : "fold",
+    "84o" : "fold",
+    "84s" : "fold",
+    "85o" : "fold",
+    "85s" : "fold",
+    "86o" : "fold",
+    "86s" : "call",
+    "87o" : {
+      "call" : 0.5,
+      "fold" : 0.5
+    },
+    "87s" : "call",
+    "88" : "call",
+    "92o" : "fold",
+    "92s" : "fold",
+    "93o" : "fold",
+    "93s" : "fold",
+    "94o" : "fold",
+    "94s" : "fold",
+    "95o" : "fold",
+    "95s" : "fold",
+    "96o" : "fold",
+    "96s" : {
+      "call" : 0.5,
+      "fold" : 0.5
+    },
+    "97o" : "fold",
+    "97s" : "call",
+    "98o" : "fold",
+    "98s" : "call",
+    "99" : "call",
+    "A2o" : "fold",
+    "A2s" : "fold",
+    "A3o" : "fold",
+    "A3s" : "call",
+    "A4o" : "fold",
+    "A4s" : "call",
+    "A5o" : "fold",
+    "A5s" : "raise",
+    "A6o" : "fold",
+    "A6s" : {
+      "call" : 0.5,
+      "fold" : 0.5
+    },
+    "A7o" : "fold",
+    "A7s" : "call",
+    "A8o" : "fold",
+    "A8s" : {
+      "call" : 0.5,
+      "raise25x" : 0.5
+    },
+    "A9o" : "fold",
+    "A9s" : "call",
+    "AA" : "raise",
+    "AJo" : {
+      "call" : 0.5,
+      "raise25x" : 0.5
+    },
+    "AJs" : "call",
+    "AKo" : "fold",
+    "AKs" : "raise",
+    "AQo" : "call",
+    "AQs" : "call",
+    "ATo" : "fold",
+    "ATs" : "call",
+    "J2o" : "fold",
+    "J2s" : "fold",
+    "J3o" : "fold",
+    "J3s" : "fold",
+    "J4o" : "fold",
+    "J4s" : "fold",
+    "J5o" : "fold",
+    "J5s" : "fold",
+    "J6o" : "fold",
+    "J6s" : "fold",
+    "J7o" : "fold",
+    "J7s" : "fold",
+    "J8o" : "fold",
+    "J8s" : "fold",
+    "J9o" : "fold",
+    "J9s" : "call",
+    "JJ" : "call",
+    "JTo" : "fold",
+    "JTs" : "call",
+    "K2o" : "fold",
+    "K2s" : "fold",
+    "K3o" : "fold",
+    "K3s" : "fold",
+    "K4o" : "fold",
+    "K4s" : "call",
+    "K5o" : "fold",
+    "K5s" : "call",
+    "K6o" : "fold",
+    "K6s" : "call",
+    "K7o" : "fold",
+    "K7s" : {
+      "call" : 0.5,
+      "fold" : 0.5
+    },
+    "K8o" : "fold",
+    "K8s" : "fold",
+    "K9o" : "fold",
+    "K9s" : "call",
+    "KJo" : "fold",
+    "KJs" : {
+      "call" : 0.5,
+      "raise25x" : 0.5
+    },
+    "KK" : "raise",
+    "KQo" : {
+      "call" : 0.5,
+      "raise25x" : 0.5
+    },
+    "KQs" : "call",
+    "KTo" : "fold",
+    "KTs" : {
+      "call" : 0.5,
+      "raise25x" : 0.5
+    },
+    "Q2o" : "fold",
+    "Q2s" : "fold",
+    "Q3o" : "fold",
+    "Q3s" : "fold",
+    "Q4o" : "fold",
+    "Q4s" : "fold",
+    "Q5o" : "fold",
+    "Q5s" : "fold",
+    "Q6o" : "fold",
+    "Q6s" : "fold",
+    "Q7o" : "fold",
+    "Q7s" : "fold",
+    "Q8o" : "fold",
+    "Q8s" : "fold",
+    "Q9o" : "fold",
+    "Q9s" : {
+      "call" : 0.5,
+      "fold" : 0.5
+    },
+    "QJo" : "fold",
+    "QJs" : "call",
+    "QQ" : "raise",
+    "QTo" : "fold",
+    "QTs" : "call",
+    "T2o" : "fold",
+    "T2s" : "fold",
+    "T3o" : "fold",
+    "T3s" : "fold",
+    "T4o" : "fold",
+    "T5o" : "fold",
+    "T5s" : "fold",
+    "T6o" : "fold",
+    "T6s" : "fold",
+    "T7o" : "fold",
+    "T7s" : "call",
+    "T8o" : "fold",
+    "T8s" : "call",
+    "T9o" : "fold",
+    "T9s" : "call",
+    "TT" : {
+      "call" : 0.5,
+      "raise25x" : 0.5
+    }
+  },
+  "id" : "mtt_9max_60bb_lj_vs3bet",
+  "source" : {
+    "description" : "Adapted from RangeConverter 8-max baseline.",
+    "publisher" : {
+      "accessedDate" : "2026-05-25",
+      "name" : "RangeConverter",
+      "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
+      "treeParams" : "2.5x open, 3.5x 3bet IP, 4.5x 3bet OOP, 2.3x 4bet IP, 2.75x 4bet OOP, SB vs BB 3.2bb",
+      "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
+    },
+    "solver" : {
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante. Copied verbatim from 8-max LJ (same effective seat in 9-max)."
+    },
+    "type" : "published"
+  },
+  "spot" : {
+    "anteType" : "bigBlindAnte",
+    "facingAction" : "vs3Bet",
+    "position" : "LJ",
+    "stackDepthBB" : 60
+  }
+}
