@@ -302,6 +302,22 @@ def canonical_8max_specs() -> List[Tuple[str, str, int, List[str]]]:
     for seat in range(1, 8):  # UTG1..BB
         specs.append((POSITION_BY_SEAT_8MAX[seat], "vsopen",
                       seat, ["R"] + ["F"] * (seat - 1)))
+    # vs3bet (canonical): original opener faces a 3-bet from the next
+    # position, then everyone else folds, decision returns to opener.
+    # For multi-sized 3-bet trees, find_node_by_seq picks the first 'R'
+    # at the 3-bet step — typically the smaller (non-allin) size, which
+    # is the scenario where the opener's fold/call/4-bet decision is
+    # non-trivial. For jam-only 3-bet trees (e.g. 20bb), this falls
+    # back to "facing a 3-bet jam" — still valid, less rich.
+    for opener_seat in range(7):  # UTG..SB can be opener; BB can't open
+        threebettor_seat = opener_seat + 1  # always defined here (≤ 7)
+        seq = (["F"] * opener_seat
+               + ["R", "R"]
+               + ["F"] * (7 - threebettor_seat))
+        # sanity: total decisions before opener's response == 8
+        assert len(seq) == 8, f"vs3bet seq length {len(seq)} for seat {opener_seat}"
+        specs.append((POSITION_BY_SEAT_8MAX[opener_seat], "vs3bet",
+                      opener_seat, seq))
     return specs
 
 
