@@ -9,15 +9,18 @@
     "42s" : "fold",
     "43o" : "fold",
     "43s" : "fold",
-    "44" : "fold",
+    "44" : {
+      "fold" : 0.99880000000000002,
+      "raise25x" : 0.0012000000000000001
+    },
     "52o" : "fold",
     "52s" : "fold",
     "53o" : "fold",
     "53s" : "fold",
     "54o" : "fold",
     "55" : {
-      "fold" : 0.5,
-      "raise25x" : 0.5
+      "fold" : 0.98550000000000004,
+      "raise25x" : 0.014499999999999999
     },
     "62o" : "fold",
     "62s" : "fold",
@@ -27,8 +30,8 @@
     "64s" : "fold",
     "65o" : "fold",
     "66" : {
-      "fold" : 0.5,
-      "raise25x" : 0.5
+      "fold" : 0.5736,
+      "raise25x" : 0.4264
     },
     "72o" : "fold",
     "72s" : "fold",
@@ -39,10 +42,7 @@
     "75o" : "fold",
     "75s" : "fold",
     "76o" : "fold",
-    "77" : {
-      "fold" : 0.5,
-      "raise25x" : 0.5
-    },
+    "77" : "raise",
     "82o" : "fold",
     "82s" : "fold",
     "83o" : "fold",
@@ -72,16 +72,34 @@
     "A2o" : "fold",
     "A3o" : "fold",
     "A4o" : "fold",
-    "A4s" : "raise",
-    "A5o" : "fold",
-    "A5s" : "raise",
+    "A4s" : "fold",
+    "A5o" : {
+      "fold" : 0.99850000000000005,
+      "raise25x" : 0.0015
+    },
+    "A5s" : {
+      "fold" : 0.67010000000000003,
+      "raise25x" : 0.32990000000000003
+    },
     "A6o" : "fold",
-    "A6s" : "raise",
+    "A6s" : {
+      "fold" : 0.99680000000000002,
+      "raise25x" : 0.0032000000000000002
+    },
     "A7o" : "fold",
-    "A7s" : "raise",
-    "A8o" : "fold",
+    "A7s" : {
+      "fold" : 0.60809999999999997,
+      "raise25x" : 0.39190000000000003
+    },
+    "A8o" : {
+      "fold" : 0.97760000000000002,
+      "raise25x" : 0.0224
+    },
     "A8s" : "raise",
-    "A9o" : "fold",
+    "A9o" : {
+      "fold" : 0.96989999999999998,
+      "raise25x" : 0.030100000000000005
+    },
     "A9s" : "raise",
     "AA" : "raise",
     "AJo" : "raise",
@@ -107,9 +125,15 @@
     "J8o" : "fold",
     "J8s" : "fold",
     "J9o" : "fold",
-    "J9s" : "raise",
+    "J9s" : {
+      "fold" : 0.99619999999999997,
+      "raise25x" : 0.0038
+    },
     "JJ" : "raise",
-    "JTs" : "raise",
+    "JTs" : {
+      "fold" : 0.1772,
+      "raise25x" : 0.82279999999999998
+    },
     "K2o" : "fold",
     "K2s" : "fold",
     "K3o" : "fold",
@@ -123,15 +147,21 @@
     "K7o" : "fold",
     "K8o" : "fold",
     "K9o" : "fold",
-    "K9s" : "raise",
-    "KJo" : "raise",
+    "K9s" : {
+      "fold" : 0.7641,
+      "raise25x" : 0.2359
+    },
+    "KJo" : {
+      "fold" : 0.074999999999999997,
+      "raise25x" : 0.92500000000000004
+    },
     "KJs" : "raise",
     "KK" : "raise",
     "KQo" : "raise",
     "KQs" : "raise",
     "KTo" : {
-      "fold" : 0.5,
-      "raise25x" : 0.5
+      "fold" : 0.99839999999999995,
+      "raise25x" : 0.0016000000000000001
     },
     "KTs" : "raise",
     "Q2o" : "fold",
@@ -145,19 +175,30 @@
     "Q6o" : "fold",
     "Q6s" : "fold",
     "Q7o" : "fold",
-    "Q7s" : "fold",
+    "Q7s" : {
+      "fold" : 0.99860000000000004,
+      "raise25x" : 0.0014
+    },
     "Q8o" : "fold",
     "Q8s" : "fold",
     "Q9o" : "fold",
-    "Q9s" : "raise",
+    "Q9s" : {
+      "fold" : 0.99709999999999999,
+      "raise25x" : 0.0028999999999999998
+    },
     "QJo" : {
-      "fold" : 0.5,
-      "raise25x" : 0.5
+      "fold" : 0.99790000000000001,
+      "raise25x" : 0.0021000000000000003
     },
     "QJs" : "raise",
     "QQ" : "raise",
-    "QTo" : "fold",
-    "QTs" : "raise",
+    "QTo" : {
+      "fold" : 0.999
+    },
+    "QTs" : {
+      "fold" : 0.091299999999999992,
+      "raise25x" : 0.90869999999999995
+    },
     "T2o" : "fold",
     "T2s" : "fold",
     "T3o" : "fold",
@@ -171,15 +212,15 @@
     "T7o" : "fold",
     "T7s" : "fold",
     "T8o" : "fold",
-    "T8s" : "raise",
-    "T9s" : "raise",
+    "T8s" : "fold",
+    "T9s" : "fold",
     "TT" : "raise"
   },
   "id" : "mtt_9max_30bb_utg_unopened",
   "source" : {
     "description" : "Adapted from RangeConverter 8-max baseline.",
     "publisher" : {
-      "accessedDate" : "2026-05-22",
+      "accessedDate" : "2026-05-25",
       "name" : "RangeConverter",
       "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
       "treeParams" : "2.5x open, 3.5x 3bet IP, 4.5x 3bet OOP, 2.3x 4bet IP, 2.75x 4bet OOP, SB vs BB 3.2bb",
