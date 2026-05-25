@@ -43,6 +43,9 @@ struct Emitter {
     }
 
     func emit(slug: ChartSlug, sheet: CribSheet) throws -> Data {
+        // Prefer per-sheet tree-param override (e.g. from HRC crib headers).
+        // Falls back to the publisher's hardcoded params if absent.
+        let resolvedTreeParams = sheet.treeParamsOverride ?? publisher.treeParams
         // Build the hand map: each notation → either a string (pure coarse
         // action) or an object (mixed frequencies). Pure-fold hands are
         // omitted; RangeChart's decoder treats absence as 100% fold.
@@ -69,7 +72,7 @@ struct Emitter {
             "product": publisher.product,
             "url": publisher.url,
             "accessedDate": publisher.accessedDate,
-            "treeParams": publisher.treeParams,
+            "treeParams": resolvedTreeParams,
         ]
 
         var assumptions = publisher.assumptions

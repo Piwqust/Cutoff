@@ -555,7 +555,7 @@
       "accessedDate" : "2026-05-25",
       "name" : "RangeConverter",
       "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
-      "treeParams" : "2.5x open, 3.5x 3bet IP, 4.5x 3bet OOP, 2.3x 4bet IP, 2.75x 4bet OOP, SB vs BB 3.2bb",
+      "treeParams" : "HRC v3 Advanced ChipEV @ 50bb: open 2.2bb + 1.0bb; BU 2.2bb + 1.0bb; SB 2.8bb + 1.0bb; 3-bet IP 2.5x + 1.0x; 3-bet BB-vs-others 3.3x + 1.0x; 4-bet IP 90.0%, all-in",
       "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
     },
     "solver" : {

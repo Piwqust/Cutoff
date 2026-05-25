@@ -18,6 +18,17 @@ struct CribSheet {
     /// nonzero-frequency actions are stored. Missing combos = 100% fold.
     let entries: [String: [String: Double]]
 
+    /// Optional tree-parameter override harvested from CSV `# TreeParams:`
+    /// header line. When present, the Emitter prefers this string over the
+    /// hardcoded `PublisherMetadata.treeParams`. Used by HRC-derived crib
+    /// CSVs to carry per-depth solver settings into the emitted JSON.
+    let treeParamsOverride: String?
+
+    init(entries: [String: [String: Double]], treeParamsOverride: String? = nil) {
+        self.entries = entries
+        self.treeParamsOverride = treeParamsOverride
+    }
+
     /// Validation errors discovered while parsing.
     struct ValidationError: Error, CustomStringConvertible {
         let messages: [String]
@@ -28,9 +39,19 @@ struct CribSheet {
     static func parse(_ csv: String, sourceName: String = "<input>") throws -> CribSheet {
         var entries: [String: [String: Double]] = [:]
         var errors: [String] = []
+        var treeParamsOverride: String? = nil
 
         for (lineNumber, rawLine) in csv.split(separator: "\n", omittingEmptySubsequences: false).enumerated() {
             let line = rawLine.trimmingCharacters(in: .whitespaces)
+            // Harvest tree-param hint from a `# TreeParams: <...>` provenance
+            // line before skipping comments. First match wins.
+            if treeParamsOverride == nil, line.hasPrefix("#") {
+                let stripped = String(line.dropFirst()).trimmingCharacters(in: .whitespaces)
+                if stripped.lowercased().hasPrefix("treeparams:") {
+                    let after = stripped.index(stripped.startIndex, offsetBy: "treeparams:".count)
+                    treeParamsOverride = String(stripped[after...]).trimmingCharacters(in: .whitespaces)
+                }
+            }
             if line.isEmpty || line.hasPrefix("#") { continue }
             // Skip header rows anywhere in the file (multiple `# comment` lines may
             // push it past line 0). A header is any non-comment line that starts
@@ -81,7 +102,7 @@ struct CribSheet {
         if !errors.isEmpty {
             throw ValidationError(messages: errors)
         }
-        return CribSheet(entries: entries)
+        return CribSheet(entries: entries, treeParamsOverride: treeParamsOverride)
     }
 
     /// Number of canonical hands that received a nonzero strategy.
