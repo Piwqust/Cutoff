@@ -1,5 +1,5 @@
 {
-  "format" : "NLHE_MTT_9MAX",
+  "format" : "NLHE_MTT_8MAX",
   "hands" : {
     "22" : "fold",
     "32o" : "fold",
@@ -9,23 +9,33 @@
     "42s" : "fold",
     "43o" : "fold",
     "43s" : "fold",
-    "44" : "fold",
+    "44" : {
+      "call" : 0.5,
+      "fold" : 0.5
+    },
     "52o" : "fold",
     "52s" : "fold",
     "53o" : "fold",
     "53s" : "fold",
-    "54o" : "fold",
+    "54o" : {
+      "call" : 0.5,
+      "fold" : 0.5
+    },
     "54s" : "fold",
-    "55" : "fold",
+    "55" : "call",
     "62o" : "fold",
     "62s" : "fold",
     "63o" : "fold",
     "63s" : "fold",
     "64o" : "fold",
     "64s" : "fold",
-    "65o" : "fold",
-    "65s" : "fold",
-    "66" : "fold",
+    "65o" : "call",
+    "65s" : {
+      "call" : 0.5,
+      "fold" : 0.5
+    },
+    "66" : "call",
+    "72o" : "fold",
     "72s" : "fold",
     "73o" : "fold",
     "73s" : "fold",
@@ -34,11 +44,11 @@
     "75o" : "fold",
     "75s" : "fold",
     "76o" : "call",
-    "76s" : {
+    "76s" : "fold",
+    "77" : {
       "call" : 0.5,
       "fold" : 0.5
     },
-    "77" : "call",
     "82o" : "fold",
     "82s" : "fold",
     "83o" : "fold",
@@ -50,7 +60,10 @@
     "86o" : "fold",
     "86s" : "fold",
     "87o" : "call",
-    "87s" : "fold",
+    "87s" : {
+      "call" : 0.5,
+      "fold" : 0.5
+    },
     "88" : "call",
     "92o" : "fold",
     "92s" : "fold",
@@ -59,45 +72,43 @@
     "94o" : "fold",
     "94s" : "fold",
     "95o" : "fold",
-    "95s" : "fold",
     "96o" : "fold",
     "96s" : "fold",
     "97o" : "fold",
     "97s" : "fold",
-    "98o" : {
+    "98o" : "fold",
+    "98s" : {
       "call" : 0.5,
       "fold" : 0.5
     },
-    "98s" : "fold",
     "99" : "call",
     "A2o" : "fold",
     "A2s" : "fold",
     "A3o" : "fold",
     "A3s" : "fold",
-    "A4o" : "fold",
     "A4s" : "fold",
     "A5o" : "fold",
-    "A5s" : "fold",
-    "A6o" : "fold",
-    "A6s" : "fold",
-    "A7o" : "fold",
-    "A7s" : "fold",
-    "A8o" : "fold",
-    "A8s" : "fold",
-    "A9o" : "fold",
-    "A9s" : "fold",
-    "AA" : "call",
-    "AJo" : {
+    "A5s" : {
       "call" : 0.5,
       "fold" : 0.5
     },
+    "A6o" : "fold",
+    "A6s" : "call",
+    "A7o" : "fold",
+    "A7s" : "call",
+    "A8o" : "fold",
+    "A8s" : "call",
+    "A9o" : "fold",
+    "A9s" : "call",
+    "AA" : "call",
+    "AJo" : "fold",
     "AJs" : "call",
-    "AKo" : "call",
+    "AKo" : "fold",
     "AKs" : "call",
-    "AQo" : "call",
+    "AQo" : "fold",
     "AQs" : "call",
     "ATo" : "fold",
-    "ATs" : "fold",
+    "ATs" : "call",
     "J2o" : "fold",
     "J2s" : "fold",
     "J3o" : "fold",
@@ -111,15 +122,15 @@
     "J7o" : "fold",
     "J7s" : "fold",
     "J8o" : "fold",
-    "J8s" : "fold",
-    "J9o" : "fold",
-    "J9s" : "fold",
-    "JJ" : "call",
-    "JTo" : {
+    "J8s" : {
       "call" : 0.5,
       "fold" : 0.5
     },
-    "JTs" : "fold",
+    "J9o" : "fold",
+    "J9s" : "call",
+    "JJ" : "call",
+    "JTo" : "call",
+    "JTs" : "call",
     "K2o" : "fold",
     "K2s" : "fold",
     "K3o" : "fold",
@@ -135,14 +146,17 @@
     "K8o" : "fold",
     "K8s" : "fold",
     "K9o" : "fold",
-    "K9s" : "fold",
-    "KJo" : "fold",
+    "K9s" : {
+      "call" : 0.5,
+      "fold" : 0.5
+    },
+    "KJo" : "call",
     "KJs" : "call",
     "KK" : "call",
     "KQo" : "fold",
     "KQs" : "call",
-    "KTo" : "fold",
-    "KTs" : "fold",
+    "KTo" : "call",
+    "KTs" : "call",
     "Q2o" : "fold",
     "Q2s" : "fold",
     "Q3o" : "fold",
@@ -160,10 +174,12 @@
     "Q9o" : "fold",
     "Q9s" : "fold",
     "QJo" : "fold",
-    "QJs" : "fold",
+    "QJs" : {
+      "call" : 0.5,
+      "fold" : 0.5
+    },
     "QQ" : "call",
     "QTo" : "fold",
-    "QTs" : "fold",
     "T2o" : "fold",
     "T2s" : "fold",
     "T3o" : "fold",
@@ -177,17 +193,14 @@
     "T7o" : "fold",
     "T7s" : "fold",
     "T8o" : "fold",
-    "T8s" : "fold",
-    "T9o" : {
-      "call" : 0.5,
-      "fold" : 0.5
-    },
-    "T9s" : "fold",
+    "T8s" : "call",
+    "T9o" : "fold",
+    "T9s" : "call",
     "TT" : "call"
   },
-  "id" : "mtt_9max_20bb_lj_vs3bet",
+  "id" : "mtt_8max_20bb_sb_vs3bet",
   "source" : {
-    "description" : "Adapted from RangeConverter 8-max baseline.",
+    "description" : "RangeConverter free PDF — 8-max 20bb 1bb ante (12.5%).",
     "publisher" : {
       "accessedDate" : "2026-05-25",
       "name" : "RangeConverter",
@@ -196,14 +209,14 @@
       "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
     },
     "solver" : {
-      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante. Copied verbatim from 8-max LJ (same effective seat in 9-max)."
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante."
     },
     "type" : "published"
   },
   "spot" : {
     "anteType" : "bigBlindAnte",
     "facingAction" : "vs3Bet",
-    "position" : "LJ",
+    "position" : "SB",
     "stackDepthBB" : 20
   }
 }
