@@ -45,7 +45,7 @@
     "75s" : "fold",
     "76o" : "fold",
     "76s" : "fold",
-    "77" : "raise",
+    "77" : "raise25x",
     "82o" : "fold",
     "82s" : "fold",
     "83o" : "fold",
@@ -61,7 +61,7 @@
     },
     "87o" : "fold",
     "87s" : "fold",
-    "88" : "raise",
+    "88" : "raise25x",
     "92o" : "fold",
     "92s" : "fold",
     "93o" : "fold",
@@ -76,7 +76,7 @@
     "97s" : "fold",
     "98o" : "fold",
     "98s" : "fold",
-    "99" : "raise",
+    "99" : "raise25x",
     "A2o" : "fold",
     "A2s" : {
       "fold" : 0.99099999999999999,
@@ -135,15 +135,15 @@
       "fold" : 0.29630000000000001,
       "raise25x" : 0.70369999999999999
     },
-    "AA" : "raise",
-    "AJo" : "raise",
-    "AJs" : "raise",
-    "AKo" : "raise",
-    "AKs" : "raise",
-    "AQo" : "raise",
-    "AQs" : "raise",
-    "ATo" : "raise",
-    "ATs" : "raise",
+    "AA" : "raise25x",
+    "AJo" : "raise25x",
+    "AJs" : "raise25x",
+    "AKo" : "raise25x",
+    "AKs" : "raise25x",
+    "AQo" : "raise25x",
+    "AQs" : "raise25x",
+    "ATo" : "raise25x",
+    "ATs" : "raise25x",
     "J2o" : "fold",
     "J2s" : "fold",
     "J3o" : "fold",
@@ -166,7 +166,7 @@
       "fold" : 0.98909999999999998,
       "raise25x" : 0.0109
     },
-    "JJ" : "raise",
+    "JJ" : "raise25x",
     "JTo" : {
       "fold" : 0.99729999999999996,
       "raise25x" : 0.0027000000000000001
@@ -215,15 +215,15 @@
       "fold" : 0.1174,
       "raise25x" : 0.88260000000000005
     },
-    "KJs" : "raise",
-    "KK" : "raise",
-    "KQo" : "raise",
-    "KQs" : "raise",
+    "KJs" : "raise25x",
+    "KK" : "raise25x",
+    "KQo" : "raise25x",
+    "KQs" : "raise25x",
     "KTo" : {
       "fold" : 0.99760000000000004,
       "raise25x" : 0.0023999999999999998
     },
-    "KTs" : "raise",
+    "KTs" : "raise25x",
     "Q2o" : "fold",
     "Q2s" : "fold",
     "Q3o" : "fold",
@@ -260,7 +260,7 @@
       "fold" : 0.0112,
       "raise25x" : 0.98880000000000001
     },
-    "QQ" : "raise",
+    "QQ" : "raise25x",
     "QTo" : {
       "fold" : 0.98870000000000002,
       "raise25x" : 0.011299999999999999
@@ -288,7 +288,7 @@
       "fold" : 0.99890000000000001,
       "raise25x" : 0.0011000000000000001
     },
-    "TT" : "raise"
+    "TT" : "raise25x"
   },
   "id" : "mtt_8max_100bb_utg1_unopened",
   "source" : {

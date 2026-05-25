@@ -55,8 +55,16 @@ struct Emitter {
             let cleaned = bucket.filter { $0.value > 0.001 }
             if cleaned.isEmpty { continue }
             if cleaned.count == 1, let only = cleaned.first, abs(only.value - 1.0) < 0.001 {
-                // Pure action — emit as string for diff-friendliness.
-                hands[notation] = only.key
+                // Pure action — emit as string for diff-friendliness. The
+                // crib vocabulary ("raise", "jam") must be mapped through
+                // preflopActionKey so the emitted JSON uses the app's
+                // PreflopAction enum rawValues ("raise25x", "shove").
+                // Without this mapping the app's decoder treats the value
+                // as an unknown action and silently falls back to fold —
+                // which silently broke every sharp-equilibrium chart
+                // (BTN/CO 100bb vsopen, most vs3bet charts) until caught
+                // by visual inspection.
+                hands[notation] = Self.preflopActionKey(forCoarse: only.key)
             } else {
                 // Mixed — emit object with full-name PreflopAction keys.
                 var obj: [String: Double] = [:]

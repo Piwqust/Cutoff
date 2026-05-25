@@ -153,7 +153,7 @@
     "A8s" : "call",
     "A9o" : "call",
     "A9s" : "call",
-    "AA" : "raise",
+    "AA" : "raise25x",
     "AJo" : "call",
     "AJs" : {
       "call" : 0.99650000000000005,
@@ -260,7 +260,7 @@
       "fold" : 0.0027000000000000001,
       "raise25x" : 0.31780000000000003
     },
-    "KK" : "raise",
+    "KK" : "raise25x",
     "KQo" : "call",
     "KQs" : "call",
     "KTo" : "call",

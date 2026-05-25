@@ -34,7 +34,7 @@
     "64s" : "fold",
     "65o" : "fold",
     "65s" : "fold",
-    "66" : "raise",
+    "66" : "raise25x",
     "72o" : "fold",
     "72s" : "fold",
     "73o" : "fold",
@@ -45,7 +45,7 @@
     "75s" : "fold",
     "76o" : "fold",
     "76s" : "fold",
-    "77" : "raise",
+    "77" : "raise25x",
     "82o" : "fold",
     "82s" : "fold",
     "83o" : "fold",
@@ -63,7 +63,7 @@
       "fold" : 0.99180000000000001,
       "raise25x" : 0.008199999999999999
     },
-    "88" : "raise",
+    "88" : "raise25x",
     "92o" : "fold",
     "92s" : "fold",
     "93o" : "fold",
@@ -81,7 +81,7 @@
       "fold" : 0.26950000000000002,
       "raise25x" : 0.73050000000000004
     },
-    "99" : "raise",
+    "99" : "raise25x",
     "A2o" : {
       "fold" : 0.036700000000000003,
       "raise25x" : 0.96330000000000005
@@ -130,24 +130,24 @@
       "fold" : 0.0064000000000000003,
       "raise25x" : 0.99360000000000004
     },
-    "A8o" : "raise",
+    "A8o" : "raise25x",
     "A8s" : {
       "fold" : 0.011000000000000001,
       "raise25x" : 0.98899999999999999
     },
-    "A9o" : "raise",
+    "A9o" : "raise25x",
     "A9s" : {
       "raise25x" : 0.999
     },
-    "AA" : "raise",
-    "AJo" : "raise",
-    "AJs" : "raise",
-    "AKo" : "raise",
-    "AKs" : "raise",
-    "AQo" : "raise",
-    "AQs" : "raise",
-    "ATo" : "raise",
-    "ATs" : "raise",
+    "AA" : "raise25x",
+    "AJo" : "raise25x",
+    "AJs" : "raise25x",
+    "AKo" : "raise25x",
+    "AKs" : "raise25x",
+    "AQo" : "raise25x",
+    "AQs" : "raise25x",
+    "ATo" : "raise25x",
+    "ATs" : "raise25x",
     "J2o" : "fold",
     "J2s" : "fold",
     "J3o" : "fold",
@@ -179,7 +179,7 @@
       "fold" : 0.062,
       "raise25x" : 0.93799999999999994
     },
-    "JJ" : "raise",
+    "JJ" : "raise25x",
     "JTo" : {
       "fold" : 0.073800000000000004,
       "raise25x" : 0.92620000000000002
@@ -240,16 +240,16 @@
       "fold" : 0.061800000000000001,
       "raise25x" : 0.93820000000000003
     },
-    "KJo" : "raise",
-    "KJs" : "raise",
-    "KK" : "raise",
-    "KQo" : "raise",
-    "KQs" : "raise",
+    "KJo" : "raise25x",
+    "KJs" : "raise25x",
+    "KK" : "raise25x",
+    "KQo" : "raise25x",
+    "KQs" : "raise25x",
     "KTo" : {
       "fold" : 0.0073999999999999995,
       "raise25x" : 0.99260000000000004
     },
-    "KTs" : "raise",
+    "KTs" : "raise25x",
     "Q2o" : "fold",
     "Q2s" : "fold",
     "Q3o" : "fold",
@@ -292,7 +292,7 @@
       "fold" : 0.0144,
       "raise25x" : 0.98560000000000003
     },
-    "QQ" : "raise",
+    "QQ" : "raise25x",
     "QTo" : {
       "fold" : 0.0109,
       "raise25x" : 0.98909999999999998
@@ -326,7 +326,7 @@
       "fold" : 0.99750000000000005,
       "raise25x" : 0.0025000000000000001
     },
-    "TT" : "raise"
+    "TT" : "raise25x"
   },
   "id" : "mtt_9max_50bb_co_unopened",
   "source" : {

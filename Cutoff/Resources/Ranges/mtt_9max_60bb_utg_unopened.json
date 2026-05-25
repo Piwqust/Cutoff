@@ -39,7 +39,7 @@
     "75o" : "fold",
     "75s" : "fold",
     "76o" : "fold",
-    "77" : "raise",
+    "77" : "raise25x",
     "82o" : "fold",
     "82s" : "fold",
     "83o" : "fold",
@@ -51,7 +51,7 @@
     "86o" : "fold",
     "86s" : "fold",
     "87o" : "fold",
-    "88" : "raise",
+    "88" : "raise25x",
     "92o" : "fold",
     "92s" : "fold",
     "93o" : "fold",
@@ -65,7 +65,7 @@
     "97o" : "fold",
     "97s" : "fold",
     "98o" : "fold",
-    "99" : "raise",
+    "99" : "raise25x",
     "A2o" : "fold",
     "A3o" : "fold",
     "A4o" : "fold",
@@ -102,16 +102,16 @@
       "fold" : 0.89829999999999999,
       "raise25x" : 0.1017
     },
-    "A9s" : "raise",
-    "AA" : "raise",
-    "AJo" : "raise",
-    "AJs" : "raise",
-    "AKo" : "raise",
-    "AKs" : "raise",
-    "AQo" : "raise",
-    "AQs" : "raise",
-    "ATo" : "raise",
-    "ATs" : "raise",
+    "A9s" : "raise25x",
+    "AA" : "raise25x",
+    "AJo" : "raise25x",
+    "AJs" : "raise25x",
+    "AKo" : "raise25x",
+    "AKs" : "raise25x",
+    "AQo" : "raise25x",
+    "AQs" : "raise25x",
+    "ATo" : "raise25x",
+    "ATs" : "raise25x",
     "J2o" : "fold",
     "J2s" : "fold",
     "J3o" : "fold",
@@ -134,7 +134,7 @@
       "fold" : 0.5585,
       "raise25x" : 0.4415
     },
-    "JJ" : "raise",
+    "JJ" : "raise25x",
     "JTs" : {
       "fold" : 0.91979999999999995,
       "raise25x" : 0.080199999999999994
@@ -169,15 +169,15 @@
       "fold" : 0.74729999999999996,
       "raise25x" : 0.25269999999999998
     },
-    "KJs" : "raise",
-    "KK" : "raise",
-    "KQo" : "raise",
-    "KQs" : "raise",
+    "KJs" : "raise25x",
+    "KK" : "raise25x",
+    "KQo" : "raise25x",
+    "KQs" : "raise25x",
     "KTo" : {
       "fold" : 0.96020000000000005,
       "raise25x" : 0.039799999999999995
     },
-    "KTs" : "raise",
+    "KTs" : "raise25x",
     "Q2o" : "fold",
     "Q2s" : "fold",
     "Q3o" : "fold",
@@ -208,12 +208,12 @@
       "fold" : 0.2828,
       "raise25x" : 0.71719999999999995
     },
-    "QQ" : "raise",
+    "QQ" : "raise25x",
     "QTo" : {
       "fold" : 0.997,
       "raise25x" : 0.0030000000000000001
     },
-    "QTs" : "raise",
+    "QTs" : "raise25x",
     "T2o" : "fold",
     "T2s" : "fold",
     "T3o" : "fold",
@@ -235,7 +235,7 @@
       "fold" : 0.98880000000000001,
       "raise25x" : 0.0112
     },
-    "TT" : "raise"
+    "TT" : "raise25x"
   },
   "id" : "mtt_9max_60bb_utg_unopened",
   "source" : {

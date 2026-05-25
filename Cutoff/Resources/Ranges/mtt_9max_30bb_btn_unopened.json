@@ -25,7 +25,7 @@
     "53s" : "fold",
     "54o" : "fold",
     "54s" : "fold",
-    "55" : "raise",
+    "55" : "raise25x",
     "62o" : "fold",
     "62s" : "fold",
     "63o" : "fold",
@@ -34,7 +34,7 @@
     "64s" : "fold",
     "65o" : "fold",
     "65s" : "fold",
-    "66" : "raise",
+    "66" : "raise25x",
     "72o" : "fold",
     "72s" : "fold",
     "73o" : "fold",
@@ -45,7 +45,7 @@
     "75s" : "fold",
     "76o" : "fold",
     "76s" : "fold",
-    "77" : "raise",
+    "77" : "raise25x",
     "82o" : "fold",
     "82s" : "fold",
     "83o" : "fold",
@@ -58,7 +58,7 @@
     "86s" : "fold",
     "87o" : "fold",
     "87s" : "fold",
-    "88" : "raise",
+    "88" : "raise25x",
     "92o" : "fold",
     "92s" : "fold",
     "93o" : "fold",
@@ -76,7 +76,7 @@
       "fold" : 0.99690000000000001,
       "raise25x" : 0.0030999999999999999
     },
-    "99" : "raise",
+    "99" : "raise25x",
     "A2o" : {
       "fold" : 0.015099999999999999,
       "raise25x" : 0.9849
@@ -97,8 +97,8 @@
       "fold" : 0.0015,
       "raise25x" : 0.99850000000000005
     },
-    "A4s" : "raise",
-    "A5o" : "raise",
+    "A4s" : "raise25x",
+    "A5o" : "raise25x",
     "A5s" : {
       "fold" : 0.12520000000000001,
       "raise25x" : 0.87480000000000002
@@ -115,20 +115,20 @@
       "fold" : 0.0024000000000000002,
       "raise25x" : 0.99760000000000004
     },
-    "A7s" : "raise",
-    "A8o" : "raise",
-    "A8s" : "raise",
-    "A9o" : "raise",
-    "A9s" : "raise",
-    "AA" : "raise",
-    "AJo" : "raise",
-    "AJs" : "raise",
-    "AKo" : "raise",
-    "AKs" : "raise",
-    "AQo" : "raise",
-    "AQs" : "raise",
-    "ATo" : "raise",
-    "ATs" : "raise",
+    "A7s" : "raise25x",
+    "A8o" : "raise25x",
+    "A8s" : "raise25x",
+    "A9o" : "raise25x",
+    "A9s" : "raise25x",
+    "AA" : "raise25x",
+    "AJo" : "raise25x",
+    "AJs" : "raise25x",
+    "AKo" : "raise25x",
+    "AKs" : "raise25x",
+    "AQo" : "raise25x",
+    "AQs" : "raise25x",
+    "ATo" : "raise25x",
+    "ATs" : "raise25x",
     "J2o" : "fold",
     "J2s" : "fold",
     "J3o" : "fold",
@@ -157,8 +157,8 @@
       "fold" : 0.29449999999999998,
       "raise25x" : 0.70550000000000002
     },
-    "JJ" : "raise",
-    "JTo" : "raise",
+    "JJ" : "raise25x",
+    "JTo" : "raise25x",
     "JTs" : {
       "fold" : 0.026600000000000002,
       "raise25x" : 0.97340000000000004
@@ -214,15 +214,15 @@
       "fold" : 0.002,
       "raise25x" : 0.998
     },
-    "K9s" : "raise",
-    "KJo" : "raise",
-    "KJs" : "raise",
-    "KK" : "raise",
+    "K9s" : "raise25x",
+    "KJo" : "raise25x",
+    "KJs" : "raise25x",
+    "KK" : "raise25x",
     "KQo" : {
       "fold" : 0.0012000000000000001,
       "raise25x" : 0.99880000000000002
     },
-    "KQs" : "raise",
+    "KQs" : "raise25x",
     "KTo" : {
       "fold" : 0.0013000000000000002,
       "raise25x" : 0.99870000000000003
@@ -285,8 +285,8 @@
       "fold" : 0.0012000000000000001,
       "raise25x" : 0.99880000000000002
     },
-    "QQ" : "raise",
-    "QTo" : "raise",
+    "QQ" : "raise25x",
+    "QTo" : "raise25x",
     "QTs" : {
       "fold" : 0.0054000000000000003,
       "raise25x" : 0.99460000000000004
@@ -316,7 +316,7 @@
       "fold" : 0.74119999999999997,
       "raise25x" : 0.25879999999999997
     },
-    "TT" : "raise"
+    "TT" : "raise25x"
   },
   "id" : "mtt_9max_30bb_btn_unopened",
   "source" : {

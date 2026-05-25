@@ -48,7 +48,7 @@
     "75s" : "fold",
     "76o" : "fold",
     "76s" : "fold",
-    "77" : "raise",
+    "77" : "raise25x",
     "82o" : "fold",
     "82s" : "fold",
     "83o" : "fold",
@@ -61,7 +61,7 @@
     "86s" : "fold",
     "87o" : "fold",
     "87s" : "fold",
-    "88" : "raise",
+    "88" : "raise25x",
     "92o" : "fold",
     "92s" : "fold",
     "93o" : "fold",
@@ -76,7 +76,7 @@
     "97s" : "fold",
     "98o" : "fold",
     "98s" : "fold",
-    "99" : "raise",
+    "99" : "raise25x",
     "A2o" : {
       "fold" : 0.1835,
       "raise25x" : 0.8165
@@ -89,17 +89,17 @@
       "fold" : 0.021399999999999995,
       "raise25x" : 0.97860000000000003
     },
-    "A3s" : "raise",
+    "A3s" : "raise25x",
     "A4o" : {
       "fold" : 0.039799999999999995,
       "raise25x" : 0.96020000000000005
     },
-    "A4s" : "raise",
+    "A4s" : "raise25x",
     "A5o" : {
       "fold" : 0.028999999999999998,
       "raise25x" : 0.97099999999999997
     },
-    "A5s" : "raise",
+    "A5s" : "raise25x",
     "A6o" : {
       "fold" : 0.0076,
       "raise25x" : 0.99239999999999995
@@ -112,12 +112,12 @@
       "fold" : 0.0040999999999999995,
       "raise25x" : 0.99590000000000001
     },
-    "A7s" : "raise",
+    "A7s" : "raise25x",
     "A8o" : {
       "fold" : 0.0132,
       "raise25x" : 0.98680000000000001
     },
-    "A8s" : "raise",
+    "A8s" : "raise25x",
     "A9o" : {
       "fold" : 0.0011000000000000001,
       "raise25x" : 0.99890000000000001
@@ -125,15 +125,15 @@
     "A9s" : {
       "raise25x" : 0.999
     },
-    "AA" : "raise",
-    "AJo" : "raise",
-    "AJs" : "raise",
-    "AKo" : "raise",
-    "AKs" : "raise",
-    "AQo" : "raise",
-    "AQs" : "raise",
-    "ATo" : "raise",
-    "ATs" : "raise",
+    "AA" : "raise25x",
+    "AJo" : "raise25x",
+    "AJs" : "raise25x",
+    "AKo" : "raise25x",
+    "AKs" : "raise25x",
+    "AQo" : "raise25x",
+    "AQs" : "raise25x",
+    "ATo" : "raise25x",
+    "ATs" : "raise25x",
     "J2o" : "fold",
     "J2s" : "fold",
     "J3o" : "fold",
@@ -156,7 +156,7 @@
       "fold" : 0.6321,
       "raise25x" : 0.3679
     },
-    "JJ" : "raise",
+    "JJ" : "raise25x",
     "JTo" : {
       "fold" : 0.42899999999999999,
       "raise25x" : 0.57099999999999995
@@ -208,16 +208,16 @@
       "fold" : 0.0070999999999999995,
       "raise25x" : 0.9929
     },
-    "KJo" : "raise",
+    "KJo" : "raise25x",
     "KJs" : {
       "fold" : 0.0023,
       "raise25x" : 0.99770000000000003
     },
-    "KK" : "raise",
-    "KQo" : "raise",
-    "KQs" : "raise",
-    "KTo" : "raise",
-    "KTs" : "raise",
+    "KK" : "raise25x",
+    "KQo" : "raise25x",
+    "KQs" : "raise25x",
+    "KTo" : "raise25x",
+    "KTs" : "raise25x",
     "Q2o" : "fold",
     "Q2s" : "fold",
     "Q3o" : "fold",
@@ -257,7 +257,7 @@
       "fold" : 0.0013000000000000002,
       "raise25x" : 0.99870000000000003
     },
-    "QQ" : "raise",
+    "QQ" : "raise25x",
     "QTo" : {
       "fold" : 0.0040000000000000001,
       "raise25x" : 0.996
@@ -285,7 +285,7 @@
       "fold" : 0.15310000000000001,
       "raise25x" : 0.84689999999999999
     },
-    "TT" : "raise"
+    "TT" : "raise25x"
   },
   "id" : "mtt_9max_40bb_co_unopened",
   "source" : {
