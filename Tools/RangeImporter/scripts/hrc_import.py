@@ -302,30 +302,45 @@ def canonical_8max_specs() -> List[Tuple[str, str, int, List[str]]]:
     for seat in range(1, 8):  # UTG1..BB
         specs.append((POSITION_BY_SEAT_8MAX[seat], "vsopen",
                       seat, ["R"] + ["F"] * (seat - 1)))
-    # vs3bet (canonical): original opener faces a 3-bet from the next
-    # position, then everyone else folds, decision returns to opener.
-    # For multi-sized 3-bet trees, find_node_by_seq picks the first 'R'
-    # at the 3-bet step — typically the smaller (non-allin) size, which
-    # is the scenario where the opener's fold/call/4-bet decision is
-    # non-trivial. For jam-only 3-bet trees (e.g. 20bb), this falls
-    # back to "facing a 3-bet jam" — still valid, less rich.
+    # vs3bet (small): original opener faces a SMALL 3-bet from the next
+    # position. find_node_by_seq picks first 'R' at the 3-bet step.
     for opener_seat in range(7):  # UTG..SB can be opener; BB can't open
         threebettor_seat = opener_seat + 1  # always defined here (≤ 7)
         seq = (["F"] * opener_seat
                + ["R", "R"]
                + ["F"] * (7 - threebettor_seat))
-        # sanity: total decisions before opener's response == 8
         assert len(seq) == 8, f"vs3bet seq length {len(seq)} for seat {opener_seat}"
         specs.append((POSITION_BY_SEAT_8MAX[opener_seat], "vs3bet",
+                      opener_seat, seq))
+    # vs3betjam: same shape but the 3-bet step picks the LARGEST raise
+    # (all-in if available). For jam-only 3-bet trees the file is
+    # identical to vs3bet; for multi-sized 3-bet trees it's the much
+    # tighter "facing an all-in shove" decision (call vs fold only).
+    for opener_seat in range(7):
+        threebettor_seat = opener_seat + 1
+        seq = (["F"] * opener_seat
+               + ["R", "R$"]
+               + ["F"] * (7 - threebettor_seat))
+        specs.append((POSITION_BY_SEAT_8MAX[opener_seat], "vs3betjam",
                       opener_seat, seq))
     return specs
 
 
 def find_node_by_seq(nodes: Dict[int, dict],
-                     seq_types: List[str]) -> Optional[int]:
+                     seq_types: List[str],
+                     stack_chips: int = 0) -> Optional[int]:
     """Walk from node 0 following actions whose type matches each entry.
-    For 'R', pick the FIRST raise action at each node (typically the
-    smaller / non-allin size). Returns None if the path doesn't exist.
+
+    Sequence-step tokens:
+      'F' / 'C'       — first matching fold / call action.
+      'R'             — first raise action at this node (typically the
+                        smaller / non-allin size if multi-sized).
+      'R$' (jam)      — the largest-amount raise at this node (the all-in
+                        if present, else the only / largest raise).
+
+    `stack_chips` is only used to disambiguate 'R$' when multiple
+    raises exist — picks the one with the largest `amount` field.
+    Returns None if the path doesn't exist.
     """
     if 0 not in nodes:
         return None
@@ -334,8 +349,14 @@ def find_node_by_seq(nodes: Dict[int, dict],
         node = nodes.get(current)
         if node is None:
             return None
-        match = next((a for a in node.get("actions", [])
-                      if a.get("type") == t), None)
+        actions = node.get("actions", [])
+        match: Optional[dict] = None
+        if t == "R$":
+            raises = [a for a in actions if a.get("type") == "R"]
+            if raises:
+                match = max(raises, key=lambda a: a.get("amount", 0))
+        else:
+            match = next((a for a in actions if a.get("type") == t), None)
         if match is None:
             return None
         nxt = match.get("node")

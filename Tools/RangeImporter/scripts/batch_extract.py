@@ -63,6 +63,19 @@ VSRFI_PANEL_AT_X = {
     "lj":   1750,  # panel 2 of page 4
 }
 
+# vs-3bet: each opener has its own page in the PDF, starting at page 10.
+# Each page's top-left panel is "<opener> vs <next-seat> 3bet" — our canonical
+# "vs the earliest possible 3-bettor" choice.
+VS3BET_PAGE = {
+    "utg":  10,  # UTG vs UTG1 3bet
+    "utg1": 11,  # UTG1 vs MP 3bet
+    "lj":   12,  # MP vs HJ 3bet (RangeConverter "MP" = our "LJ")
+    "hj":   13,
+    "co":   14,
+    "btn":  15,
+    "sb":   16,
+}
+
 
 def run(cmd: list[str]) -> None:
     res = subprocess.run(cmd, capture_output=True, text=True)
@@ -105,6 +118,8 @@ def main() -> None:
                    help="omit SB RFI (3-action limp chart that the extractor under-counts)")
     p.add_argument("--include-vsrfi", action="store_true",
                    help="also extract canonical-opener vs-RFI panels (one per defender)")
+    p.add_argument("--include-vs3bet", action="store_true",
+                   help="also extract canonical-3bettor vs-3bet panels (one per opener)")
     args = p.parse_args()
 
     pages_dir = Path(args.pages_dir)
@@ -152,6 +167,24 @@ def main() -> None:
             for line in out.splitlines():
                 if "combos" in line:
                     print(f"  {defender}: {line.strip()}")
+
+    if args.include_vs3bet:
+        print(f"=== {args.depth}bb vs-3bet (canonical 3-bettor: next seat) ===")
+        for opener, page_idx in VS3BET_PAGE.items():
+            page_png = pages_dir / f"page-{page_idx:02d}.png"
+            if not page_png.exists():
+                page_png = pages_dir / f"page-{page_idx}.png"
+            if not page_png.exists():
+                print(f"  [skip] {opener}: no page-{page_idx}")
+                continue
+            panel = workdir / f"vs3bet_{opener}.png"
+            # Top-left panel on each opener's vs-3bet page.
+            crop(page_png, panel, (50, 95, 1700, 2300))
+            slug = f"mtt_8max_{args.depth}bb_{opener}_vs3bet"
+            out = extract(panel, slug, crib_dir, mode="vs-3bet")
+            for line in out.splitlines():
+                if "combos" in line:
+                    print(f"  {opener}: {line.strip()}")
 
 
 if __name__ == "__main__":

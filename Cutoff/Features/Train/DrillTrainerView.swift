@@ -112,6 +112,7 @@ struct DrillTrainerView: View {
         case .unopened:      return AppColors.accentGreen
         case .vsOpen:        return AppColors.accentLime
         case .vs3Bet:        return AppColors.accentPeach
+        case .vs3BetJam:     return AppColors.actionJam
         case .blindDefense:  return AppColors.actionCall
         case .squeeze:       return AppColors.accentCoral
         case .pushFold:      return AppColors.actionJam

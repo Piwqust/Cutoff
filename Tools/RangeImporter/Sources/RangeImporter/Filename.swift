@@ -32,7 +32,7 @@ struct ChartSlug {
     }
 
     enum Facing: String, CaseIterable {
-        case unopened, vsopen, vs3bet, squeeze, blinddefense, pushfold
+        case unopened, vsopen, vs3bet, vs3betjam, squeeze, blinddefense, pushfold
 
         /// JSON `FacingAction` rawValue. Matches the enum in
         /// Cutoff/Models/PokerTableSnapshot.swift via TablePosition / FacingAction.
@@ -41,6 +41,7 @@ struct ChartSlug {
             case .unopened:     return "unopened"
             case .vsopen:       return "vsOpen"
             case .vs3bet:       return "vs3Bet"
+            case .vs3betjam:    return "vs3BetJam"
             case .squeeze:      return "squeeze"
             case .blinddefense: return "blindDefense"
             case .pushfold:     return "pushFold"

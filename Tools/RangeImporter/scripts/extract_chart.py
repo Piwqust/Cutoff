@@ -125,6 +125,10 @@ def auto_bounds(im: Image.Image) -> tuple[int, int, int, int]:
                 return True
         return False
 
+    def row_colour_count(y: int) -> int:
+        return sum(1 for x in range(0, w, 6)
+                   if classify_pixel(im.getpixel((x, y))) != "?")
+
     def col_has_chart_colour(x: int) -> bool:
         for y in range(0, h, 6):
             if classify_pixel(im.getpixel((x, y))) != "?":
@@ -144,12 +148,52 @@ def auto_bounds(im: Image.Image) -> tuple[int, int, int, int]:
     # Walk down from y0 to y1 keeping the last row that had any chart colour.
     # A short gap (1 row of all-fold cells whose text dominates) doesn't end
     # the matrix; only a sustained background gap of ≥120 px does.
+    # Two end-of-matrix signals, whichever fires first:
+    #
+    #   (a) **Sustained background gap** (≥120 px of zero-chart-colour rows).
+    #       Catches the case where the legend is separated by a wide navy
+    #       strip.
+    #
+    #   (b) **Legend-density spike**. The colour-legend bar at the bottom of
+    #       every panel is a horizontal stripe of solid R/L/F colour. Solid
+    #       rows yield ~250+ chart-colour pixels at our coarse x-stride,
+    #       whereas matrix rows max out around ~150 even when many cells are
+    #       pure colour. Spotting a sustained density spike lets us terminate
+    #       the matrix even when the navy gap between matrix and legend is
+    #       only 20–40 px (common at 600 DPI on 3-action panels).
     matrix_y1 = y1
     last_chart_y = y0
     GAP_THRESHOLD = 120
+    # Legend rows are solid colour bars and peak around 260-270 chart-colour
+    # pixels at our 6-px x-stride. Matrix rows can hit ~225-250 when a row is
+    # mostly pure cells (e.g. the AA suited row in a wide-RFI panel), so a
+    # threshold below 255 produces false positives. We additionally require
+    # the dense run to be at least one full matrix-row-height long; legend
+    # bars at 600 DPI are usually 60-90 px tall.
+    LEGEND_DENSITY = 255
+    LEGEND_MIN_RUN = 25
+    # Matrices in this PDF set are at least ~1500 px tall (13 rows × ~120 px
+    # per row). Don't even consider the legend detector until we're past the
+    # plausible matrix-bottom region — otherwise the wide-RFI AA row trips
+    # the density spike at the top of the matrix.
+    MATRIX_MIN_HEIGHT = 1400
+    legend_run = 0
     in_chart = True
     for y in range(y0, y1 + 1):
-        is_chart = row_has_chart_colour(y)
+        cnt = row_colour_count(y)
+        is_chart = cnt > 0
+        legend_eligible = (y - y0) >= MATRIX_MIN_HEIGHT
+        if legend_eligible and cnt >= LEGEND_DENSITY:
+            legend_run += 1
+            if legend_run >= LEGEND_MIN_RUN:
+                # Walk back to the last sub-legend-density chart row.
+                yi = y - legend_run
+                while yi > y0 and row_colour_count(yi) == 0:
+                    yi -= 1
+                matrix_y1 = yi
+                break
+        else:
+            legend_run = 0
         if is_chart:
             last_chart_y = y
             in_chart = True

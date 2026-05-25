@@ -92,6 +92,7 @@ extension FacingAction {
         case .unopened:     return L10n.string(.facingUnopened, in: lang)
         case .vsOpen:       return L10n.string(.facingVsOpen, in: lang)
         case .vs3Bet:       return L10n.string(.facingVs3Bet, in: lang)
+        case .vs3BetJam:    return "\(L10n.string(.facingVs3Bet, in: lang)) jam"
         case .blindDefense: return L10n.string(.facingBlindDefense, in: lang)
         case .squeeze:      return L10n.string(.facingSqueeze, in: lang)
         case .pushFold:     return L10n.string(.facingPushFold, in: lang)
@@ -103,6 +104,7 @@ extension FacingAction {
         case .unopened:     return L10n.string(.headlineUnopened, in: lang)
         case .vsOpen:       return L10n.string(.headlineVsOpen, in: lang)
         case .vs3Bet:       return L10n.string(.headlineVs3Bet, in: lang)
+        case .vs3BetJam:    return "\(L10n.string(.headlineVs3Bet, in: lang)) jam"
         case .blindDefense: return L10n.string(.headlineBlindDefense, in: lang)
         case .squeeze:      return L10n.string(.headlineSqueeze, in: lang)
         case .pushFold:     return L10n.string(.headlinePushFold, in: lang)

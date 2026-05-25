@@ -87,6 +87,7 @@ extension PokerTableSnapshot {
             case .vsOpen, .blindDefense:  return 2.5     // single open
             case .squeeze:                return 2.5 + 2.5 // open + caller
             case .vs3Bet:                 return 2.5 + 8.0 // open + 3-bet
+            case .vs3BetJam:              return 2.5 + Double(spot.stackDepthBB) // open + jam
             }
         }()
         return blinds + antes + actionAhead

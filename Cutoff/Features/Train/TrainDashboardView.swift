@@ -212,6 +212,7 @@ struct TrainDashboardView: View {
         switch spot.facingAction {
         case .pushFold:     return .firstInJam
         case .vs3Bet:       return .vsManiac
+        case .vs3BetJam:    return .vsManiac
         case .squeeze:      return .reJam
         case .unopened:     return .mixed
         case .vsOpen:       return .mixed
