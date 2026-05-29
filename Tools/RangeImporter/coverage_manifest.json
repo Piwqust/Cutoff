@@ -1,0 +1,5012 @@
+{
+ "mtt_8max_100bb_bb_vsopen.json": {
+  "depth": 100,
+  "position": "bb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_polarity",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_btn_unopened.json": {
+  "depth": 100,
+  "position": "btn",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "WARN",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_btn_vs3bet.json": {
+  "depth": 100,
+  "position": "btn",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_btn_vs3betjam.json": {
+  "depth": 100,
+  "position": "btn",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_btn_vsopen.json": {
+  "depth": 100,
+  "position": "btn",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "WARN",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_co_unopened.json": {
+  "depth": 100,
+  "position": "co",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_co_vs3bet.json": {
+  "depth": 100,
+  "position": "co",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_co_vs3betjam.json": {
+  "depth": 100,
+  "position": "co",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_co_vsopen.json": {
+  "depth": 100,
+  "position": "co",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_hj_unopened.json": {
+  "depth": 100,
+  "position": "hj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_hj_vs3bet.json": {
+  "depth": 100,
+  "position": "hj",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_hj_vs3betjam.json": {
+  "depth": 100,
+  "position": "hj",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_hj_vsopen.json": {
+  "depth": 100,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_lj_unopened.json": {
+  "depth": 100,
+  "position": "lj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_lj_vs3bet.json": {
+  "depth": 100,
+  "position": "lj",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_lj_vs3betjam.json": {
+  "depth": 100,
+  "position": "lj",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_lj_vsopen.json": {
+  "depth": 100,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_sb_unopened.json": {
+  "depth": 100,
+  "position": "sb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_polarity",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_sb_vs3bet.json": {
+  "depth": 100,
+  "position": "sb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_polarity",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_sb_vs3betjam.json": {
+  "depth": 100,
+  "position": "sb",
+  "rules": [
+   "polarity.trash_too_loose",
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_sb_vsopen.json": {
+  "depth": 100,
+  "position": "sb",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_utg1_unopened.json": {
+  "depth": 100,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_utg1_vs3bet.json": {
+  "depth": 100,
+  "position": "utg1",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_utg1_vs3betjam.json": {
+  "depth": 100,
+  "position": "utg1",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_utg1_vsopen.json": {
+  "depth": 100,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_utg_unopened.json": {
+  "depth": 100,
+  "position": "utg",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_utg_vs3bet.json": {
+  "depth": 100,
+  "position": "utg",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_100bb_utg_vs3betjam.json": {
+  "depth": 100,
+  "position": "utg",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_10bb_bb_vsopen.json": {
+  "depth": 10,
+  "position": "bb",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "WARN",
+  "table": "8max"
+ },
+ "mtt_8max_10bb_btn_unopened.json": {
+  "depth": 10,
+  "position": "btn",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_10bb_btn_vsopen.json": {
+  "depth": 10,
+  "position": "btn",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_10bb_co_unopened.json": {
+  "depth": 10,
+  "position": "co",
+  "rules": [
+   "polarity.trash_too_loose",
+   "warn:vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_polarity",
+  "table": "8max"
+ },
+ "mtt_8max_10bb_co_vsopen.json": {
+  "depth": 10,
+  "position": "co",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_10bb_hj_unopened.json": {
+  "depth": 10,
+  "position": "hj",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_10bb_hj_vsopen.json": {
+  "depth": 10,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_10bb_lj_unopened.json": {
+  "depth": 10,
+  "position": "lj",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "WARN",
+  "table": "8max"
+ },
+ "mtt_8max_10bb_lj_vsopen.json": {
+  "depth": 10,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_10bb_sb_vsopen.json": {
+  "depth": 10,
+  "position": "sb",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_10bb_utg1_unopened.json": {
+  "depth": 10,
+  "position": "utg1",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "WARN",
+  "table": "8max"
+ },
+ "mtt_8max_10bb_utg1_vsopen.json": {
+  "depth": 10,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_10bb_utg_unopened.json": {
+  "depth": 10,
+  "position": "utg",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "WARN",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_bb_vsopen.json": {
+  "depth": 20,
+  "position": "bb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_polarity",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_btn_unopened.json": {
+  "depth": 20,
+  "position": "btn",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_btn_vs3bet.json": {
+  "depth": 20,
+  "position": "btn",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_btn_vs3betjam.json": {
+  "depth": 20,
+  "position": "btn",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_btn_vsopen.json": {
+  "depth": 20,
+  "position": "btn",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_co_unopened.json": {
+  "depth": 20,
+  "position": "co",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_co_vs3bet.json": {
+  "depth": 20,
+  "position": "co",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_co_vs3betjam.json": {
+  "depth": 20,
+  "position": "co",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_co_vsopen.json": {
+  "depth": 20,
+  "position": "co",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_hj_unopened.json": {
+  "depth": 20,
+  "position": "hj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_hj_vs3bet.json": {
+  "depth": 20,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_hj_vs3betjam.json": {
+  "depth": 20,
+  "position": "hj",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_hj_vsopen.json": {
+  "depth": 20,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_lj_unopened.json": {
+  "depth": 20,
+  "position": "lj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_lj_vs3bet.json": {
+  "depth": 20,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_lj_vs3betjam.json": {
+  "depth": 20,
+  "position": "lj",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_lj_vsopen.json": {
+  "depth": 20,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_sb_unopened.json": {
+  "depth": 20,
+  "position": "sb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_polarity",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_sb_vs3bet.json": {
+  "depth": 20,
+  "position": "sb",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_sb_vs3betjam.json": {
+  "depth": 20,
+  "position": "sb",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_sb_vsopen.json": {
+  "depth": 20,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_utg1_unopened.json": {
+  "depth": 20,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_utg1_vs3bet.json": {
+  "depth": 20,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_utg1_vs3betjam.json": {
+  "depth": 20,
+  "position": "utg1",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_utg1_vsopen.json": {
+  "depth": 20,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_utg_unopened.json": {
+  "depth": 20,
+  "position": "utg",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_utg_vs3bet.json": {
+  "depth": 20,
+  "position": "utg",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_20bb_utg_vs3betjam.json": {
+  "depth": 20,
+  "position": "utg",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_bb_vsopen.json": {
+  "depth": 30,
+  "position": "bb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_polarity",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_btn_unopened.json": {
+  "depth": 30,
+  "position": "btn",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_btn_vs3bet.json": {
+  "depth": 30,
+  "position": "btn",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_btn_vs3betjam.json": {
+  "depth": 30,
+  "position": "btn",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_btn_vsopen.json": {
+  "depth": 30,
+  "position": "btn",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_co_unopened.json": {
+  "depth": 30,
+  "position": "co",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_co_vs3bet.json": {
+  "depth": 30,
+  "position": "co",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_co_vs3betjam.json": {
+  "depth": 30,
+  "position": "co",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_co_vsopen.json": {
+  "depth": 30,
+  "position": "co",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_hj_unopened.json": {
+  "depth": 30,
+  "position": "hj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_hj_vs3bet.json": {
+  "depth": 30,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_hj_vs3betjam.json": {
+  "depth": 30,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_hj_vsopen.json": {
+  "depth": 30,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_lj_unopened.json": {
+  "depth": 30,
+  "position": "lj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_lj_vs3bet.json": {
+  "depth": 30,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_lj_vs3betjam.json": {
+  "depth": 30,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_lj_vsopen.json": {
+  "depth": 30,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_sb_unopened.json": {
+  "depth": 30,
+  "position": "sb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_polarity",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_sb_vs3bet.json": {
+  "depth": 30,
+  "position": "sb",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_sb_vs3betjam.json": {
+  "depth": 30,
+  "position": "sb",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_sb_vsopen.json": {
+  "depth": 30,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_utg1_unopened.json": {
+  "depth": 30,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_utg1_vs3bet.json": {
+  "depth": 30,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_utg1_vs3betjam.json": {
+  "depth": 30,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_utg1_vsopen.json": {
+  "depth": 30,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_utg_unopened.json": {
+  "depth": 30,
+  "position": "utg",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_utg_vs3bet.json": {
+  "depth": 30,
+  "position": "utg",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_30bb_utg_vs3betjam.json": {
+  "depth": 30,
+  "position": "utg",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_bb_vsopen.json": {
+  "depth": 40,
+  "position": "bb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_polarity",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_btn_unopened.json": {
+  "depth": 40,
+  "position": "btn",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "WARN",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_btn_vs3bet.json": {
+  "depth": 40,
+  "position": "btn",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "WARN",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_btn_vs3betjam.json": {
+  "depth": 40,
+  "position": "btn",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_btn_vsopen.json": {
+  "depth": 40,
+  "position": "btn",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "WARN",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_co_unopened.json": {
+  "depth": 40,
+  "position": "co",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_co_vs3bet.json": {
+  "depth": 40,
+  "position": "co",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_co_vs3betjam.json": {
+  "depth": 40,
+  "position": "co",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_co_vsopen.json": {
+  "depth": 40,
+  "position": "co",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_hj_unopened.json": {
+  "depth": 40,
+  "position": "hj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_hj_vs3bet.json": {
+  "depth": 40,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_hj_vs3betjam.json": {
+  "depth": 40,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_hj_vsopen.json": {
+  "depth": 40,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_lj_unopened.json": {
+  "depth": 40,
+  "position": "lj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_lj_vs3bet.json": {
+  "depth": 40,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_lj_vs3betjam.json": {
+  "depth": 40,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_lj_vsopen.json": {
+  "depth": 40,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_sb_unopened.json": {
+  "depth": 40,
+  "position": "sb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_polarity",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_sb_vs3bet.json": {
+  "depth": 40,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_sb_vs3betjam.json": {
+  "depth": 40,
+  "position": "sb",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_sb_vsopen.json": {
+  "depth": 40,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_utg1_unopened.json": {
+  "depth": 40,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_utg1_vs3bet.json": {
+  "depth": 40,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_utg1_vs3betjam.json": {
+  "depth": 40,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_utg1_vsopen.json": {
+  "depth": 40,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_utg_unopened.json": {
+  "depth": 40,
+  "position": "utg",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_utg_vs3bet.json": {
+  "depth": 40,
+  "position": "utg",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_40bb_utg_vs3betjam.json": {
+  "depth": 40,
+  "position": "utg",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_bb_vsopen.json": {
+  "depth": 50,
+  "position": "bb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_polarity",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_btn_unopened.json": {
+  "depth": 50,
+  "position": "btn",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_btn_vs3bet.json": {
+  "depth": 50,
+  "position": "btn",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_btn_vs3betjam.json": {
+  "depth": 50,
+  "position": "btn",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_btn_vsopen.json": {
+  "depth": 50,
+  "position": "btn",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "WARN",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_co_unopened.json": {
+  "depth": 50,
+  "position": "co",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_co_vs3bet.json": {
+  "depth": 50,
+  "position": "co",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_co_vs3betjam.json": {
+  "depth": 50,
+  "position": "co",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_co_vsopen.json": {
+  "depth": 50,
+  "position": "co",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_hj_unopened.json": {
+  "depth": 50,
+  "position": "hj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_hj_vs3bet.json": {
+  "depth": 50,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_hj_vs3betjam.json": {
+  "depth": 50,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_hj_vsopen.json": {
+  "depth": 50,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_lj_unopened.json": {
+  "depth": 50,
+  "position": "lj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_lj_vs3bet.json": {
+  "depth": 50,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_lj_vs3betjam.json": {
+  "depth": 50,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_lj_vsopen.json": {
+  "depth": 50,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_sb_unopened.json": {
+  "depth": 50,
+  "position": "sb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_polarity",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_sb_vs3bet.json": {
+  "depth": 50,
+  "position": "sb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_polarity",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_sb_vs3betjam.json": {
+  "depth": 50,
+  "position": "sb",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_sb_vsopen.json": {
+  "depth": 50,
+  "position": "sb",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "WARN",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_utg1_unopened.json": {
+  "depth": 50,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_utg1_vs3bet.json": {
+  "depth": 50,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_utg1_vs3betjam.json": {
+  "depth": 50,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_utg1_vsopen.json": {
+  "depth": 50,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_utg_unopened.json": {
+  "depth": 50,
+  "position": "utg",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_utg_vs3bet.json": {
+  "depth": 50,
+  "position": "utg",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_50bb_utg_vs3betjam.json": {
+  "depth": 50,
+  "position": "utg",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_bb_vsopen.json": {
+  "depth": 60,
+  "position": "bb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_polarity",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_btn_unopened.json": {
+  "depth": 60,
+  "position": "btn",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_btn_vs3bet.json": {
+  "depth": 60,
+  "position": "btn",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_btn_vs3betjam.json": {
+  "depth": 60,
+  "position": "btn",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_btn_vsopen.json": {
+  "depth": 60,
+  "position": "btn",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "WARN",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_co_unopened.json": {
+  "depth": 60,
+  "position": "co",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_co_vs3bet.json": {
+  "depth": 60,
+  "position": "co",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_co_vs3betjam.json": {
+  "depth": 60,
+  "position": "co",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_co_vsopen.json": {
+  "depth": 60,
+  "position": "co",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_hj_unopened.json": {
+  "depth": 60,
+  "position": "hj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_hj_vs3bet.json": {
+  "depth": 60,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_hj_vs3betjam.json": {
+  "depth": 60,
+  "position": "hj",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_hj_vsopen.json": {
+  "depth": 60,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_lj_unopened.json": {
+  "depth": 60,
+  "position": "lj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_lj_vs3bet.json": {
+  "depth": 60,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_lj_vs3betjam.json": {
+  "depth": 60,
+  "position": "lj",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_lj_vsopen.json": {
+  "depth": 60,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_sb_unopened.json": {
+  "depth": 60,
+  "position": "sb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_polarity",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_sb_vs3bet.json": {
+  "depth": 60,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_sb_vs3betjam.json": {
+  "depth": 60,
+  "position": "sb",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_sb_vsopen.json": {
+  "depth": 60,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_utg1_unopened.json": {
+  "depth": 60,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_utg1_vs3bet.json": {
+  "depth": 60,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_utg1_vs3betjam.json": {
+  "depth": 60,
+  "position": "utg1",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_utg1_vsopen.json": {
+  "depth": 60,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_utg_unopened.json": {
+  "depth": 60,
+  "position": "utg",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_utg_vs3bet.json": {
+  "depth": 60,
+  "position": "utg",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "8max"
+ },
+ "mtt_8max_60bb_utg_vs3betjam.json": {
+  "depth": 60,
+  "position": "utg",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "8max"
+ },
+ "mtt_9max_100bb_bb_blinddefense.json": {
+  "depth": 100,
+  "position": "bb",
+  "rules": [],
+  "scenario": "blinddefense",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_bb_squeeze.json": {
+  "depth": 100,
+  "position": "bb",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_bb_vsopen.json": {
+  "depth": 100,
+  "position": "bb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_polarity",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_btn_squeeze.json": {
+  "depth": 100,
+  "position": "btn",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_btn_unopened.json": {
+  "depth": 100,
+  "position": "btn",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "WARN",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_btn_vs3bet.json": {
+  "depth": 100,
+  "position": "btn",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_btn_vs3betjam.json": {
+  "depth": 100,
+  "position": "btn",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_btn_vsopen.json": {
+  "depth": 100,
+  "position": "btn",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "WARN",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_co_squeeze.json": {
+  "depth": 100,
+  "position": "co",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_co_unopened.json": {
+  "depth": 100,
+  "position": "co",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_co_vs3bet.json": {
+  "depth": 100,
+  "position": "co",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_co_vs3betjam.json": {
+  "depth": 100,
+  "position": "co",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_co_vsopen.json": {
+  "depth": 100,
+  "position": "co",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_hj_squeeze.json": {
+  "depth": 100,
+  "position": "hj",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_hj_unopened.json": {
+  "depth": 100,
+  "position": "hj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_hj_vs3bet.json": {
+  "depth": 100,
+  "position": "hj",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_hj_vs3betjam.json": {
+  "depth": 100,
+  "position": "hj",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_hj_vsopen.json": {
+  "depth": 100,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_lj_squeeze.json": {
+  "depth": 100,
+  "position": "lj",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_lj_unopened.json": {
+  "depth": 100,
+  "position": "lj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_lj_vs3bet.json": {
+  "depth": 100,
+  "position": "lj",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_lj_vs3betjam.json": {
+  "depth": 100,
+  "position": "lj",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_lj_vsopen.json": {
+  "depth": 100,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_sb_blinddefense.json": {
+  "depth": 100,
+  "position": "sb",
+  "rules": [],
+  "scenario": "blinddefense",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_sb_squeeze.json": {
+  "depth": 100,
+  "position": "sb",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_sb_unopened.json": {
+  "depth": 100,
+  "position": "sb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_polarity",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_sb_vs3bet.json": {
+  "depth": 100,
+  "position": "sb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_polarity",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_sb_vs3betjam.json": {
+  "depth": 100,
+  "position": "sb",
+  "rules": [
+   "polarity.trash_too_loose",
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_sb_vsopen.json": {
+  "depth": 100,
+  "position": "sb",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_utg1_unopened.json": {
+  "depth": 100,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_utg1_vs3bet.json": {
+  "depth": 100,
+  "position": "utg1",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_utg1_vs3betjam.json": {
+  "depth": 100,
+  "position": "utg1",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_utg1_vsopen.json": {
+  "depth": 100,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_utg_unopened.json": {
+  "depth": 100,
+  "position": "utg",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_utg_vs3bet.json": {
+  "depth": 100,
+  "position": "utg",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_100bb_utg_vs3betjam.json": {
+  "depth": 100,
+  "position": "utg",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_bb_blinddefense.json": {
+  "depth": 10,
+  "position": "bb",
+  "rules": [],
+  "scenario": "blinddefense",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_bb_pushfold.json": {
+  "depth": 10,
+  "position": "bb",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_bb_squeeze.json": {
+  "depth": 10,
+  "position": "bb",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_bb_vsopen.json": {
+  "depth": 10,
+  "position": "bb",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "WARN",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_btn_pushfold.json": {
+  "depth": 10,
+  "position": "btn",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_btn_squeeze.json": {
+  "depth": 10,
+  "position": "btn",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_btn_unopened.json": {
+  "depth": 10,
+  "position": "btn",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_btn_vs3bet.json": {
+  "depth": 10,
+  "position": "btn",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_btn_vsopen.json": {
+  "depth": 10,
+  "position": "btn",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_co_pushfold.json": {
+  "depth": 10,
+  "position": "co",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_co_squeeze.json": {
+  "depth": 10,
+  "position": "co",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_co_unopened.json": {
+  "depth": 10,
+  "position": "co",
+  "rules": [
+   "polarity.trash_too_loose",
+   "warn:vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_polarity",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_co_vs3bet.json": {
+  "depth": 10,
+  "position": "co",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_co_vsopen.json": {
+  "depth": 10,
+  "position": "co",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_hj_pushfold.json": {
+  "depth": 10,
+  "position": "hj",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_hj_squeeze.json": {
+  "depth": 10,
+  "position": "hj",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_hj_unopened.json": {
+  "depth": 10,
+  "position": "hj",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_hj_vs3bet.json": {
+  "depth": 10,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_hj_vsopen.json": {
+  "depth": 10,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_lj_pushfold.json": {
+  "depth": 10,
+  "position": "lj",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_lj_squeeze.json": {
+  "depth": 10,
+  "position": "lj",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_lj_unopened.json": {
+  "depth": 10,
+  "position": "lj",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "WARN",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_lj_vs3bet.json": {
+  "depth": 10,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_lj_vsopen.json": {
+  "depth": 10,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_sb_blinddefense.json": {
+  "depth": 10,
+  "position": "sb",
+  "rules": [],
+  "scenario": "blinddefense",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_sb_pushfold.json": {
+  "depth": 10,
+  "position": "sb",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_sb_squeeze.json": {
+  "depth": 10,
+  "position": "sb",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_sb_unopened.json": {
+  "depth": 10,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_sb_vs3bet.json": {
+  "depth": 10,
+  "position": "sb",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_sb_vsopen.json": {
+  "depth": 10,
+  "position": "sb",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_utg1_pushfold.json": {
+  "depth": 10,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_utg1_unopened.json": {
+  "depth": 10,
+  "position": "utg1",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "WARN",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_utg1_vs3bet.json": {
+  "depth": 10,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_utg1_vsopen.json": {
+  "depth": 10,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_utg_pushfold.json": {
+  "depth": 10,
+  "position": "utg",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_utg_unopened.json": {
+  "depth": 10,
+  "position": "utg",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "WARN",
+  "table": "9max"
+ },
+ "mtt_9max_10bb_utg_vs3bet.json": {
+  "depth": 10,
+  "position": "utg",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_bb_blinddefense.json": {
+  "depth": 125,
+  "position": "bb",
+  "rules": [],
+  "scenario": "blinddefense",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_bb_squeeze.json": {
+  "depth": 125,
+  "position": "bb",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_bb_vsopen.json": {
+  "depth": 125,
+  "position": "bb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_btn_squeeze.json": {
+  "depth": 125,
+  "position": "btn",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_btn_unopened.json": {
+  "depth": 125,
+  "position": "btn",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_btn_vs3bet.json": {
+  "depth": 125,
+  "position": "btn",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_btn_vsopen.json": {
+  "depth": 125,
+  "position": "btn",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_co_squeeze.json": {
+  "depth": 125,
+  "position": "co",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_co_unopened.json": {
+  "depth": 125,
+  "position": "co",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_co_vs3bet.json": {
+  "depth": 125,
+  "position": "co",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_co_vsopen.json": {
+  "depth": 125,
+  "position": "co",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_hj_squeeze.json": {
+  "depth": 125,
+  "position": "hj",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_hj_unopened.json": {
+  "depth": 125,
+  "position": "hj",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_hj_vs3bet.json": {
+  "depth": 125,
+  "position": "hj",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_hj_vsopen.json": {
+  "depth": 125,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_lj_squeeze.json": {
+  "depth": 125,
+  "position": "lj",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_lj_unopened.json": {
+  "depth": 125,
+  "position": "lj",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_lj_vs3bet.json": {
+  "depth": 125,
+  "position": "lj",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_lj_vsopen.json": {
+  "depth": 125,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_sb_blinddefense.json": {
+  "depth": 125,
+  "position": "sb",
+  "rules": [],
+  "scenario": "blinddefense",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_sb_squeeze.json": {
+  "depth": 125,
+  "position": "sb",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_sb_unopened.json": {
+  "depth": 125,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_sb_vs3bet.json": {
+  "depth": 125,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_sb_vsopen.json": {
+  "depth": 125,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_utg1_unopened.json": {
+  "depth": 125,
+  "position": "utg1",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_utg1_vs3bet.json": {
+  "depth": 125,
+  "position": "utg1",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_utg1_vsopen.json": {
+  "depth": 125,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_utg_unopened.json": {
+  "depth": 125,
+  "position": "utg",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_125bb_utg_vs3bet.json": {
+  "depth": 125,
+  "position": "utg",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_12bb_bb_pushfold.json": {
+  "depth": 12,
+  "position": "bb",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_12bb_btn_pushfold.json": {
+  "depth": 12,
+  "position": "btn",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_12bb_co_pushfold.json": {
+  "depth": 12,
+  "position": "co",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_12bb_hj_pushfold.json": {
+  "depth": 12,
+  "position": "hj",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_12bb_lj_pushfold.json": {
+  "depth": 12,
+  "position": "lj",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_12bb_sb_pushfold.json": {
+  "depth": 12,
+  "position": "sb",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_12bb_utg1_pushfold.json": {
+  "depth": 12,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_12bb_utg_pushfold.json": {
+  "depth": 12,
+  "position": "utg",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_bb_blinddefense.json": {
+  "depth": 15,
+  "position": "bb",
+  "rules": [],
+  "scenario": "blinddefense",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_bb_pushfold.json": {
+  "depth": 15,
+  "position": "bb",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_bb_squeeze.json": {
+  "depth": 15,
+  "position": "bb",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_bb_vsopen.json": {
+  "depth": 15,
+  "position": "bb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_btn_pushfold.json": {
+  "depth": 15,
+  "position": "btn",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_btn_squeeze.json": {
+  "depth": 15,
+  "position": "btn",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_btn_unopened.json": {
+  "depth": 15,
+  "position": "btn",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_btn_vs3bet.json": {
+  "depth": 15,
+  "position": "btn",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_btn_vsopen.json": {
+  "depth": 15,
+  "position": "btn",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_co_pushfold.json": {
+  "depth": 15,
+  "position": "co",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_co_squeeze.json": {
+  "depth": 15,
+  "position": "co",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_co_unopened.json": {
+  "depth": 15,
+  "position": "co",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_co_vs3bet.json": {
+  "depth": 15,
+  "position": "co",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_co_vsopen.json": {
+  "depth": 15,
+  "position": "co",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_hj_pushfold.json": {
+  "depth": 15,
+  "position": "hj",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_hj_squeeze.json": {
+  "depth": 15,
+  "position": "hj",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_hj_unopened.json": {
+  "depth": 15,
+  "position": "hj",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_hj_vs3bet.json": {
+  "depth": 15,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_hj_vsopen.json": {
+  "depth": 15,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_lj_pushfold.json": {
+  "depth": 15,
+  "position": "lj",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_lj_squeeze.json": {
+  "depth": 15,
+  "position": "lj",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_lj_unopened.json": {
+  "depth": 15,
+  "position": "lj",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_lj_vs3bet.json": {
+  "depth": 15,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_lj_vsopen.json": {
+  "depth": 15,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_sb_blinddefense.json": {
+  "depth": 15,
+  "position": "sb",
+  "rules": [],
+  "scenario": "blinddefense",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_sb_pushfold.json": {
+  "depth": 15,
+  "position": "sb",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_sb_squeeze.json": {
+  "depth": 15,
+  "position": "sb",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_sb_unopened.json": {
+  "depth": 15,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_sb_vs3bet.json": {
+  "depth": 15,
+  "position": "sb",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_sb_vsopen.json": {
+  "depth": 15,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_utg1_pushfold.json": {
+  "depth": 15,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_utg1_unopened.json": {
+  "depth": 15,
+  "position": "utg1",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_utg1_vs3bet.json": {
+  "depth": 15,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_utg1_vsopen.json": {
+  "depth": 15,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_utg_pushfold.json": {
+  "depth": 15,
+  "position": "utg",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_utg_unopened.json": {
+  "depth": 15,
+  "position": "utg",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_15bb_utg_vs3bet.json": {
+  "depth": 15,
+  "position": "utg",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_bb_blinddefense.json": {
+  "depth": 20,
+  "position": "bb",
+  "rules": [],
+  "scenario": "blinddefense",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_bb_pushfold.json": {
+  "depth": 20,
+  "position": "bb",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_bb_squeeze.json": {
+  "depth": 20,
+  "position": "bb",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_bb_vsopen.json": {
+  "depth": 20,
+  "position": "bb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_polarity",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_btn_pushfold.json": {
+  "depth": 20,
+  "position": "btn",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_btn_squeeze.json": {
+  "depth": 20,
+  "position": "btn",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_btn_unopened.json": {
+  "depth": 20,
+  "position": "btn",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_btn_vs3bet.json": {
+  "depth": 20,
+  "position": "btn",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_btn_vs3betjam.json": {
+  "depth": 20,
+  "position": "btn",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_btn_vsopen.json": {
+  "depth": 20,
+  "position": "btn",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_co_pushfold.json": {
+  "depth": 20,
+  "position": "co",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_co_squeeze.json": {
+  "depth": 20,
+  "position": "co",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_co_unopened.json": {
+  "depth": 20,
+  "position": "co",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_co_vs3bet.json": {
+  "depth": 20,
+  "position": "co",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_co_vs3betjam.json": {
+  "depth": 20,
+  "position": "co",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_co_vsopen.json": {
+  "depth": 20,
+  "position": "co",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_hj_pushfold.json": {
+  "depth": 20,
+  "position": "hj",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_hj_squeeze.json": {
+  "depth": 20,
+  "position": "hj",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_hj_unopened.json": {
+  "depth": 20,
+  "position": "hj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_hj_vs3bet.json": {
+  "depth": 20,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_hj_vs3betjam.json": {
+  "depth": 20,
+  "position": "hj",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_hj_vsopen.json": {
+  "depth": 20,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_lj_pushfold.json": {
+  "depth": 20,
+  "position": "lj",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_lj_squeeze.json": {
+  "depth": 20,
+  "position": "lj",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_lj_unopened.json": {
+  "depth": 20,
+  "position": "lj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_lj_vs3bet.json": {
+  "depth": 20,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_lj_vs3betjam.json": {
+  "depth": 20,
+  "position": "lj",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_lj_vsopen.json": {
+  "depth": 20,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_sb_blinddefense.json": {
+  "depth": 20,
+  "position": "sb",
+  "rules": [],
+  "scenario": "blinddefense",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_sb_pushfold.json": {
+  "depth": 20,
+  "position": "sb",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_sb_squeeze.json": {
+  "depth": 20,
+  "position": "sb",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_sb_unopened.json": {
+  "depth": 20,
+  "position": "sb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_polarity",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_sb_vs3bet.json": {
+  "depth": 20,
+  "position": "sb",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_sb_vs3betjam.json": {
+  "depth": 20,
+  "position": "sb",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_sb_vsopen.json": {
+  "depth": 20,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_utg1_pushfold.json": {
+  "depth": 20,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_utg1_unopened.json": {
+  "depth": 20,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_utg1_vs3bet.json": {
+  "depth": 20,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_utg1_vs3betjam.json": {
+  "depth": 20,
+  "position": "utg1",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_utg1_vsopen.json": {
+  "depth": 20,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_utg_pushfold.json": {
+  "depth": 20,
+  "position": "utg",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_utg_unopened.json": {
+  "depth": 20,
+  "position": "utg",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_utg_vs3bet.json": {
+  "depth": 20,
+  "position": "utg",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_20bb_utg_vs3betjam.json": {
+  "depth": 20,
+  "position": "utg",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_bb_blinddefense.json": {
+  "depth": 25,
+  "position": "bb",
+  "rules": [],
+  "scenario": "blinddefense",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_bb_pushfold.json": {
+  "depth": 25,
+  "position": "bb",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_bb_squeeze.json": {
+  "depth": 25,
+  "position": "bb",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_bb_vsopen.json": {
+  "depth": 25,
+  "position": "bb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_btn_pushfold.json": {
+  "depth": 25,
+  "position": "btn",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_btn_squeeze.json": {
+  "depth": 25,
+  "position": "btn",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_btn_unopened.json": {
+  "depth": 25,
+  "position": "btn",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_btn_vs3bet.json": {
+  "depth": 25,
+  "position": "btn",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_btn_vsopen.json": {
+  "depth": 25,
+  "position": "btn",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_co_pushfold.json": {
+  "depth": 25,
+  "position": "co",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_co_squeeze.json": {
+  "depth": 25,
+  "position": "co",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_co_unopened.json": {
+  "depth": 25,
+  "position": "co",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_co_vs3bet.json": {
+  "depth": 25,
+  "position": "co",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_co_vsopen.json": {
+  "depth": 25,
+  "position": "co",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_hj_pushfold.json": {
+  "depth": 25,
+  "position": "hj",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_hj_squeeze.json": {
+  "depth": 25,
+  "position": "hj",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_hj_unopened.json": {
+  "depth": 25,
+  "position": "hj",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_hj_vs3bet.json": {
+  "depth": 25,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_hj_vsopen.json": {
+  "depth": 25,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_lj_pushfold.json": {
+  "depth": 25,
+  "position": "lj",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_lj_squeeze.json": {
+  "depth": 25,
+  "position": "lj",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_lj_unopened.json": {
+  "depth": 25,
+  "position": "lj",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_lj_vs3bet.json": {
+  "depth": 25,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_lj_vsopen.json": {
+  "depth": 25,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_sb_blinddefense.json": {
+  "depth": 25,
+  "position": "sb",
+  "rules": [],
+  "scenario": "blinddefense",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_sb_pushfold.json": {
+  "depth": 25,
+  "position": "sb",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_sb_squeeze.json": {
+  "depth": 25,
+  "position": "sb",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_sb_unopened.json": {
+  "depth": 25,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_sb_vs3bet.json": {
+  "depth": 25,
+  "position": "sb",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_sb_vsopen.json": {
+  "depth": 25,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_utg1_pushfold.json": {
+  "depth": 25,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_utg1_unopened.json": {
+  "depth": 25,
+  "position": "utg1",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_utg1_vs3bet.json": {
+  "depth": 25,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_utg1_vsopen.json": {
+  "depth": 25,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_utg_pushfold.json": {
+  "depth": 25,
+  "position": "utg",
+  "rules": [],
+  "scenario": "pushfold",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_utg_unopened.json": {
+  "depth": 25,
+  "position": "utg",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_25bb_utg_vs3bet.json": {
+  "depth": 25,
+  "position": "utg",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_bb_blinddefense.json": {
+  "depth": 30,
+  "position": "bb",
+  "rules": [],
+  "scenario": "blinddefense",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_bb_squeeze.json": {
+  "depth": 30,
+  "position": "bb",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_bb_vsopen.json": {
+  "depth": 30,
+  "position": "bb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_polarity",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_btn_squeeze.json": {
+  "depth": 30,
+  "position": "btn",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_btn_unopened.json": {
+  "depth": 30,
+  "position": "btn",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_btn_vs3bet.json": {
+  "depth": 30,
+  "position": "btn",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_btn_vs3betjam.json": {
+  "depth": 30,
+  "position": "btn",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_btn_vsopen.json": {
+  "depth": 30,
+  "position": "btn",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_co_squeeze.json": {
+  "depth": 30,
+  "position": "co",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_co_unopened.json": {
+  "depth": 30,
+  "position": "co",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_co_vs3bet.json": {
+  "depth": 30,
+  "position": "co",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_co_vs3betjam.json": {
+  "depth": 30,
+  "position": "co",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_co_vsopen.json": {
+  "depth": 30,
+  "position": "co",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_hj_squeeze.json": {
+  "depth": 30,
+  "position": "hj",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_hj_unopened.json": {
+  "depth": 30,
+  "position": "hj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_hj_vs3bet.json": {
+  "depth": 30,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_hj_vs3betjam.json": {
+  "depth": 30,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_hj_vsopen.json": {
+  "depth": 30,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_lj_squeeze.json": {
+  "depth": 30,
+  "position": "lj",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_lj_unopened.json": {
+  "depth": 30,
+  "position": "lj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_lj_vs3bet.json": {
+  "depth": 30,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_lj_vs3betjam.json": {
+  "depth": 30,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_lj_vsopen.json": {
+  "depth": 30,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_sb_blinddefense.json": {
+  "depth": 30,
+  "position": "sb",
+  "rules": [],
+  "scenario": "blinddefense",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_sb_squeeze.json": {
+  "depth": 30,
+  "position": "sb",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_sb_unopened.json": {
+  "depth": 30,
+  "position": "sb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_polarity",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_sb_vs3bet.json": {
+  "depth": 30,
+  "position": "sb",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_sb_vs3betjam.json": {
+  "depth": 30,
+  "position": "sb",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_sb_vsopen.json": {
+  "depth": 30,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_utg1_unopened.json": {
+  "depth": 30,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_utg1_vs3bet.json": {
+  "depth": 30,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_utg1_vs3betjam.json": {
+  "depth": 30,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_utg1_vsopen.json": {
+  "depth": 30,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_utg_unopened.json": {
+  "depth": 30,
+  "position": "utg",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_utg_vs3bet.json": {
+  "depth": 30,
+  "position": "utg",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_30bb_utg_vs3betjam.json": {
+  "depth": 30,
+  "position": "utg",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_bb_blinddefense.json": {
+  "depth": 40,
+  "position": "bb",
+  "rules": [],
+  "scenario": "blinddefense",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_bb_squeeze.json": {
+  "depth": 40,
+  "position": "bb",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_bb_vsopen.json": {
+  "depth": 40,
+  "position": "bb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_polarity",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_btn_squeeze.json": {
+  "depth": 40,
+  "position": "btn",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_btn_unopened.json": {
+  "depth": 40,
+  "position": "btn",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "WARN",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_btn_vs3bet.json": {
+  "depth": 40,
+  "position": "btn",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "WARN",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_btn_vs3betjam.json": {
+  "depth": 40,
+  "position": "btn",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_btn_vsopen.json": {
+  "depth": 40,
+  "position": "btn",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "WARN",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_co_squeeze.json": {
+  "depth": 40,
+  "position": "co",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_co_unopened.json": {
+  "depth": 40,
+  "position": "co",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_co_vs3bet.json": {
+  "depth": 40,
+  "position": "co",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_co_vs3betjam.json": {
+  "depth": 40,
+  "position": "co",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_co_vsopen.json": {
+  "depth": 40,
+  "position": "co",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_hj_squeeze.json": {
+  "depth": 40,
+  "position": "hj",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_hj_unopened.json": {
+  "depth": 40,
+  "position": "hj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_hj_vs3bet.json": {
+  "depth": 40,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_hj_vs3betjam.json": {
+  "depth": 40,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_hj_vsopen.json": {
+  "depth": 40,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_lj_squeeze.json": {
+  "depth": 40,
+  "position": "lj",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_lj_unopened.json": {
+  "depth": 40,
+  "position": "lj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_lj_vs3bet.json": {
+  "depth": 40,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_lj_vs3betjam.json": {
+  "depth": 40,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_lj_vsopen.json": {
+  "depth": 40,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_sb_blinddefense.json": {
+  "depth": 40,
+  "position": "sb",
+  "rules": [],
+  "scenario": "blinddefense",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_sb_squeeze.json": {
+  "depth": 40,
+  "position": "sb",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_sb_unopened.json": {
+  "depth": 40,
+  "position": "sb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_polarity",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_sb_vs3bet.json": {
+  "depth": 40,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_sb_vs3betjam.json": {
+  "depth": 40,
+  "position": "sb",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_sb_vsopen.json": {
+  "depth": 40,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_utg1_unopened.json": {
+  "depth": 40,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_utg1_vs3bet.json": {
+  "depth": 40,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_utg1_vs3betjam.json": {
+  "depth": 40,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_utg1_vsopen.json": {
+  "depth": 40,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_utg_unopened.json": {
+  "depth": 40,
+  "position": "utg",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_utg_vs3bet.json": {
+  "depth": 40,
+  "position": "utg",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_40bb_utg_vs3betjam.json": {
+  "depth": 40,
+  "position": "utg",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_bb_blinddefense.json": {
+  "depth": 50,
+  "position": "bb",
+  "rules": [],
+  "scenario": "blinddefense",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_bb_squeeze.json": {
+  "depth": 50,
+  "position": "bb",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_bb_vsopen.json": {
+  "depth": 50,
+  "position": "bb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_polarity",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_btn_squeeze.json": {
+  "depth": 50,
+  "position": "btn",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_btn_unopened.json": {
+  "depth": 50,
+  "position": "btn",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_btn_vs3bet.json": {
+  "depth": 50,
+  "position": "btn",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_btn_vs3betjam.json": {
+  "depth": 50,
+  "position": "btn",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_btn_vsopen.json": {
+  "depth": 50,
+  "position": "btn",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "WARN",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_co_squeeze.json": {
+  "depth": 50,
+  "position": "co",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_co_unopened.json": {
+  "depth": 50,
+  "position": "co",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_co_vs3bet.json": {
+  "depth": 50,
+  "position": "co",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_co_vs3betjam.json": {
+  "depth": 50,
+  "position": "co",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_co_vsopen.json": {
+  "depth": 50,
+  "position": "co",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_hj_squeeze.json": {
+  "depth": 50,
+  "position": "hj",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_hj_unopened.json": {
+  "depth": 50,
+  "position": "hj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_hj_vs3bet.json": {
+  "depth": 50,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_hj_vs3betjam.json": {
+  "depth": 50,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_hj_vsopen.json": {
+  "depth": 50,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_lj_squeeze.json": {
+  "depth": 50,
+  "position": "lj",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_lj_unopened.json": {
+  "depth": 50,
+  "position": "lj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_lj_vs3bet.json": {
+  "depth": 50,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_lj_vs3betjam.json": {
+  "depth": 50,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_lj_vsopen.json": {
+  "depth": 50,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_sb_blinddefense.json": {
+  "depth": 50,
+  "position": "sb",
+  "rules": [],
+  "scenario": "blinddefense",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_sb_squeeze.json": {
+  "depth": 50,
+  "position": "sb",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_sb_unopened.json": {
+  "depth": 50,
+  "position": "sb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_polarity",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_sb_vs3bet.json": {
+  "depth": 50,
+  "position": "sb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_polarity",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_sb_vs3betjam.json": {
+  "depth": 50,
+  "position": "sb",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_sb_vsopen.json": {
+  "depth": 50,
+  "position": "sb",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "WARN",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_utg1_unopened.json": {
+  "depth": 50,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_utg1_vs3bet.json": {
+  "depth": 50,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_utg1_vs3betjam.json": {
+  "depth": 50,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_utg1_vsopen.json": {
+  "depth": 50,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_utg_unopened.json": {
+  "depth": 50,
+  "position": "utg",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_utg_vs3bet.json": {
+  "depth": 50,
+  "position": "utg",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_50bb_utg_vs3betjam.json": {
+  "depth": 50,
+  "position": "utg",
+  "rules": [],
+  "scenario": "vs3betjam",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_bb_vsopen.json": {
+  "depth": 60,
+  "position": "bb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_polarity",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_btn_unopened.json": {
+  "depth": 60,
+  "position": "btn",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_btn_vs3bet.json": {
+  "depth": 60,
+  "position": "btn",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_btn_vs3betjam.json": {
+  "depth": 60,
+  "position": "btn",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_btn_vsopen.json": {
+  "depth": 60,
+  "position": "btn",
+  "rules": [
+   "warn:vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "WARN",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_co_unopened.json": {
+  "depth": 60,
+  "position": "co",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_co_vs3bet.json": {
+  "depth": 60,
+  "position": "co",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_co_vs3betjam.json": {
+  "depth": 60,
+  "position": "co",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_co_vsopen.json": {
+  "depth": 60,
+  "position": "co",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_hj_unopened.json": {
+  "depth": 60,
+  "position": "hj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_hj_vs3bet.json": {
+  "depth": 60,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_hj_vs3betjam.json": {
+  "depth": 60,
+  "position": "hj",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_hj_vsopen.json": {
+  "depth": 60,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_lj_unopened.json": {
+  "depth": 60,
+  "position": "lj",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_lj_vs3bet.json": {
+  "depth": 60,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_lj_vs3betjam.json": {
+  "depth": 60,
+  "position": "lj",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_lj_vsopen.json": {
+  "depth": 60,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_sb_unopened.json": {
+  "depth": 60,
+  "position": "sb",
+  "rules": [
+   "vpip.band",
+   "polarity.trash_too_loose"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_polarity",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_sb_vs3bet.json": {
+  "depth": 60,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_sb_vs3betjam.json": {
+  "depth": 60,
+  "position": "sb",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_sb_vsopen.json": {
+  "depth": 60,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_utg1_unopened.json": {
+  "depth": 60,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_utg1_vs3bet.json": {
+  "depth": 60,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vs3bet",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_utg1_vs3betjam.json": {
+  "depth": 60,
+  "position": "utg1",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_utg_unopened.json": {
+  "depth": 60,
+  "position": "utg",
+  "rules": [],
+  "scenario": "unopened",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_utg_vs3bet.json": {
+  "depth": 60,
+  "position": "utg",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_60bb_utg_vs3betjam.json": {
+  "depth": 60,
+  "position": "utg",
+  "rules": [
+   "duplicates.vs3betjam_eq_vs3bet"
+  ],
+  "scenario": "vs3betjam",
+  "status": "BROKEN_clone",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_bb_blinddefense.json": {
+  "depth": 75,
+  "position": "bb",
+  "rules": [],
+  "scenario": "blinddefense",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_bb_squeeze.json": {
+  "depth": 75,
+  "position": "bb",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_bb_vsopen.json": {
+  "depth": 75,
+  "position": "bb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_btn_squeeze.json": {
+  "depth": 75,
+  "position": "btn",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_btn_unopened.json": {
+  "depth": 75,
+  "position": "btn",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_btn_vs3bet.json": {
+  "depth": 75,
+  "position": "btn",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_btn_vsopen.json": {
+  "depth": 75,
+  "position": "btn",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_co_squeeze.json": {
+  "depth": 75,
+  "position": "co",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_co_unopened.json": {
+  "depth": 75,
+  "position": "co",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_co_vs3bet.json": {
+  "depth": 75,
+  "position": "co",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_co_vsopen.json": {
+  "depth": 75,
+  "position": "co",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_hj_squeeze.json": {
+  "depth": 75,
+  "position": "hj",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_hj_unopened.json": {
+  "depth": 75,
+  "position": "hj",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_hj_vs3bet.json": {
+  "depth": 75,
+  "position": "hj",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_hj_vsopen.json": {
+  "depth": 75,
+  "position": "hj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_lj_squeeze.json": {
+  "depth": 75,
+  "position": "lj",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_lj_unopened.json": {
+  "depth": 75,
+  "position": "lj",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_lj_vs3bet.json": {
+  "depth": 75,
+  "position": "lj",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_lj_vsopen.json": {
+  "depth": 75,
+  "position": "lj",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_sb_blinddefense.json": {
+  "depth": 75,
+  "position": "sb",
+  "rules": [],
+  "scenario": "blinddefense",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_sb_squeeze.json": {
+  "depth": 75,
+  "position": "sb",
+  "rules": [],
+  "scenario": "squeeze",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_sb_unopened.json": {
+  "depth": 75,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_sb_vs3bet.json": {
+  "depth": 75,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_sb_vsopen.json": {
+  "depth": 75,
+  "position": "sb",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vsopen",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_utg1_unopened.json": {
+  "depth": 75,
+  "position": "utg1",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_utg1_vs3bet.json": {
+  "depth": 75,
+  "position": "utg1",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_utg1_vsopen.json": {
+  "depth": 75,
+  "position": "utg1",
+  "rules": [],
+  "scenario": "vsopen",
+  "status": "OK",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_utg_unopened.json": {
+  "depth": 75,
+  "position": "utg",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "unopened",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ },
+ "mtt_9max_75bb_utg_vs3bet.json": {
+  "depth": 75,
+  "position": "utg",
+  "rules": [
+   "vpip.band"
+  ],
+  "scenario": "vs3bet",
+  "status": "BROKEN_vpip",
+  "table": "9max"
+ }
+}
