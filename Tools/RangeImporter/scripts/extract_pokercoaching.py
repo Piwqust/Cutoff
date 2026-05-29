@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 """extract_pokercoaching.py — pixel-extract PokerCoaching free GTO chart PDFs.
 
-STATUS: PROTOTYPE. Validated on row-1 RFI panels (within ~2-3pp of the printed
-VPIP). Row-2 panels and non-RFI layouts (vs-RFI / vs-3bet / blind-vs-blind) still
-mis-lock the matrix box and must NOT be trusted into the app bundle without
-per-layout calibration + VPIP validation against validate_ranges.py first.
+STATUS: PROTOTYPE / NOT TRUSTWORTHY FOR BUNDLE. With phase-fit box detection
+some panels extract spot-on (±0.5pp of printed VPIP) but others — especially
+colour-dense wide ranges (BTN/CO/SB) — are 30-45% off, because PokerCoaching's
+white-background charts lose their grey gridlines between adjacent coloured
+cells and the lattice fit degrades. Per-panel reliability is not good enough for
+a training app. Use assisted transcription (read the chart + printed VPIP/combo
+count as a checksum) for canonical data; keep this only as an extraction aid
+whose every output must be VPIP-validated before acceptance.
 
 
 PokerCoaching's free preflop chart PDFs
@@ -96,34 +100,66 @@ def _grey_lattice(im: Image.Image, win):
     return xs, ys
 
 
-def _pitch(proj: list[int]) -> float:
-    """Dominant gridline pitch (px) via autocorrelation, searched in 25..50."""
-    import statistics
-    p = [v - statistics.fmean(proj) for v in proj] if proj else [0]
-    best, bestk = -1e18, 38
-    for k in range(25, 51):
-        s = sum(p[i] * p[i + k] for i in range(len(p) - k))
-        if s > best:
-            best, bestk = s, k
-    return float(bestk)
+def _peaks(proj: list[int]) -> list[int]:
+    """Cluster-centre indices of strong gridline spikes in a 1-D projection."""
+    if not proj:
+        return []
+    th = max(max(proj) * 0.33, 4)
+    on = [i for i, v in enumerate(proj) if v > th]
+    out, cluster = [], []
+    for i in on:
+        if cluster and i - cluster[-1] > 4:
+            out.append(sum(cluster) // len(cluster))
+            cluster = []
+        cluster.append(i)
+    if cluster:
+        out.append(sum(cluster) // len(cluster))
+    return out
+
+
+def _fit_axis(proj: list[int], lo: int) -> tuple[int, float]:
+    """Phase-fit a 14-line lattice to gridline peaks. Returns (origin_abs, pitch).
+
+    pitch = median consecutive gap (filtered to plausible 30-45 px cell size);
+    origin = the candidate phase that lands the most detected peaks on lattice
+    nodes. Robust to a faint boundary line or strong interior lines (the bug
+    that shifted the box 2 cells down).
+    """
+    pk = _peaks(proj)
+    if len(pk) < 3:
+        return lo, 37.5
+    gaps = sorted(pk[i + 1] - pk[i] for i in range(len(pk) - 1))
+    plausible = [g for g in gaps if 30 <= g <= 45]
+    pitch = float(plausible[len(plausible) // 2]) if plausible else 37.5
+    # Try every detected peak as a possible lattice node; score by how many
+    # peaks fall near origin + k*pitch. Best origin = lowest well-scoring phase.
+    best_origin, best_score = pk[0], -1
+    for cand in pk:
+        for k0 in range(0, 14):
+            origin = cand - k0 * pitch
+            if origin < -pitch * 0.5:
+                continue
+            score = sum(1 for p in pk
+                        if min(abs(p - (origin + n * pitch)) for n in range(14)) <= 3)
+            if score > best_score or (score == best_score and origin < best_origin):
+                best_score, best_origin = score, origin
+    return int(round(lo + best_origin)), pitch
 
 
 def find_box(im: Image.Image, win) -> tuple[int, int, int, int]:
-    """Lock the 13x13 matrix inside the window.
+    """Lock the 13x13 matrix inside the window via phase-fit of the grey lattice.
 
-    The matrix is a regular grey lattice; the legend bars below it are solid
-    colour with no internal grid. We find the matrix's top-left grey corner,
-    measure the cell pitch by autocorrelation, then index exactly 13 cells from
-    the origin on each axis. Indexing a fixed 13×13 from the origin structurally
-    excludes the legend (no overshoot) and survives colour-dense panels.
+    The matrix is a regular grey lattice of 14 lines per axis; the legend bars
+    below it are solid colour with no internal grid. We fit the lattice phase +
+    pitch on each axis and index exactly 13 cells from the origin — structurally
+    excluding the legend and surviving colour-dense panels.
     """
     x0, y0, x1, y1 = win
     xs, ys = _grey_lattice(im, win)
     if not xs or not ys or max(xs) < 6 or max(ys) < 6:
         return win
-    px, py = _pitch(xs), _pitch(ys)
-    ox = x0 + next(i for i, v in enumerate(xs) if v > max(xs) * 0.4)
-    oy = y0 + next(i for i, v in enumerate(ys) if v > max(ys) * 0.4)
+    ox, px = _fit_axis(xs, x0)
+    oy, py = _fit_axis(ys, y0)
     return ox, oy, int(round(ox + 13 * px)), int(round(oy + 13 * py))
 
 
