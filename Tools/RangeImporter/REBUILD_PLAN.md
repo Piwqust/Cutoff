@@ -33,7 +33,22 @@ provenance.
 
 ## Current baseline (see `coverage_manifest.json`, regenerate any time)
 
-- 376 OK · 97 BROKEN_vpip · 46 BROKEN_clone · 30 BROKEN_polarity · 24 WARN (573 total)
+- **493 OK · 46 BROKEN_clone · 30 BROKEN_polarity · 4 BROKEN_vpip** (573 total)
+
+### Gate-correctness pass (done first — the original "173 broken" was inflated)
+The validator itself had two metric bugs that produced ~93 false positives:
+1. **Subrange denominator** — `vpip_percent` divided non-fold by *listed*
+   combos. Files stored compactly (only played hands listed, trash omitted =
+   fold) reported ~100% VPIP. Fixed: denominator is the full 1326-combo deck.
+2. **vs3bet metric** — vs3bet/vs3betjam list only the opener's reachable
+   *opening* subrange, so non-fold/listed is a continue-frequency (~80-97%),
+   not a /1326 VPIP. Removed from VPIP-band (guarded by polarity + duplicate).
+3. SB-vs-open band widened to ~10-50% after confirming those charts are
+   correct GTO (proper polarity), not corrupt.
+
+The 80 remaining are genuine: 46 fake vs3betjam clones, 30 polarity inversions
+(trash playing ~100%, ex-HRC importer bug), 4 thin/corrupt unopened
+(`10bb_hj` opens AA=fold(!), etc.).
 
 ## Batch order (highest value / lowest risk first)
 

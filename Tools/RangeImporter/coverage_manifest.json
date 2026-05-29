@@ -13,21 +13,17 @@
  "mtt_8max_100bb_btn_unopened.json": {
   "depth": 100,
   "position": "btn",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "WARN",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_100bb_btn_vs3bet.json": {
   "depth": 100,
   "position": "btn",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_100bb_btn_vs3betjam.json": {
@@ -43,11 +39,9 @@
  "mtt_8max_100bb_btn_vsopen.json": {
   "depth": 100,
   "position": "btn",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "WARN",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_100bb_co_unopened.json": {
@@ -61,11 +55,9 @@
  "mtt_8max_100bb_co_vs3bet.json": {
   "depth": 100,
   "position": "co",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_100bb_co_vs3betjam.json": {
@@ -97,11 +89,9 @@
  "mtt_8max_100bb_hj_vs3bet.json": {
   "depth": 100,
   "position": "hj",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_100bb_hj_vs3betjam.json": {
@@ -133,11 +123,9 @@
  "mtt_8max_100bb_lj_vs3bet.json": {
   "depth": 100,
   "position": "lj",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_100bb_lj_vs3betjam.json": {
@@ -173,7 +161,6 @@
   "depth": 100,
   "position": "sb",
   "rules": [
-   "vpip.band",
    "polarity.trash_too_loose"
   ],
   "scenario": "vs3bet",
@@ -210,11 +197,9 @@
  "mtt_8max_100bb_utg1_vs3bet.json": {
   "depth": 100,
   "position": "utg1",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_100bb_utg1_vs3betjam.json": {
@@ -246,11 +231,9 @@
  "mtt_8max_100bb_utg_vs3bet.json": {
   "depth": 100,
   "position": "utg",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_100bb_utg_vs3betjam.json": {
@@ -266,11 +249,9 @@
  "mtt_8max_10bb_bb_vsopen.json": {
   "depth": 10,
   "position": "bb",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "WARN",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_10bb_btn_unopened.json": {
@@ -293,8 +274,7 @@
   "depth": 10,
   "position": "co",
   "rules": [
-   "polarity.trash_too_loose",
-   "warn:vpip.band"
+   "polarity.trash_too_loose"
   ],
   "scenario": "unopened",
   "status": "BROKEN_polarity",
@@ -329,11 +309,9 @@
  "mtt_8max_10bb_lj_unopened.json": {
   "depth": 10,
   "position": "lj",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "WARN",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_10bb_lj_vsopen.json": {
@@ -355,11 +333,9 @@
  "mtt_8max_10bb_utg1_unopened.json": {
   "depth": 10,
   "position": "utg1",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "WARN",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_10bb_utg1_vsopen.json": {
@@ -373,11 +349,9 @@
  "mtt_8max_10bb_utg_unopened.json": {
   "depth": 10,
   "position": "utg",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "WARN",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_20bb_bb_vsopen.json": {
@@ -559,11 +533,9 @@
  "mtt_8max_20bb_sb_vsopen.json": {
   "depth": 20,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_20bb_utg1_unopened.json": {
@@ -797,11 +769,9 @@
  "mtt_8max_30bb_sb_vsopen.json": {
   "depth": 30,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_30bb_utg1_unopened.json": {
@@ -874,21 +844,17 @@
  "mtt_8max_40bb_btn_unopened.json": {
   "depth": 40,
   "position": "btn",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "WARN",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_40bb_btn_vs3bet.json": {
   "depth": 40,
   "position": "btn",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "WARN",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_40bb_btn_vs3betjam.json": {
@@ -902,11 +868,9 @@
  "mtt_8max_40bb_btn_vsopen.json": {
   "depth": 40,
   "position": "btn",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "WARN",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_40bb_co_unopened.json": {
@@ -920,11 +884,9 @@
  "mtt_8max_40bb_co_vs3bet.json": {
   "depth": 40,
   "position": "co",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_40bb_co_vs3betjam.json": {
@@ -1021,11 +983,9 @@
  "mtt_8max_40bb_sb_vs3bet.json": {
   "depth": 40,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_40bb_sb_vs3betjam.json": {
@@ -1039,11 +999,9 @@
  "mtt_8max_40bb_sb_vsopen.json": {
   "depth": 40,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_40bb_utg1_unopened.json": {
@@ -1089,11 +1047,9 @@
  "mtt_8max_40bb_utg_vs3bet.json": {
   "depth": 40,
   "position": "utg",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_40bb_utg_vs3betjam.json": {
@@ -1126,11 +1082,9 @@
  "mtt_8max_50bb_btn_vs3bet.json": {
   "depth": 50,
   "position": "btn",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_50bb_btn_vs3betjam.json": {
@@ -1146,11 +1100,9 @@
  "mtt_8max_50bb_btn_vsopen.json": {
   "depth": 50,
   "position": "btn",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "WARN",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_50bb_co_unopened.json": {
@@ -1164,11 +1116,9 @@
  "mtt_8max_50bb_co_vs3bet.json": {
   "depth": 50,
   "position": "co",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_50bb_co_vs3betjam.json": {
@@ -1266,7 +1216,6 @@
   "depth": 50,
   "position": "sb",
   "rules": [
-   "vpip.band",
    "polarity.trash_too_loose"
   ],
   "scenario": "vs3bet",
@@ -1284,11 +1233,9 @@
  "mtt_8max_50bb_sb_vsopen.json": {
   "depth": 50,
   "position": "sb",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "WARN",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_50bb_utg1_unopened.json": {
@@ -1334,11 +1281,9 @@
  "mtt_8max_50bb_utg_vs3bet.json": {
   "depth": 50,
   "position": "utg",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_50bb_utg_vs3betjam.json": {
@@ -1371,11 +1316,9 @@
  "mtt_8max_60bb_btn_vs3bet.json": {
   "depth": 60,
   "position": "btn",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_60bb_btn_vs3betjam.json": {
@@ -1391,11 +1334,9 @@
  "mtt_8max_60bb_btn_vsopen.json": {
   "depth": 60,
   "position": "btn",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "WARN",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_60bb_co_unopened.json": {
@@ -1409,11 +1350,9 @@
  "mtt_8max_60bb_co_vs3bet.json": {
   "depth": 60,
   "position": "co",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_60bb_co_vs3betjam.json": {
@@ -1516,11 +1455,9 @@
  "mtt_8max_60bb_sb_vs3bet.json": {
   "depth": 60,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_60bb_sb_vs3betjam.json": {
@@ -1536,11 +1473,9 @@
  "mtt_8max_60bb_sb_vsopen.json": {
   "depth": 60,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_60bb_utg1_unopened.json": {
@@ -1588,11 +1523,9 @@
  "mtt_8max_60bb_utg_vs3bet.json": {
   "depth": 60,
   "position": "utg",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "8max"
  },
  "mtt_8max_60bb_utg_vs3betjam.json": {
@@ -1643,21 +1576,17 @@
  "mtt_9max_100bb_btn_unopened.json": {
   "depth": 100,
   "position": "btn",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "WARN",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_100bb_btn_vs3bet.json": {
   "depth": 100,
   "position": "btn",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_100bb_btn_vs3betjam.json": {
@@ -1673,11 +1602,9 @@
  "mtt_9max_100bb_btn_vsopen.json": {
   "depth": 100,
   "position": "btn",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "WARN",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_100bb_co_squeeze.json": {
@@ -1699,11 +1626,9 @@
  "mtt_9max_100bb_co_vs3bet.json": {
   "depth": 100,
   "position": "co",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_100bb_co_vs3betjam.json": {
@@ -1743,11 +1668,9 @@
  "mtt_9max_100bb_hj_vs3bet.json": {
   "depth": 100,
   "position": "hj",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_100bb_hj_vs3betjam.json": {
@@ -1787,11 +1710,9 @@
  "mtt_9max_100bb_lj_vs3bet.json": {
   "depth": 100,
   "position": "lj",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_100bb_lj_vs3betjam.json": {
@@ -1843,7 +1764,6 @@
   "depth": 100,
   "position": "sb",
   "rules": [
-   "vpip.band",
    "polarity.trash_too_loose"
   ],
   "scenario": "vs3bet",
@@ -1880,11 +1800,9 @@
  "mtt_9max_100bb_utg1_vs3bet.json": {
   "depth": 100,
   "position": "utg1",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_100bb_utg1_vs3betjam.json": {
@@ -1916,11 +1834,9 @@
  "mtt_9max_100bb_utg_vs3bet.json": {
   "depth": 100,
   "position": "utg",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_100bb_utg_vs3betjam.json": {
@@ -1960,11 +1876,9 @@
  "mtt_9max_10bb_bb_vsopen.json": {
   "depth": 10,
   "position": "bb",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "WARN",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_10bb_btn_pushfold.json": {
@@ -2027,8 +1941,7 @@
   "depth": 10,
   "position": "co",
   "rules": [
-   "polarity.trash_too_loose",
-   "warn:vpip.band"
+   "polarity.trash_too_loose"
   ],
   "scenario": "unopened",
   "status": "BROKEN_polarity",
@@ -2111,11 +2024,9 @@
  "mtt_9max_10bb_lj_unopened.json": {
   "depth": 10,
   "position": "lj",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "WARN",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_10bb_lj_vs3bet.json": {
@@ -2161,11 +2072,9 @@
  "mtt_9max_10bb_sb_unopened.json": {
   "depth": 10,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_10bb_sb_vs3bet.json": {
@@ -2195,11 +2104,9 @@
  "mtt_9max_10bb_utg1_unopened.json": {
   "depth": 10,
   "position": "utg1",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "WARN",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_10bb_utg1_vs3bet.json": {
@@ -2229,11 +2136,9 @@
  "mtt_9max_10bb_utg_unopened.json": {
   "depth": 10,
   "position": "utg",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "WARN",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_10bb_utg_vs3bet.json": {
@@ -2263,11 +2168,9 @@
  "mtt_9max_125bb_bb_vsopen.json": {
   "depth": 125,
   "position": "bb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_125bb_btn_squeeze.json": {
@@ -2281,31 +2184,25 @@
  "mtt_9max_125bb_btn_unopened.json": {
   "depth": 125,
   "position": "btn",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_125bb_btn_vs3bet.json": {
   "depth": 125,
   "position": "btn",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_125bb_btn_vsopen.json": {
   "depth": 125,
   "position": "btn",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_125bb_co_squeeze.json": {
@@ -2319,21 +2216,17 @@
  "mtt_9max_125bb_co_unopened.json": {
   "depth": 125,
   "position": "co",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_125bb_co_vs3bet.json": {
   "depth": 125,
   "position": "co",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_125bb_co_vsopen.json": {
@@ -2355,21 +2248,17 @@
  "mtt_9max_125bb_hj_unopened.json": {
   "depth": 125,
   "position": "hj",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_125bb_hj_vs3bet.json": {
   "depth": 125,
   "position": "hj",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_125bb_hj_vsopen.json": {
@@ -2391,21 +2280,17 @@
  "mtt_9max_125bb_lj_unopened.json": {
   "depth": 125,
   "position": "lj",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_125bb_lj_vs3bet.json": {
   "depth": 125,
   "position": "lj",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_125bb_lj_vsopen.json": {
@@ -2435,51 +2320,41 @@
  "mtt_9max_125bb_sb_unopened.json": {
   "depth": 125,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_125bb_sb_vs3bet.json": {
   "depth": 125,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_125bb_sb_vsopen.json": {
   "depth": 125,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_125bb_utg1_unopened.json": {
   "depth": 125,
   "position": "utg1",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_125bb_utg1_vs3bet.json": {
   "depth": 125,
   "position": "utg1",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_125bb_utg1_vsopen.json": {
@@ -2493,21 +2368,17 @@
  "mtt_9max_125bb_utg_unopened.json": {
   "depth": 125,
   "position": "utg",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_125bb_utg_vs3bet.json": {
   "depth": 125,
   "position": "utg",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_12bb_bb_pushfold.json": {
@@ -2601,11 +2472,9 @@
  "mtt_9max_15bb_bb_vsopen.json": {
   "depth": 15,
   "position": "bb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_15bb_btn_pushfold.json": {
@@ -2627,11 +2496,9 @@
  "mtt_9max_15bb_btn_unopened.json": {
   "depth": 15,
   "position": "btn",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_15bb_btn_vs3bet.json": {
@@ -2645,11 +2512,9 @@
  "mtt_9max_15bb_btn_vsopen.json": {
   "depth": 15,
   "position": "btn",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_15bb_co_pushfold.json": {
@@ -2671,11 +2536,9 @@
  "mtt_9max_15bb_co_unopened.json": {
   "depth": 15,
   "position": "co",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_15bb_co_vs3bet.json": {
@@ -2713,11 +2576,9 @@
  "mtt_9max_15bb_hj_unopened.json": {
   "depth": 15,
   "position": "hj",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_15bb_hj_vs3bet.json": {
@@ -2755,11 +2616,9 @@
  "mtt_9max_15bb_lj_unopened.json": {
   "depth": 15,
   "position": "lj",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_15bb_lj_vs3bet.json": {
@@ -2823,11 +2682,9 @@
  "mtt_9max_15bb_sb_vsopen.json": {
   "depth": 15,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_15bb_utg1_pushfold.json": {
@@ -2841,11 +2698,9 @@
  "mtt_9max_15bb_utg1_unopened.json": {
   "depth": 15,
   "position": "utg1",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_15bb_utg1_vs3bet.json": {
@@ -2875,11 +2730,9 @@
  "mtt_9max_15bb_utg_unopened.json": {
   "depth": 15,
   "position": "utg",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_15bb_utg_vs3bet.json": {
@@ -3181,11 +3034,9 @@
  "mtt_9max_20bb_sb_vsopen.json": {
   "depth": 20,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_20bb_utg1_pushfold.json": {
@@ -3291,11 +3142,9 @@
  "mtt_9max_25bb_bb_vsopen.json": {
   "depth": 25,
   "position": "bb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_25bb_btn_pushfold.json": {
@@ -3317,11 +3166,9 @@
  "mtt_9max_25bb_btn_unopened.json": {
   "depth": 25,
   "position": "btn",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_25bb_btn_vs3bet.json": {
@@ -3335,11 +3182,9 @@
  "mtt_9max_25bb_btn_vsopen.json": {
   "depth": 25,
   "position": "btn",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_25bb_co_pushfold.json": {
@@ -3361,11 +3206,9 @@
  "mtt_9max_25bb_co_unopened.json": {
   "depth": 25,
   "position": "co",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_25bb_co_vs3bet.json": {
@@ -3403,11 +3246,9 @@
  "mtt_9max_25bb_hj_unopened.json": {
   "depth": 25,
   "position": "hj",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_25bb_hj_vs3bet.json": {
@@ -3445,11 +3286,9 @@
  "mtt_9max_25bb_lj_unopened.json": {
   "depth": 25,
   "position": "lj",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_25bb_lj_vs3bet.json": {
@@ -3495,11 +3334,9 @@
  "mtt_9max_25bb_sb_unopened.json": {
   "depth": 25,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_25bb_sb_vs3bet.json": {
@@ -3513,11 +3350,9 @@
  "mtt_9max_25bb_sb_vsopen.json": {
   "depth": 25,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_25bb_utg1_pushfold.json": {
@@ -3531,11 +3366,9 @@
  "mtt_9max_25bb_utg1_unopened.json": {
   "depth": 25,
   "position": "utg1",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_25bb_utg1_vs3bet.json": {
@@ -3565,11 +3398,9 @@
  "mtt_9max_25bb_utg_unopened.json": {
   "depth": 25,
   "position": "utg",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_25bb_utg_vs3bet.json": {
@@ -3815,11 +3646,9 @@
  "mtt_9max_30bb_sb_vsopen.json": {
   "depth": 30,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_30bb_utg1_unopened.json": {
@@ -3916,21 +3745,17 @@
  "mtt_9max_40bb_btn_unopened.json": {
   "depth": 40,
   "position": "btn",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "WARN",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_40bb_btn_vs3bet.json": {
   "depth": 40,
   "position": "btn",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "WARN",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_40bb_btn_vs3betjam.json": {
@@ -3944,11 +3769,9 @@
  "mtt_9max_40bb_btn_vsopen.json": {
   "depth": 40,
   "position": "btn",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "WARN",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_40bb_co_squeeze.json": {
@@ -3970,11 +3793,9 @@
  "mtt_9max_40bb_co_vs3bet.json": {
   "depth": 40,
   "position": "co",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_40bb_co_vs3betjam.json": {
@@ -4103,11 +3924,9 @@
  "mtt_9max_40bb_sb_vs3bet.json": {
   "depth": 40,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_40bb_sb_vs3betjam.json": {
@@ -4121,11 +3940,9 @@
  "mtt_9max_40bb_sb_vsopen.json": {
   "depth": 40,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_40bb_utg1_unopened.json": {
@@ -4171,11 +3988,9 @@
  "mtt_9max_40bb_utg_vs3bet.json": {
   "depth": 40,
   "position": "utg",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_40bb_utg_vs3betjam.json": {
@@ -4232,11 +4047,9 @@
  "mtt_9max_50bb_btn_vs3bet.json": {
   "depth": 50,
   "position": "btn",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_50bb_btn_vs3betjam.json": {
@@ -4252,11 +4065,9 @@
  "mtt_9max_50bb_btn_vsopen.json": {
   "depth": 50,
   "position": "btn",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "WARN",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_50bb_co_squeeze.json": {
@@ -4278,11 +4089,9 @@
  "mtt_9max_50bb_co_vs3bet.json": {
   "depth": 50,
   "position": "co",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_50bb_co_vs3betjam.json": {
@@ -4412,7 +4221,6 @@
   "depth": 50,
   "position": "sb",
   "rules": [
-   "vpip.band",
    "polarity.trash_too_loose"
   ],
   "scenario": "vs3bet",
@@ -4430,11 +4238,9 @@
  "mtt_9max_50bb_sb_vsopen.json": {
   "depth": 50,
   "position": "sb",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "WARN",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_50bb_utg1_unopened.json": {
@@ -4480,11 +4286,9 @@
  "mtt_9max_50bb_utg_vs3bet.json": {
   "depth": 50,
   "position": "utg",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_50bb_utg_vs3betjam.json": {
@@ -4517,11 +4321,9 @@
  "mtt_9max_60bb_btn_vs3bet.json": {
   "depth": 60,
   "position": "btn",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_60bb_btn_vs3betjam.json": {
@@ -4537,11 +4339,9 @@
  "mtt_9max_60bb_btn_vsopen.json": {
   "depth": 60,
   "position": "btn",
-  "rules": [
-   "warn:vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "WARN",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_60bb_co_unopened.json": {
@@ -4555,11 +4355,9 @@
  "mtt_9max_60bb_co_vs3bet.json": {
   "depth": 60,
   "position": "co",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_60bb_co_vs3betjam.json": {
@@ -4662,11 +4460,9 @@
  "mtt_9max_60bb_sb_vs3bet.json": {
   "depth": 60,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_60bb_sb_vs3betjam.json": {
@@ -4682,11 +4478,9 @@
  "mtt_9max_60bb_sb_vsopen.json": {
   "depth": 60,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_60bb_utg1_unopened.json": {
@@ -4726,11 +4520,9 @@
  "mtt_9max_60bb_utg_vs3bet.json": {
   "depth": 60,
   "position": "utg",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_60bb_utg_vs3betjam.json": {
@@ -4762,11 +4554,9 @@
  "mtt_9max_75bb_bb_vsopen.json": {
   "depth": 75,
   "position": "bb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_75bb_btn_squeeze.json": {
@@ -4790,21 +4580,17 @@
  "mtt_9max_75bb_btn_vs3bet.json": {
   "depth": 75,
   "position": "btn",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_75bb_btn_vsopen.json": {
   "depth": 75,
   "position": "btn",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_75bb_co_squeeze.json": {
@@ -4818,21 +4604,17 @@
  "mtt_9max_75bb_co_unopened.json": {
   "depth": 75,
   "position": "co",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_75bb_co_vs3bet.json": {
   "depth": 75,
   "position": "co",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_75bb_co_vsopen.json": {
@@ -4854,21 +4636,17 @@
  "mtt_9max_75bb_hj_unopened.json": {
   "depth": 75,
   "position": "hj",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_75bb_hj_vs3bet.json": {
   "depth": 75,
   "position": "hj",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_75bb_hj_vsopen.json": {
@@ -4890,21 +4668,17 @@
  "mtt_9max_75bb_lj_unopened.json": {
   "depth": 75,
   "position": "lj",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_75bb_lj_vs3bet.json": {
   "depth": 75,
   "position": "lj",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_75bb_lj_vsopen.json": {
@@ -4934,51 +4708,41 @@
  "mtt_9max_75bb_sb_unopened.json": {
   "depth": 75,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_75bb_sb_vs3bet.json": {
   "depth": 75,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_75bb_sb_vsopen.json": {
   "depth": 75,
   "position": "sb",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vsopen",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_75bb_utg1_unopened.json": {
   "depth": 75,
   "position": "utg1",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_75bb_utg1_vs3bet.json": {
   "depth": 75,
   "position": "utg1",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_75bb_utg1_vsopen.json": {
@@ -4992,21 +4756,17 @@
  "mtt_9max_75bb_utg_unopened.json": {
   "depth": 75,
   "position": "utg",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "unopened",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  },
  "mtt_9max_75bb_utg_vs3bet.json": {
   "depth": 75,
   "position": "utg",
-  "rules": [
-   "vpip.band"
-  ],
+  "rules": [],
   "scenario": "vs3bet",
-  "status": "BROKEN_vpip",
+  "status": "OK",
   "table": "9max"
  }
 }

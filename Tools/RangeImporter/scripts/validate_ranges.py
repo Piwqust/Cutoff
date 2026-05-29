@@ -65,22 +65,29 @@ def combos_for_hand(h: str) -> int:
     return 4 if h.endswith("s") else 12
 
 
+ALL_COMBOS = 1326  # 13*6 pairs + 78*4 suited + 78*12 offsuit
+
+
 def vpip_percent(hands: dict[str, Any]) -> float:
-    """% of starting hands that take any non-fold action, combo-weighted."""
-    total = 0
+    """% of ALL starting hands that take any non-fold action, combo-weighted.
+
+    The denominator is the full 1326-combo deck, NOT just the listed hands.
+    Range files may be stored compactly (only the played hands listed, trash
+    omitted = implicit fold); dividing by listed-combos instead of 1326 would
+    report ~100% VPIP for those files and falsely flag them. Unlisted hands
+    contribute 0 to `inplay` (they fold), which is exactly correct.
+    """
     inplay = 0.0
     for h, value in hands.items():
         if not HAND_RE.match(h):
             continue
         combos = combos_for_hand(h)
-        total += combos
         if isinstance(value, dict):
             non_fold = sum(p for k, p in value.items() if k != "fold")
             inplay += combos * non_fold
-        else:
-            if value != "fold":
-                inplay += combos
-    return 0.0 if total == 0 else 100.0 * inplay / total
+        elif value != "fold":
+            inplay += combos
+    return 100.0 * inplay / ALL_COMBOS
 
 
 def trash_non_fold_percent(hands: dict[str, Any]) -> float:
@@ -167,17 +174,22 @@ RFI_BANDS: dict[tuple[str, str], tuple[float, float]] = {
 # Bands here are deliberately loose; their main role is catching the
 # polarity-flip bug, not validating solver fidelity.
 VSOPEN_BANDS: dict[tuple[str, str], tuple[float, float]] = {
+    # SB-vs-open is wide: the SB defends a steal by 3-betting AND flatting, so
+    # ~30-45% total defense is canonical (confirmed by inspecting the charts:
+    # AA/AKo jam-or-raise, suited broadways/connectors call, offsuit trash
+    # folds). Bands widened accordingly; a true polarity flip (trash calling)
+    # is still caught by the polarity check.
     ("deep", "btn"): (12, 35),
-    ("deep", "sb"):  (8, 25),
+    ("deep", "sb"):  (10, 50),
     ("deep", "bb"):  (40, 80),
     ("deep_mid", "btn"): (10, 35),
-    ("deep_mid", "sb"):  (8, 25),
+    ("deep_mid", "sb"):  (10, 50),
     ("deep_mid", "bb"):  (35, 80),
     ("midstack", "btn"): (8, 35),
-    ("midstack", "sb"):  (6, 25),
+    ("midstack", "sb"):  (8, 55),
     ("midstack", "bb"):  (30, 80),
     ("shallow", "btn"):  (6, 35),
-    ("shallow", "sb"):   (4, 25),
+    ("shallow", "sb"):   (6, 70),
     ("shallow", "bb"):   (20, 80),
 }
 
@@ -267,10 +279,17 @@ def check_vpip_band(name: str, doc: dict[str, Any], report: Report) -> None:
     hands = doc.get("hands") or {}
     vpip = vpip_percent(hands)
 
+    # VPIP bands are only meaningful for charts that enumerate the FULL 169-hand
+    # range (unopened, vsopen): there, non-fold / listed-combos == non-fold /
+    # 1326 == true VPIP. vs3bet/vs3betjam list only the opener's reachable
+    # *opening* subrange (trash is unlisted = implicit fold), so non-fold /
+    # listed-combos measures CONTINUE-frequency (~80-97%), which is not
+    # comparable to a /1326 VPIP band — applying one produces false positives.
+    # Corruption in those charts is instead guarded by the polarity check
+    # (trash must fold) and the vs3betjam duplicate check.
     band_table = {
         "unopened": RFI_BANDS,
         "vsopen": VSOPEN_BANDS,
-        "vs3bet": VS3BET_BANDS,
     }.get(scenario)
     if not band_table:
         return
