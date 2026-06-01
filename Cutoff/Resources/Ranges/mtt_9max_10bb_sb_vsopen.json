@@ -1,526 +1,177 @@
 {
   "format" : "NLHE_MTT_9MAX",
   "hands" : {
-    "22" : {
-      "fold" : 1
-    },
-    "32o" : {
-      "fold" : 1
-    },
-    "32s" : {
-      "fold" : 1
-    },
     "33" : {
-      "fold" : 1
-    },
-    "42o" : {
-      "fold" : 1
-    },
-    "42s" : {
-      "fold" : 1
-    },
-    "43o" : {
-      "fold" : 1
-    },
-    "43s" : {
-      "fold" : 1
+      "fold" : 0.73009999999999997,
+      "shove" : 0.26989999999999997
     },
     "44" : {
-      "fold" : 1
-    },
-    "52o" : {
-      "fold" : 1
-    },
-    "52s" : {
-      "fold" : 1
-    },
-    "53o" : {
-      "fold" : 1
-    },
-    "53s" : {
-      "fold" : 1
-    },
-    "54o" : {
-      "call" : 0.5,
-      "fold" : 0.5
-    },
-    "54s" : {
-      "fold" : 1
+      "shove" : 1
     },
     "55" : {
-      "call" : 0.5,
-      "fold" : 0.5
-    },
-    "62o" : {
-      "fold" : 1
-    },
-    "62s" : {
-      "fold" : 1
-    },
-    "63o" : {
-      "fold" : 1
-    },
-    "63s" : {
-      "fold" : 1
-    },
-    "64o" : {
-      "fold" : 1
-    },
-    "64s" : {
-      "fold" : 1
-    },
-    "65o" : {
-      "call" : 0.5,
-      "fold" : 0.5
-    },
-    "65s" : {
-      "fold" : 1
+      "shove" : 1
     },
     "66" : {
-      "call" : 0.5,
-      "fold" : 0.5
-    },
-    "72o" : {
-      "fold" : 1
-    },
-    "72s" : {
-      "fold" : 1
-    },
-    "73o" : {
-      "fold" : 1
-    },
-    "73s" : {
-      "fold" : 1
-    },
-    "74o" : {
-      "fold" : 1
-    },
-    "74s" : {
-      "fold" : 1
-    },
-    "75o" : {
-      "fold" : 1
-    },
-    "75s" : {
-      "fold" : 1
-    },
-    "76o" : {
-      "call" : 0.5,
-      "fold" : 0.5
-    },
-    "76s" : {
-      "fold" : 1
+      "shove" : 1
     },
     "77" : {
-      "call" : 0.5,
-      "fold" : 0.5
-    },
-    "82o" : {
-      "fold" : 1
-    },
-    "82s" : {
-      "fold" : 1
-    },
-    "83o" : {
-      "fold" : 1
-    },
-    "83s" : {
-      "fold" : 1
-    },
-    "84o" : {
-      "fold" : 1
-    },
-    "84s" : {
-      "fold" : 1
-    },
-    "85o" : {
-      "fold" : 1
-    },
-    "85s" : {
-      "fold" : 1
-    },
-    "86o" : {
-      "fold" : 1
-    },
-    "86s" : {
-      "fold" : 1
-    },
-    "87o" : {
-      "call" : 0.5,
-      "fold" : 0.5
-    },
-    "87s" : {
-      "fold" : 1
+      "shove" : 1
     },
     "88" : {
-      "call" : 0.5,
-      "fold" : 0.5
-    },
-    "92o" : {
-      "fold" : 1
-    },
-    "92s" : {
-      "fold" : 1
-    },
-    "93o" : {
-      "fold" : 1
-    },
-    "93s" : {
-      "fold" : 1
-    },
-    "94o" : {
-      "fold" : 1
-    },
-    "94s" : {
-      "fold" : 1
-    },
-    "95o" : {
-      "fold" : 1
-    },
-    "95s" : {
-      "fold" : 1
-    },
-    "96o" : {
-      "fold" : 1
-    },
-    "96s" : {
-      "fold" : 1
-    },
-    "97o" : {
-      "fold" : 1
-    },
-    "97s" : {
-      "fold" : 1
-    },
-    "98o" : {
-      "call" : 0.5,
-      "fold" : 0.5
-    },
-    "98s" : {
-      "fold" : 1
+      "shove" : 1
     },
     "99" : {
-      "call" : 0.5,
-      "fold" : 0.5
+      "shove" : 1
     },
     "A2o" : {
-      "fold" : 1
+      "shove" : 1
     },
     "A2s" : {
-      "fold" : 1
+      "shove" : 1
     },
     "A3o" : {
-      "fold" : 1
+      "shove" : 1
     },
     "A3s" : {
-      "fold" : 1
+      "shove" : 1
     },
     "A4o" : {
-      "fold" : 1
+      "shove" : 1
     },
     "A4s" : {
-      "fold" : 1
+      "shove" : 1
     },
     "A5o" : {
-      "fold" : 1
+      "shove" : 1
     },
     "A5s" : {
-      "fold" : 1
+      "shove" : 1
     },
     "A6o" : {
-      "fold" : 1
+      "shove" : 1
     },
     "A6s" : {
-      "fold" : 1
+      "shove" : 1
     },
     "A7o" : {
-      "fold" : 1
+      "shove" : 1
     },
     "A7s" : {
-      "fold" : 1
+      "shove" : 1
     },
     "A8o" : {
-      "fold" : 1
+      "shove" : 1
     },
     "A8s" : {
-      "call" : 1
+      "shove" : 1
     },
     "A9o" : {
-      "call" : 0.5,
-      "fold" : 0.5
+      "shove" : 1
     },
     "A9s" : {
-      "call" : 1
+      "shove" : 1
     },
     "AA" : {
-      "call" : 1
+      "shove" : 1
     },
     "AJo" : {
-      "call" : 1
+      "shove" : 1
     },
     "AJs" : {
-      "call" : 1
+      "shove" : 1
     },
     "AKo" : {
-      "call" : 1
+      "shove" : 1
     },
     "AKs" : {
-      "call" : 1
+      "shove" : 1
     },
     "AQo" : {
-      "call" : 1
+      "shove" : 1
     },
     "AQs" : {
-      "call" : 1
+      "shove" : 1
     },
     "ATo" : {
-      "call" : 1
+      "shove" : 1
     },
     "ATs" : {
-      "call" : 1
-    },
-    "J2o" : {
-      "fold" : 1
-    },
-    "J2s" : {
-      "fold" : 1
-    },
-    "J3o" : {
-      "fold" : 1
-    },
-    "J3s" : {
-      "fold" : 1
-    },
-    "J4o" : {
-      "fold" : 1
-    },
-    "J4s" : {
-      "fold" : 1
-    },
-    "J5o" : {
-      "fold" : 1
-    },
-    "J5s" : {
-      "fold" : 1
-    },
-    "J6o" : {
-      "fold" : 1
-    },
-    "J6s" : {
-      "fold" : 1
-    },
-    "J7o" : {
-      "fold" : 1
-    },
-    "J7s" : {
-      "fold" : 1
-    },
-    "J8o" : {
-      "fold" : 1
-    },
-    "J8s" : {
-      "fold" : 1
-    },
-    "J9o" : {
-      "fold" : 1
+      "shove" : 1
     },
     "J9s" : {
-      "fold" : 1
+      "fold" : 0.4551,
+      "shove" : 0.54490000000000005
     },
     "JJ" : {
-      "call" : 1
+      "shove" : 1
     },
     "JTo" : {
-      "call" : 0.5,
-      "fold" : 0.5
+      "fold" : 0.75009999999999999,
+      "shove" : 0.24990000000000001
     },
     "JTs" : {
-      "fold" : 1
-    },
-    "K2o" : {
-      "fold" : 1
-    },
-    "K2s" : {
-      "fold" : 1
-    },
-    "K3o" : {
-      "fold" : 1
-    },
-    "K3s" : {
-      "fold" : 1
-    },
-    "K4o" : {
-      "fold" : 1
+      "shove" : 1
     },
     "K4s" : {
-      "fold" : 1
-    },
-    "K5o" : {
-      "fold" : 1
+      "shove" : 1
     },
     "K5s" : {
-      "fold" : 1
-    },
-    "K6o" : {
-      "fold" : 1
+      "shove" : 1
     },
     "K6s" : {
-      "fold" : 1
-    },
-    "K7o" : {
-      "fold" : 1
+      "shove" : 1
     },
     "K7s" : {
-      "fold" : 1
-    },
-    "K8o" : {
-      "fold" : 1
-    },
-    "K8s" : {
-      "fold" : 1
-    },
-    "K9o" : {
-      "fold" : 1
+      "shove" : 1
     },
     "K9s" : {
-      "fold" : 1
+      "shove" : 1
     },
     "KJo" : {
-      "fold" : 1
+      "shove" : 1
     },
     "KJs" : {
-      "call" : 1
+      "shove" : 1
     },
     "KK" : {
-      "call" : 1
+      "shove" : 1
     },
     "KQo" : {
-      "call" : 1
+      "shove" : 1
     },
     "KQs" : {
-      "call" : 1
+      "shove" : 1
     },
     "KTo" : {
-      "fold" : 1
+      "shove" : 1
     },
     "KTs" : {
-      "fold" : 1
-    },
-    "Q2o" : {
-      "fold" : 1
-    },
-    "Q2s" : {
-      "fold" : 1
-    },
-    "Q3o" : {
-      "fold" : 1
-    },
-    "Q3s" : {
-      "fold" : 1
-    },
-    "Q4o" : {
-      "fold" : 1
-    },
-    "Q4s" : {
-      "fold" : 1
-    },
-    "Q5o" : {
-      "fold" : 1
-    },
-    "Q5s" : {
-      "fold" : 1
-    },
-    "Q6o" : {
-      "fold" : 1
-    },
-    "Q6s" : {
-      "fold" : 1
-    },
-    "Q7o" : {
-      "fold" : 1
-    },
-    "Q7s" : {
-      "fold" : 1
-    },
-    "Q8o" : {
-      "fold" : 1
-    },
-    "Q8s" : {
-      "fold" : 1
-    },
-    "Q9o" : {
-      "fold" : 1
+      "shove" : 1
     },
     "Q9s" : {
-      "fold" : 1
+      "shove" : 1
     },
     "QJo" : {
-      "fold" : 1
+      "shove" : 1
     },
     "QJs" : {
-      "fold" : 1
+      "shove" : 1
     },
     "QQ" : {
-      "call" : 1
+      "shove" : 1
     },
     "QTo" : {
-      "fold" : 1
+      "shove" : 1
     },
     "QTs" : {
-      "fold" : 1
-    },
-    "T2o" : {
-      "fold" : 1
-    },
-    "T2s" : {
-      "fold" : 1
-    },
-    "T3o" : {
-      "fold" : 1
-    },
-    "T3s" : {
-      "fold" : 1
-    },
-    "T4o" : {
-      "fold" : 1
-    },
-    "T4s" : {
-      "fold" : 1
-    },
-    "T5o" : {
-      "fold" : 1
-    },
-    "T5s" : {
-      "fold" : 1
-    },
-    "T6o" : {
-      "fold" : 1
-    },
-    "T6s" : {
-      "fold" : 1
-    },
-    "T7o" : {
-      "fold" : 1
-    },
-    "T7s" : {
-      "fold" : 1
-    },
-    "T8o" : {
-      "fold" : 1
-    },
-    "T8s" : {
-      "fold" : 1
-    },
-    "T9o" : {
-      "call" : 0.5,
-      "fold" : 0.5
+      "shove" : 1
     },
     "T9s" : {
-      "fold" : 1
+      "fold" : 0.91000000000000003,
+      "shove" : 0.089999999999999997
     },
     "TT" : {
-      "call" : 0.5,
-      "fold" : 0.5
+      "shove" : 1
     }
   },
   "id" : "mtt_9max_10bb_sb_vsopen",

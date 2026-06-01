@@ -41,12 +41,18 @@ final class ChartCatalogTests: XCTestCase {
 
     func test_validCombinations_arePresent() {
         let cat = loadCatalog()
-        // Every depth bucket should be populated for the easy positions.
-        for d in StackDepthBucket.allCases {
-            XCTAssertTrue(cat.contains(position: .btn, depthBB: d.bb, facing: .unopened),
-                          "BTN unopened at \(d.bb) BB should exist")
-            XCTAssertTrue(cat.contains(position: .bb, depthBB: d.bb, facing: .blindDefense),
-                          "BB blind defense at \(d.bb) BB should exist")
+        // Every UI depth bucket should resolve to a populated chart for the easy
+        // positions. The rebuilt opening library uses poker.academy's real
+        // solver depths (…60/70/80/100, no synthetic 75bb), so we assert via the
+        // same nearest-bucket mapping the app uses (StackDepthBucket.nearest)
+        // rather than exact-depth equality.
+        let btnDepths = cat.depths(position: .btn, facing: .unopened)
+        let bbDepths  = cat.depths(position: .bb,  facing: .blindDefense)
+        for bucket in StackDepthBucket.allCases {
+            XCTAssertTrue(btnDepths.contains { StackDepthBucket.nearest(to: $0) == bucket },
+                          "BTN unopened should populate the \(bucket.bb) BB bucket")
+            XCTAssertTrue(bbDepths.contains { StackDepthBucket.nearest(to: $0) == bucket },
+                          "BB blind defense should populate the \(bucket.bb) BB bucket")
         }
     }
 

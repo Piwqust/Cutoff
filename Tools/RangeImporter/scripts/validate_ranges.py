@@ -91,15 +91,20 @@ def vpip_percent(hands: dict[str, Any]) -> float:
 
 
 def trash_non_fold_percent(hands: dict[str, Any]) -> float:
-    """Combo-weighted non-fold % across the trash-offsuit set."""
+    """Combo-weighted non-fold % across the trash-offsuit set.
+
+    Hands absent from `hands` are 100% fold — the emitter omits pure-fold
+    combos — so they must stay in the denominator. Skipping them made a range
+    that limps one trash hand and folds the rest read as ~100% non-fold (a
+    false polarity-inversion alarm on the SB limp strategy)."""
     total = 0
     inplay = 0.0
     for h in TRASH_OFFSUIT:
-        value = hands.get(h)
-        if value is None:
-            continue
         combos = combos_for_hand(h)
         total += combos
+        value = hands.get(h)
+        if value is None:
+            continue  # absent = fold → 0 inplay, but still counted in total
         if isinstance(value, dict):
             non_fold = sum(p for k, p in value.items() if k != "fold")
             inplay += combos * non_fold
@@ -143,7 +148,7 @@ RFI_BANDS: dict[tuple[str, str], tuple[float, float]] = {
     ("deep", "hj"):   (18, 30),
     ("deep", "co"):   (24, 34),
     ("deep", "btn"):  (40, 55),
-    ("deep", "sb"):   (32, 55),
+    ("deep", "sb"):   (30, 95),
 
     ("deep_mid", "utg"):  (10, 20),
     ("deep_mid", "utg1"): (12, 22),
@@ -151,7 +156,7 @@ RFI_BANDS: dict[tuple[str, str], tuple[float, float]] = {
     ("deep_mid", "hj"):   (17, 28),
     ("deep_mid", "co"):   (22, 33),
     ("deep_mid", "btn"):  (38, 55),
-    ("deep_mid", "sb"):   (28, 50),
+    ("deep_mid", "sb"):   (30, 95),
 
     ("midstack", "utg"):  (10, 22),
     ("midstack", "utg1"): (12, 24),
@@ -159,7 +164,7 @@ RFI_BANDS: dict[tuple[str, str], tuple[float, float]] = {
     ("midstack", "hj"):   (16, 30),
     ("midstack", "co"):   (20, 34),
     ("midstack", "btn"):  (32, 55),
-    ("midstack", "sb"):   (25, 55),
+    ("midstack", "sb"):   (30, 95),
 
     ("shallow", "utg"):  (8, 22),
     ("shallow", "utg1"): (10, 24),
@@ -167,7 +172,11 @@ RFI_BANDS: dict[tuple[str, str], tuple[float, float]] = {
     ("shallow", "hj"):   (15, 30),
     ("shallow", "co"):   (18, 36),
     ("shallow", "btn"):  (30, 60),
-    ("shallow", "sb"):   (35, 70),
+    ("shallow", "sb"):   (30, 95),
+    # SB-unopened bands widened to 30–95%: the poker.academy CE-Symmetric pack
+    # models the SB with a wide limp-or-raise first-in strategy (VPIP ~82–91%
+    # at every depth; AA/KK limp ~80% — verified against the live charts). The
+    # 30% floor still trips if the SB range ever collapses or inverts.
 }
 
 # vsopen is composite (averages across openers in this bundle's shape).
@@ -327,7 +336,16 @@ def check_polarity(name: str, doc: dict[str, Any], report: Report) -> None:
         cap = 8.0
     elif scenario == "unopened":
         # Trash from any position should fold pre — even BTN limps the worst hands rarely.
-        cap = 8.0 if position not in {"sb", "bb"} else 15.0
+        # Exception: the CE-Symmetric SB runs a wide limp-or-raise strategy that
+        # limps up to ~50% of offsuit trash at 70–100bb (verified against the
+        # live site), so the SB cap is raised well above the no-limp default. A
+        # genuine fold/call inversion would still show ~90%+ trash non-fold.
+        if position == "sb":
+            cap = 60.0
+        elif position == "bb":
+            cap = 15.0
+        else:
+            cap = 8.0
     elif scenario == "squeeze":
         cap = 10.0
     elif scenario == "blinddefense":

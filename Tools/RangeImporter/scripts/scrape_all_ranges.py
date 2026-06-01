@@ -1,374 +1,572 @@
 #!/usr/bin/env python3
+"""
+scrape_all_ranges.py — unattended poker.academy → Cutoff range scraper (v3).
+
+Drives the active Google Chrome tab (which must be on a poker.academy
+tournament chart page) entirely through AppleScript JavaScript injection. No
+clicking pixels, no fixed sleeps: every wait POLLS the live DOM until the grid
+is loaded and stable, so it is both fast and robust to network jitter.
+
+DOM model (reverse-engineered 2026-06, CE-Symmetric pack — see
+poker_academy_extract.js for the gory details):
+  * Each hand tile's strategy is encoded as 4 width-proportional colour
+    segments. Colours map to actions: red=All-in, orange=Raise, teal=Limp/Call,
+    grey=Fold. Extraction lives in poker_academy_extract.js.
+  * vsOpen / vs3Bet grids are EMPTY until an opponent position is selected, so
+    we click the opponent (anchored on the "Opponent's position" text label)
+    and poll until the grid populates.
+
+App schema reality: Cutoff keys every range by (position, depth, facing) ONLY —
+there is no opener dimension (see Cutoff/Logic/ChartCatalog.swift). So each
+(depth, hero, facing) maps to ONE canonical opponent. Convention here:
+"closest raiser" — vsOpen hero faces the opponent one seat ahead; vs3Bet opener
+faces the 3-bettor one seat behind. Change CANONICAL_* below to re-pick; the
+full per-opponent archive is kept in crib_multi_opener/ so re-deriving the
+canonical set never needs a re-scrape.
+
+Outputs:
+  crib/<5-part-slug>.csv          canonical files the Swift importer compiles
+  crib_multi_opener/<slug>.csv    every opponent matchup (archive)
+
+Run:
+  python3 Tools/RangeImporter/scripts/scrape_all_ranges.py            # scrape + compile + validate
+  python3 Tools/RangeImporter/scripts/scrape_all_ranges.py --canonical-only
+  python3 Tools/RangeImporter/scripts/scrape_all_ranges.py --no-compile
+Prerequisite: Chrome → View ▸ Developer ▸ "Allow JavaScript from Apple Events".
+"""
+
+import argparse
+import json
+import os
 import subprocess
 import sys
-import os
 import time
-import json
+import datetime
+import hashlib
 from pathlib import Path
 
-# Color terminal formatting helpers
-GREEN = "\033[92m"
-YELLOW = "\033[93m"
-RED = "\033[91m"
-BLUE = "\033[94m"
-CYAN = "\033[96m"
-RESET = "\033[0m"
+# ---------------------------------------------------------------------------
+# Paths & logging
+# ---------------------------------------------------------------------------
+SCRIPT_DIR = Path(__file__).parent.resolve()
+IMPORTER_DIR = SCRIPT_DIR.parent.resolve()
+RANGES_DIR = (IMPORTER_DIR.parent.parent / "Cutoff" / "Resources" / "Ranges").resolve()
+CRIB_DIR = IMPORTER_DIR / "crib"
+ARCHIVE_DIR = IMPORTER_DIR / "crib_multi_opener"
+MANIFEST = SCRIPT_DIR / "scrape_manifest.json"
+EXTRACT_JS = (SCRIPT_DIR / "poker_academy_extract.js").read_text(encoding="utf-8")
+LOG_FILE = IMPORTER_DIR / "scrape_log.txt"
 
-def run_cmd(cmd, cwd=None, capture=True):
-    if not capture:
-        print(f"{BLUE}[Execute]{RESET} {cmd}")
-        res = subprocess.run(cmd, shell=True, cwd=cwd)
-        return res.returncode == 0, "", ""
-    res = subprocess.run(cmd, shell=True, capture_output=True, text=True, cwd=cwd)
-    if res.returncode != 0:
-        return False, res.stdout, res.stderr
-    return True, res.stdout, res.stderr
+G, Y, R, B, C, X = "\033[92m", "\033[93m", "\033[91m", "\033[94m", "\033[96m", "\033[0m"
 
-def execute_js_in_chrome(js_code, script_dir):
-    escaped_js = js_code.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '\\n').replace('\r', '\\r')
-    applescript_exec = f'tell application "Google Chrome" to execute active tab of first window javascript "{escaped_js}"'
-    
-    as_file = script_dir / "temp_run_js.applescript"
-    as_file.write_text(applescript_exec, encoding="utf-8")
-    
-    success, stdout, stderr = run_cmd(f'osascript "{as_file}"')
-    
-    if as_file.exists():
-        os.remove(as_file)
-        
-    return success, stdout, stderr
 
-def derive_vs3betjam_csv(csv_content):
-    lines = csv_content.strip().split("\n")
-    if not lines or len(lines) < 2:
-        return ""
-    
-    header = lines[0]
-    out_lines = [header]
-    
-    premiums = {"AA", "KK", "QQ", "JJ", "TT", "99", "88", "AKs", "AKo", "AQs", "AQo", "AJs", "AJo", "ATs"}
-    
-    # Group by hand to normalize frequencies
-    hand_strats = {}
-    for line in lines[1:]:
-        parts = line.split(",")
-        if len(parts) < 3:
-            continue
-        hand, action, freq = parts[0], parts[1], float(parts[2])
-        if hand not in hand_strats:
-            hand_strats[hand] = {}
-        hand_strats[hand][action] = freq
-        
-    for hand in sorted(hand_strats.keys()):
-        strat = hand_strats[hand]
-        # Facing a jam, we can only call or fold
-        call_freq = 0.0
-        
-        # 1. Existing call or jam/shove always goes to call
-        call_freq += strat.get("call", 0.0)
-        call_freq += strat.get("jam", 0.0)
-        call_freq += strat.get("shove", 0.0)
-        
-        # 2. Raise goes to call if premium, otherwise folds (bluffs)
-        raise_freq = sum(f for act, f in strat.items() if act in ("raise", "raise25x", "raise3x", "minRaise"))
-        if hand in premiums:
-            call_freq += raise_freq
-            
-        call_freq = min(1.0, max(0.0, call_freq))
-        
-        # Round to standard 25% steps
-        if call_freq > 0.85: call_freq = 1.0
-        elif call_freq > 0.62: call_freq = 0.75
-        elif call_freq > 0.37: call_freq = 0.50
-        elif call_freq > 0.15: call_freq = 0.25
-        else: call_freq = 0.0
-        
-        if call_freq > 0:
-            out_lines.append(f"{hand},call,{call_freq}")
-            if call_freq < 1.0:
-                out_lines.append(f"{hand},fold,{round(1.0 - call_freq, 2)}")
-        else:
-            out_lines.append(f"{hand},fold,1.0")
-            
-    return "\n".join(out_lines) + "\n"
-
-def main():
-    print(f"{GREEN}=== Starting Bulk Tournament Range Scraper ==={RESET}")
-    print("This script will automatically navigate Chrome through all stack depths and scenarios")
-    print("for your tournament structure, click appropriate filters, scrape the ranges, and compile them.\n")
-
-    # 1. Path setup
-    script_dir = Path(__file__).parent.resolve()
-    importer_dir = script_dir.parent.resolve()
-    manifest_file = importer_dir / "scripts" / "scrape_manifest.json"
-    js_file = script_dir / "poker_academy_console_script.js"
-
-    if not js_file.exists():
-        print(f"{RED}[Abort]{RESET} Scraper script not found at {js_file}")
-        sys.exit(1)
-
-    # 2. Check if Chrome is running and get the current active URL to extract pack and speed
-    applescript_url = 'tell application "Google Chrome" to get URL of active tab of first window'
-    success, stdout, stderr = run_cmd(f"osascript -e '{applescript_url}'")
-    if not success:
-        print(f"{RED}[Abort]{RESET} Could not communicate with Google Chrome. Please open Chrome to poker.academy.")
-        sys.exit(1)
-
-    current_url = stdout.strip()
-    print(f"{GREEN}[Found Chrome Tab]{RESET} Active URL: {current_url}")
-
-    if "poker.academy/tournaments" not in current_url:
-        print(f"{RED}[Abort]{RESET} Your active Chrome window must be open on a poker.academy tournament chart page.")
-        sys.exit(1)
-
-    # Extract Pack Name and Speed from current URL
-    path_parts = [p for p in current_url.split('/') if p]
-    if len(path_parts) < 5:
-        print(f"{RED}[Abort]{RESET} URL structure is not recognized. Please open a valid range chart page.")
-        sys.exit(1)
-
+def log(msg=""):
+    print(msg, flush=True)
     try:
-        s_idx = path_parts.index("s")
-        pack_name = path_parts[s_idx + 1]
-        speed_name = path_parts[s_idx + 3]
-    except (ValueError, IndexError):
-        pack_name = "CE-Symmetric"
-        speed_name = "Regular"
+        clean = msg
+        for code in (G, Y, R, B, C, X):
+            clean = clean.replace(code, "")
+        with open(LOG_FILE, "a", encoding="utf-8") as fh:
+            fh.write(f"[{datetime.datetime.now():%Y-%m-%d %H:%M:%S}] {clean}\n")
+    except Exception:
+        pass
 
-    print(f"{CYAN}[Tourney Pack]{RESET} Pack: {pack_name} | Speed: {speed_name}")
 
-    # 3. Generate all combinations of spots to scrape matching the exact website structure
-    depths = [10, 15, 20, 25, 30, 40, 50, 60, 70, 100]
-    
-    def get_app_depth(d):
-        return 75 if d == 70 else d
-        
-    def get_app_pos(p):
-        if p == "EP": return "utg"
-        if p == "MP": return "utg1"
-        return p.lower()
-    
-    spots_to_scrape = []
+# ---------------------------------------------------------------------------
+# Chrome / AppleScript bridge
+# ---------------------------------------------------------------------------
+_AS_FILE = SCRIPT_DIR / ".chrome_eval.applescript"
 
-    # A. RFI spots (all positions except BB)
-    rfi_positions = ["EP", "MP", "LJ", "HJ", "CO", "BTN", "SB"]
-    for depth in depths:
-        app_depth = get_app_depth(depth)
-        for pos in rfi_positions:
-            app_pos = get_app_pos(pos)
-            spots_to_scrape.append({
-                "type": "RFI",
-                "depth": depth,
-                "url": f"https://poker.academy/tournaments/s/{pack_name}/{depth}/{speed_name}/RFI/{pos}///",
-                "slug": f"mtt_8max_{app_depth}bb_{app_pos}_unopened",
-                "desc": f"{depth}bb RFI from {pos}",
-                "opp_pos": None
-            })
 
-    # B. Targeted representative vsOpen (Facing RFI) spots
-    vs_open_matchups = [
-        ("MP", "EP"),
-        ("LJ", "MP"),
-        ("HJ", "LJ"),
-        ("CO", "HJ"),
-        ("BTN", "CO"),
-        ("SB", "BTN"),
-        ("BB", "BTN")
-    ]
-    for depth in depths:
-        app_depth = get_app_depth(depth)
-        for defender, opener in vs_open_matchups:
-            app_defender = get_app_pos(defender)
-            spots_to_scrape.append({
-                "type": "vsOpen",
-                "depth": depth,
-                "url": f"https://poker.academy/tournaments/s/{pack_name}/{depth}/{speed_name}/vs.%20RFI/{defender}///",
-                "slug": f"mtt_8max_{app_depth}bb_{app_defender}_vsopen",
-                "desc": f"{depth}bb Hero {defender} vs Opponent {opener} open",
-                "opp_pos": opener
-            })
-
-    # C. Targeted representative vs3Bet (Facing 3-Bet) spots
-    vs_3bet_matchups = [
-        ("EP", "BTN"),
-        ("MP", "BTN"),
-        ("LJ", "BTN"),
-        ("HJ", "BTN"),
-        ("CO", "BTN"),
-        ("BTN", "BB"),
-        ("SB", "BB")
-    ]
-    for depth in depths:
-        app_depth = get_app_depth(depth)
-        for opener, three_bettor in vs_3bet_matchups:
-            app_opener = get_app_pos(opener)
-            spots_to_scrape.append({
-                "type": "vs3Bet",
-                "depth": depth,
-                "url": f"https://poker.academy/tournaments/s/{pack_name}/{depth}/{speed_name}/vs.%203bet/{opener}///",
-                "slug": f"mtt_8max_{app_depth}bb_{app_opener}_vs3bet",
-                "desc": f"{depth}bb Hero {opener} vs Opponent {three_bettor} 3-bet",
-                "opp_pos": three_bettor
-            })
-
-    print(f"{GREEN}[Planner]{RESET} Generated {len(spots_to_scrape)} targeted GTO range spots to scrape.")
-
-    # 4. Load manifest to support Resume functionality
-    completed_slugs = set()
-    if manifest_file.exists():
+def chrome_eval(js, timeout=30):
+    """Execute JS in the active Chrome tab; return (ok, stdout, stderr)."""
+    esc = (js.replace("\\", "\\\\").replace('"', '\\"')
+             .replace("\n", "\\n").replace("\r", "\\r"))
+    _AS_FILE.write_text(
+        f'tell application "Google Chrome" to execute active tab '
+        f'of front window javascript "{esc}"', encoding="utf-8")
+    try:
+        res = subprocess.run(["osascript", str(_AS_FILE)],
+                             capture_output=True, text=True, timeout=timeout)
+        return res.returncode == 0, res.stdout.strip(), res.stderr.strip()
+    except subprocess.TimeoutExpired:
+        return False, "", "osascript timed out"
+    finally:
         try:
-            completed_slugs = set(json.loads(manifest_file.read_text(encoding="utf-8")))
-            print(f"{YELLOW}[Manifest]{RESET} Found manifest. Resuming scrape; {len(completed_slugs)} spots already completed.")
-        except Exception:
+            _AS_FILE.unlink()
+        except OSError:
             pass
 
-    # Read JS code
-    js_code = js_file.read_text(encoding="utf-8")
-    
-    # Modify JS code to return the CSV content directly to AppleScript
-    search_target = "const blob = new Blob([csvContent]"
-    if search_target in js_code:
-        lines = js_code.split("\n")
-        filtered_lines = []
-        skip = False
-        for line in lines:
-            if "// 6. Generate file download in browser" in line:
-                skip = True
-                filtered_lines.append("    return csvContent;")
-            if "})();" in line:
-                skip = False
-            if not skip:
-                filtered_lines.append(line)
-        js_code = "\n".join(filtered_lines)
-    else:
-        js_code += "\ncsvContent;"
 
-    # 5. Main loop
-    total_spots = len(spots_to_scrape)
-    skipped_count = 0
-    scraped_count = 0
-    
-    start_time = time.time()
+def chrome_get_url():
+    ok, out, _ = chrome_eval("window.location.href")
+    return out if ok else ""
+
+
+def chrome_navigate(url):
+    safe = url.replace("'", "")
+    subprocess.run(["osascript", "-e",
+                    f'tell application "Google Chrome" to set URL of active tab '
+                    f'of front window to "{safe}"'], capture_output=True)
+
+
+def chrome_reload():
+    subprocess.run(["osascript", "-e",
+                    'tell application "Google Chrome" to reload active tab of front window'],
+                   capture_output=True)
+
+
+# ---------------------------------------------------------------------------
+# Grid extraction & opponent selection
+# ---------------------------------------------------------------------------
+def extract_grids():
+    """Return list of grids [{'n':int,'hands':{...}}, ...] or None on failure."""
+    ok, out, err = chrome_eval(EXTRACT_JS)
+    if not ok or not out:
+        return None
+    try:
+        return json.loads(out).get("grids", [])
+    except json.JSONDecodeError:
+        return None
+
+
+def choose_grid(grids, facing):
+    """Pick the grid that holds HERO's strategy. poker.academy labels each grid
+    (e.g. "40bb CO vs. 3bet from BTN Hero" vs "... Opponent"); the hero grid is
+    tagged "Hero". RFI renders a single grid (no Hero/Opponent tag)."""
+    if not grids:
+        return None
+    if len(grids) == 1:
+        return grids[0]
+    hero = [g for g in grids if "hero" in g.get("label", "").lower()]
+    if hero:
+        return hero[0]
+    # Fallback if labels ever go missing: the hero grid says "vs." and the
+    # opponent grids say "opponent".
+    vs = [g for g in grids
+          if "vs." in g.get("label", "").lower()
+          and "opponent" not in g.get("label", "").lower()]
+    if vs:
+        return vs[0]
+    return min(grids, key=lambda g: g["n"]) if facing == "vs3bet" else max(grids, key=lambda g: g["n"])
+
+
+def _nonfold_count(hands):
+    return sum(1 for v in hands.values()
+               if any(a != "fold" and f > 0.001 for a, f in v.items()))
+
+
+def _signature(hands):
+    rounded = {h: {a: round(f, 2) for a, f in v.items()} for h, v in hands.items()}
+    return hashlib.md5(json.dumps(rounded, sort_keys=True).encode()).hexdigest()
+
+
+def poll_grid_loaded(facing, timeout=12.0, interval=0.35, post=0.3):
+    """Poll until hero's grid is rendered, has ≥1 non-fold hand, and is stable
+    across two reads. Returns the hands dict or None on timeout."""
+    time.sleep(post)
+    deadline = time.time() + timeout
+    last_sig = None
+    full = facing in ("unopened", "vsopen")
+    while time.time() < deadline:
+        grids = extract_grids()
+        grid = choose_grid(grids, facing) if grids else None
+        if grid:
+            hands = grid["hands"]
+            ok = (grid["n"] >= 160) if full else (grid["n"] >= 8)
+            if ok and _nonfold_count(hands) >= 1:
+                sig = _signature(hands)
+                if sig == last_sig:
+                    return hands
+                last_sig = sig
+        time.sleep(interval)
+    return None
+
+
+def wait_for_opponent_selector(timeout=12.0, interval=0.4):
+    """After navigating to a vsOpen/vs3Bet page, poll until the opponent
+    position buttons exist."""
+    js = """
+    (function(){
+      var labels=Array.from(document.querySelectorAll('p,div,span,label'));
+      for(var i=0;i<labels.length;i++){
+        var own=Array.from(labels[i].childNodes).filter(function(n){return n.nodeType===3;})
+                 .map(function(n){return n.textContent.trim();}).join(' ').toLowerCase();
+        if(own.indexOf('opponent')>-1) return "yes";
+      }
+      return "no";
+    })();
+    """
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        ok, out, _ = chrome_eval(js)
+        if ok and out == "yes":
+            return True
+        time.sleep(interval)
+    return False
+
+
+def click_scenario(label):
+    """Click a scenario tab (e.g. 'vs. 3bet') to drive the SPA's client-side
+    router, which renders grids that a cold URL load leaves blank."""
+    js = """
+    (function(){
+      var b=Array.from(document.querySelectorAll('div,span,button,li')).filter(function(e){
+        return (e.textContent||'').trim()===%r && e.children.length<=1 && e.getBoundingClientRect().width>0;});
+      if(!b.length) return "none";
+      b.sort(function(x,y){return x.getBoundingClientRect().top-y.getBoundingClientRect().top;});
+      b[0].click(); return "ok";
+    })();
+    """ % label
+    ok, out, _ = chrome_eval(js)
+    return ok and out == "ok"
+
+
+def click_opponent(label):
+    """Click the opponent-position button matching `label`. Returns (ok, info)."""
+    js = """
+    (function(){
+      var target="%s";
+      var labels=Array.from(document.querySelectorAll('p,div,span,label'));
+      var hdr=null;
+      for(var i=0;i<labels.length;i++){
+        var own=Array.from(labels[i].childNodes).filter(function(n){return n.nodeType===3;})
+                 .map(function(n){return n.textContent.trim();}).join(' ').toLowerCase();
+        if(own.indexOf('opponent')>-1){hdr=labels[i];break;}
+      }
+      if(!hdr) return "ERR:no-opponent-header";
+      var hTop=hdr.getBoundingClientRect().top;
+      var POS=['EP','MP','LJ','HJ','CO','BTN','SB','BB'];
+      var btns=Array.from(document.querySelectorAll('div')).filter(function(e){
+        return POS.indexOf((e.textContent||'').trim())>-1
+            && (e.className||'').toString().indexOf('sc-')>-1
+            && e.getBoundingClientRect().top>hTop;
+      });
+      if(!btns.length) return "ERR:no-buttons";
+      var minTop=Math.min.apply(null,btns.map(function(b){return b.getBoundingClientRect().top;}));
+      btns=btns.filter(function(b){return b.getBoundingClientRect().top<=minTop+80;});
+      var cand=btns.filter(function(b){return b.textContent.trim()===target;});
+      if(!cand.length) return "ERR:no-target";
+      cand[0].click();
+      return "OK";
+    })();
+    """ % label
+    ok, out, err = chrome_eval(js)
+    return (ok and out == "OK"), (out or err)
+
+
+# ---------------------------------------------------------------------------
+# Poker model
+# ---------------------------------------------------------------------------
+POS_SITE = ["EP", "MP", "LJ", "HJ", "CO", "BTN", "SB", "BB"]
+POS_APP = {"EP": "utg", "MP": "utg1", "LJ": "lj", "HJ": "hj",
+           "CO": "co", "BTN": "btn", "SB": "sb", "BB": "bb"}
+DEPTHS = [10, 15, 20, 25, 30, 35, 40, 50, 60, 70, 80, 100]
+
+# Neutral colour tokens → CribAction vocabulary, per scenario.
+REMAP = {
+    "unopened": {"jam": "jam", "raise": "raise",   "call": "limp", "fold": "fold"},
+    "vsopen":   {"jam": "jam", "raise": "threeBet", "call": "call", "fold": "fold"},
+    "vs3bet":   {"jam": "jam", "raise": "threeBet", "call": "call", "fold": "fold"},
+}
+FACING_JSON = {"unopened": "RFI", "vsopen": "vs.%20RFI", "vs3bet": "vs.%203bet"}
+
+
+def build_tasks(pack, speed, canonical_only):
+    """Return ordered task list. Canonical matchups first (app-critical), then
+    the full per-opponent archive. Each task is a dict."""
+    canonical, archive = [], []
+
+    def url(facing, depth, hero):
+        return f"https://poker.academy/tournaments/s/{pack}/{depth}/{speed}/{FACING_JSON[facing]}/{hero}///"
+
+    for depth in DEPTHS:
+        # A. RFI / unopened — 7 positions (EP..SB), no opponent.
+        for hero in POS_SITE[:7]:
+            canonical.append({
+                "facing": "unopened", "depth": depth, "hero": hero, "opp": None,
+                "url": url("unopened", depth, hero),
+                "slug": f"mtt_8max_{depth}bb_{POS_APP[hero]}_unopened",
+                "canonical": True,
+            })
+        # B. vsOpen — hero (defender) faces an earlier opener.
+        for h_idx in range(1, 8):
+            hero = POS_SITE[h_idx]
+            for o_idx in range(h_idx):
+                opp = POS_SITE[o_idx]
+                is_canon = (o_idx == h_idx - 1)  # closest raiser
+                t = {
+                    "facing": "vsopen", "depth": depth, "hero": hero, "opp": opp,
+                    "url": url("vsopen", depth, hero),
+                    "slug": f"mtt_8max_{depth}bb_{POS_APP[hero]}_vsopen" if is_canon else None,
+                    "archive_slug": f"mtt_8max_{depth}bb_{POS_APP[hero]}_vsopen_vs_{POS_APP[opp]}",
+                    "canonical": is_canon,
+                }
+                (canonical if is_canon else archive).append(t)
+        # C. vs3Bet — hero (opener) faces a later 3-bettor.
+        for h_idx in range(7):
+            hero = POS_SITE[h_idx]
+            for o_idx in range(h_idx + 1, 8):
+                opp = POS_SITE[o_idx]
+                is_canon = (o_idx == h_idx + 1)  # closest 3-bettor
+                t = {
+                    "facing": "vs3bet", "depth": depth, "hero": hero, "opp": opp,
+                    "url": url("vs3bet", depth, hero),
+                    "slug": f"mtt_8max_{depth}bb_{POS_APP[hero]}_vs3bet" if is_canon else None,
+                    "archive_slug": f"mtt_8max_{depth}bb_{POS_APP[hero]}_vs3bet_vs_{POS_APP[opp]}",
+                    "canonical": is_canon,
+                }
+                (canonical if is_canon else archive).append(t)
+
+    if canonical_only:
+        return canonical
+    # Group archive by page so same-page opponents are scraped without re-nav.
+    archive.sort(key=lambda t: (t["facing"], t["depth"], t["hero"], t["opp"]))
+    return canonical + archive
+
+
+# ---------------------------------------------------------------------------
+# CSV emission (CribSheet-compatible: per-hand freqs sum to 1.0 ± 0.001)
+# ---------------------------------------------------------------------------
+def normalize(acc):
+    """Round, drop sub-0.5% noise, renormalize to sum exactly 1.0."""
+    items = {a: f for a, f in acc.items() if f >= 0.005}
+    if not items:
+        return {}
+    s = sum(items.values())
+    items = {a: round(f / s, 4) for a, f in items.items()}
+    resid = round(1.0 - sum(items.values()), 4)
+    if abs(resid) >= 0.0001:
+        k = max(items, key=items.get)
+        items[k] = round(items[k] + resid, 4)
+    return items
+
+
+def grid_to_csv(hands, facing, depth, hero, opp):
+    remap = REMAP[facing]
+    rows = []
+    for hand, acc in hands.items():
+        # collapse neutral tokens to crib actions, summing collisions
+        crib = {}
+        for tok, freq in acc.items():
+            crib[remap[tok]] = crib.get(remap[tok], 0.0) + freq
+        norm = normalize(crib)
+        if not norm or (len(norm) == 1 and "fold" in norm):
+            continue  # pure fold → omit (importer treats absence as fold)
+        for action, freq in sorted(norm.items()):
+            rows.append(f"{hand},{action},{freq}")
+    header = [
+        f"# poker.academy CE-Symmetric — {depth}bb {facing}"
+        + (f" | hero {hero} vs {opp}" if opp else f" | {hero} first-in"),
+        f"# Scraped {datetime.date.today()} via scrape_all_ranges.py",
+        f"# TreeParams: poker.academy CE-Symmetric Regular @ {depth}bb (GTO ChipEV, 1bb ante)",
+        "notation,action,freq",
+    ]
+    return "\n".join(header + rows) + "\n", len(rows)
+
+
+# ---------------------------------------------------------------------------
+# Manifest (atomic)
+# ---------------------------------------------------------------------------
+def load_manifest():
+    if MANIFEST.exists():
+        try:
+            return set(json.loads(MANIFEST.read_text(encoding="utf-8")))
+        except Exception:
+            log(f"{Y}[Manifest]{X} corrupt manifest ignored; starting fresh.")
+    return set()
+
+
+def save_manifest(done):
+    tmp = MANIFEST.with_suffix(".tmp")
+    tmp.write_text(json.dumps(sorted(done), indent=2), encoding="utf-8")
+    os.replace(tmp, MANIFEST)
+
+
+def task_key(t):
+    return t["archive_slug"] if t["opp"] else t["slug"]
+
+
+# ---------------------------------------------------------------------------
+# Compile / validate
+# ---------------------------------------------------------------------------
+def run_cmd(cmd, cwd=None):
+    log(f"{B}$ {cmd}{X}")
+    res = subprocess.run(cmd, shell=True, cwd=cwd, capture_output=True, text=True)
+    if res.stdout:
+        log(res.stdout.strip()[-2000:])
+    if res.returncode != 0 and res.stderr:
+        log(f"{R}{res.stderr.strip()[-2000:]}{X}")
+    return res.returncode == 0
+
+
+def compile_and_validate():
+    log(f"\n{C}=== Compiling crib → JSON + deriving 9-max ==={X}")
+    run_cmd("swift run RangeImporter import --input crib/ --output ../../Cutoff/Resources/Ranges/", cwd=IMPORTER_DIR)
+    run_cmd("swift run RangeImporter derive-9max --input ../../Cutoff/Resources/Ranges/ --output ../../Cutoff/Resources/Ranges/", cwd=IMPORTER_DIR)
+    log(f"\n{C}=== Validating bundled ranges ==={X}")
+    ok = run_cmd(f'python3 "{SCRIPT_DIR / "validate_ranges.py"}"')
+    if ok:
+        log(f"{G}[Validator] All ranges passed.{X}")
+    else:
+        log(f"{Y}[Validator] Reported issues — see output above (warnings do not block).{X}")
+    return ok
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--canonical-only", action="store_true",
+                    help="Scrape only the closest-raiser matchups (app-critical, ~252 spots).")
+    ap.add_argument("--no-compile", action="store_true",
+                    help="Skip the Swift compile + validation at the end.")
+    ap.add_argument("--reset", action="store_true", help="Ignore manifest; rescrape everything.")
+    ap.add_argument("--limit", type=int, default=0, help="Stop after N newly-scraped spots (testing).")
+    args = ap.parse_args()
+
+    CRIB_DIR.mkdir(exist_ok=True)
+    ARCHIVE_DIR.mkdir(exist_ok=True)
+
+    log(f"{G}=== poker.academy bulk scraper (v3) ==={X}")
+
+    # --- Pre-flight ---------------------------------------------------------
+    ok, out, err = chrome_eval("1+1")
+    if not ok or out != "2":
+        log(f"{R}[Abort]{X} Cannot run JS in Chrome.")
+        log("Open Chrome and enable: View ▸ Developer ▸ 'Allow JavaScript from Apple Events'.")
+        log(f"(osascript said: {err or out})")
+        sys.exit(1)
+
+    url = chrome_get_url()
+    if "poker.academy/tournaments" not in url:
+        log(f"{R}[Abort]{X} Active Chrome tab must be a poker.academy tournament page. Got: {url}")
+        sys.exit(1)
+
+    parts = [p for p in url.split("/") if p]
+    try:
+        s = parts.index("s")
+        pack, speed = parts[s + 1], parts[s + 3]
+    except (ValueError, IndexError):
+        pack, speed = "CE-Symmetric", "Regular"
+    log(f"{C}[Pack]{X} {pack} | Speed: {speed}")
+
+    tasks = build_tasks(pack, speed, args.canonical_only)
+    done = set() if args.reset else load_manifest()
+    n_canon = sum(1 for t in tasks if t["canonical"])
+    log(f"{G}[Plan]{X} {len(tasks)} spots ({n_canon} canonical + {len(tasks)-n_canon} archive). "
+        f"{len(done)} already done.")
+
+    start = time.time()
+    cur_page = None
+    scraped = failed = skipped = 0
+    consec_fail = 0
 
     try:
-        for idx, spot in enumerate(spots_to_scrape):
-            slug = spot["slug"]
-            if slug in completed_slugs:
+        for i, t in enumerate(tasks):
+            key = task_key(t)
+            if key in done:
                 continue
 
-            print(f"\n{GREEN}[Spot {idx+1}/{total_spots}]{RESET} Processing {CYAN}{spot['desc']}{RESET}...")
-            
-            # Navigate Chrome to the target URL (sets Category + Hero Position)
-            nav_script = f'tell application "Google Chrome" to set URL of active tab of first window to "{spot["url"]}"'
-            success, _, _ = run_cmd(f"osascript -e '{nav_script}'")
-            if not success:
-                print(f"{RED}[Error]{RESET} Failed to navigate Chrome. Is the tab closed?")
+            facing, depth, hero, opp = t["facing"], t["depth"], t["hero"], t["opp"]
+            page = (facing, depth, hero)
+            tag = f"{depth}bb {hero} {facing}" + (f" vs {opp}" if opp else "")
+            log(f"\n{G}[{i+1}/{len(tasks)}]{X} {C}{tag}{X}"
+                + (f" {B}(canonical){X}" if t["canonical"] else ""))
+
+            def acquire():
+                """Navigate (if page changed) + select opponent + return grid."""
+                nonlocal cur_page
+                if page != cur_page:
+                    chrome_navigate(t["url"])
+                    if facing == "unopened":
+                        if not poll_grid_loaded(facing, timeout=14):
+                            return None
+                    else:
+                        if not wait_for_opponent_selector():
+                            return None
+                        # vs3Bet's SPA route needs a scenario "kick" after a
+                        # cold URL load before the selector wires up the grid.
+                        if facing == "vs3bet":
+                            click_scenario("vs. 3bet")
+                            time.sleep(1.0)
+                    cur_page = page
+                if opp:
+                    clicked = False
+                    for _ in range(4):
+                        ok, info = click_opponent(opp)
+                        if ok:
+                            clicked = True
+                            break
+                        time.sleep(0.6)
+                    if not clicked:
+                        return None
+                    return poll_grid_loaded(facing, timeout=12)
+                return poll_grid_loaded(facing, timeout=12)
+
+            hands = acquire()
+            if hands is None:
+                # self-heal: reload page once and retry from scratch
+                log(f"{Y}[heal]{X} grid not ready — reloading tab and retrying")
+                chrome_reload()
+                cur_page = None
+                time.sleep(4)
+                hands = acquire()
+
+            if hands is None:
+                log(f"{R}[fail]{X} could not load grid for {tag}")
+                failed += 1
+                consec_fail += 1
+                if consec_fail >= 8:
+                    log(f"{Y}[backoff]{X} {consec_fail} consecutive failures — pausing 30s + reload.")
+                    chrome_reload()
+                    cur_page = None
+                    time.sleep(30)
+                    consec_fail = 0
+                continue
+            consec_fail = 0
+
+            # Sanity: AA should not be pure-fold for open/defend spots.
+            aa = hands.get("AA", {})
+            aa_fold = aa.get("fold", 0) >= 0.99
+            if facing in ("unopened", "vsopen") and aa_fold:
+                log(f"{Y}[warn]{X} AA folds in {tag} — suspicious, skipping (will retry next run).")
+                failed += 1
+                continue
+
+            # Write archive copy (always) + canonical copy (if applicable).
+            if opp:
+                csv, nrows = grid_to_csv(hands, facing, depth, hero, opp)
+                (ARCHIVE_DIR / f"{t['archive_slug']}.csv").write_text(csv, encoding="utf-8")
+            if t["slug"]:
+                csv, nrows = grid_to_csv(hands, facing, depth, hero, opp)
+                (CRIB_DIR / f"{t['slug']}.csv").write_text(csv, encoding="utf-8")
+                log(f"{G}[saved]{X} {t['slug']}.csv ({nrows} action rows)")
+            else:
+                log(f"{G}[archived]{X} {t['archive_slug']}.csv")
+
+            scraped += 1
+            done.add(key)
+            save_manifest(done)
+
+            if args.limit and scraped >= args.limit:
+                log(f"{Y}[limit]{X} reached --limit {args.limit}, stopping.")
                 break
-                
-            # Wait 2.0 seconds for the React app to load the page layout
-            time.sleep(2.0)
-
-            # If there is an opponent position to select (vsOpen / vs3Bet), click it programmatically!
-            if spot["opp_pos"]:
-                print(f"{YELLOW}[Chrome]{RESET} Clicking Opponent Position '{spot['opp_pos']}'...")
-                click_opp_js = f"""
-                (function() {{
-                    const headers = Array.from(document.querySelectorAll('div.headerSection, .headerSection'));
-                    const oppHeader = headers.find(el => {{
-                        const text = el.textContent.trim().toLowerCase();
-                        return text.includes("opponent") && text.includes("position");
-                    }});
-                    
-                    if (!oppHeader) return "Opponent header not found";
-                    
-                    const buttonsContainer = oppHeader.nextElementSibling;
-                    if (!buttonsContainer) return "Buttons container not found";
-                    
-                    const buttons = Array.from(buttonsContainer.querySelectorAll('.sc-gbvfcU, div, button'));
-                    const btn = buttons.find(b => b.textContent.trim() === '{spot["opp_pos"]}');
-                    
-                    if (!btn) return "Opponent button '{spot["opp_pos"]}' not found";
-                    
-                    btn.click();
-                    return "Clicked Opponent " + '{spot["opp_pos"]}';
-                }})();
-                """
-                click_success, click_stdout, click_stderr = execute_js_in_chrome(click_opp_js, script_dir)
-                if click_success and "Clicked Opponent" in click_stdout:
-                    # Wait 1.2 seconds for React to fetch and render the newly selected grid
-                    time.sleep(1.2)
-                else:
-                    print(f"{YELLOW}[Warning]{RESET} Failed to select Opponent Position '{spot['opp_pos']}' (result: {click_stdout.strip()}). HTML structure might be different.")
-
-            # Inject and execute scraper JS with a retry loop to survive rendering/network lag
-            max_retries = 3
-            csv_content = ""
-            
-            for attempt in range(1, max_retries + 1):
-                if attempt > 1:
-                    time.sleep(1.2)
-                    
-                success, stdout, stderr = execute_js_in_chrome(js_code, script_dir)
-                
-                if not success:
-                    if "Executing JavaScript through AppleScript is turned off" in stderr or "Executing JavaScript through AppleScript is turned off" in stdout:
-                        print(f"\n{RED}[Action Required]{RESET} JavaScript execution through AppleScript is disabled in Google Chrome.")
-                        print(f"Please enable it by clicking in Chrome's menu bar:")
-                        print(f"  {YELLOW}View > Developer > Allow JavaScript from Apple Events{RESET}\n")
-                        sys.exit(1)
-                    continue
-                    
-                csv_content = stdout.strip()
-                if csv_content and "notation,action,freq" in csv_content:
-                    break
-
-            if not csv_content or "notation,action,freq" not in csv_content:
-                # Page is not a valid chart or completely empty, skip it
-                print(f"{YELLOW}[Skip]{RESET} No valid range grid found at URL after {max_retries} attempts.")
-                skipped_count += 1
-                completed_slugs.add(slug)
-                continue
-
-            # Save the CSV crib sheet
-            csv_path = importer_dir / "crib" / f"{slug}.csv"
-            csv_path.write_text(csv_content, encoding="utf-8")
-            print(f"{GREEN}[Saved]{RESET} Crib sheet written to {csv_path.name}")
-            
-            # Automatically derive and save the vs3betjam sibling if applicable!
-            if spot["type"] == "vs3Bet":
-                jam_slug = slug.replace("_vs3bet", "_vs3betjam")
-                jam_csv_path = importer_dir / "crib" / f"{jam_slug}.csv"
-                jam_csv_content = derive_vs3betjam_csv(csv_content)
-                if jam_csv_content:
-                    jam_csv_path.write_text(jam_csv_content, encoding="utf-8")
-                    print(f"{GREEN}[Derived]{RESET} Sibling crib sheet written to {jam_csv_path.name}")
-            
-            scraped_count += 1
-            completed_slugs.add(slug)
-            
-            # Save progress to manifest
-            manifest_file.write_text(json.dumps(list(completed_slugs), indent=2), encoding="utf-8")
-
-            # Periodically compile to show live progress (every 5 scraped charts)
-            if scraped_count % 5 == 0:
-                print(f"{YELLOW}[Compiler]{RESET} Running batch compilation to sync app resources...")
-                run_cmd("swift run RangeImporter import --input crib/ --output ../../Cutoff/Resources/Ranges/", cwd=importer_dir)
-                run_cmd("swift run RangeImporter derive-9max --input ../../Cutoff/Resources/Ranges/ --output ../../Cutoff/Resources/Ranges/", cwd=importer_dir)
 
     except KeyboardInterrupt:
-        print(f"\n{YELLOW}[Interrupted]{RESET} Bulk scraping paused by user. Progress saved.")
+        log(f"\n{Y}[Interrupted]{X} progress saved to manifest.")
 
-    # Final Compilation
-    print(f"\n{YELLOW}[Compiler]{RESET} Running final compilation and 9-max derivation...")
-    run_cmd("swift run RangeImporter import --input crib/ --output ../../Cutoff/Resources/Ranges/", cwd=importer_dir)
-    run_cmd("swift run RangeImporter derive-9max --input ../../Cutoff/Resources/Ranges/ --output ../../Cutoff/Resources/Ranges/", cwd=importer_dir)
+    elapsed = (time.time() - start) / 60
+    log(f"\n{G}=== Scrape finished ==={X}")
+    log(f"Elapsed: {elapsed:.1f} min | scraped: {G}{scraped}{X} | "
+        f"failed: {R}{failed}{X} | already-done: {len(done)-scraped}")
 
-    elapsed = time.time() - start_time
-    print(f"\n{GREEN}=== Bulk Scraping Finished ==={RESET}")
-    print(f"Time elapsed: {elapsed/60:.1f} minutes")
-    print(f"Successfully scraped: {GREEN}{scraped_count} ranges{RESET}")
-    print(f"Skipped / empty slots: {YELLOW}{skipped_count} spots{RESET}")
-    print(f"All progress has been fully integrated into the Cutoff SwiftUI project!")
+    if not args.no_compile:
+        compile_and_validate()
+
+    log(f"{G}Done.{X} Canonical CSVs in crib/, full archive in crib_multi_opener/.")
+
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,348 @@
+{
+  "format" : "NLHE_MTT_8MAX",
+  "hands" : {
+    "22" : {
+      "raise25x" : 1
+    },
+    "33" : {
+      "raise25x" : 1
+    },
+    "44" : {
+      "raise25x" : 1
+    },
+    "53s" : {
+      "fold" : 0.66800000000000004,
+      "raise25x" : 0.33200000000000002
+    },
+    "54s" : {
+      "raise25x" : 1
+    },
+    "55" : {
+      "raise25x" : 1
+    },
+    "64s" : {
+      "raise25x" : 1
+    },
+    "65s" : {
+      "raise25x" : 1
+    },
+    "66" : {
+      "raise25x" : 1
+    },
+    "75s" : {
+      "raise25x" : 1
+    },
+    "76s" : {
+      "raise25x" : 1
+    },
+    "77" : {
+      "raise25x" : 1
+    },
+    "85s" : {
+      "raise25x" : 1
+    },
+    "86s" : {
+      "raise25x" : 1
+    },
+    "87o" : {
+      "fold" : 0.28589999999999999,
+      "raise25x" : 0.71409999999999996
+    },
+    "87s" : {
+      "raise25x" : 1
+    },
+    "88" : {
+      "raise25x" : 1
+    },
+    "95s" : {
+      "raise25x" : 1
+    },
+    "96s" : {
+      "raise25x" : 1
+    },
+    "97s" : {
+      "raise25x" : 1
+    },
+    "98o" : {
+      "raise25x" : 1
+    },
+    "98s" : {
+      "raise25x" : 1
+    },
+    "99" : {
+      "raise25x" : 1
+    },
+    "A2o" : {
+      "raise25x" : 1
+    },
+    "A2s" : {
+      "raise25x" : 1
+    },
+    "A3o" : {
+      "raise25x" : 1
+    },
+    "A3s" : {
+      "raise25x" : 1
+    },
+    "A4o" : {
+      "raise25x" : 1
+    },
+    "A4s" : {
+      "raise25x" : 1
+    },
+    "A5o" : {
+      "raise25x" : 1
+    },
+    "A5s" : {
+      "raise25x" : 1
+    },
+    "A6o" : {
+      "raise25x" : 1
+    },
+    "A6s" : {
+      "raise25x" : 1
+    },
+    "A7o" : {
+      "raise25x" : 1
+    },
+    "A7s" : {
+      "raise25x" : 1
+    },
+    "A8o" : {
+      "raise25x" : 1
+    },
+    "A8s" : {
+      "raise25x" : 1
+    },
+    "A9o" : {
+      "raise25x" : 1
+    },
+    "A9s" : {
+      "raise25x" : 1
+    },
+    "AA" : {
+      "raise25x" : 1
+    },
+    "AJo" : {
+      "raise25x" : 1
+    },
+    "AJs" : {
+      "raise25x" : 1
+    },
+    "AKo" : {
+      "raise25x" : 1
+    },
+    "AKs" : {
+      "raise25x" : 1
+    },
+    "AQo" : {
+      "raise25x" : 1
+    },
+    "AQs" : {
+      "raise25x" : 1
+    },
+    "ATo" : {
+      "raise25x" : 1
+    },
+    "ATs" : {
+      "raise25x" : 1
+    },
+    "J3s" : {
+      "raise25x" : 1
+    },
+    "J4s" : {
+      "raise25x" : 1
+    },
+    "J5s" : {
+      "raise25x" : 1
+    },
+    "J6s" : {
+      "raise25x" : 1
+    },
+    "J7o" : {
+      "fold" : 0.95009999999999994,
+      "raise25x" : 0.0499
+    },
+    "J7s" : {
+      "raise25x" : 1
+    },
+    "J8o" : {
+      "raise25x" : 1
+    },
+    "J8s" : {
+      "raise25x" : 1
+    },
+    "J9o" : {
+      "raise25x" : 1
+    },
+    "J9s" : {
+      "raise25x" : 1
+    },
+    "JJ" : {
+      "raise25x" : 1
+    },
+    "JTo" : {
+      "raise25x" : 1
+    },
+    "JTs" : {
+      "raise25x" : 1
+    },
+    "K2s" : {
+      "raise25x" : 1
+    },
+    "K3s" : {
+      "raise25x" : 1
+    },
+    "K4s" : {
+      "raise25x" : 1
+    },
+    "K5o" : {
+      "raise25x" : 1
+    },
+    "K5s" : {
+      "raise25x" : 1
+    },
+    "K6o" : {
+      "raise25x" : 1
+    },
+    "K6s" : {
+      "raise25x" : 1
+    },
+    "K7o" : {
+      "raise25x" : 1
+    },
+    "K7s" : {
+      "raise25x" : 1
+    },
+    "K8o" : {
+      "raise25x" : 1
+    },
+    "K8s" : {
+      "raise25x" : 1
+    },
+    "K9o" : {
+      "raise25x" : 1
+    },
+    "K9s" : {
+      "raise25x" : 1
+    },
+    "KJo" : {
+      "raise25x" : 1
+    },
+    "KJs" : {
+      "raise25x" : 1
+    },
+    "KK" : {
+      "raise25x" : 1
+    },
+    "KQo" : {
+      "raise25x" : 1
+    },
+    "KQs" : {
+      "raise25x" : 1
+    },
+    "KTo" : {
+      "raise25x" : 1
+    },
+    "KTs" : {
+      "raise25x" : 1
+    },
+    "Q2s" : {
+      "raise25x" : 1
+    },
+    "Q3s" : {
+      "raise25x" : 1
+    },
+    "Q4s" : {
+      "raise25x" : 1
+    },
+    "Q5s" : {
+      "raise25x" : 1
+    },
+    "Q6s" : {
+      "raise25x" : 1
+    },
+    "Q7s" : {
+      "raise25x" : 1
+    },
+    "Q8o" : {
+      "raise25x" : 1
+    },
+    "Q8s" : {
+      "raise25x" : 1
+    },
+    "Q9o" : {
+      "raise25x" : 1
+    },
+    "Q9s" : {
+      "raise25x" : 1
+    },
+    "QJo" : {
+      "raise25x" : 1
+    },
+    "QJs" : {
+      "raise25x" : 1
+    },
+    "QQ" : {
+      "raise25x" : 1
+    },
+    "QTo" : {
+      "raise25x" : 1
+    },
+    "QTs" : {
+      "raise25x" : 1
+    },
+    "T4s" : {
+      "raise25x" : 1
+    },
+    "T5s" : {
+      "raise25x" : 1
+    },
+    "T6s" : {
+      "raise25x" : 1
+    },
+    "T7o" : {
+      "fold" : 0.017899999999999999,
+      "raise25x" : 0.98209999999999997
+    },
+    "T7s" : {
+      "raise25x" : 1
+    },
+    "T8o" : {
+      "raise25x" : 1
+    },
+    "T8s" : {
+      "raise25x" : 1
+    },
+    "T9o" : {
+      "raise25x" : 1
+    },
+    "T9s" : {
+      "raise25x" : 1
+    },
+    "TT" : {
+      "raise25x" : 1
+    }
+  },
+  "id" : "mtt_8max_70bb_btn_unopened",
+  "source" : {
+    "description" : "RangeConverter free PDF — 8-max 70bb 1bb ante (12.5%).",
+    "publisher" : {
+      "accessedDate" : "2026-06-01",
+      "name" : "RangeConverter",
+      "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
+      "treeParams" : "poker.academy CE-Symmetric Regular @ 70bb (GTO ChipEV, 1bb ante)",
+      "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
+    },
+    "solver" : {
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante."
+    },
+    "type" : "published"
+  },
+  "spot" : {
+    "anteType" : "bigBlindAnte",
+    "facingAction" : "unopened",
+    "position" : "BTN",
+    "stackDepthBB" : 70
+  }
+}

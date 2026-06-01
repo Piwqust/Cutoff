@@ -1,0 +1,26 @@
+# poker.academy CE-Symmetric — 10bb vsopen | hero CO vs EP
+# Scraped 2026-06-01 via scrape_all_ranges.py
+# TreeParams: poker.academy CE-Symmetric Regular @ 10bb (GTO ChipEV, 1bb ante)
+notation,action,freq
+66,jam,1.0
+77,jam,1.0
+88,jam,1.0
+99,jam,1.0
+AA,jam,1.0
+AKs,jam,1.0
+AQs,jam,1.0
+AJs,jam,1.0
+ATs,jam,1.0
+A5s,fold,0.5748
+A5s,jam,0.4252
+AKo,jam,1.0
+KK,jam,1.0
+KQs,jam,1.0
+KJs,jam,1.0
+AQo,jam,1.0
+QQ,jam,1.0
+AJo,jam,1.0
+JJ,jam,1.0
+ATo,fold,0.48
+ATo,jam,0.52
+TT,jam,1.0

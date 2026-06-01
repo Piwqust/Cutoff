@@ -1,0 +1,27 @@
+# poker.academy CE-Symmetric — 15bb vs3bet | hero HJ vs BTN
+# Scraped 2026-06-01 via scrape_all_ranges.py
+# TreeParams: poker.academy CE-Symmetric Regular @ 15bb (GTO ChipEV, 1bb ante)
+notation,action,freq
+77,call,1.0
+88,call,1.0
+99,call,1.0
+AA,call,1.0
+AKs,call,1.0
+AQs,call,1.0
+AJs,call,1.0
+ATs,call,1.0
+A9s,call,1.0
+A8s,call,1.0
+A7s,call,1.0
+A6s,call,1.0
+AKo,call,1.0
+KK,call,1.0
+KQs,call,1.0
+KJs,call,1.0
+KTs,call,1.0
+AQo,call,1.0
+QQ,call,1.0
+QJs,call,1.0
+QTs,call,1.0
+JJ,call,1.0
+TT,call,1.0
