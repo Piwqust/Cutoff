@@ -275,16 +275,16 @@
     const filename = `mtt_8max_${depth}_${position}_${facing}.csv`;
     const csvContent = csvRows.join("\n") + "\n";
 
-    // Trigger file download
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const link = document.createElement("a");
-    const url = URL.createObjectURL(blob);
-    link.setAttribute("href", url);
-    link.setAttribute("download", filename);
-    link.style.visibility = 'hidden';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Trigger file download disabled to prevent Downloads clutter when automated
+    // const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    // const link = document.createElement("a");
+    // const url = URL.createObjectURL(blob);
+    // link.setAttribute("href", url);
+    // link.setAttribute("download", filename);
+    // link.style.visibility = 'hidden';
+    // document.body.appendChild(link);
+    // link.click();
+    // document.body.removeChild(link);
 
     console.log(`%c[Poker.academy Scraper] Export Complete!`, "color: #4db6ac; font-weight: bold; font-size: 14px;");
     return csvContent;

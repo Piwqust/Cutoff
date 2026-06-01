@@ -38,6 +38,60 @@ def execute_js_in_chrome(js_code, script_dir):
         
     return success, stdout, stderr
 
+def derive_vs3betjam_csv(csv_content):
+    lines = csv_content.strip().split("\n")
+    if not lines or len(lines) < 2:
+        return ""
+    
+    header = lines[0]
+    out_lines = [header]
+    
+    premiums = {"AA", "KK", "QQ", "JJ", "TT", "99", "88", "AKs", "AKo", "AQs", "AQo", "AJs", "AJo", "ATs"}
+    
+    # Group by hand to normalize frequencies
+    hand_strats = {}
+    for line in lines[1:]:
+        parts = line.split(",")
+        if len(parts) < 3:
+            continue
+        hand, action, freq = parts[0], parts[1], float(parts[2])
+        if hand not in hand_strats:
+            hand_strats[hand] = {}
+        hand_strats[hand][action] = freq
+        
+    for hand in sorted(hand_strats.keys()):
+        strat = hand_strats[hand]
+        # Facing a jam, we can only call or fold
+        call_freq = 0.0
+        
+        # 1. Existing call or jam/shove always goes to call
+        call_freq += strat.get("call", 0.0)
+        call_freq += strat.get("jam", 0.0)
+        call_freq += strat.get("shove", 0.0)
+        
+        # 2. Raise goes to call if premium, otherwise folds (bluffs)
+        raise_freq = sum(f for act, f in strat.items() if act in ("raise", "raise25x", "raise3x", "minRaise"))
+        if hand in premiums:
+            call_freq += raise_freq
+            
+        call_freq = min(1.0, max(0.0, call_freq))
+        
+        # Round to standard 25% steps
+        if call_freq > 0.85: call_freq = 1.0
+        elif call_freq > 0.62: call_freq = 0.75
+        elif call_freq > 0.37: call_freq = 0.50
+        elif call_freq > 0.15: call_freq = 0.25
+        else: call_freq = 0.0
+        
+        if call_freq > 0:
+            out_lines.append(f"{hand},call,{call_freq}")
+            if call_freq < 1.0:
+                out_lines.append(f"{hand},fold,{round(1.0 - call_freq, 2)}")
+        else:
+            out_lines.append(f"{hand},fold,1.0")
+            
+    return "\n".join(out_lines) + "\n"
+
 def main():
     print(f"{GREEN}=== Starting Bulk Tournament Range Scraper ==={RESET}")
     print("This script will automatically navigate Chrome through all stack depths and scenarios")
@@ -68,7 +122,6 @@ def main():
         sys.exit(1)
 
     # Extract Pack Name and Speed from current URL
-    # Format e.g.: https://poker.academy/tournaments/s/CE-Symmetric/60/Regular/RFI/CO///
     path_parts = [p for p in current_url.split('/') if p]
     if len(path_parts) < 5:
         print(f"{RED}[Abort]{RESET} URL structure is not recognized. Please open a valid range chart page.")
@@ -86,7 +139,6 @@ def main():
 
     # 3. Generate all combinations of spots to scrape matching the exact website structure
     depths = [10, 15, 20, 25, 30, 40, 50, 60, 70, 100]
-    positions = ["EP", "MP", "LJ", "HJ", "CO", "BTN", "SB", "BB"]
     
     def get_app_depth(d):
         return 75 if d == 70 else d
@@ -99,9 +151,10 @@ def main():
     spots_to_scrape = []
 
     # A. RFI spots (all positions except BB)
+    rfi_positions = ["EP", "MP", "LJ", "HJ", "CO", "BTN", "SB"]
     for depth in depths:
         app_depth = get_app_depth(depth)
-        for pos in positions[:-1]: # exclude BB
+        for pos in rfi_positions:
             app_pos = get_app_pos(pos)
             spots_to_scrape.append({
                 "type": "RFI",
@@ -112,61 +165,53 @@ def main():
                 "opp_pos": None
             })
 
-    # B. vsOpen (Facing RFI) spots
-    # Valid (Opener, Hero) pairs
-    vs_open_pairs = [
-        ("EP", ["MP", "LJ", "HJ", "CO", "BTN", "SB", "BB"]),
-        ("MP", ["LJ", "HJ", "CO", "BTN", "SB", "BB"]),
-        ("LJ", ["HJ", "CO", "BTN", "SB", "BB"]),
-        ("HJ", ["CO", "BTN", "SB", "BB"]),
-        ("CO", ["BTN", "SB", "BB"]),
-        ("BTN", ["SB", "BB"]),
-        ("SB", ["BB"])
+    # B. Targeted representative vsOpen (Facing RFI) spots
+    vs_open_matchups = [
+        ("MP", "EP"),
+        ("LJ", "MP"),
+        ("HJ", "LJ"),
+        ("CO", "HJ"),
+        ("BTN", "CO"),
+        ("SB", "BTN"),
+        ("BB", "BTN")
     ]
-
     for depth in depths:
         app_depth = get_app_depth(depth)
-        for opener, heroes in vs_open_pairs:
-            for hero in heroes:
-                app_hero = get_app_pos(hero)
-                app_opener = get_app_pos(opener)
-                spots_to_scrape.append({
-                    "type": "vsOpen",
-                    "depth": depth,
-                    "url": f"https://poker.academy/tournaments/s/{pack_name}/{depth}/{speed_name}/vs.%20RFI/{hero}///",
-                    "slug": f"mtt_8max_{app_depth}bb_{app_hero}_vsopen",
-                    "desc": f"{depth}bb Hero {hero} vs Opponent {opener} open",
-                    "opp_pos": opener
-                })
+        for defender, opener in vs_open_matchups:
+            app_defender = get_app_pos(defender)
+            spots_to_scrape.append({
+                "type": "vsOpen",
+                "depth": depth,
+                "url": f"https://poker.academy/tournaments/s/{pack_name}/{depth}/{speed_name}/vs.%20RFI/{defender}///",
+                "slug": f"mtt_8max_{app_depth}bb_{app_defender}_vsopen",
+                "desc": f"{depth}bb Hero {defender} vs Opponent {opener} open",
+                "opp_pos": opener
+            })
 
-    # C. vs3Bet (Facing 3-Bet) spots
-    # Standard 3-bet pairs (Hero is Opener, Opponent is 3Beter)
-    vs_3bet_pairs = [
-        ("EP", ["LJ", "HJ", "CO", "BTN", "SB", "BB"]),
-        ("MP", ["LJ", "HJ", "CO", "BTN", "SB", "BB"]),
-        ("LJ", ["HJ", "CO", "BTN", "SB", "BB"]),
-        ("HJ", ["CO", "BTN", "SB", "BB"]),
-        ("CO", ["BTN", "SB", "BB"]),
-        ("BTN", ["SB", "BB"]),
-        ("SB", ["BB"])
+    # C. Targeted representative vs3Bet (Facing 3-Bet) spots
+    vs_3bet_matchups = [
+        ("EP", "BTN"),
+        ("MP", "BTN"),
+        ("LJ", "BTN"),
+        ("HJ", "BTN"),
+        ("CO", "BTN"),
+        ("BTN", "BB"),
+        ("SB", "BB")
     ]
-
     for depth in depths:
         app_depth = get_app_depth(depth)
-        for opener, three_beters in vs_3bet_pairs:
-            for tb in three_beters:
-                app_opener = get_app_pos(opener)
-                app_tb = get_app_pos(tb)
-                spots_to_scrape.append({
-                    "type": "vs3Bet",
-                    "depth": depth,
-                    "url": f"https://poker.academy/tournaments/s/{pack_name}/{depth}/{speed_name}/vs.%203bet/{opener}///",
-                    "slug": f"mtt_8max_{app_depth}bb_{app_opener}_vs3bet",
-                    "desc": f"{depth}bb Hero {opener} vs Opponent {tb} 3-bet",
-                    "opp_pos": tb
-                })
+        for opener, three_bettor in vs_3bet_matchups:
+            app_opener = get_app_pos(opener)
+            spots_to_scrape.append({
+                "type": "vs3Bet",
+                "depth": depth,
+                "url": f"https://poker.academy/tournaments/s/{pack_name}/{depth}/{speed_name}/vs.%203bet/{opener}///",
+                "slug": f"mtt_8max_{app_depth}bb_{app_opener}_vs3bet",
+                "desc": f"{depth}bb Hero {opener} vs Opponent {three_bettor} 3-bet",
+                "opp_pos": three_bettor
+            })
 
-    print(f"{GREEN}[Planner]{RESET} Generated {len(spots_to_scrape)} total potential GTO range spots to scrape.")
+    print(f"{GREEN}[Planner]{RESET} Generated {len(spots_to_scrape)} targeted GTO range spots to scrape.")
 
     # 4. Load manifest to support Resume functionality
     completed_slugs = set()
@@ -228,28 +273,24 @@ def main():
                 print(f"{YELLOW}[Chrome]{RESET} Clicking Opponent Position '{spot['opp_pos']}'...")
                 click_opp_js = f"""
                 (function() {{
-                    const divs = Array.from(document.querySelectorAll('div, span, p'));
-                    const oppLabel = divs.find(el => {{
+                    const headers = Array.from(document.querySelectorAll('div.headerSection, .headerSection'));
+                    const oppHeader = headers.find(el => {{
                         const text = el.textContent.trim().toLowerCase();
                         return text.includes("opponent") && text.includes("position");
                     }});
                     
-                    if (!oppLabel) return "Opponent label not found";
+                    if (!oppHeader) return "Opponent header not found";
                     
-                    let container = oppLabel.parentElement;
-                    for (let i = 0; i < 4 && container; i++) {{
-                        const btns = Array.from(container.querySelectorAll('div, button, span'));
-                        const btn = btns.find(el => {{
-                            return el.childNodes.length === 1 && el.textContent.trim() === '{spot["opp_pos"]}';
-                        }});
-                        
-                        if (btn) {{
-                            btn.click();
-                            return "Clicked Opponent " + '{spot["opp_pos"]}';
-                        }}
-                        container = container.parentElement;
-                    }}
-                    return "Opponent button " + '{spot["opp_pos"]}' + " not found";
+                    const buttonsContainer = oppHeader.nextElementSibling;
+                    if (!buttonsContainer) return "Buttons container not found";
+                    
+                    const buttons = Array.from(buttonsContainer.querySelectorAll('.sc-gbvfcU, div, button'));
+                    const btn = buttons.find(b => b.textContent.trim() === '{spot["opp_pos"]}');
+                    
+                    if (!btn) return "Opponent button '{spot["opp_pos"]}' not found";
+                    
+                    btn.click();
+                    return "Clicked Opponent " + '{spot["opp_pos"]}';
                 }})();
                 """
                 click_success, click_stdout, click_stderr = execute_js_in_chrome(click_opp_js, script_dir)
@@ -292,6 +333,15 @@ def main():
             csv_path = importer_dir / "crib" / f"{slug}.csv"
             csv_path.write_text(csv_content, encoding="utf-8")
             print(f"{GREEN}[Saved]{RESET} Crib sheet written to {csv_path.name}")
+            
+            # Automatically derive and save the vs3betjam sibling if applicable!
+            if spot["type"] == "vs3Bet":
+                jam_slug = slug.replace("_vs3bet", "_vs3betjam")
+                jam_csv_path = importer_dir / "crib" / f"{jam_slug}.csv"
+                jam_csv_content = derive_vs3betjam_csv(csv_content)
+                if jam_csv_content:
+                    jam_csv_path.write_text(jam_csv_content, encoding="utf-8")
+                    print(f"{GREEN}[Derived]{RESET} Sibling crib sheet written to {jam_csv_path.name}")
             
             scraped_count += 1
             completed_slugs.add(slug)
