@@ -197,32 +197,37 @@ def main():
             # Wait 2.2 seconds for the React app to fetch data and render the grid
             time.sleep(2.2)
 
-            # Inject and execute scraper JS
-            applescript_exec = f'tell application "Google Chrome" to execute active tab of first window javascript "{escaped_js}"'
-            as_file = script_dir / "temp_bulk_scrape.applescript"
-            as_file.write_text(applescript_exec, encoding="utf-8")
+            # Inject and execute scraper JS with a retry loop to survive rendering/network lag
+            max_retries = 3
+            csv_content = ""
             
-            success, stdout, stderr = run_cmd(f'osascript "{as_file}"')
-            if as_file.exists():
-                os.remove(as_file)
-
-            if not success:
-                # If JS execution is completely turned off, abort immediately
-                if "Executing JavaScript through AppleScript is turned off" in stderr or "Executing JavaScript through AppleScript is turned off" in stdout:
-                    print(f"\n{RED}[Action Required]{RESET} JavaScript execution through AppleScript is disabled in Google Chrome.")
-                    print(f"Please enable it by clicking in Chrome's menu bar:")
-                    print(f"  {YELLOW}View > Developer > Allow JavaScript from Apple Events{RESET}\n")
-                    sys.exit(1)
+            for attempt in range(1, max_retries + 1):
+                if attempt > 1:
+                    time.sleep(1.2)
+                    
+                applescript_exec = f'tell application "Google Chrome" to execute active tab of first window javascript "{escaped_js}"'
+                as_file = script_dir / "temp_bulk_scrape.applescript"
+                as_file.write_text(applescript_exec, encoding="utf-8")
                 
-                # Otherwise, it might be a 404/invalid page, safe to skip
-                print(f"{YELLOW}[Skip]{RESET} No valid range grid found at URL (likely a 404 or empty scenario).")
-                skipped_count += 1
-                completed_slugs.add(slug) # mark as processed so we don't try again
-                continue
+                success, stdout, stderr = run_cmd(f'osascript "{as_file}"')
+                if as_file.exists():
+                    os.remove(as_file)
+                    
+                if not success:
+                    if "Executing JavaScript through AppleScript is turned off" in stderr or "Executing JavaScript through AppleScript is turned off" in stdout:
+                        print(f"\n{RED}[Action Required]{RESET} JavaScript execution through AppleScript is disabled in Google Chrome.")
+                        print(f"Please enable it by clicking in Chrome's menu bar:")
+                        print(f"  {YELLOW}View > Developer > Allow JavaScript from Apple Events{RESET}\n")
+                        sys.exit(1)
+                    continue
+                    
+                csv_content = stdout.strip()
+                if csv_content and "notation,action,freq" in csv_content:
+                    break
 
-            csv_content = stdout.strip()
             if not csv_content or "notation,action,freq" not in csv_content:
-                print(f"{YELLOW}[Skip]{RESET} Returned empty or invalid CSV range data (likely empty slot).")
+                # Page is not a valid chart or completely empty, skip it
+                print(f"{YELLOW}[Skip]{RESET} No valid range grid found at URL after {max_retries} attempts.")
                 skipped_count += 1
                 completed_slugs.add(slug)
                 continue

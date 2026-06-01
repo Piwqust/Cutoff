@@ -2,6 +2,7 @@
 import subprocess
 import sys
 import os
+import time
 from pathlib import Path
 
 # Color terminal formatting helpers
@@ -80,33 +81,42 @@ def main():
     
     # 5. Execute JavaScript in the active Chrome tab via AppleScript
     print(f"{YELLOW}[Chrome]{RESET} Injecting scraper JavaScript to parse range chart...")
-    applescript_exec = f'tell application "Google Chrome" to execute active tab of first window javascript "{escaped_js}"'
     
-    # Temporary AppleScript file to avoid shell argument length limits
-    as_file = script_dir / "temp_scrape.applescript"
-    as_file.write_text(applescript_exec, encoding="utf-8")
+    max_retries = 4
+    csv_content = ""
     
-    success, stdout, stderr = run_cmd(f'osascript "{as_file}"')
-    
-    # Cleanup temporary script file
-    if as_file.exists():
-        os.remove(as_file)
+    for attempt in range(1, max_retries + 1):
+        if attempt > 1:
+            print(f"{YELLOW}[Retry]{RESET} Waiting 1.5 seconds and retrying execution (Attempt {attempt}/{max_retries})...")
+            time.sleep(1.5)
+            
+        applescript_exec = f'tell application "Google Chrome" to execute active tab of first window javascript "{escaped_js}"'
+        as_file = script_dir / "temp_scrape.applescript"
+        as_file.write_text(applescript_exec, encoding="utf-8")
         
-    if not success:
-        if "Executing JavaScript through AppleScript is turned off" in stderr or "Executing JavaScript through AppleScript is turned off" in stdout:
-            print(f"\n{RED}[Action Required]{RESET} JavaScript execution through AppleScript is disabled in Google Chrome.")
-            print(f"Please enable it by clicking in Chrome's menu bar:")
-            print(f"  {YELLOW}View > Developer > Allow JavaScript from Apple Events{RESET}")
-            print(f"After enabling it, rerun this automation script!\n")
-        else:
-            print(f"{RED}[Error]{RESET} Failed to execute JavaScript via AppleScript:")
-            print(stderr)
-        sys.exit(1)
+        success, stdout, stderr = run_cmd(f'osascript "{as_file}"')
         
-    csv_content = stdout.strip()
+        if as_file.exists():
+            os.remove(as_file)
+            
+        if not success:
+            if "Executing JavaScript through AppleScript is turned off" in stderr or "Executing JavaScript through AppleScript is turned off" in stdout:
+                print(f"\n{RED}[Action Required]{RESET} JavaScript execution through AppleScript is disabled in Google Chrome.")
+                print(f"Please enable it by clicking in Chrome's menu bar:")
+                print(f"  {YELLOW}View > Developer > Allow JavaScript from Apple Events{RESET}")
+                print(f"After enabling it, rerun this automation script!\n")
+                sys.exit(1)
+            
+            print(f"{YELLOW}[Warning]{RESET} Execution failed: {stderr.strip()}")
+            continue
+            
+        csv_content = stdout.strip()
+        if csv_content and "notation,action,freq" in csv_content:
+            break
+            
     if not csv_content or "notation,action,freq" not in csv_content:
-        print(f"{RED}[Error]{RESET} Scraping returned invalid or empty CSV data.")
-        print(f"Scraper output preview: {csv_content[:200]}")
+        print(f"{RED}[Error]{RESET} Scraping returned invalid or empty CSV data after {max_retries} attempts.")
+        print("Please ensure the page is fully loaded and the range chart is visible.")
         sys.exit(1)
         
     print(f"{GREEN}[Scrape Successful]{RESET} Extracted {len(csv_content.splitlines()) - 1} rows of range data.")
