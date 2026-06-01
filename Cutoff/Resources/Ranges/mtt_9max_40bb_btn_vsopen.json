@@ -654,7 +654,7 @@
   "source" : {
     "description" : "Adapted from RangeConverter 8-max baseline.",
     "publisher" : {
-      "accessedDate" : "2026-05-25",
+      "accessedDate" : "2026-06-01",
       "name" : "RangeConverter",
       "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
       "treeParams" : "2.5x open, 3.5x 3bet IP, 4.5x 3bet OOP, 2.3x 4bet IP, 2.75x 4bet OOP, SB vs BB 3.2bb",
