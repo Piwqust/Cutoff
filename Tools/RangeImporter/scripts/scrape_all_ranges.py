@@ -228,24 +228,36 @@ def main():
                 print(f"{YELLOW}[Chrome]{RESET} Clicking Opponent Position '{spot['opp_pos']}'...")
                 click_opp_js = f"""
                 (function() {{
-                    const sections = Array.from(document.querySelectorAll('.guiButtonsSection'));
-                    if (sections.length > 1) {{
-                        const btns = Array.from(sections[1].querySelectorAll('div, button, span'));
-                        const btn = btns.find(el => el.textContent.trim() === '{spot["opp_pos"]}');
+                    const divs = Array.from(document.querySelectorAll('div, span, p'));
+                    const oppLabel = divs.find(el => {{
+                        const text = el.textContent.trim().toLowerCase();
+                        return text.includes("opponent") && text.includes("position");
+                    }});
+                    
+                    if (!oppLabel) return "Opponent label not found";
+                    
+                    let container = oppLabel.parentElement;
+                    for (let i = 0; i < 4 && container; i++) {{
+                        const btns = Array.from(container.querySelectorAll('div, button, span'));
+                        const btn = btns.find(el => {{
+                            return el.childNodes.length === 1 && el.textContent.trim() === '{spot["opp_pos"]}';
+                        }});
+                        
                         if (btn) {{
                             btn.click();
-                            return "Clicked Opponent Button";
+                            return "Clicked Opponent " + '{spot["opp_pos"]}';
                         }}
+                        container = container.parentElement;
                     }}
-                    return "Opponent Button not found";
+                    return "Opponent button " + '{spot["opp_pos"]}' + " not found";
                 }})();
                 """
                 click_success, click_stdout, click_stderr = execute_js_in_chrome(click_opp_js, script_dir)
-                if click_success:
+                if click_success and "Clicked Opponent" in click_stdout:
                     # Wait 1.2 seconds for React to fetch and render the newly selected grid
                     time.sleep(1.2)
                 else:
-                    print(f"{YELLOW}[Warning]{RESET} Failed to select Opponent Position. HTML structure might be different.")
+                    print(f"{YELLOW}[Warning]{RESET} Failed to select Opponent Position '{spot['opp_pos']}' (result: {click_stdout.strip()}). HTML structure might be different.")
 
             # Inject and execute scraper JS with a retry loop to survive rendering/network lag
             max_retries = 3
