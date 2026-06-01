@@ -24,10 +24,24 @@ def run_cmd(cmd, cwd=None, capture=True):
         return False, res.stdout, res.stderr
     return True, res.stdout, res.stderr
 
+def execute_js_in_chrome(js_code, script_dir):
+    escaped_js = js_code.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '\\n').replace('\r', '\\r')
+    applescript_exec = f'tell application "Google Chrome" to execute active tab of first window javascript "{escaped_js}"'
+    
+    as_file = script_dir / "temp_run_js.applescript"
+    as_file.write_text(applescript_exec, encoding="utf-8")
+    
+    success, stdout, stderr = run_cmd(f'osascript "{as_file}"')
+    
+    if as_file.exists():
+        os.remove(as_file)
+        
+    return success, stdout, stderr
+
 def main():
     print(f"{GREEN}=== Starting Bulk Tournament Range Scraper ==={RESET}")
     print("This script will automatically navigate Chrome through all stack depths and scenarios")
-    print("for your tournament structure, scrape the ranges, and compile them.\n")
+    print("for your tournament structure, click appropriate filters, scrape the ranges, and compile them.\n")
 
     # 1. Path setup
     script_dir = Path(__file__).parent.resolve()
@@ -60,8 +74,6 @@ def main():
         print(f"{RED}[Abort]{RESET} URL structure is not recognized. Please open a valid range chart page.")
         sys.exit(1)
 
-    # Walk path parts to extract structure
-    # tournaments -> s -> [Pack] -> [Depth] -> [Speed]
     try:
         s_idx = path_parts.index("s")
         pack_name = path_parts[s_idx + 1]
@@ -72,28 +84,39 @@ def main():
 
     print(f"{CYAN}[Tourney Pack]{RESET} Pack: {pack_name} | Speed: {speed_name}")
 
-    # 3. Generate all combinations of spots to scrape
-    depths = [10, 15, 20, 25, 30, 40, 50, 60, 75, 100, 125]
-    positions = ["UTG", "UTG1", "LJ", "HJ", "CO", "BTN", "SB", "BB"]
+    # 3. Generate all combinations of spots to scrape matching the exact website structure
+    depths = [10, 15, 20, 25, 30, 40, 50, 60, 70, 100]
+    positions = ["EP", "MP", "LJ", "HJ", "CO", "BTN", "SB", "BB"]
+    
+    def get_app_depth(d):
+        return 75 if d == 70 else d
+        
+    def get_app_pos(p):
+        if p == "EP": return "utg"
+        if p == "MP": return "utg1"
+        return p.lower()
     
     spots_to_scrape = []
 
     # A. RFI spots (all positions except BB)
     for depth in depths:
+        app_depth = get_app_depth(depth)
         for pos in positions[:-1]: # exclude BB
+            app_pos = get_app_pos(pos)
             spots_to_scrape.append({
                 "type": "RFI",
                 "depth": depth,
                 "url": f"https://poker.academy/tournaments/s/{pack_name}/{depth}/{speed_name}/RFI/{pos}///",
-                "slug": f"mtt_8max_{depth}bb_{pos.lower()}_unopened",
-                "desc": f"{depth}bb RFI from {pos}"
+                "slug": f"mtt_8max_{app_depth}bb_{app_pos}_unopened",
+                "desc": f"{depth}bb RFI from {pos}",
+                "opp_pos": None
             })
 
     # B. vsOpen (Facing RFI) spots
     # Valid (Opener, Hero) pairs
     vs_open_pairs = [
-        ("UTG", ["UTG1", "LJ", "HJ", "CO", "BTN", "SB", "BB"]),
-        ("UTG1", ["LJ", "HJ", "CO", "BTN", "SB", "BB"]),
+        ("EP", ["MP", "LJ", "HJ", "CO", "BTN", "SB", "BB"]),
+        ("MP", ["LJ", "HJ", "CO", "BTN", "SB", "BB"]),
         ("LJ", ["HJ", "CO", "BTN", "SB", "BB"]),
         ("HJ", ["CO", "BTN", "SB", "BB"]),
         ("CO", ["BTN", "SB", "BB"]),
@@ -102,22 +125,25 @@ def main():
     ]
 
     for depth in depths:
+        app_depth = get_app_depth(depth)
         for opener, heroes in vs_open_pairs:
             for hero in heroes:
-                # Format: vsOpen/[Opener]/[Hero]
+                app_hero = get_app_pos(hero)
+                app_opener = get_app_pos(opener)
                 spots_to_scrape.append({
                     "type": "vsOpen",
                     "depth": depth,
-                    "url": f"https://poker.academy/tournaments/s/{pack_name}/{depth}/{speed_name}/vsOpen/{opener}/{hero}///",
-                    "slug": f"mtt_8max_{depth}bb_{hero.lower()}_vsopen", # in app: mtt_8max_Xbb_[hero]_vsopen.json
-                    "desc": f"{depth}bb {hero} vs {opener} open"
+                    "url": f"https://poker.academy/tournaments/s/{pack_name}/{depth}/{speed_name}/vs.%20RFI/{hero}///",
+                    "slug": f"mtt_8max_{app_depth}bb_{app_hero}_vsopen",
+                    "desc": f"{depth}bb Hero {hero} vs Opponent {opener} open",
+                    "opp_pos": opener
                 })
 
     # C. vs3Bet (Facing 3-Bet) spots
-    # Standard 3-bet pairs (Opener, 3Beter)
+    # Standard 3-bet pairs (Hero is Opener, Opponent is 3Beter)
     vs_3bet_pairs = [
-        ("UTG", ["LJ", "HJ", "CO", "BTN", "SB", "BB"]),
-        ("UTG1", ["LJ", "HJ", "CO", "BTN", "SB", "BB"]),
+        ("EP", ["LJ", "HJ", "CO", "BTN", "SB", "BB"]),
+        ("MP", ["LJ", "HJ", "CO", "BTN", "SB", "BB"]),
         ("LJ", ["HJ", "CO", "BTN", "SB", "BB"]),
         ("HJ", ["CO", "BTN", "SB", "BB"]),
         ("CO", ["BTN", "SB", "BB"]),
@@ -126,18 +152,21 @@ def main():
     ]
 
     for depth in depths:
+        app_depth = get_app_depth(depth)
         for opener, three_beters in vs_3bet_pairs:
             for tb in three_beters:
-                # Format: vs3Bet/[Opener]/[3Beter]
+                app_opener = get_app_pos(opener)
+                app_tb = get_app_pos(tb)
                 spots_to_scrape.append({
                     "type": "vs3Bet",
                     "depth": depth,
-                    "url": f"https://poker.academy/tournaments/s/{pack_name}/{depth}/{speed_name}/vs3Bet/{opener}/{tb}///",
-                    "slug": f"mtt_8max_{depth}bb_{opener.lower()}_vs3bet",
-                    "desc": f"{depth}bb {opener} vs {tb} 3-bet"
+                    "url": f"https://poker.academy/tournaments/s/{pack_name}/{depth}/{speed_name}/vs.%203bet/{opener}///",
+                    "slug": f"mtt_8max_{app_depth}bb_{app_opener}_vs3bet",
+                    "desc": f"{depth}bb Hero {opener} vs Opponent {tb} 3-bet",
+                    "opp_pos": tb
                 })
 
-    print(f"{GREEN}[Planner]{RESET} Generated {len(spots_to_scrape)} total potential range spots to scrape.")
+    print(f"{GREEN}[Planner]{RESET} Generated {len(spots_to_scrape)} total potential GTO range spots to scrape.")
 
     # 4. Load manifest to support Resume functionality
     completed_slugs = set()
@@ -169,9 +198,6 @@ def main():
     else:
         js_code += "\ncsvContent;"
 
-    # Double-quote escape for AppleScript double-quoted string literals
-    escaped_js = js_code.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '\\n').replace('\r', '\\r')
-
     # 5. Main loop
     total_spots = len(spots_to_scrape)
     skipped_count = 0
@@ -187,15 +213,39 @@ def main():
 
             print(f"\n{GREEN}[Spot {idx+1}/{total_spots}]{RESET} Processing {CYAN}{spot['desc']}{RESET}...")
             
-            # Navigate Chrome to the target URL
+            # Navigate Chrome to the target URL (sets Category + Hero Position)
             nav_script = f'tell application "Google Chrome" to set URL of active tab of first window to "{spot["url"]}"'
             success, _, _ = run_cmd(f"osascript -e '{nav_script}'")
             if not success:
                 print(f"{RED}[Error]{RESET} Failed to navigate Chrome. Is the tab closed?")
                 break
                 
-            # Wait 2.2 seconds for the React app to fetch data and render the grid
-            time.sleep(2.2)
+            # Wait 2.0 seconds for the React app to load the page layout
+            time.sleep(2.0)
+
+            # If there is an opponent position to select (vsOpen / vs3Bet), click it programmatically!
+            if spot["opp_pos"]:
+                print(f"{YELLOW}[Chrome]{RESET} Clicking Opponent Position '{spot['opp_pos']}'...")
+                click_opp_js = f"""
+                (function() {{
+                    const sections = Array.from(document.querySelectorAll('.guiButtonsSection'));
+                    if (sections.length > 1) {{
+                        const btns = Array.from(sections[1].querySelectorAll('div, button, span'));
+                        const btn = btns.find(el => el.textContent.trim() === '{spot["opp_pos"]}');
+                        if (btn) {{
+                            btn.click();
+                            return "Clicked Opponent Button";
+                        }}
+                    }}
+                    return "Opponent Button not found";
+                }})();
+                """
+                click_success, click_stdout, click_stderr = execute_js_in_chrome(click_opp_js, script_dir)
+                if click_success:
+                    # Wait 1.2 seconds for React to fetch and render the newly selected grid
+                    time.sleep(1.2)
+                else:
+                    print(f"{YELLOW}[Warning]{RESET} Failed to select Opponent Position. HTML structure might be different.")
 
             # Inject and execute scraper JS with a retry loop to survive rendering/network lag
             max_retries = 3
@@ -205,14 +255,8 @@ def main():
                 if attempt > 1:
                     time.sleep(1.2)
                     
-                applescript_exec = f'tell application "Google Chrome" to execute active tab of first window javascript "{escaped_js}"'
-                as_file = script_dir / "temp_bulk_scrape.applescript"
-                as_file.write_text(applescript_exec, encoding="utf-8")
+                success, stdout, stderr = execute_js_in_chrome(js_code, script_dir)
                 
-                success, stdout, stderr = run_cmd(f'osascript "{as_file}"')
-                if as_file.exists():
-                    os.remove(as_file)
-                    
                 if not success:
                     if "Executing JavaScript through AppleScript is turned off" in stderr or "Executing JavaScript through AppleScript is turned off" in stdout:
                         print(f"\n{RED}[Action Required]{RESET} JavaScript execution through AppleScript is disabled in Google Chrome.")
