@@ -3,11 +3,12 @@ import SwiftUI
 /// Renders the 3-card flop board for the postflop drill.
 struct BoardView: View {
     let board: [Card]
+    var size: CardView.Size = .regular
 
     var body: some View {
         HStack(spacing: AppSpacing.xs) {
             ForEach(board) { card in
-                CardView(card: card)
+                CardView(card: card, size: size)
             }
         }
         .accessibilityElement(children: .combine)
@@ -18,12 +19,13 @@ struct BoardView: View {
 /// Renders hero's two hole cards.
 struct HoleCardsView: View {
     let hand: HoleCards
+    var size: CardView.Size = .regular
 
     var body: some View {
         let label = "Hero hand: \(hand.first.rank.rawValue) of \(hand.first.suit), \(hand.second.rank.rawValue) of \(hand.second.suit)"
         return HStack(spacing: AppSpacing.xs) {
-            CardView(card: hand.first)
-            CardView(card: hand.second)
+            CardView(card: hand.first, size: size)
+            CardView(card: hand.second, size: size)
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(label)

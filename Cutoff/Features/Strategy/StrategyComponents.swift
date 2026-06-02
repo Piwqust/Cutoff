@@ -498,8 +498,7 @@ struct CBetSituationCard: View {
 
             HStack(spacing: AppSpacing.md) {
                 // Left Column: Visual Cards
-                BoardView(board: board.compactMap { Card(notation: $0) })
-                    .frame(width: 172)
+                BoardView(board: board.compactMap { Card(notation: $0) }, size: .compact)
 
                 // Vertical divider line for beautiful structure
                 RoundedRectangle(cornerRadius: 1)
@@ -509,7 +508,7 @@ struct CBetSituationCard: View {
 
                 // Right Column: Tactical details
                 VStack(alignment: .leading, spacing: 6) {
-                    HStack(spacing: 6) {
+                    VStack(alignment: .leading, spacing: 2) {
                         Text("САЙЗИНГ:")
                             .font(AppTypography.caption)
                             .bold()
