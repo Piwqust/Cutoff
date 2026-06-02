@@ -84,6 +84,16 @@ struct StrategyGuideView: View {
                         }
                     }
                 }
+
+                // Methodology footnote — keeps the ranges honest.
+                HStack(alignment: .top, spacing: AppSpacing.xxs) {
+                    Image(systemName: "info.circle")
+                        .font(.system(size: 11))
+                    Text("Диапазоны — ориентир по Nash/солверам для ChipEV-игры. Округляйте под своё поле и анте.")
+                        .font(AppTypography.caption2)
+                }
+                .foregroundStyle(AppColors.textSecondary.opacity(0.7))
+                .padding(.horizontal, AppSpacing.xxs)
             }
             .padding(.horizontal, AppSpacing.pageHorizontal)
             .padding(.top, AppSpacing.lg)

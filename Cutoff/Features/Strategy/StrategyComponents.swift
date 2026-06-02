@@ -276,16 +276,18 @@ struct FirstInJamCard: View {
     private let depths = [12, 15, 18]
 
     var shovingRange: String {
+        // Nash first-in shove ranges, ~12.5% antes (Beasts of Poker chart).
+        // positionIndex: 0 = CO, 1 = BTN, 2 = SB.
         switch (selectedDepth, positionIndex) {
-        case (12, 0): return "22+, A2s+, A8o+, KJs+, KQo, QJs"
-        case (12, 1): return "22+, A2s+, A3o+, K9s+, KTo+, QTs+, QJo, JTs, T9s"
-        case (12, 2): return "22+, A2s+, A2o+, K4s+, K8o+, Q8s+, QTo+, J8s+, T8s+, 98s"
-        case (15, 0): return "22+, A7s+, AJo, KQs"
-        case (15, 1): return "22+, A2s+, A7o+, KTs+, KTo+, QTs+, JTs"
-        case (15, 2): return "22+, A2s+, A2o+, K8s+, KTo+, Q9s+, QJo, J9s+, T9s"
-        case (18, 0): return "55+, AQs+, AQo"
-        case (18, 1): return "22+, A8s+, ATo+, KJs+, KQo"
-        case (18, 2): return "22+, A2s+, A8o+, KTs+, KTo+, QTs+, JTs"
+        case (12, 0): return "22+, A2s+, A2o+, K5s+, KTo+, Q8s+, QTo+, J8s+, JTo, T7s+, 97s+, 86s+, 76s, 65s"
+        case (12, 1): return "22+, A2s+, A2o+, K2s+, K8o+, Q5s+, Q9o+, J7s+, JTo, T7s+, T9o, 96s+, 86s+, 75s+, 65s, 54s"
+        case (12, 2): return "22+, A2s+, A2o+, K2s+, K2o+, Q2s+, Q2o+, J2s+, J5o+, T2s+, T6o+, 93s+, 96o+, 84s+, 86o+, 74s+, 76o, 63s+, 65o, 53s+, 43s"
+        case (15, 0): return "22+, A2s+, A3o+, K7s+, KTo+, Q8s+, QTo+, J8s+, JTo, T8s+, 97s+, 87s"
+        case (15, 1): return "22+, A2s+, A2o+, K3s+, K9o+, Q7s+, QTo+, J7s+, JTo, T7s+, T9o, 97s+, 86s+, 76s, 65s"
+        case (15, 2): return "22+, A2s+, A2o+, K2s+, K2o+, Q2s+, Q4o+, J2s+, J7o+, T3s+, T7o+, 95s+, 97o+, 84s+, 87o, 74s+, 76o, 64s+, 53s+, 43s"
+        case (18, 0): return "22+, A2s+, A4o+, K6s+, KTo+, Q8s+, QTo+, J8s+, JTo, T8s+, 97s+, 87s, 76s"
+        case (18, 1): return "22+, A2s+, A2o+, K5s+, KTo+, Q8s+, QTo+, J8s+, JTo, T7s+, T9o, 97s+, 86s+, 76s, 65s"
+        case (18, 2): return "22+, A2s+, A2o+, K2s+, K2o+, Q2s+, Q6o+, J3s+, J8o+, T4s+, T8o+, 95s+, 97o+, 84s+, 87o, 74s+, 76o, 64s+, 53s+"
         default: return "22+, A2s+"
         }
     }
@@ -343,8 +345,8 @@ struct FirstInJamCard: View {
                         .padding(.top, 2)
 
                     Text(selectedDepth >= 18 ?
-                         "При 18 ББ диапазон пуша очень тайтовый. Здесь уже можно прибыльно минрейзить сильный бродвей для провокации." :
-                         "При \(selectedDepth) ББ мин-рейзить маргинально — прямой пуш максимизирует фолд-эквити.")
+                         "На 18 ББ first-in пуш всё ещё широкий (~34% с BTN по Nash), но здесь уже выгодно подмешивать мин-рейз с премиумом и играть постфлоп в позиции." :
+                         "При \(selectedDepth) ББ прямой пуш максимизирует фолд-эквити — мин-рейз-фолд просто сжигает фишки.")
                         .font(AppTypography.footnote)
                         .foregroundStyle(AppColors.textSecondary)
                         .italic()
