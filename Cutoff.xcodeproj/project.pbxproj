@@ -142,6 +142,7 @@
 		0F130A518E3B56C5E5C33278 /* mtt_8max_70bb_utg_vs3bet_vs_co.json in Resources */ = {isa = PBXBuildFile; fileRef = 95085477A2510DD0413485BC /* mtt_8max_70bb_utg_vs3bet_vs_co.json */; };
 		0F188087A871D156D6215A92 /* mtt_9max_35bb_btn_vsopen_vs_hj.json in Resources */ = {isa = PBXBuildFile; fileRef = 13696C7EBF41032A00D87F62 /* mtt_9max_35bb_btn_vsopen_vs_hj.json */; };
 		0F3AD48970C13C69FCAEA984 /* mtt_8max_80bb_lj_vs3bet_vs_hj.json in Resources */ = {isa = PBXBuildFile; fileRef = 0DB762A889957B6044DE2592 /* mtt_8max_80bb_lj_vs3bet_vs_hj.json */; };
+		0F401FF5DED24EF14F0A1656 /* DeveloperStrategyDocView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC884507B58F4154501B4282 /* DeveloperStrategyDocView.swift */; };
 		0F6C97F6A99D171A2C9486A9 /* mtt_9max_100bb_lj_vsopen_vs_utg1.json in Resources */ = {isa = PBXBuildFile; fileRef = 0590BD71407775ED225C8310 /* mtt_9max_100bb_lj_vsopen_vs_utg1.json */; };
 		0F7E5CC4ECB2D4C0EBEC8FF5 /* mtt_9max_70bb_hj_vs3bet_vs_co.json in Resources */ = {isa = PBXBuildFile; fileRef = 74B5C3B581F51C57735CAA83 /* mtt_9max_70bb_hj_vs3bet_vs_co.json */; };
 		0FCDC5C1B246E547DDDCA395 /* mtt_9max_20bb_sb_squeeze.json in Resources */ = {isa = PBXBuildFile; fileRef = F576A6706856780981E67A13 /* mtt_9max_20bb_sb_squeeze.json */; };
@@ -3607,6 +3608,7 @@
 		BC18DE42BC3AC1DF2E34B416 /* mtt_8max_80bb_sb_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_8max_80bb_sb_unopened.json; sourceTree = "<group>"; };
 		BC3D12D35DB8320B05D98FFF /* mtt_9max_20bb_btn_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_20bb_btn_unopened.json; sourceTree = "<group>"; };
 		BC575F14C5B78EC3D26CF1DD /* mtt_9max_35bb_utg_vs3bet_vs_hj.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_35bb_utg_vs3bet_vs_hj.json; sourceTree = "<group>"; };
+		BC884507B58F4154501B4282 /* DeveloperStrategyDocView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperStrategyDocView.swift; sourceTree = "<group>"; };
 		BC938D5F1FB820298643E634 /* mtt_9max_30bb_utg1_vs3bet_vs_btn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_30bb_utg1_vs3bet_vs_btn.json; sourceTree = "<group>"; };
 		BCA4AED9A1FBEE74252611E1 /* mtt_9max_100bb_sb_vsopen.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_100bb_sb_vsopen.json; sourceTree = "<group>"; };
 		BCBC15325A2103EF66840448 /* mtt_8max_40bb_bb_vsopen_vs_co.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_8max_40bb_bb_vsopen_vs_co.json; sourceTree = "<group>"; };
@@ -6158,6 +6160,7 @@
 		4DBEFE8C67849110838E3D1F /* Strategy */ = {
 			isa = PBXGroup;
 			children = (
+				BC884507B58F4154501B4282 /* DeveloperStrategyDocView.swift */,
 				298862F23728E2C80CB8DE2B /* StrategyChapterDetailView.swift */,
 				CF498CA3FDA81B9F57F77D53 /* StrategyComponents.swift */,
 				17B735D184DA2A033FF5453C /* StrategyGuideView.swift */,
@@ -8526,6 +8529,7 @@
 				08286EDC93D2AA5A1FC97D54 /* ComboView.swift in Sources */,
 				7486877828502466A0EDFDEB /* ConfigStore.swift in Sources */,
 				0AF132A37748A5A202A57276 /* CutoffApp.swift in Sources */,
+				0F401FF5DED24EF14F0A1656 /* DeveloperStrategyDocView.swift in Sources */,
 				517BC25DA527FD7D93DCC53C /* DrillCategory.swift in Sources */,
 				A69A897603C581A2D82F31E3 /* DrillEngine.swift in Sources */,
 				3D696B9D878C054570AD7A09 /* DrillPickerView.swift in Sources */,

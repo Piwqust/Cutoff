@@ -5,6 +5,7 @@ struct StrategyGuideView: View {
     @Environment(ConfigStore.self) private var config
 
     @State private var selectedGuide: WeeklyGuide = StrategyStore.activeGuide
+    @State private var showDeveloperMenu = false
 
     /// Reactive completion state — drives the "Studied" badges without manual redraws.
     private var progress: StrategyProgressStore { .shared }
@@ -31,6 +32,19 @@ struct StrategyGuideView: View {
         }
         .navigationTitle(isLanguageSupported ? selectedGuide.title(for: l10n.language) : "Стратегия")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(isLanguageSupported ? selectedGuide.title(for: l10n.language) : "Стратегия")
+                    .font(AppTypography.headline)
+                    .foregroundStyle(AppColors.textPrimary)
+                    .onTapGesture(count: 5) {
+                        showDeveloperMenu = true
+                    }
+            }
+        }
+        .sheet(isPresented: $showDeveloperMenu) {
+            DeveloperStrategyDocView()
+        }
     }
 
     // MARK: - Guide Content (Russian)
