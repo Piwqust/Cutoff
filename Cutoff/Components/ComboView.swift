@@ -14,8 +14,8 @@ struct ComboView: View {
             HStack(alignment: .bottom, spacing: 1) {
                 // The two ranks overlapping
                 HStack(spacing: -3) {
-                    rankCard(comboParsed.highRank.rawValue)
-                    rankCard(comboParsed.lowRank.rawValue)
+                    rankCard(comboParsed.highRank.rawValue, isRed: false)
+                    rankCard(comboParsed.lowRank.rawValue, isRed: comboParsed.category == .offsuit || comboParsed.category == .pair)
                 }
                 
                 // The modifier badge
@@ -38,7 +38,8 @@ struct ComboView: View {
     }
     
     @ViewBuilder
-    private func rankCard(_ rank: String) -> some View {
+    private func rankCard(_ rank: String, isRed: Bool) -> some View {
+        let foregroundColor = isRed ? Color(red: 0.85, green: 0.15, blue: 0.15) : Color.black
         ZStack {
             RoundedRectangle(cornerRadius: 3, style: .continuous)
                 .fill(Color.white)
@@ -49,7 +50,7 @@ struct ComboView: View {
                 )
             Text(rank)
                 .font(.system(size: size.rankSize + 1, weight: .bold, design: .rounded))
-                .foregroundStyle(Color.black)
+                .foregroundStyle(foregroundColor)
         }
         .frame(width: size.height * 0.8, height: size.height) // Make rank cards vertical rectangles
     }
