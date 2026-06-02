@@ -8,6 +8,7 @@ struct StrategyChapterDetailView: View {
 
     @Environment(LocalizationManager.self) private var l10n
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     init(chapter: StrategyChapter, weekId: String) {
         self.startingChapterId = chapter.id
@@ -87,7 +88,7 @@ struct StrategyChapterDetailView: View {
                 }
             } else if hasPrevFutureWeek {
                 // Transition to Future Week (e.g. Chapter 5 of next week)
-                navPill(text: "Новее катка", systemImage: "arrow.left.to.line.compact", tint: AppColors.accentLime, font: AppTypography.caption) {
+                navPill(text: l10n.language == .russianGenZ ? "Новее катка" : "Новее", systemImage: "arrow.left.to.line.compact", tint: AppColors.accentLime, font: AppTypography.caption) {
                     let prevWeek = guides[currentWeekIndex - 1]
                     withAnimation(.easeInOut(duration: 0.35)) {
                         activeWeekId = prevWeek.id
@@ -108,7 +109,7 @@ struct StrategyChapterDetailView: View {
                         .fill(currentChapterId == chap.id ? AppColors.primaryMint : AppColors.divider.opacity(0.5))
                         .frame(width: currentChapterId == chap.id ? 8 : 6, height: currentChapterId == chap.id ? 8 : 6)
                         .scaleEffect(currentChapterId == chap.id ? 1.2 : 1.0)
-                        .animation(.spring, value: currentChapterId)
+                        .animation(reduceMotion ? nil : .spring, value: currentChapterId)
                 }
             }
 
@@ -124,7 +125,7 @@ struct StrategyChapterDetailView: View {
                 }
             } else if hasNextPastWeek {
                 // Transition to chronological Past Week (Chapter 1)
-                navPill(text: "Архив каток", systemImage: "arrow.right.to.line.compact", tint: AppColors.accentPeach, font: AppTypography.caption, trailingIcon: true) {
+                navPill(text: l10n.language == .russianGenZ ? "Архив каток" : "Архив", systemImage: "arrow.right.to.line.compact", tint: AppColors.accentPeach, font: AppTypography.caption, trailingIcon: true) {
                     let nextWeek = guides[currentWeekIndex + 1]
                     withAnimation(.easeInOut(duration: 0.35)) {
                         activeWeekId = nextWeek.id
@@ -181,7 +182,7 @@ struct StrategyChapterDetailContentView: View {
                 // Chapter Title Area
                 VStack(alignment: .leading, spacing: AppSpacing.xs) {
                     HStack {
-                        Text(chapter.tag.uppercased())
+                        Text(chapter.localizedTag(for: l10n.language).uppercased())
                             .font(AppTypography.caption)
                             .bold()
                             .foregroundStyle(AppColors.primaryMint)
@@ -259,17 +260,17 @@ struct StrategyChapterDetailContentView: View {
                             .stroke(AppColors.divider.opacity(0.4), lineWidth: 0.5)
                     )
 
-                    // WHY PANEL (WITH LIVE HAND HISTORY SCENARIO)
+                    // WHY PANEL (the reasoning, scenario stripped out)
                     VStack(alignment: .leading, spacing: AppSpacing.xs) {
                         HStack(spacing: 6) {
                             Image(systemName: "questionmark.circle.fill")
                                 .foregroundStyle(AppColors.textSecondary)
-                            Text("ПОЧЕМУ И ЖИВОЙ ПРИМЕР:")
+                            Text("ПОЧЕМУ ЭТО РАБОТАЕТ:")
                                 .font(AppTypography.caption)
                                 .bold()
                                 .foregroundStyle(AppColors.textSecondary)
                         }
-                        Text(chapter.why(for: l10n.language))
+                        Text(chapter.whyReason(for: l10n.language))
                             .font(AppTypography.subheadline)
                             .foregroundStyle(AppColors.textSecondary)
                             .lineSpacing(4)
@@ -282,6 +283,41 @@ struct StrategyChapterDetailContentView: View {
                         RoundedRectangle(cornerRadius: AppRadius.card)
                             .stroke(AppColors.divider.opacity(0.3), lineWidth: 0.5)
                     )
+
+                    // LIVE HAND EXAMPLE — its own scannable card
+                    if let scenario = chapter.whyScenario(for: l10n.language) {
+                        VStack(alignment: .leading, spacing: AppSpacing.xs) {
+                            HStack(spacing: 6) {
+                                Image(systemName: "book.pages.fill")
+                                    .foregroundStyle(AppColors.primaryMint)
+                                Text(scenario.title.uppercased())
+                                    .font(AppTypography.caption)
+                                    .bold()
+                                    .foregroundStyle(AppColors.primaryMint)
+                            }
+                            Text(scenario.body)
+                                .font(AppTypography.subheadline)
+                                .foregroundStyle(AppColors.textPrimary)
+                                .lineSpacing(4)
+                        }
+                        .padding(AppSpacing.md)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(
+                            RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
+                                .fill(AppColors.primaryMint.opacity(0.07))
+                        )
+                        .overlay(alignment: .leading) {
+                            // Accent spine to set the worked example apart visually.
+                            RoundedRectangle(cornerRadius: 2)
+                                .fill(AppColors.primaryMint)
+                                .frame(width: 3)
+                                .padding(.vertical, AppSpacing.sm)
+                        }
+                        .overlay(
+                            RoundedRectangle(cornerRadius: AppRadius.card)
+                                .stroke(AppColors.primaryMint.opacity(0.25), lineWidth: 0.5)
+                        )
+                    }
                 }
 
                 Spacer(minLength: AppSpacing.lg)
@@ -315,7 +351,7 @@ struct StrategyChapterDetailContentView: View {
             }
             .padding(.horizontal, AppSpacing.pageHorizontal)
             .padding(.top, AppSpacing.lg)
-            .padding(.bottom, 260) // Generous breathing room to scroll "Mark as Studied" well past the floating dock
+            .padding(.bottom, 180) // Clears the floating nav dock while avoiding excess dead scroll
         }
     }
 

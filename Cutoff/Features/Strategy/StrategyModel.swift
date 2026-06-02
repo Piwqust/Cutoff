@@ -98,6 +98,42 @@ struct StrategyChapter: Identifiable, Hashable {
         case .russianGenZ: return ruGenzWhy
         }
     }
+
+    /// The "why" explanation with the embedded 📖 hand example stripped out,
+    /// so the reasoning and the worked example can live in separate cards.
+    func whyReason(for lang: AppLanguage) -> String {
+        let full = why(for: lang)
+        return full.components(separatedBy: "📖").first?
+            .trimmingCharacters(in: .whitespacesAndNewlines) ?? full
+    }
+
+    /// The embedded live-hand example, split into (title, body). Nil when the
+    /// chapter has no 📖 scenario (e.g. archived weeks).
+    func whyScenario(for lang: AppLanguage) -> (title: String, body: String)? {
+        let parts = why(for: lang).components(separatedBy: "📖")
+        guard parts.count > 1 else { return nil }
+        let raw = parts[1...].joined(separator: "📖").trimmingCharacters(in: .whitespacesAndNewlines)
+        let lines = raw.split(separator: "\n", maxSplits: 1, omittingEmptySubsequences: false)
+        let title = lines.first.map {
+            $0.trimmingCharacters(in: CharacterSet(charactersIn: " :"))
+        } ?? "Пример"
+        let body = lines.count > 1 ? String(lines[1]).trimmingCharacters(in: .whitespacesAndNewlines) : ""
+        return (title, body)
+    }
+
+    /// Localized category badge. English keeps the canonical poker terms; the
+    /// Russian registers get their standard translated equivalents so the chip
+    /// doesn't read as mixed-language inside an otherwise Russian UI.
+    func localizedTag(for lang: AppLanguage) -> String {
+        guard lang != .english else { return tag }
+        switch tag.lowercased() {
+        case "preflop":   return "Префлоп"
+        case "postflop":  return "Постфлоп"
+        case "push/fold": return "Пуш-Фолд"
+        case "math":      return "Математика"
+        default:          return tag
+        }
+    }
     
     // Raw localized strings
     let engTitle: String
@@ -202,15 +238,15 @@ enum StrategyStore {
                     engTitle: "ChipEV Push-Fold Strategy (12-18 BB)",
                     ruTitle: "Математика Пуш-Фолда в ChipEV (12-18 BB)",
                     ruGenzTitle: "First-in Jam по ChipEV: уничтожение шорт-стеком",
-                    engShortDesc: "Pure all-in or fold decision making with zero ICM pressure.",
-                    ruShortDesc: "Безошибочная стратегия 'олл-ин или фолд' для коротких стеков без учета ICM.",
-                    ruGenzShortDesc: "Забудь про лимпы и минрейзы с коротким стеком. Наш единственный друг — олл-ин.",
-                    engWhatsDo: "• With a stack of 12-15 BB, stop min-raising in late positions. Play strictly Push-Fold.\n• 12 BB BTN shove range: 22+, A2s+, A3o+, K9s+, KTo+, QTs+, QJo, JTs, T9s.\n• 15 BB BTN shove range: 22+, A2s+, A7o+, KTs+, KTo+, QTs+, JTs.",
-                    ruWhatsDo: "• При стеке 12-15 BB полностью прекратите стандартные рейзы. Играйте строго по системе Пуш-Фолд.\n• Диапазон пуша (BTN) при 12 BB: карманные пары 22+, все одномастные тузы, разномастные тузы от A3o+, K9s+, KTo+, QTs+, QJo, JTs, T9s.\n• Диапазон пуша (BTN) при 15 BB: 22+, A2s+, A7o+, KTs+, KTo+, QTs+, JTs.",
-                    ruGenzWhatsDo: "• Стек 12-15 ББ? Выкинь кнопку минрейза, играй только олл-ин или пас.\n• Диапазон пуша с BTN при 12 ББ: 22+, A2s+, A3o+, K9s+, KTo+, QTs+, QJo, JTs, T9s.\n• Диапазон пуша с BTN при 15 ББ: 22+, A2s+, A7o+, KTs+, KTo+, QTs+, JTs.",
-                    engWhy: "Raise-folding with a short stack burns too much valuable equity. Going all-in maximizes fold equity and protects your equity from multi-way sticky flops.\n\n📖 SCENARIO:\nStack 12bb. You hold KTo on the BTN. If you min-raise to 2bb and receive a shove from the BB, you must fold, losing 17% of your stack. Shoving directly forces hands like A2o-A5o and QJo to fold, which have huge equity against you.",
-                    ruWhy: "Рейз-фолд с коротким стеком сжигает фишки. Прямой олл-ин заставляет оппонентов выбрасывать сильные живые карты.\n\n📖 ПРИМЕР ИЗ ИГРЫ:\nСтек 12bb. У вас KTo на BTN. Если вы сыграете мин-рейз до 2bb и получите олл-ин от BB, вам придется выбросить руку, потеряв 17% своего стека. Прямой пуш заставляет BB выкинуть руки типа A2o-A5o, QJo, которые имеют отличное эквити против вашей руки.",
-                    ruGenzWhy: "Делать рейз-фолд на коротыше — это слив. Прямой олл-ин генерирует тонну фолд-эквити и выбивает доминирующие руки соперников.\n\n📖 ЖИЗНЕННЫЙ СПОТ:\nСтек 12 ББ. У тебя KTo на баттоне. Сыграешь минрейз 2 ББ и получишь пуш от ББ — придется фолдить, подарив 17% стека. Пихаешь олл-ин сразу — ББ выкидывает руки типа A3o, QJo. Банк твой!"
+                    engShortDesc: "When to jam — and when 13–18 BB lets you mix in a min-raise. Pure ChipEV, no ICM.",
+                    ruShortDesc: "Когда пушить, а когда на 13–18 ББ подмешать мин-рейз. Чистый ChipEV без ICM.",
+                    ruGenzShortDesc: "На 12 ББ твой бро — олл-ин. На 15–18 ББ подключаем минрейз премиумом. Считаем по ChipEV.",
+                    engWhatsDo: "• ≤12 BB: pure Push-Fold is optimal — jam or fold, no min-raises.\n• 12 BB BTN jam range: 22+, A2s+, A3o+, K9s+, KTo+, QTs+, QJo, JTs, T9s.\n• 13–18 BB: the highest-EV play is a MIX — min-raise your premiums (to play post-flop in position) and jam the rest. Pure jamming is the simpler, lower-variance baseline if you're not yet confident post-flop.\n• 15 BB BTN jam baseline: 22+, A2s+, A7o+, KTs+, KTo+, QTs+, JTs.",
+                    ruWhatsDo: "• До 12 ББ: чистый Пуш-Фолд оптимален — только олл-ин или пас, без мин-рейзов.\n• Диапазон пуша (BTN) при 12 ББ: карманные пары 22+, все одномастные тузы, разномастные тузы от A3o+, K9s+, KTo+, QTs+, QJo, JTs, T9s.\n• 13–18 ББ: максимально прибыльна СМЕШАННАЯ стратегия — мин-рейз с премиумом (чтобы играть постфлоп в позиции) и пуш остальным диапазоном. Чистый пуш — простой и низкодисперсный базис, если вы пока не уверены в постфлопе.\n• Базовый диапазон пуша (BTN) при 15 ББ: 22+, A2s+, A7o+, KTs+, KTo+, QTs+, JTs.",
+                    ruGenzWhatsDo: "• До 12 ББ: чистый пуш-фолд — это закон. Только олл-ин или пас, без минрейзов.\n• Диапазон пуша с BTN при 12 ББ: 22+, A2s+, A3o+, K9s+, KTo+, QTs+, QJo, JTs, T9s.\n• 13–18 ББ: топ по EV — это МИКС: минрейзь премиум (чтобы катать постфлоп в позе) и пуш остальным. Чистый пуш — изи-режим с низкой дисперсией, если постфлоп пока не твоё.\n• Базовый пуш-диапазон с BTN при 15 ББ: 22+, A2s+, A7o+, KTs+, KTo+, QTs+, JTs.",
+                    engWhy: "Raise-folding with a short stack burns too much valuable equity. Going all-in maximizes fold equity and protects your equity from multi-way sticky flops. Above ~13–15 BB you keep enough behind to min-raise premiums and realize post-flop equity in position — modern solvers show this mix beats pure jamming.\n\n📖 SCENARIO:\nStack 12bb. You hold KTo on the BTN. If you min-raise to 2bb and receive a shove from the BB, you must fold, losing 17% of your stack. Shoving directly forces hands like A2o-A5o and QJo to fold, which have huge equity against you.",
+                    ruWhy: "Рейз-фолд с коротким стеком сжигает фишки. Прямой олл-ин заставляет оппонентов выбрасывать сильные живые карты. Но начиная с ~13–15 ББ за спиной остаётся достаточно фишек, чтобы мин-рейзить премиум и играть постфлоп в позиции — современные солверы показывают, что такой микс прибыльнее чистого пуша.\n\n📖 ПРИМЕР ИЗ ИГРЫ:\nСтек 12bb. У вас KTo на BTN. Если вы сыграете мин-рейз до 2bb и получите олл-ин от BB, вам придется выбросить руку, потеряв 17% своего стека. Прямой пуш заставляет BB выкинуть руки типа A2o-A5o, QJo, которые имеют отличное эквити против вашей руки.",
+                    ruGenzWhy: "Делать рейз-фолд на коротыше — это слив. Прямой олл-ин генерирует тонну фолд-эквити и выбивает доминирующие руки соперников. Но с ~13–15 ББ за спиной остаётся достаточно фишек, чтобы минрейзить премиум и катать постфлоп в позе — по солверам этот микс жирнее чистого пуша.\n\n📖 ЖИЗНЕННЫЙ СПОТ:\nСтек 12 ББ. У тебя KTo на баттоне. Сыграешь минрейз 2 ББ и получишь пуш от ББ — придется фолдить, подарив 17% стека. Пихаешь олл-ин сразу — ББ выкидывает руки типа A3o, QJo. Банк твой!"
                 ),
                 StrategyChapter(
                     id: 4,

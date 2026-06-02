@@ -356,6 +356,77 @@ struct FirstInJamCard: View {
 
 // MARK: - 4. C-Bet Situation Card
 struct CBetSituationCard: View {
+    enum Texture: String, CaseIterable, Identifiable {
+        case dry, wet, paired, monotone
+        var id: String { rawValue }
+        var label: String {
+            switch self {
+            case .dry:      return "Сухая"
+            case .wet:      return "Дровяная"
+            case .paired:   return "Спаренная"
+            case .monotone: return "Монотон"
+            }
+        }
+    }
+
+    /// Resolved guidance for the selected flop texture.
+    struct Config {
+        let subtitle: String
+        let cbetLabel: String
+        let cbetTint: Color
+        let board: [String]
+        let sizingLabel: String
+        let sizingTint: Color
+        let detail: String
+    }
+
+    @State private var texture: Texture = .dry
+
+    private func config(for texture: Texture) -> Config {
+        switch texture {
+        case .dry:
+            return Config(
+                subtitle: "(Dry Rainbow)",
+                cbetLabel: "C-Bet: 80%+",
+                cbetTint: AppColors.primaryMint,
+                board: ["Kc", "7d", "2s"],
+                sizingLabel: "25-33% пота",
+                sizingTint: AppColors.accentLime,
+                detail: "Ставим со всем спектром. Оппоненты редко попадут и легко выкинут мусор."
+            )
+        case .wet:
+            return Config(
+                subtitle: "(Wet Board)",
+                cbetLabel: "C-Bet: 30-40%",
+                cbetTint: AppColors.accentPeach,
+                board: ["Qc", "Jd", "9c"],
+                sizingLabel: "65-75% пота",
+                sizingTint: AppColors.accentCoral,
+                detail: "Только плотное велью или супер-дро. Пустые руки чекаем и сдаемся."
+            )
+        case .paired:
+            return Config(
+                subtitle: "(Paired)",
+                cbetLabel: "C-Bet: 65-75%",
+                cbetTint: AppColors.primaryMint,
+                board: ["Kc", "Kd", "4s"],
+                sizingLabel: "25-33% пота",
+                sizingTint: AppColors.accentLime,
+                detail: "У коллера редко тройка — лупим частый мелкий контбет почти всем диапазоном за счёт перевеса в старших картах."
+            )
+        case .monotone:
+            return Config(
+                subtitle: "(Monotone)",
+                cbetLabel: "C-Bet: 25-30%",
+                cbetTint: AppColors.accentPeach,
+                board: ["Ac", "9c", "5c"],
+                sizingLabel: "33% / чек",
+                sizingTint: AppColors.accentLime,
+                detail: "Эквити сближается, банки опасны. Много чекаем; ставим мелко с готовым флешем или натсовым флеш-дро."
+            )
+        }
+    }
+
     var body: some View {
         GlassCard {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
@@ -367,30 +438,31 @@ struct CBetSituationCard: View {
                         .foregroundStyle(AppColors.textPrimary)
                 }
 
-                // Situation 1: Dry Board
-                boardSituation(
-                    title: "1. Сухая доска",
-                    subtitle: "(Dry Rainbow)",
-                    cbetLabel: "C-Bet: 80%+",
-                    cbetTint: AppColors.primaryMint,
-                    board: ["Kc", "7d", "2s"],
-                    sizingLabel: "25-33% пота",
-                    sizingTint: AppColors.accentLime,
-                    detail: "Ставим со всем спектром. Оппоненты редко попадут и легко выкинут мусор."
-                )
+                // Texture selector — drives the dynamic guidance below
+                HStack(spacing: AppSpacing.xs) {
+                    ForEach(Texture.allCases) { t in
+                        StrategyChip(title: t.label, isSelected: texture == t,
+                                     font: AppTypography.footnote, verticalPadding: 6) {
+                            texture = t
+                        }
+                    }
+                }
 
-                // Situation 2: Wet Board
+                let cfg = config(for: texture)
                 boardSituation(
-                    title: "2. Дровяная доска",
-                    subtitle: "(Wet Board)",
-                    cbetLabel: "C-Bet: 30-40%",
-                    cbetTint: AppColors.accentPeach,
-                    board: ["Qc", "Jd", "9c"],
-                    sizingLabel: "65-75% пота",
-                    sizingTint: AppColors.accentCoral,
-                    detail: "Только плотное велью или супер-дро. Пустые руки чекаем и сдаемся."
+                    title: texture.label + " доска",
+                    subtitle: cfg.subtitle,
+                    cbetLabel: cfg.cbetLabel,
+                    cbetTint: cfg.cbetTint,
+                    board: cfg.board,
+                    sizingLabel: cfg.sizingLabel,
+                    sizingTint: cfg.sizingTint,
+                    detail: cfg.detail
                 )
+                .id(texture)
+                .transition(.opacity)
             }
+            .animation(.easeInOut(duration: 0.2), value: texture)
         }
     }
 
@@ -455,7 +527,7 @@ struct CBetSituationCard: View {
                         .lineSpacing(3)
                 }
             }
-            .frame(height: 76) // Match standard card height (76pt) to align grid perfectly
+            .frame(minHeight: 76) // Align the board grid; grow for longer guidance text
         }
         .padding(AppSpacing.md)
         .background(
