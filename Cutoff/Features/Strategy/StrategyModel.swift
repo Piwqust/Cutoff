@@ -98,6 +98,42 @@ struct StrategyChapter: Identifiable, Hashable {
         case .russianGenZ: return ruGenzWhy
         }
     }
+
+    /// The "why" explanation with the embedded 📖 hand example stripped out,
+    /// so the reasoning and the worked example can live in separate cards.
+    func whyReason(for lang: AppLanguage) -> String {
+        let full = why(for: lang)
+        return full.components(separatedBy: "📖").first?
+            .trimmingCharacters(in: .whitespacesAndNewlines) ?? full
+    }
+
+    /// The embedded live-hand example, split into (title, body). Nil when the
+    /// chapter has no 📖 scenario (e.g. archived weeks).
+    func whyScenario(for lang: AppLanguage) -> (title: String, body: String)? {
+        let parts = why(for: lang).components(separatedBy: "📖")
+        guard parts.count > 1 else { return nil }
+        let raw = parts[1...].joined(separator: "📖").trimmingCharacters(in: .whitespacesAndNewlines)
+        let lines = raw.split(separator: "\n", maxSplits: 1, omittingEmptySubsequences: false)
+        let title = lines.first.map {
+            $0.trimmingCharacters(in: CharacterSet(charactersIn: " :"))
+        } ?? "Пример"
+        let body = lines.count > 1 ? String(lines[1]).trimmingCharacters(in: .whitespacesAndNewlines) : ""
+        return (title, body)
+    }
+
+    /// Localized category badge. English keeps the canonical poker terms; the
+    /// Russian registers get their standard translated equivalents so the chip
+    /// doesn't read as mixed-language inside an otherwise Russian UI.
+    func localizedTag(for lang: AppLanguage) -> String {
+        guard lang != .english else { return tag }
+        switch tag.lowercased() {
+        case "preflop":   return "Префлоп"
+        case "postflop":  return "Постфлоп"
+        case "push/fold": return "Пуш-Фолд"
+        case "math":      return "Математика"
+        default:          return tag
+        }
+    }
     
     // Raw localized strings
     let engTitle: String
@@ -202,15 +238,15 @@ enum StrategyStore {
                     engTitle: "ChipEV Push-Fold Strategy (12-18 BB)",
                     ruTitle: "Математика Пуш-Фолда в ChipEV (12-18 BB)",
                     ruGenzTitle: "First-in Jam по ChipEV: уничтожение шорт-стеком",
-                    engShortDesc: "Pure all-in or fold decision making with zero ICM pressure.",
-                    ruShortDesc: "Безошибочная стратегия 'олл-ин или фолд' для коротких стеков без учета ICM.",
-                    ruGenzShortDesc: "Забудь про лимпы и минрейзы с коротким стеком. Наш единственный друг — олл-ин.",
-                    engWhatsDo: "• With a stack of 12-15 BB, stop min-raising in late positions. Play strictly Push-Fold.\n• 12 BB BTN shove range: 22+, A2s+, A3o+, K9s+, KTo+, QTs+, QJo, JTs, T9s.\n• 15 BB BTN shove range: 22+, A2s+, A7o+, KTs+, KTo+, QTs+, JTs.",
-                    ruWhatsDo: "• При стеке 12-15 BB полностью прекратите стандартные рейзы. Играйте строго по системе Пуш-Фолд.\n• Диапазон пуша (BTN) при 12 BB: карманные пары 22+, все одномастные тузы, разномастные тузы от A3o+, K9s+, KTo+, QTs+, QJo, JTs, T9s.\n• Диапазон пуша (BTN) при 15 BB: 22+, A2s+, A7o+, KTs+, KTo+, QTs+, JTs.",
-                    ruGenzWhatsDo: "• Стек 12-15 ББ? Выкинь кнопку минрейза, играй только олл-ин или пас.\n• Диапазон пуша с BTN при 12 ББ: 22+, A2s+, A3o+, K9s+, KTo+, QTs+, QJo, JTs, T9s.\n• Диапазон пуша с BTN при 15 ББ: 22+, A2s+, A7o+, KTs+, KTo+, QTs+, JTs.",
-                    engWhy: "Raise-folding with a short stack burns too much valuable equity. Going all-in maximizes fold equity and protects your equity from multi-way sticky flops.\n\n📖 SCENARIO:\nStack 12bb. You hold KTo on the BTN. If you min-raise to 2bb and receive a shove from the BB, you must fold, losing 17% of your stack. Shoving directly forces hands like A2o-A5o and QJo to fold, which have huge equity against you.",
-                    ruWhy: "Рейз-фолд с коротким стеком сжигает фишки. Прямой олл-ин заставляет оппонентов выбрасывать сильные живые карты.\n\n📖 ПРИМЕР ИЗ ИГРЫ:\nСтек 12bb. У вас KTo на BTN. Если вы сыграете мин-рейз до 2bb и получите олл-ин от BB, вам придется выбросить руку, потеряв 17% своего стека. Прямой пуш заставляет BB выкинуть руки типа A2o-A5o, QJo, которые имеют отличное эквити против вашей руки.",
-                    ruGenzWhy: "Делать рейз-фолд на коротыше — это слив. Прямой олл-ин генерирует тонну фолд-эквити и выбивает доминирующие руки соперников.\n\n📖 ЖИЗНЕННЫЙ СПОТ:\nСтек 12 ББ. У тебя KTo на баттоне. Сыграешь минрейз 2 ББ и получишь пуш от ББ — придется фолдить, подарив 17% стека. Пихаешь олл-ин сразу — ББ выкидывает руки типа A3o, QJo. Банк твой!"
+                    engShortDesc: "When to jam — and when 13–18 BB lets you mix in a min-raise. Pure ChipEV, no ICM.",
+                    ruShortDesc: "Когда пушить, а когда на 13–18 ББ подмешать мин-рейз. Чистый ChipEV без ICM.",
+                    ruGenzShortDesc: "На 12 ББ твой бро — олл-ин. На 15–18 ББ подключаем минрейз премиумом. Считаем по ChipEV.",
+                    engWhatsDo: "• ≤12 BB: pure Push-Fold is optimal — jam or fold, no min-raises.\n• 12 BB BTN jam range: 22+, A2s+, A2o+, K2s+, K8o+, Q5s+, Q9o+, J7s+, JTo, T7s+, T9o, 96s+, 86s+, 75s+, 65s, 54s.\n• 13–18 BB: the highest-EV play is a MIX — min-raise your premiums (to play post-flop in position) and jam the rest. Pure jamming is the simpler, lower-variance baseline if you're not yet confident post-flop.\n• 15 BB BTN jam baseline: 22+, A2s+, A2o+, K3s+, K9o+, Q7s+, QTo+, J7s+, JTo, T7s+, T9o, 97s+, 86s+, 76s, 65s.",
+                    ruWhatsDo: "• До 12 ББ: чистый Пуш-Фолд оптимален — только олл-ин или пас, без мин-рейзов.\n• Диапазон пуша (BTN) при 12 ББ (~40%): 22+, A2s+, A2o+, K2s+, K8o+, Q5s+, Q9o+, J7s+, JTo, T7s+, T9o, 96s+, 86s+, 75s+, 65s, 54s.\n• 13–18 ББ: максимально прибыльна СМЕШАННАЯ стратегия — мин-рейз с премиумом (чтобы играть постфлоп в позиции) и пуш остальным диапазоном. Чистый пуш — простой и низкодисперсный базис, если вы пока не уверены в постфлопе.\n• Базовый диапазон пуша (BTN) при 15 ББ: 22+, A2s+, A2o+, K3s+, K9o+, Q7s+, QTo+, J7s+, JTo, T7s+, T9o, 97s+, 86s+, 76s, 65s.",
+                    ruGenzWhatsDo: "• До 12 ББ: чистый пуш-фолд — это закон. Только олл-ин или пас, без минрейзов.\n• Диапазон пуша с BTN при 12 ББ: 22+, A2s+, A2o+, K2s+, K8o+, Q5s+, Q9o+, J7s+, JTo, T7s+, T9o, 96s+, 86s+, 75s+, 65s, 54s.\n• 13–18 ББ: топ по EV — это МИКС: минрейзь премиум (чтобы катать постфлоп в позе) и пуш остальным. Чистый пуш — изи-режим с низкой дисперсией, если постфлоп пока не твоё.\n• Базовый пуш-диапазон с BTN при 15 ББ: 22+, A2s+, A2o+, K3s+, K9o+, Q7s+, QTo+, J7s+, JTo, T7s+, T9o, 97s+, 86s+, 76s, 65s.",
+                    engWhy: "Raise-folding with a short stack burns too much valuable equity. Going all-in maximizes fold equity and protects your equity from multi-way sticky flops. Above ~13–15 BB you keep enough behind to min-raise premiums and realize post-flop equity in position — modern solvers show this mix beats pure jamming.\n\n📖 SCENARIO:\nStack 12bb. You hold KTo on the BTN. If you min-raise to 2bb and receive a shove from the BB, you must fold, losing 17% of your stack. Shoving directly forces hands like A2o-A5o and QJo to fold, which have huge equity against you.",
+                    ruWhy: "Рейз-фолд с коротким стеком сжигает фишки. Прямой олл-ин заставляет оппонентов выбрасывать сильные живые карты. Но начиная с ~13–15 ББ за спиной остаётся достаточно фишек, чтобы мин-рейзить премиум и играть постфлоп в позиции — современные солверы показывают, что такой микс прибыльнее чистого пуша.\n\n📖 ПРИМЕР ИЗ ИГРЫ:\nСтек 12bb. У вас KTo на BTN. Если вы сыграете мин-рейз до 2bb и получите олл-ин от BB, вам придется выбросить руку, потеряв 17% своего стека. Прямой пуш заставляет BB выкинуть руки типа A2o-A5o, QJo, которые имеют отличное эквити против вашей руки.",
+                    ruGenzWhy: "Делать рейз-фолд на коротыше — это слив. Прямой олл-ин генерирует тонну фолд-эквити и выбивает доминирующие руки соперников. Но с ~13–15 ББ за спиной остаётся достаточно фишек, чтобы минрейзить премиум и катать постфлоп в позе — по солверам этот микс жирнее чистого пуша.\n\n📖 ЖИЗНЕННЫЙ СПОТ:\nСтек 12 ББ. У тебя KTo на баттоне. Сыграешь минрейз 2 ББ и получишь пуш от ББ — придется фолдить, подарив 17% стека. Пихаешь олл-ин сразу — ББ выкидывает руки типа A3o, QJo. Банк твой!"
                 ),
                 StrategyChapter(
                     id: 4,
@@ -222,9 +258,9 @@ enum StrategyStore {
                     engShortDesc: "Sizing and frequency guidelines based on flop coordination.",
                     ruShortDesc: "Правила частоты и сайзингов C-bet в зависимости от структуры доски.",
                     ruGenzShortDesc: "Флоп K-7-2 радуга и Q-J-9 с флеш-дро требуют абсолютно разной игры. Разбор.",
-                    engWhatsDo: "• Dry Boards (e.g. K♠ 7♦ 2♣): C-bet high frequency (80%+), small sizing (25-33% pot) with your entire range.\n• Wet Boards (e.g. Q♣ J♦ 9♠): C-bet low frequency (30-40%), large sizing (65-75% pot) only with strong value hands and monsters draws.\n• LIVE EXPLOIT: Against calling stations, size up slightly. If they float 33% bets, use larger bets/overbets on dry boards to exploit their attachment to high cards.",
-                    ruWhatsDo: "• Сухие флопы (например, K♠ 7♦ 2♣): Ставьте очень часто (80%+), мелким размером (25-33% пота) со всем вашим диапазоном.\n• Дровяные флопы (например, Q♣ J♦ 9♠): Ставьте редко (30-40%), крупным размером (65-75% пота) только со своими сильными готовыми руками и монстр-дро.\n• ЭКСПЛОЙТ В ЖИВОЙ ИГРЕ: Против телефонов увеличивайте сайзинг. Если они тащат на ставки 33%, используйте овербеты на сухих досках, чтобы выбить их старшие карты.",
-                    ruGenzWhatsDo: "• Сухой флоп (K♠ 7♦ 2♣ радуга): лупи контбет 1/3 пота почти со всем ренжем (частота 80%+).\n• Мокрый флоп (Q♣ J♦ 9♠ с флеш-дро): играй аккуратно (частота 35%). Ставь крупно (65%-75% пота) только на плотное велью или с монстр-дро. Остальное — чек/фолд.\n• ЖИВОЙ ЭКСПЛОЙТ: Если за столом телефоны, которые не верят в 1/3 пота — заряжай плотнее. На сухих досках можно даже лепить овербеты, чтобы выбить их любимые картинки.",
+                    engWhatsDo: "• Dry Boards (e.g. Ks-7d-2c): C-bet high frequency (80%+), small sizing (25-33% pot) with your entire range.\n• Wet Boards (e.g. Qc-Jd-9s): C-bet low frequency (30-40%), large sizing (65-75% pot) only with strong value hands and monsters draws.\n• LIVE EXPLOIT: Against calling stations, size up slightly. If they float 33% bets, use larger bets/overbets on dry boards to exploit their attachment to high cards.",
+                    ruWhatsDo: "• Сухие флопы (например, Ks-7d-2c): Ставьте очень часто (80%+), мелким размером (25-33% пота) со всем вашим диапазоном.\n• Дровяные флопы (например, Qc-Jd-9s): Ставьте редко (30-40%), крупным размером (65-75% пота) только со своими сильными готовыми руками и монстр-дро.\n• ЭКСПЛОЙТ В ЖИВОЙ ИГРЕ: Против телефонов увеличивайте сайзинг. Если они тащат на ставки 33%, используйте овербеты на сухих досках, чтобы выбить их старшие карты.",
+                    ruGenzWhatsDo: "• Сухой флоп (Ks-7d-2c радуга): лупи контбет 1/3 пота почти со всем ренжем (частота 80%+).\n• Мокрый флоп (Qc-Jd-9s с флеш-дро): играй аккуратно (частота 35%). Ставь крупно (65%-75% пота) только на плотное велью или с монстр-дро. Остальное — чек/фолд.\n• ЖИВОЙ ЭКСПЛОЙТ: Если за столом телефоны, которые не верят в 1/3 пота — заряжай плотнее. На сухих досках можно даже лепить овербеты, чтобы выбить их любимые картинки.",
                     engWhy: "On dry boards, the opponent misses completely and folds to any small bet. On wet boards, calling stations call any small bet with draw or pairs, so you must charge draws heavily.\n\n📖 SCENARIO:\nAs BTN open-raiser, you hit a flop of Ks-7h-2c. BB checks. You hold QdJd (air). You fire a C-bet of 33% pot. BB folds 9d8d instantly. On a flop of Qc-Jd-9c with QdJd, you check back. GTO range connects heavily with BB's caller range, making a C-bet bluff highly unprofitable.",
                     ruWhy: "На сухих досках оппонент часто промахивается и фолдит на мелкую ставку. На мокрых досках соперники коллируют по любым совпадениям — нужно добирать или чекать.\n\n📖 ПРИМЕР ИЗ ИГРЫ:\nВы открылись на баттоне, BB коллировал. Флоп: Ks-7h-2c. У вас QdJd (воздух). Вы ставите контбет 33% пота. Оппонент сбрасывает 9d8d. На флопе Qc-Jd-9c с той же QdJd вы играете чек вслед, так как эта доска идеально подходит диапазону колла BB.",
                     ruGenzWhy: "Сухой флоп соперник зацепить не может, мелкая ставка 30% пота заставит его сдаться. На мокром флопе телефоны потащат любое совпадение — блефовать мелко нельзя.\n\n📖 ЖИЗНЕННЫЙ СПОТ:\nТы открылся на BTN, ББ колл. Флоп Ks-7h-2c. У тебя QdJd (воздух). Ты ставишь контбет 1/3 пота. Опп фолдит 9d8d. На мокром флопе Qc-Jd-9c с той же QdJd — чекаем вслед, опп зацепился 100%!"
@@ -239,9 +275,9 @@ enum StrategyStore {
                     engShortDesc: "Instantly estimate draw probabilities and required calling equity.",
                     ruShortDesc: "Мгновенная методика оценки вероятностей в уме во время живой раздачи.",
                     ruGenzShortDesc: "Сложно считать в уме за столом? Правило 2 и 4 + простая формула цены колла.",
-                    engWhatsDo: "• Draw Equity: Flop: Outs x 4 = % Equity. Turn: Outs x 2 = % Equity.\n• Pot Odds: Call Amount / (Total Pot + Bet + Call) = % Required Equity.\n• Shortcut Table: 1/3 pot bet needs 20% equity; 1/2 pot needs 25%; full pot needs 33% equity.",
-                    ruWhatsDo: "• Расчет эквити: На флопе: Кол-во аутов х 4 = % Эквити. На терне: Кол-во аутов х 2 = % Эквити.\n• Пот-оддсы: Сумма колла / (Общий банк + Ставка + Колл) = % Требуемого Эквити.\n• Шпаргалка в уме: Колл ставки 33% пота требует 20% эквити; ставки 50% пота — 25% эквити; ставки 100% пота — 33% эквити.",
-                    ruGenzWhatsDo: "• Эквити (шанс доехать): Флоп: Ауты х 4 = % Эквити. Тёрн: Ауты х 2 = % Эквити.\n• Пот-оддсы (цена билета): Колл / (Банк + Ставка + Твой Колл) = сколько % эквити нужно.\n• Шпаргалка: опп ставит 1/3 пота -> надо 20% эквити. Ставит 1/2 пота -> надо 25% эквити. Ставит пот -> надо 33%.",
+                    engWhatsDo: "• Draw Equity: Flop: Outs x 4 = % Equity. Turn: Outs x 2 = % Equity.\n• Pot Odds: Call Amount / (Total Pot + Bet + Call) = % Required Equity.\n• Shortcut Table: 1/3 pot bet needs 20% equity; 1/2 pot needs 25%; full pot needs 33% equity.\n• Caveat: ×4 only holds all-in (both cards guaranteed). Facing a bet with streets to come, use ×2 — and discount 1–2 \"dirty\" outs that could also improve your opponent.",
+                    ruWhatsDo: "• Расчет эквити: На флопе: Кол-во аутов х 4 = % Эквити. На терне: Кол-во аутов х 2 = % Эквити.\n• Пот-оддсы: Сумма колла / (Общий банк + Ставка + Колл) = % Требуемого Эквити.\n• Шпаргалка в уме: Колл ставки 33% пота требует 20% эквити; ставки 50% пота — 25% эквити; ставки 100% пота — 33% эквити.\n• Оговорка: ×4 работает только в олл-ине (обе карты гарантированы). Против ставки, когда впереди ещё улицы, считайте по ×2 — и вычитайте 1–2 «грязных» аута, которые могут усилить и оппонента.",
+                    ruGenzWhatsDo: "• Эквити (шанс доехать): Флоп: Ауты х 4 = % Эквити. Тёрн: Ауты х 2 = % Эквити.\n• Пот-оддсы (цена билета): Колл / (Банк + Ставка + Твой Колл) = сколько % эквити нужно.\n• Шпаргалка: опп ставит 1/3 пота -> надо 20% эквити. Ставит 1/2 пота -> надо 25% эквити. Ставит пот -> надо 33%.\n• Важно: ×4 — это только олл-ин (обе карты твои гарантированно). Если просто платишь ставку, а впереди ещё улицы — считай по ×2 и минусуй 1–2 «грязных» аута, которые докинут и оппу.",
                     engWhy: "Math is the absolute defense against burning chips. If your draw equity (Rule of 2/4) is greater than the required pot odds, it is a mathematically profitable (+EV) call.\n\n📖 SCENARIO:\nOn the turn, there is 1000 in the pot. Opponent bets 500 (1/2 pot). You hold a flush draw (9 outs). Call amount is 500. Pot odds needed = 500 / 2000 = 25%. Your equity = 9 outs x 2 = 18%. Since your equity (18%) is LESS than required pot odds (25%), a raw call is mathematically unprofitable (-EV). Fold immediately!",
                     ruWhy: "Математика предохраняет вас от пустых трат. Если ваше эквити больше пот-оддсов — это прибыльный колл. Если меньше — это слив фишек.\n\n📖 ПРИМЕР ИЗ ИГРЫ:\nНа терне в банке 1000 фишек. У вас флеш-дро (9 аутов). Оппонент ставит 500 фишек (1/2 пота). Вам нужно коллировать 500. Цена колла (пот-оддсы) = 500 / (1000 + 500 + 500) = 25%. По правилу 2 и 4 на терне ваше эквити = 9 аутов х 2 = 18%. Поскольку ваше эквити (18%) МЕНЬШЕ пот-оддсов (25%), колл невыгоден. Фолд!",
                     ruGenzWhy: "Это твоя защита от бездумного дарения фишек. Если шанс доехать выше, чем цена колла — жми колл (+EV). Иначе — легкий пас.\n\n📖 ЖИЗНЕННЫЙ СПОТ:\nНа тёрне в банке 1000. Опп ставит 500 (1/2 пота). У тебя флеш-дро (9 аутов). Для колла надо 500. Пот-оддсы = 25% нужного эквити. Твое эквити = 9 х 2 = 18%. Твои 18% меньше нужных 25% — колл минусовый. Жми фолд!"
@@ -287,9 +323,9 @@ enum StrategyStore {
                     engShortDesc: "How to size open raises on deep stacks to maintain pot control.",
                     ruShortDesc: "Размеры открывающих ставок на глубоких стеках для контроля банка.",
                     ruGenzShortDesc: "Не раздувай банки с плохими картами. Держим сайзинги под контролем.",
-                    engWhatsDo: "• In early stages (stack >60 BB), use 2.2x to 2.5x BB open size.\n• Maintain consistent sizing regardless of hand strength.\n• Do not open limping yourself — raise first in or fold.",
-                    ruWhatsDo: "• На ранних уровнях (стек >60 BB) открывайтесь размером 2.2x-2.5x BB.\n• Используйте одинаковый сайзинг для всех разыгрываемых рук preflop.\n• Никогда не заходите лимпом сами — либо рейз, либо фолд.",
-                    ruGenzWhatsDo: "• На ранней стадии турнира (стек >60 ББ) открывайся плотнее — 2.2x-2.5x ББ.\n• Держи сайзинг одинаковым — соперники не должны читать твои тузы по размеру рейза.\n• Забыть про первый лимп! Если заходишь первым — делай рейз. Нет силы — жми фолд.",
+                    engWhatsDo: "• In early stages (stack >60 BB), use 2.2x to 2.5x BB open size.\n• Maintain consistent sizing regardless of hand strength.\n• Don't open-limp — raise first-in or fold. The one exception is the small blind: heads-up vs the BB with antes, limping a mix of strong and speculative hands is standard.",
+                    ruWhatsDo: "• На ранних уровнях (стек >60 BB) открывайтесь размером 2.2x-2.5x BB.\n• Используйте одинаковый сайзинг для всех разыгрываемых рук preflop.\n• Не заходите лимпом — либо рейз, либо фолд. Единственное исключение — малый блайнд (SB): один на один против ББ с анте лимп частью диапазона (сильные + спекулятивные руки) абсолютно нормален.",
+                    ruGenzWhatsDo: "• На ранней стадии турнира (стек >60 ББ) открывайся плотнее — 2.2x-2.5x ББ.\n• Держи сайзинг одинаковым — соперники не должны читать твои тузы по размеру рейза.\n• Забей на первый лимп с ранних и средних — рейз или фолд. Но с малого блайнда (SB) один на один против ББ лимпать норм: с анте это часть оптимальной игры.",
                     engWhy: "Limping allows opponents to see the flop cheap and outdraw your good hands. Flat, consistent open sizes build stable pots for value hands.",
                     ruWhy: "Лимп позволяет оппонентам дешево заходить в банк и переезжать ваши сильные руки. Единообразные сайзинги рейза строят оптимальные банки для сильного диапазона.",
                     ruGenzWhy: "Сам никогда не лимпуй — лимп-колл preflop сжигает EV и дарит оппонентам бесплатную информацию. Открывайся рейзом, чтобы сразу забрать банк или играть хедз-ап с инициативой."

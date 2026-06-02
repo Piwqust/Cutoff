@@ -42,6 +42,28 @@ enum L10n {
         case languageEnglish
         case languageRussian
         case languageRussianGenZ
+        // Settings — redesigned hub
+        case settingsTournamentSection
+        case settingsAppearanceSection
+        case settingsPreferencesSection
+        case settingsDataSection
+        case settingsAboutSection
+        case editTournamentSubtitle
+        case appIcon
+        case appIconSubtitle
+        case appIconClassic
+        case comingSoon
+        case haptics
+        case hapticsSubtitle
+        case sounds
+        case soundsSubtitle
+        case resetOnboardingSubtitle
+        case clearHistory
+        case clearHistorySubtitle
+        case clearHistoryConfirmTitle
+        case clearHistoryConfirmMessage
+        case version
+        case appTagline
 
         // Tournament setup
         case tournamentProfile
@@ -453,6 +475,7 @@ enum L10n {
 
         .tabTrain: "Train",
         .tabRanges: "Ranges",
+        .tabReview: "Review",
         .tabSettings: "Settings",
         .tabStrategy: "Strategy",
         .strategyTitle: "Strategy Guide",
@@ -469,6 +492,28 @@ enum L10n {
         .languageEnglish: "English",
         .languageRussian: "Русский",
         .languageRussianGenZ: "Русский (Gen Z)",
+
+        .settingsTournamentSection: "Tournament",
+        .settingsAppearanceSection: "Appearance",
+        .settingsPreferencesSection: "Preferences",
+        .settingsDataSection: "Data",
+        .settingsAboutSection: "About",
+        .editTournamentSubtitle: "Stack, blinds, table size & antes",
+        .appIcon: "App icon",
+        .appIconSubtitle: "Pick how Cutoff looks on your home screen",
+        .appIconClassic: "Classic",
+        .comingSoon: "Soon",
+        .haptics: "Haptics",
+        .hapticsSubtitle: "Vibrate on answers and selections",
+        .sounds: "Sounds",
+        .soundsSubtitle: "Play sounds during drills",
+        .resetOnboardingSubtitle: "Show the intro screens again",
+        .clearHistory: "Clear training history",
+        .clearHistorySubtitle: "Delete all results, stats & progress",
+        .clearHistoryConfirmTitle: "Clear training history?",
+        .clearHistoryConfirmMessage: "This permanently deletes your hands, stats, and progress. This can't be undone.",
+        .version: "Version",
+        .appTagline: "Preflop MTT trainer",
 
         .tournamentProfile: "Tournament profile",
         .saveProfile: "Save profile",
@@ -706,6 +751,7 @@ enum L10n {
 
         .tabTrain: "Тренировка",
         .tabRanges: "Диапазоны",
+        .tabReview: "Разбор",
         .tabSettings: "Настройки",
         .tabStrategy: "Стратегия",
         .strategyTitle: "Гид по стратегии",
@@ -722,6 +768,28 @@ enum L10n {
         .languageEnglish: "English",
         .languageRussian: "Русский",
         .languageRussianGenZ: "Русский (Gen Z)",
+
+        .settingsTournamentSection: "Турнир",
+        .settingsAppearanceSection: "Оформление",
+        .settingsPreferencesSection: "Настройки",
+        .settingsDataSection: "Данные",
+        .settingsAboutSection: "О приложении",
+        .editTournamentSubtitle: "Стек, блайнды, размер стола и анте",
+        .appIcon: "Иконка приложения",
+        .appIconSubtitle: "Выберите вид Cutoff на домашнем экране",
+        .appIconClassic: "Классическая",
+        .comingSoon: "Скоро",
+        .haptics: "Вибрация",
+        .hapticsSubtitle: "Отклик на ответы и выбор",
+        .sounds: "Звуки",
+        .soundsSubtitle: "Воспроизводить звуки во время тренировок",
+        .resetOnboardingSubtitle: "Показать вводные экраны снова",
+        .clearHistory: "Очистить историю тренировок",
+        .clearHistorySubtitle: "Удалить все результаты, статистику и прогресс",
+        .clearHistoryConfirmTitle: "Очистить историю тренировок?",
+        .clearHistoryConfirmMessage: "Это безвозвратно удалит ваши раздачи, статистику и прогресс. Отменить нельзя.",
+        .version: "Версия",
+        .appTagline: "Тренажёр префлопа для MTT",
 
         .tournamentProfile: "Параметры турнира",
         .saveProfile: "Сохранить",
@@ -959,6 +1027,7 @@ enum L10n {
 
         .tabTrain: "тренить",
         .tabRanges: "ренжи",
+        .tabReview: "разбор",
         .tabSettings: "настройки",
         .tabStrategy: "гид",
         .strategyTitle: "гид по катке",
@@ -975,6 +1044,27 @@ enum L10n {
         .languageEnglish: "English",
         .languageRussian: "Русский",
         .languageRussianGenZ: "Русский (Gen Z)",
+        .settingsTournamentSection: "турнир",
+        .settingsAppearanceSection: "стилек",
+        .settingsPreferencesSection: "настройки",
+        .settingsDataSection: "данные",
+        .settingsAboutSection: "о приле",
+        .editTournamentSubtitle: "стек, блайнды, размер стола и анте",
+        .appIcon: "иконка",
+        .appIconSubtitle: "выбери как будет выглядеть аппка",
+        .appIconClassic: "классика",
+        .comingSoon: "скоро",
+        .haptics: "вибрация",
+        .hapticsSubtitle: "отклик на тапы",
+        .sounds: "звуки",
+        .soundsSubtitle: "врубить звуки на тренях",
+        .resetOnboardingSubtitle: "показать туториал",
+        .clearHistory: "снести историю",
+        .clearHistorySubtitle: "удалить всё",
+        .clearHistoryConfirmTitle: "снести историю?",
+        .clearHistoryConfirmMessage: "это удалит всё с концами. бэкапов нет.",
+        .version: "версия",
+        .appTagline: "тренажёр префлопа для мтт",
 
         .tournamentProfile: "профиль турика",
         .saveProfile: "сохранить (го)",

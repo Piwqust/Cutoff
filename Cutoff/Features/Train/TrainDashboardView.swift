@@ -9,6 +9,7 @@ struct TrainDashboardView: View {
     private var allResults: [QuizResult]
 
     @State private var moreExpanded: Bool = false
+    @State private var showingSettings: Bool = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
@@ -30,7 +31,23 @@ struct TrainDashboardView: View {
         .navigationTitle(l10n.t(.tabTrain))
         .navigationBarTitleDisplayMode(.large)
         .toolbarBackground(.hidden, for: .navigationBar)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: { showingSettings = true }) {
+                    Image(systemName: "gearshape.fill")
+                        .font(.body)
+                        .foregroundStyle(AppColors.textSecondary)
+                }
+                .accessibilityLabel(l10n.t(.settingsTitle))
+            }
+        }
         .dynamicTypeSize(...DynamicTypeSize.accessibility3)
+        .sheet(isPresented: $showingSettings) {
+            NavigationStack {
+                SettingsView()
+            }
+            .environment(progress)
+        }
     }
 
     // MARK: - Stat strip

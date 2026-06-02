@@ -5,10 +5,15 @@ struct StrategyGuideView: View {
     @Environment(ConfigStore.self) private var config
 
     @State private var selectedGuide: WeeklyGuide = StrategyStore.activeGuide
-    @State private var showingSettings = false
+    @State private var showDeveloperMenu = false
 
     /// Reactive completion state — drives the "Studied" badges without manual redraws.
     private var progress: StrategyProgressStore { .shared }
+
+    /// Number of chapters in the selected week the user has marked studied.
+    private var studiedCount: Int {
+        selectedGuide.chapters.filter { progress.isStudied(week: selectedGuide.id, chapter: $0.id) }.count
+    }
 
     /// The Strategy tab is authored in Russian only. Other languages get a notice.
     private var isLanguageSupported: Bool {
@@ -22,26 +27,23 @@ struct StrategyGuideView: View {
             if isLanguageSupported {
                 guideContent
             } else {
-                StrategyUnsupportedLanguageView(openSettings: { showingSettings = true })
+                StrategyUnsupportedLanguageView()
             }
         }
         .navigationTitle(isLanguageSupported ? selectedGuide.title(for: l10n.language) : "Стратегия")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button(action: { showingSettings = true }) {
-                    Image(systemName: "gearshape.fill")
-                        .foregroundStyle(AppColors.primaryMint)
-                }
-                .accessibilityLabel(l10n.t(.settingsTitle))
+            ToolbarItem(placement: .principal) {
+                Text(isLanguageSupported ? selectedGuide.title(for: l10n.language) : "Стратегия")
+                    .font(AppTypography.headline)
+                    .foregroundStyle(AppColors.textPrimary)
+                    .onTapGesture(count: 5) {
+                        showDeveloperMenu = true
+                    }
             }
         }
-        .sheet(isPresented: $showingSettings) {
-            NavigationStack {
-                SettingsView()
-            }
-            .environment(config)
-            .environment(l10n)
+        .sheet(isPresented: $showDeveloperMenu) {
+            DeveloperStrategyDocView()
         }
     }
 
@@ -54,12 +56,16 @@ struct StrategyGuideView: View {
                 weekSelectorMenu
 
                 VStack(alignment: .leading, spacing: AppSpacing.xs) {
-                    Text("ГЛАВЫ ОБУЧЕНИЯ")
-                        .font(AppTypography.caption)
-                        .bold()
-                        .foregroundStyle(AppColors.textSecondary)
-                        .tracking(1.0)
-                        .padding(.horizontal, AppSpacing.xxs)
+                    HStack {
+                        Text("ГЛАВЫ ОБУЧЕНИЯ")
+                            .font(AppTypography.caption)
+                            .bold()
+                            .foregroundStyle(AppColors.textSecondary)
+                            .tracking(1.0)
+                        Spacer()
+                        progressBadge(studied: studiedCount, total: selectedGuide.chapters.count)
+                    }
+                    .padding(.horizontal, AppSpacing.xxs)
 
                     // List of Chapters as NavLinks
                     VStack(spacing: AppSpacing.md) {
@@ -78,11 +84,55 @@ struct StrategyGuideView: View {
                         }
                     }
                 }
+
+                // Methodology footnote — keeps the ranges honest.
+                HStack(alignment: .top, spacing: AppSpacing.xxs) {
+                    Image(systemName: "info.circle")
+                        .font(.system(size: 11))
+                    Text("Диапазоны — ориентир по Nash/солверам для ChipEV-игры. Округляйте под своё поле и анте.")
+                        .font(AppTypography.caption2)
+                }
+                .foregroundStyle(AppColors.textSecondary.opacity(0.7))
+                .padding(.horizontal, AppSpacing.xxs)
             }
             .padding(.horizontal, AppSpacing.pageHorizontal)
             .padding(.top, AppSpacing.lg)
             .padding(.bottom, 80) // Luxurious bottom spacing above tab bar
         }
+    }
+
+    // MARK: - Aggregate Progress Badge
+    /// Compact ring + "x/y" pill summarizing how many chapters in the week are studied.
+    @ViewBuilder
+    private func progressBadge(studied: Int, total: Int) -> some View {
+        let fraction = total > 0 ? Double(studied) / Double(total) : 0
+        let isComplete = total > 0 && studied == total
+        let tint = isComplete ? AppColors.accentLime : AppColors.primaryMint
+
+        HStack(spacing: AppSpacing.xxs) {
+            ZStack {
+                Circle()
+                    .stroke(AppColors.divider.opacity(0.4), lineWidth: 2.5)
+                Circle()
+                    .trim(from: 0, to: fraction)
+                    .stroke(tint, style: StrokeStyle(lineWidth: 2.5, lineCap: .round))
+                    .rotationEffect(.degrees(-90))
+            }
+            .frame(width: 15, height: 15)
+
+            Text("\(studied)/\(total)")
+                .font(AppTypography.caption)
+                .bold()
+                .foregroundStyle(isComplete ? AppColors.accentLime : AppColors.textSecondary)
+                .monospacedDigit()
+        }
+        .padding(.horizontal, AppSpacing.xs)
+        .padding(.vertical, AppSpacing.xxs)
+        .background(tint.opacity(0.12))
+        .clipShape(Capsule())
+        .animation(.easeInOut(duration: 0.25), value: studied)
+        .accessibilityElement()
+        .accessibilityLabel("Изучено \(studied) из \(total) глав")
     }
 
     // MARK: - Chapter Row
@@ -92,7 +142,7 @@ struct StrategyGuideView: View {
             VStack(alignment: .leading, spacing: AppSpacing.xs) {
                 HStack {
                     // Category Tag Badge
-                    Text(chapter.tag.uppercased())
+                    Text(chapter.localizedTag(for: l10n.language).uppercased())
                         .font(AppTypography.caption)
                         .bold()
                         .foregroundStyle(AppColors.primaryMint)
@@ -191,8 +241,6 @@ struct StrategyGuideView: View {
 
 // MARK: - Unsupported Language Notice
 struct StrategyUnsupportedLanguageView: View {
-    let openSettings: () -> Void
-
     var body: some View {
         VStack(spacing: AppSpacing.lg) {
             Image(systemName: "globe")
@@ -205,22 +253,11 @@ struct StrategyUnsupportedLanguageView: View {
                     .foregroundStyle(AppColors.textPrimary)
                     .multilineTextAlignment(.center)
 
-                Text("Вкладка «Стратегия» сейчас доступна только на русском языке. Переключите язык в настройках, чтобы открыть материалы.")
+                Text("Вкладка «Стратегия» сейчас доступна только на русском языке. Перейдите на вкладку Настройки (Settings), чтобы переключить язык.")
                     .font(AppTypography.subheadline)
                     .foregroundStyle(AppColors.textSecondary)
                     .multilineTextAlignment(.center)
             }
-
-            Button(action: openSettings) {
-                Text("Switch to Russian")
-                    .font(AppTypography.bodyBold)
-                    .foregroundStyle(AppColors.backgroundDeep)
-                    .padding(.horizontal, AppSpacing.xl)
-                    .padding(.vertical, AppSpacing.sm)
-                    .background(Capsule().fill(AppColors.primaryMint))
-            }
-            .buttonStyle(.plain)
-            .padding(.top, AppSpacing.xs)
         }
         .padding(AppSpacing.xl)
         .frame(maxWidth: .infinity)

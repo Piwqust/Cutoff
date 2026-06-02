@@ -8,6 +8,7 @@ struct DrillTrainerView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(ProgressStore.self) private var progress
     @Environment(LocalizationManager.self) private var l10n
+    @Environment(ConfigStore.self) private var config
     @State private var vm = DrillTrainerViewModel()
 
     /// Two atomic pieces of feedback state. They're independent on purpose —
@@ -169,6 +170,7 @@ struct DrillTrainerView: View {
     // MARK: - Haptics
 
     private func haptic(for outcome: AnswerOutcome?) -> SensoryFeedback? {
+        guard config.hapticsEnabled else { return nil }
         switch outcome {
         case .correct: return .success
         case .close:   return .impact(weight: .medium, intensity: 0.7)

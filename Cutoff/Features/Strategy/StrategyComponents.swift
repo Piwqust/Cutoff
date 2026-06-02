@@ -276,16 +276,18 @@ struct FirstInJamCard: View {
     private let depths = [12, 15, 18]
 
     var shovingRange: String {
+        // Nash first-in shove ranges, ~12.5% antes (Beasts of Poker chart).
+        // positionIndex: 0 = CO, 1 = BTN, 2 = SB.
         switch (selectedDepth, positionIndex) {
-        case (12, 0): return "22+, A2s+, A8o+, KJs+, KQo, QJs"
-        case (12, 1): return "22+, A2s+, A3o+, K9s+, KTo+, QTs+, QJo, JTs, T9s"
-        case (12, 2): return "22+, A2s+, A2o+, K4s+, K8o+, Q8s+, QTo+, J8s+, T8s+, 98s"
-        case (15, 0): return "22+, A7s+, AJo, KQs"
-        case (15, 1): return "22+, A2s+, A7o+, KTs+, KTo+, QTs+, JTs"
-        case (15, 2): return "22+, A2s+, A2o+, K8s+, KTo+, Q9s+, QJo, J9s+, T9s"
-        case (18, 0): return "55+, AQs+, AQo"
-        case (18, 1): return "22+, A8s+, ATo+, KJs+, KQo"
-        case (18, 2): return "22+, A2s+, A8o+, KTs+, KTo+, QTs+, JTs"
+        case (12, 0): return "22+, A2s+, A2o+, K5s+, KTo+, Q8s+, QTo+, J8s+, JTo, T7s+, 97s+, 86s+, 76s, 65s"
+        case (12, 1): return "22+, A2s+, A2o+, K2s+, K8o+, Q5s+, Q9o+, J7s+, JTo, T7s+, T9o, 96s+, 86s+, 75s+, 65s, 54s"
+        case (12, 2): return "22+, A2s+, A2o+, K2s+, K2o+, Q2s+, Q2o+, J2s+, J5o+, T2s+, T6o+, 93s+, 96o+, 84s+, 86o+, 74s+, 76o, 63s+, 65o, 53s+, 43s"
+        case (15, 0): return "22+, A2s+, A3o+, K7s+, KTo+, Q8s+, QTo+, J8s+, JTo, T8s+, 97s+, 87s"
+        case (15, 1): return "22+, A2s+, A2o+, K3s+, K9o+, Q7s+, QTo+, J7s+, JTo, T7s+, T9o, 97s+, 86s+, 76s, 65s"
+        case (15, 2): return "22+, A2s+, A2o+, K2s+, K2o+, Q2s+, Q4o+, J2s+, J7o+, T3s+, T7o+, 95s+, 97o+, 84s+, 87o, 74s+, 76o, 64s+, 53s+, 43s"
+        case (18, 0): return "22+, A2s+, A4o+, K6s+, KTo+, Q8s+, QTo+, J8s+, JTo, T8s+, 97s+, 87s, 76s"
+        case (18, 1): return "22+, A2s+, A2o+, K5s+, KTo+, Q8s+, QTo+, J8s+, JTo, T7s+, T9o, 97s+, 86s+, 76s, 65s"
+        case (18, 2): return "22+, A2s+, A2o+, K2s+, K2o+, Q2s+, Q6o+, J3s+, J8o+, T4s+, T8o+, 95s+, 97o+, 84s+, 87o, 74s+, 76o, 64s+, 53s+"
         default: return "22+, A2s+"
         }
     }
@@ -343,8 +345,8 @@ struct FirstInJamCard: View {
                         .padding(.top, 2)
 
                     Text(selectedDepth >= 18 ?
-                         "При 18 ББ диапазон пуша очень тайтовый. Здесь уже можно прибыльно минрейзить сильный бродвей для провокации." :
-                         "При \(selectedDepth) ББ мин-рейзить маргинально — прямой пуш максимизирует фолд-эквити.")
+                         "На 18 ББ first-in пуш всё ещё широкий (~34% с BTN по Nash), но здесь уже выгодно подмешивать мин-рейз с премиумом и играть постфлоп в позиции." :
+                         "При \(selectedDepth) ББ прямой пуш максимизирует фолд-эквити — мин-рейз-фолд просто сжигает фишки.")
                         .font(AppTypography.footnote)
                         .foregroundStyle(AppColors.textSecondary)
                         .italic()
@@ -356,6 +358,77 @@ struct FirstInJamCard: View {
 
 // MARK: - 4. C-Bet Situation Card
 struct CBetSituationCard: View {
+    enum Texture: String, CaseIterable, Identifiable {
+        case dry, wet, paired, monotone
+        var id: String { rawValue }
+        var label: String {
+            switch self {
+            case .dry:      return "Сухая"
+            case .wet:      return "Дровяная"
+            case .paired:   return "Спаренная"
+            case .monotone: return "Монотон"
+            }
+        }
+    }
+
+    /// Resolved guidance for the selected flop texture.
+    struct Config {
+        let subtitle: String
+        let cbetLabel: String
+        let cbetTint: Color
+        let board: [String]
+        let sizingLabel: String
+        let sizingTint: Color
+        let detail: String
+    }
+
+    @State private var texture: Texture = .dry
+
+    private func config(for texture: Texture) -> Config {
+        switch texture {
+        case .dry:
+            return Config(
+                subtitle: "(Dry Rainbow)",
+                cbetLabel: "C-Bet: 80%+",
+                cbetTint: AppColors.primaryMint,
+                board: ["Kc", "7d", "2s"],
+                sizingLabel: "25-33% пота",
+                sizingTint: AppColors.accentLime,
+                detail: "Ставим со всем спектром. Оппоненты редко попадут и легко выкинут мусор."
+            )
+        case .wet:
+            return Config(
+                subtitle: "(Wet Board)",
+                cbetLabel: "C-Bet: 30-40%",
+                cbetTint: AppColors.accentPeach,
+                board: ["Qc", "Jd", "9c"],
+                sizingLabel: "65-75% пота",
+                sizingTint: AppColors.accentCoral,
+                detail: "Только плотное велью или супер-дро. Пустые руки чекаем и сдаемся."
+            )
+        case .paired:
+            return Config(
+                subtitle: "(Paired)",
+                cbetLabel: "C-Bet: 85%+",
+                cbetTint: AppColors.primaryMint,
+                board: ["Kc", "Kd", "4s"],
+                sizingLabel: "25-33% пота",
+                sizingTint: AppColors.accentLime,
+                detail: "Высокая спаренная доска — топ-текстура для контбета: у коллера почти нет тройки, лупим мелко почти всегда за счёт перевеса в старших картах."
+            )
+        case .monotone:
+            return Config(
+                subtitle: "(Monotone)",
+                cbetLabel: "C-Bet: 25-30%",
+                cbetTint: AppColors.accentPeach,
+                board: ["Ac", "9c", "5c"],
+                sizingLabel: "33% / чек",
+                sizingTint: AppColors.accentLime,
+                detail: "Эквити сближается, банки опасны. Много чекаем; ставим мелко с готовым флешем или натсовым флеш-дро."
+            )
+        }
+    }
+
     var body: some View {
         GlassCard {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
@@ -367,30 +440,31 @@ struct CBetSituationCard: View {
                         .foregroundStyle(AppColors.textPrimary)
                 }
 
-                // Situation 1: Dry Board
-                boardSituation(
-                    title: "1. Сухая доска",
-                    subtitle: "(Dry Rainbow)",
-                    cbetLabel: "C-Bet: 80%+",
-                    cbetTint: AppColors.primaryMint,
-                    board: ["Kc", "7d", "2s"],
-                    sizingLabel: "25-33% пота",
-                    sizingTint: AppColors.accentLime,
-                    detail: "Ставим со всем спектром. Оппоненты редко попадут и легко выкинут мусор."
-                )
+                // Texture selector — drives the dynamic guidance below
+                HStack(spacing: AppSpacing.xs) {
+                    ForEach(Texture.allCases) { t in
+                        StrategyChip(title: t.label, isSelected: texture == t,
+                                     font: AppTypography.footnote, verticalPadding: 6) {
+                            texture = t
+                        }
+                    }
+                }
 
-                // Situation 2: Wet Board
+                let cfg = config(for: texture)
                 boardSituation(
-                    title: "2. Дровяная доска",
-                    subtitle: "(Wet Board)",
-                    cbetLabel: "C-Bet: 30-40%",
-                    cbetTint: AppColors.accentPeach,
-                    board: ["Qc", "Jd", "9c"],
-                    sizingLabel: "65-75% пота",
-                    sizingTint: AppColors.accentCoral,
-                    detail: "Только плотное велью или супер-дро. Пустые руки чекаем и сдаемся."
+                    title: texture.label + " доска",
+                    subtitle: cfg.subtitle,
+                    cbetLabel: cfg.cbetLabel,
+                    cbetTint: cfg.cbetTint,
+                    board: cfg.board,
+                    sizingLabel: cfg.sizingLabel,
+                    sizingTint: cfg.sizingTint,
+                    detail: cfg.detail
                 )
+                .id(texture)
+                .transition(.opacity)
             }
+            .animation(.easeInOut(duration: 0.2), value: texture)
         }
     }
 
@@ -426,8 +500,7 @@ struct CBetSituationCard: View {
 
             HStack(spacing: AppSpacing.md) {
                 // Left Column: Visual Cards
-                BoardView(board: board.compactMap { Card(notation: $0) })
-                    .frame(width: 172)
+                BoardView(board: board.compactMap { Card(notation: $0) }, size: .compact)
 
                 // Vertical divider line for beautiful structure
                 RoundedRectangle(cornerRadius: 1)
@@ -437,7 +510,7 @@ struct CBetSituationCard: View {
 
                 // Right Column: Tactical details
                 VStack(alignment: .leading, spacing: 6) {
-                    HStack(spacing: 6) {
+                    VStack(alignment: .leading, spacing: 2) {
                         Text("САЙЗИНГ:")
                             .font(AppTypography.caption)
                             .bold()
@@ -455,7 +528,7 @@ struct CBetSituationCard: View {
                         .lineSpacing(3)
                 }
             }
-            .frame(height: 76) // Match standard card height (76pt) to align grid perfectly
+            .frame(minHeight: 76) // Align the board grid; grow for longer guidance text
         }
         .padding(AppSpacing.md)
         .background(

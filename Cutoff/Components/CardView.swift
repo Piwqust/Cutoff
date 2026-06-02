@@ -10,52 +10,70 @@ struct CardView: View {
     var size: Size = .regular
 
     enum Size {
-        case regular, compact
+        case regular, compact, inline
         var width: CGFloat {
             switch self {
             case .regular: return 56
             case .compact: return 38
+            case .inline: return 28 // Wider for horizontal layout
             }
         }
         var height: CGFloat {
             switch self {
             case .regular: return 76
             case .compact: return 52
+            case .inline: return 18 // Shorter for horizontal layout
             }
         }
         var rankSize: CGFloat {
             switch self {
             case .regular: return 22
             case .compact: return 14
+            case .inline: return 11
             }
         }
         var suitSize: CGFloat {
             switch self {
             case .regular: return 20
             case .compact: return 12
+            case .inline: return 9
             }
         }
     }
 
     private var foreground: Color {
-        card.suit.isRed ? AppColors.accentCoral : AppColors.textPrimary
+        // Use a deeper red for higher contrast on the white card background
+        card.suit.isRed ? Color(red: 0.85, green: 0.15, blue: 0.15) : Color.black
     }
 
     var body: some View {
+        let radius = size == .inline ? 4.0 : AppRadius.card
         ZStack {
-            RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
-                .fill(AppColors.cardSurface)
+            RoundedRectangle(cornerRadius: radius, style: .continuous)
+                .fill(Color.white)
+                .shadow(color: Color.black.opacity(0.3), radius: 2, y: 1)
                 .overlay(
-                    RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
-                        .strokeBorder(AppColors.divider.opacity(0.6), lineWidth: 1)
+                    RoundedRectangle(cornerRadius: radius, style: .continuous)
+                        .strokeBorder(Color.black.opacity(0.2), lineWidth: 1)
                 )
-            VStack(spacing: 2) {
-                Text(card.rank.rawValue)
-                    .font(.system(size: size.rankSize, weight: .bold, design: .rounded))
-                    .foregroundStyle(foreground)
-                Image(systemName: card.suit.sfSymbol)
-                    .font(.system(size: size.suitSize, weight: .semibold))
-                    .foregroundStyle(foreground)
+            if size == .inline {
+                HStack(spacing: 1) {
+                    Text(card.rank.rawValue)
+                        .font(.system(size: size.rankSize, weight: .bold, design: .rounded))
+                        .foregroundStyle(foreground)
+                    Image(systemName: card.suit.sfSymbol)
+                        .font(.system(size: size.suitSize, weight: .semibold))
+                        .foregroundStyle(foreground)
+                }
+            } else {
+                VStack(spacing: 2) {
+                    Text(card.rank.rawValue)
+                        .font(.system(size: size.rankSize, weight: .bold, design: .rounded))
+                        .foregroundStyle(foreground)
+                    Image(systemName: card.suit.sfSymbol)
+                        .font(.system(size: size.suitSize, weight: .semibold))
+                        .foregroundStyle(foreground)
+                }
             }
         }
         .frame(width: size.width, height: size.height)
