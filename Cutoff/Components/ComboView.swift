@@ -50,7 +50,7 @@ struct ComboView: View {
                 .font(.system(size: size.rankSize + 1, weight: .bold, design: .rounded))
                 .foregroundStyle(Color.black)
         }
-        .frame(width: size.width * 0.85, height: size.height) // Slightly narrower than a real card
+        .frame(width: size.height * 0.8, height: size.height) // Make rank cards vertical rectangles
     }
     
     private func categoryColor(_ cat: HandCombo.Category) -> Color {
