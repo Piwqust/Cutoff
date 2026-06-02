@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/banner.png" alt="Cutoff — a calm, studio-grade MTT preflop trainer for iPhone" width="100%" />
+</p>
+
 # Cutoff
 
 A calm, studio-grade iPhone trainer for No-Limit Texas Hold'em **multi-table tournament** preflop decisions. Built in SwiftUI for iOS 17+, dark-mode forced, Liquid Glass on iOS 18.

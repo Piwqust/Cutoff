@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2400px; height: 1000px; overflow: hidden;
+    font-family: -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif; }
+
+  .stage {
+    position: relative; width: 2400px; height: 1000px;
+    background:
+      radial-gradient(80% 120% at 78% 30%, #0f2419 0%, #08130e 45%, #050807 100%);
+    overflow: hidden;
+  }
+  /* mint glow behind the phones */
+  .bg-glow {
+    position: absolute; right: -120px; top: 50%; transform: translateY(-50%);
+    width: 1500px; height: 1500px;
+    background: radial-gradient(circle at 50% 50%,
+      rgba(66,232,156,0.20) 0%, rgba(34,201,122,0.07) 38%, rgba(34,201,122,0) 62%);
+    filter: blur(10px);
+  }
+  /* hairline grid texture, very faint */
+  .grain {
+    position: absolute; inset: 0; opacity: 0.5;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0) 40%);
+    mix-blend-mode: screen;
+  }
+
+  /* ---------- LEFT: brand block ---------- */
+  .left {
+    position: absolute; left: 150px; top: 50%; transform: translateY(-50%);
+    width: 1100px;
+  }
+  .icon {
+    width: 188px; height: 188px; border-radius: 42px;
+    box-shadow: 0 28px 60px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.06);
+    margin-bottom: 46px;
+  }
+  .wordmark {
+    font-size: 188px; font-weight: 800; letter-spacing: -6px; line-height: 0.9;
+    color: #f5f7f6;
+    background: linear-gradient(180deg, #ffffff 0%, #cfeede 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .tagline {
+    margin-top: 34px;
+    font-size: 50px; font-weight: 500; line-height: 1.32; letter-spacing: -0.5px;
+    color: #a9c2b7; max-width: 920px;
+  }
+  .tagline b { color: #65f2b0; font-weight: 600; }
+  .tags { margin-top: 50px; display: flex; gap: 20px; }
+  .tag {
+    font-size: 30px; font-weight: 600; letter-spacing: 0.2px;
+    color: #bfeede; padding: 18px 30px; border-radius: 100px;
+    background: rgba(101,242,176,0.08);
+    box-shadow: inset 0 0 0 1.5px rgba(101,242,176,0.28);
+  }
+
+  /* ---------- RIGHT: phone mockups ---------- */
+  .phones { position: absolute; right: 70px; top: 50%; transform: translateY(-50%);
+    width: 1180px; height: 1000px; }
+  .phone {
+    position: absolute; width: 396px; height: 860px;
+    border-radius: 64px; padding: 13px;
+    background: linear-gradient(160deg, #1a1d1c 0%, #0a0c0b 100%);
+    box-shadow:
+      0 50px 90px rgba(0,0,0,0.6),
+      inset 0 0 0 2px rgba(255,255,255,0.07),
+      inset 0 2px 2px rgba(255,255,255,0.12);
+  }
+  .phone .screen {
+    width: 100%; height: 100%; border-radius: 52px; overflow: hidden;
+    background-size: cover; background-position: top center;
+    box-shadow: inset 0 0 0 2px rgba(0,0,0,0.6);
+  }
+  /* notch */
+  .phone::before {
+    content: ""; position: absolute; left: 50%; top: 26px; transform: translateX(-50%);
+    width: 120px; height: 34px; border-radius: 20px; background: #050606; z-index: 3;
+  }
+  .phone.back-l { right: 540px; top: 130px; transform: rotate(-9deg); z-index: 1; }
+  .phone.back-r { right: 30px;  top: 150px; transform: rotate(9deg);  z-index: 1; }
+  .phone.front  { right: 285px; top: 70px;  transform: rotate(0deg);  z-index: 2; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="bg-glow"></div>
+
+    <div class="phones">
+      <div class="phone back-l"><div class="screen" style="background-image:url('/docs/screenshots/03_ranges.png')"></div></div>
+      <div class="phone back-r"><div class="screen" style="background-image:url('/docs/screenshots/02_train_dashboard.png')"></div></div>
+      <div class="phone front"><div class="screen" style="background-image:url('/docs/screenshots/05_preflop_trainer_new.png')"></div></div>
+    </div>
+
+    <div class="left">
+      <img class="icon" src="/icon_preview.png" />
+      <div class="wordmark">Cutoff</div>
+      <div class="tagline">A calm, studio-grade <b>MTT preflop trainer</b> for iPhone —<br/>one decision per card, immediate feedback.</div>
+      <div class="tags">
+        <div class="tag">SwiftUI · iOS 17+</div>
+        <div class="tag">8-max MTT</div>
+        <div class="tag">Liquid Glass</div>
+      </div>
+    </div>
+
+    <div class="grain"></div>
+  </div>
+</body>
+</html>
