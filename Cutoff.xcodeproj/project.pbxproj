@@ -71,6 +71,7 @@
 		07AF631548F1D70A8C27793E /* RangeGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AB0EEB565165F2EE65BE67 /* RangeGridView.swift */; };
 		07E2A4F4559CF91CA19BF321 /* mtt_8max_40bb_utg_vs3bet.json in Resources */ = {isa = PBXBuildFile; fileRef = B8032A4DA1E6FF81268B2A22 /* mtt_8max_40bb_utg_vs3bet.json */; };
 		080058E7A8DC8212A5310A59 /* mtt_9max_30bb_utg1_vs3bet_vs_co.json in Resources */ = {isa = PBXBuildFile; fileRef = CB0D0FD3F25E8EEA2616D02A /* mtt_9max_30bb_utg1_vs3bet_vs_co.json */; };
+		08286EDC93D2AA5A1FC97D54 /* ComboView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19803C5474421C8246CE72FD /* ComboView.swift */; };
 		082BD4F75503D0006181A414 /* mtt_8max_35bb_utg1_vs3bet.json in Resources */ = {isa = PBXBuildFile; fileRef = CC5FEBB44AD18EE14CF4A5AC /* mtt_8max_35bb_utg1_vs3bet.json */; };
 		082C35415DDD7F1840E586EA /* mtt_8max_10bb_co_vs3bet_vs_btn.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FDCEF6BC5614B9C9CDAF347 /* mtt_8max_10bb_co_vs3bet_vs_btn.json */; };
 		0854AA5A45C3C3A9D49BEE8A /* mtt_9max_50bb_bb_vsopen.json in Resources */ = {isa = PBXBuildFile; fileRef = FEE122EB48DA78B0751AFC5F /* mtt_9max_50bb_bb_vsopen.json */; };
@@ -2309,6 +2310,7 @@
 		193542E7656682F38454463D /* mtt_8max_10bb_co_unopened.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_8max_10bb_co_unopened.json; sourceTree = "<group>"; };
 		193D6CD3ADDEEDFD807301C9 /* mtt_8max_20bb_co_vsopen_vs_utg1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_8max_20bb_co_vsopen_vs_utg1.json; sourceTree = "<group>"; };
 		19786B652885CAC9C264D9E1 /* mtt_9max_30bb_hj_vs3bet_vs_sb.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_30bb_hj_vs3bet_vs_sb.json; sourceTree = "<group>"; };
+		19803C5474421C8246CE72FD /* ComboView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComboView.swift; sourceTree = "<group>"; };
 		19B6B5420E7CA070008B362E /* mtt_9max_70bb_utg_vs3bet_vs_bb.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_70bb_utg_vs3bet_vs_bb.json; sourceTree = "<group>"; };
 		19C3857D1F23FD3366498009 /* mtt_8max_50bb_utg_vs3bet_vs_lj.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_8max_50bb_utg_vs3bet_vs_lj.json; sourceTree = "<group>"; };
 		19D1364397F79F275FF608AA /* mtt_9max_10bb_utg_vs3bet_vs_sb.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mtt_9max_10bb_utg_vs3bet_vs_sb.json; sourceTree = "<group>"; };
@@ -6387,6 +6389,7 @@
 				557B7EEF21B26DE03CC478C9 /* AppBackground.swift */,
 				0E6EF0EBA961EFC7D952C7B9 /* BoardView.swift */,
 				AC45A0BEE71729E46DD88E4A /* CardView.swift */,
+				19803C5474421C8246CE72FD /* ComboView.swift */,
 				FA8CCA0227ADC5E021949A5F /* FeedbackSheet.swift */,
 				C3D05E0FDB8F08848C0F1610 /* FilterChip.swift */,
 				5F1EC102BE34AC0059DACDA7 /* FrequencyDistributionView.swift */,
@@ -8520,6 +8523,7 @@
 				5EAA0BA918DF672454784D28 /* Card.swift in Sources */,
 				74A38524D86DEBF84D77CEFD /* CardView.swift in Sources */,
 				4299B8B7791F6DAC462FE078 /* ChartCatalog.swift in Sources */,
+				08286EDC93D2AA5A1FC97D54 /* ComboView.swift in Sources */,
 				7486877828502466A0EDFDEB /* ConfigStore.swift in Sources */,
 				0AF132A37748A5A202A57276 /* CutoffApp.swift in Sources */,
 				517BC25DA527FD7D93DCC53C /* DrillCategory.swift in Sources */,

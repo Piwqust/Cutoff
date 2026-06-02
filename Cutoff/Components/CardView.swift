@@ -42,13 +42,13 @@ struct CardView: View {
     }
 
     private var foreground: Color {
-        card.suit.isRed ? AppColors.accentCoral : AppColors.textPrimary
+        card.suit.isRed ? AppColors.accentCoral : Color.black
     }
 
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
-                .fill(AppColors.cardSurface)
+                .fill(Color.white)
                 .overlay(
                     RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
                         .strokeBorder(AppColors.divider.opacity(0.6), lineWidth: 1)

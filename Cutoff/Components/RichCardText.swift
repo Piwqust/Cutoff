@@ -60,12 +60,22 @@ struct RichCardText: View {
         } else if trimmed.count == 2 {
             if let card = Card(notation: trimmed) {
                 generatedText = render(card: card)
+            } else if HandCombo.parse(trimmed) != nil {
+                generatedText = render(combo: trimmed)
+            }
+        } else if trimmed.count == 3 {
+            let withoutPlus = trimmed.replacingOccurrences(of: "+", with: "")
+            if HandCombo.parse(trimmed) != nil || HandCombo.parse(withoutPlus) != nil {
+                generatedText = render(combo: trimmed)
             }
         } else if trimmed.count == 4 {
+            let withoutPlus = trimmed.replacingOccurrences(of: "+", with: "")
             if let c1 = Card(notation: String(trimmed.prefix(2))),
                let c2 = Card(notation: String(trimmed.suffix(2))) {
-                generatedText = render(card: c1) + Text(Image(systemName: "flexbox")) // hack to add minimal space? Text(" ") works.
+                generatedText = render(card: c1) + Text(Image(systemName: "flexbox")) 
                 generatedText = render(card: c1) + Text(" ") + render(card: c2)
+            } else if HandCombo.parse(trimmed) != nil || HandCombo.parse(withoutPlus) != nil {
+                generatedText = render(combo: trimmed)
             }
         }
         
@@ -88,5 +98,19 @@ struct RichCardText: View {
         }
         
         return Text(card.notation)
+    }
+
+    private func render(combo: String) -> Text {
+        let view = ComboView(combo: combo, size: .inline)
+            .environment(\.colorScheme, .dark)
+        
+        let renderer = ImageRenderer(content: view)
+        renderer.scale = UIScreen.main.scale
+        
+        if let uiImage = renderer.uiImage {
+            return Text(Image(uiImage: uiImage)).baselineOffset(-6.0)
+        }
+        
+        return Text(combo)
     }
 }
