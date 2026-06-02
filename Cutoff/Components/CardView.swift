@@ -42,16 +42,18 @@ struct CardView: View {
     }
 
     private var foreground: Color {
-        card.suit.isRed ? AppColors.accentCoral : Color.black
+        // Use a deeper red for higher contrast on the white card background
+        card.suit.isRed ? Color(red: 0.85, green: 0.15, blue: 0.15) : Color.black
     }
 
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
                 .fill(Color.white)
+                .shadow(color: Color.black.opacity(0.3), radius: 2, y: 1)
                 .overlay(
                     RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
-                        .strokeBorder(AppColors.divider.opacity(0.6), lineWidth: 1)
+                        .strokeBorder(Color.black.opacity(0.2), lineWidth: 1)
                 )
             VStack(spacing: 2) {
                 Text(card.rank.rawValue)

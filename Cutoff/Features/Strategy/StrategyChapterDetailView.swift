@@ -242,20 +242,13 @@ struct StrategyChapterDetailContentView: View {
                             Image(systemName: "checkmark.circle.fill")
                                 .foregroundStyle(AppColors.accentLime)
                             Text("ЧТО ДЕЛАТЬ:")
-                                .font(AppTypography.caption)
+                                .font(AppTypography.headline)
                                 .bold()
                                 .foregroundStyle(AppColors.accentLime)
                         }
                         RichCardText(text: chapter.whatsDo(for: l10n.language), font: AppTypography.body, foregroundColor: AppColors.textPrimary)
                     }
-                    .padding(AppSpacing.md)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(AppColors.primaryMint.opacity(0.06))
-                    .cornerRadius(AppRadius.card)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: AppRadius.card)
-                            .stroke(AppColors.divider.opacity(0.4), lineWidth: 0.5)
-                    )
+                    .padding(.vertical, AppSpacing.sm)
 
                     // WHY PANEL (the reasoning, scenario stripped out)
                     VStack(alignment: .leading, spacing: AppSpacing.xs) {
@@ -263,51 +256,35 @@ struct StrategyChapterDetailContentView: View {
                             Image(systemName: "questionmark.circle.fill")
                                 .foregroundStyle(AppColors.textSecondary)
                             Text("ПОЧЕМУ ЭТО РАБОТАЕТ:")
-                                .font(AppTypography.caption)
+                                .font(AppTypography.headline)
                                 .bold()
                                 .foregroundStyle(AppColors.textSecondary)
                         }
-                        RichCardText(text: chapter.whyReason(for: l10n.language), font: AppTypography.subheadline, foregroundColor: AppColors.textSecondary)
+                        RichCardText(text: chapter.whyReason(for: l10n.language), font: AppTypography.body, foregroundColor: AppColors.textSecondary)
                     }
-                    .padding(AppSpacing.md)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color.black.opacity(0.18))
-                    .cornerRadius(AppRadius.card)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: AppRadius.card)
-                            .stroke(AppColors.divider.opacity(0.3), lineWidth: 0.5)
-                    )
+                    .padding(.vertical, AppSpacing.sm)
 
-                    // LIVE HAND EXAMPLE — its own scannable card
+                    // LIVE HAND EXAMPLE
                     if let scenario = chapter.whyScenario(for: l10n.language) {
                         VStack(alignment: .leading, spacing: AppSpacing.xs) {
                             HStack(spacing: 6) {
                                 Image(systemName: "book.pages.fill")
                                     .foregroundStyle(AppColors.primaryMint)
                                 Text(scenario.title.uppercased())
-                                    .font(AppTypography.caption)
+                                    .font(AppTypography.headline)
                                     .bold()
                                     .foregroundStyle(AppColors.primaryMint)
                             }
-                            RichCardText(text: scenario.body, font: AppTypography.subheadline, foregroundColor: AppColors.textPrimary)
+                            RichCardText(text: scenario.body, font: AppTypography.body, foregroundColor: AppColors.textPrimary)
                         }
-                        .padding(AppSpacing.md)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(
-                            RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
-                                .fill(AppColors.primaryMint.opacity(0.07))
-                        )
+                        .padding(.vertical, AppSpacing.sm)
+                        .padding(.leading, AppSpacing.md)
                         .overlay(alignment: .leading) {
                             // Accent spine to set the worked example apart visually.
                             RoundedRectangle(cornerRadius: 2)
                                 .fill(AppColors.primaryMint)
                                 .frame(width: 3)
-                                .padding(.vertical, AppSpacing.sm)
                         }
-                        .overlay(
-                            RoundedRectangle(cornerRadius: AppRadius.card)
-                                .stroke(AppColors.primaryMint.opacity(0.25), lineWidth: 0.5)
-                        )
                     }
                 }
 

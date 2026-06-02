@@ -9,9 +9,10 @@ struct ComboView: View {
         ZStack {
             RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
                 .fill(Color.white)
+                .shadow(color: Color.black.opacity(0.3), radius: 2, y: 1)
                 .overlay(
                     RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
-                        .strokeBorder(AppColors.divider.opacity(0.6), lineWidth: 1)
+                        .strokeBorder(Color.black.opacity(0.2), lineWidth: 1)
                 )
             
             Text(combo)
