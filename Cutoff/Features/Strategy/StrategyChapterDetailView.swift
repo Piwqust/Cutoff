@@ -141,7 +141,6 @@ struct StrategyChapterDetailView: View {
         }
         .padding(.horizontal, AppSpacing.md)
         .padding(.vertical, AppSpacing.md)
-        .liquidGlass(in: RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous))
         .padding(.horizontal, AppSpacing.pageHorizontal)
         .padding(.bottom, AppSpacing.md)
     }
