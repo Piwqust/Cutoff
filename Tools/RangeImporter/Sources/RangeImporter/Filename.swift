@@ -12,6 +12,7 @@ struct ChartSlug {
     let depthBB: Int
     let position: Position
     let facing: Facing
+    let opponentPosition: Position?
 
     enum Position: String, CaseIterable {
         case utg, utg1, lj, hj, co, btn, sb, bb
@@ -50,7 +51,10 @@ struct ChartSlug {
     }
 
     var id: String {
-        "mtt_\(tableSize)max_\(depthBB)bb_\(position.rawValue)_\(facing.rawValue)"
+        if let opponent = opponentPosition {
+            return "mtt_\(tableSize)max_\(depthBB)bb_\(position.rawValue)_\(facing.rawValue)_vs_\(opponent.rawValue)"
+        }
+        return "mtt_\(tableSize)max_\(depthBB)bb_\(position.rawValue)_\(facing.rawValue)"
     }
 
     var format: String { "NLHE_MTT_\(tableSize)MAX" }
@@ -59,12 +63,19 @@ struct ChartSlug {
     /// pattern doesn't match.
     static func parse(_ stem: String) -> ChartSlug? {
         // Expect: mtt_<size>max_<depth>bb_<position>_<facing>
+        // Or: mtt_<size>max_<depth>bb_<position>_<facing>_vs_<opponent>
         let parts = stem.split(separator: "_").map(String.init)
-        guard parts.count == 5, parts[0] == "mtt" else { return nil }
+        guard parts.count == 5 || parts.count == 7, parts[0] == "mtt" else { return nil }
         guard parts[1].hasSuffix("max"), let size = Int(parts[1].dropLast(3)) else { return nil }
         guard parts[2].hasSuffix("bb"), let depth = Int(parts[2].dropLast(2)) else { return nil }
         guard let position = Position(rawValue: parts[3]) else { return nil }
         guard let facing = Facing(rawValue: parts[4]) else { return nil }
-        return ChartSlug(tableSize: size, depthBB: depth, position: position, facing: facing)
+        
+        var opponentPosition: Position? = nil
+        if parts.count == 7, parts[5] == "vs" {
+            opponentPosition = Position(rawValue: parts[6])
+        }
+        
+        return ChartSlug(tableSize: size, depthBB: depth, position: position, facing: facing, opponentPosition: opponentPosition)
     }
 }

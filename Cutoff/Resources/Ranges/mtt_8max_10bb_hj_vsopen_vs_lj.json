@@ -1,0 +1,110 @@
+{
+  "format" : "NLHE_MTT_8MAX",
+  "hands" : {
+    "55" : {
+      "fold" : 0.13980000000000001,
+      "shove" : 0.86019999999999996
+    },
+    "66" : {
+      "shove" : 1
+    },
+    "88" : {
+      "shove" : 1
+    },
+    "99" : {
+      "shove" : 1
+    },
+    "A3s" : {
+      "shove" : 1
+    },
+    "A4s" : {
+      "shove" : 1
+    },
+    "A5s" : {
+      "shove" : 1
+    },
+    "A6s" : {
+      "fold" : 0.75009999999999999,
+      "shove" : 0.24990000000000001
+    },
+    "A7s" : {
+      "shove" : 1
+    },
+    "A8s" : {
+      "shove" : 1
+    },
+    "A9s" : {
+      "shove" : 1
+    },
+    "AA" : {
+      "shove" : 1
+    },
+    "AJo" : {
+      "shove" : 1
+    },
+    "AJs" : {
+      "shove" : 1
+    },
+    "AKo" : {
+      "shove" : 1
+    },
+    "AKs" : {
+      "shove" : 1
+    },
+    "AQo" : {
+      "shove" : 1
+    },
+    "AQs" : {
+      "shove" : 1
+    },
+    "ATo" : {
+      "shove" : 1
+    },
+    "ATs" : {
+      "shove" : 1
+    },
+    "JJ" : {
+      "shove" : 1
+    },
+    "KJs" : {
+      "shove" : 1
+    },
+    "KK" : {
+      "shove" : 1
+    },
+    "KQs" : {
+      "shove" : 1
+    },
+    "QJs" : {
+      "shove" : 1
+    },
+    "QQ" : {
+      "shove" : 1
+    },
+    "TT" : {
+      "shove" : 1
+    }
+  },
+  "id" : "mtt_8max_10bb_hj_vsopen_vs_lj",
+  "source" : {
+    "description" : "RangeConverter free PDF — 8-max 10bb 1bb ante (12.5%).",
+    "publisher" : {
+      "accessedDate" : "2026-06-01",
+      "name" : "RangeConverter",
+      "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
+      "treeParams" : "poker.academy CE-Symmetric Regular @ 10bb (GTO ChipEV, 1bb ante)",
+      "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
+    },
+    "solver" : {
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante."
+    },
+    "type" : "published"
+  },
+  "spot" : {
+    "anteType" : "bigBlindAnte",
+    "facingAction" : "vsOpen",
+    "opponentPosition" : "LJ",
+    "position" : "HJ",
+    "stackDepthBB" : 10
+  }
+}

@@ -122,24 +122,42 @@ func runDerive9Max(inputDir: String, outputDir: String) throws {
         default:
             targets = [sourceSlug.position]
         }
+        
+        let opponentTargets: [ChartSlug.Position?]
+        if let opp = sourceSlug.opponentPosition {
+            switch opp {
+            case .utg:
+                opponentTargets = [.utg, .utg1]
+            case .utg1:
+                print("[skip] \(stem): 8-max UTG1 opponent has no 9-max counterpart")
+                continue
+            default:
+                opponentTargets = [opp]
+            }
+        } else {
+            opponentTargets = [nil]
+        }
 
         for target in targets {
-            let (adapted, note) = NineMaxAdapter.adapt(
-                eightMax: sourceSheet,
-                sourcePosition: sourceSlug.position,
-                targetPosition: target
-            )
-            let targetSlug = ChartSlug(
-                tableSize: 9,
-                depthBB: sourceSlug.depthBB,
-                position: target,
-                facing: sourceSlug.facing
-            )
-            let emitter = Emitter(publisher: publisher, extraAssumption: note)
-            let json = try emitter.emit(slug: targetSlug, sheet: adapted)
-            let outURL = URL(fileURLWithPath: outputDir).appendingPathComponent("\(targetSlug.id).json")
-            try json.write(to: outURL)
-            print("[ok]   \(targetSlug.id).json ← \(sourceSlug.id).json")
+            for oppTarget in opponentTargets {
+                let (adapted, note) = NineMaxAdapter.adapt(
+                    eightMax: sourceSheet,
+                    sourcePosition: sourceSlug.position,
+                    targetPosition: target
+                )
+                let targetSlug = ChartSlug(
+                    tableSize: 9,
+                    depthBB: sourceSlug.depthBB,
+                    position: target,
+                    facing: sourceSlug.facing,
+                    opponentPosition: oppTarget
+                )
+                let emitter = Emitter(publisher: publisher, extraAssumption: note)
+                let json = try emitter.emit(slug: targetSlug, sheet: adapted)
+                let outURL = URL(fileURLWithPath: outputDir).appendingPathComponent("\(targetSlug.id).json")
+                try json.write(to: outURL)
+                print("[ok]   \(targetSlug.id).json ← \(sourceSlug.id).json")
+            }
         }
     }
 }

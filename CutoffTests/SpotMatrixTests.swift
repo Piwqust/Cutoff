@@ -7,7 +7,7 @@ final class SpotMatrixTests: XCTestCase {
     func test_all_isNonEmptyAndUnique() {
         let all = SpotMatrix.all
         XCTAssertFalse(all.isEmpty)
-        let triples = all.map { SpotMatrix.Triple(position: $0.position, depth: $0.stackDepthBB, facing: $0.facingAction) }
+        let triples = all.map { SpotMatrix.Triple(position: $0.position, depth: $0.stackDepthBB, facing: $0.facingAction, opponent: $0.opponentPosition) }
         XCTAssertEqual(triples.count, Set(triples).count,
                        "SpotMatrix.all should not contain duplicate triples")
     }

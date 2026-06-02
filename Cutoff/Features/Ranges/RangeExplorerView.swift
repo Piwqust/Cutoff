@@ -53,11 +53,6 @@ struct RangeExplorerView: View {
                 .presentationDetents([.medium, .large])
                 .presentationDragIndicator(.visible)
         }
-        .sheet(item: $handDetail) { payload in
-            RangeDetailSheet(payload: payload)
-                .presentationDetents([.fraction(0.45), .medium])
-                .presentationDragIndicator(.visible)
-        }
         .onAppear {
             if let id = vm.activeChart?.id { browsing.markVisited(id) }
         }
@@ -104,6 +99,9 @@ struct RangeExplorerView: View {
             positionSection
             depthSection
             scenarioSection
+            if vm.selectedFacing == .vsOpen || vm.selectedFacing == .vs3Bet {
+                opponentSection
+            }
         }
     }
 
@@ -158,6 +156,20 @@ struct RangeExplorerView: View {
         }
     }
 
+    private var opponentSection: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            eyebrow(l10n.t(.opponent))
+                .padding(.horizontal, AppSpacing.pageHorizontal)
+            PositionPickerMinimap(
+                positions: TablePosition.nineMaxOrder,
+                selected: vm.selectedOpponent,
+                enabled: availableOpponents,
+                onSelect: { vm.selectOpponent($0) }
+            )
+            .padding(.horizontal, AppSpacing.pageHorizontal)
+        }
+    }
+
     // MARK: - Chart card
 
     private func chartCard(_ chart: RangeChart) -> some View {
@@ -171,14 +183,8 @@ struct RangeExplorerView: View {
                     .foregroundStyle(AppColors.textSecondary)
             }
 
-            RangeGridView(chart: chart) { combo, _ in
-                handDetail = RangeDetailPayload(
-                    combo: combo,
-                    frequencies: chart.frequencies(for: combo),
-                    chart: chart
-                )
-            }
-            .id(chart.id) // re-render on chart change for crisper transitions
+            RangeGridView(chart: chart, activePayload: $handDetail)
+                .id(chart.id) // re-render on chart change for crisper transitions
             .offset(x: swipeOffset)
             .gesture(depthSwipeGesture)
 
@@ -325,14 +331,18 @@ struct RangeExplorerView: View {
         Set(vm.charts.map(\.facingAction))
     }
 
-    /// Scenario buttons we render for the current position. Drops any
-    /// `FacingAction` for which there's no chart at the selected position —
-    /// so e.g. BB never shows RFI and UTG never shows blind defense.
-    /// Ordered to match the canonical `FacingAction.allCases` sequence.
     private var scenariosForCurrentPosition: [FacingAction] {
         guard let pos = vm.selectedPosition else { return [] }
         let present = Set(vm.charts.filter { $0.position == pos }.map(\.facingAction))
         return FacingAction.allCases.filter { present.contains($0) }
+    }
+
+    private var availableOpponents: Set<TablePosition> {
+        guard let pos = vm.selectedPosition, let facing = vm.selectedFacing else { return [] }
+        let present = vm.charts
+            .filter { $0.position == pos && $0.facingAction == facing }
+            .compactMap { $0.opponentPosition }
+        return Set(present)
     }
 
     // MARK: - Sheet callbacks

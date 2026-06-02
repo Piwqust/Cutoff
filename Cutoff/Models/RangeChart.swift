@@ -23,6 +23,7 @@ struct RangeChart: Codable, Identifiable, Hashable {
     let id: String
     let stackDepth: Int
     let position: TablePosition
+    let opponentPosition: TablePosition?
     let tableSize: Int
     let antePercent: Double
     let facingAction: FacingAction
@@ -121,6 +122,7 @@ struct RangeChart: Codable, Identifiable, Hashable {
             position: position,
             stackDepthBB: stackDepth,
             facingAction: facingAction,
+            opponentPosition: opponentPosition,
             anteType: .bigBlindAnte,
             tableSize: tableSize
         )
@@ -154,7 +156,7 @@ struct RangeChart: Codable, Identifiable, Hashable {
     /// Stored-property keys for the flat schema (MTT_8max_*). Also used to
     /// detect the nested-spot schema via `.spot` / `.format` keys.
     private enum CodingKeys: String, CodingKey {
-        case id, stackDepth, position, tableSize, antePercent, facingAction, isICM, source, hands
+        case id, stackDepth, position, opponentPosition, tableSize, antePercent, facingAction, isICM, source, hands
         case spot, format
     }
 
@@ -162,6 +164,7 @@ struct RangeChart: Codable, Identifiable, Hashable {
         let position: TablePosition
         let stackDepthBB: Int
         let facingAction: FacingAction
+        let opponentPosition: TablePosition?
         let anteType: AnteType?
     }
 
@@ -175,6 +178,7 @@ struct RangeChart: Codable, Identifiable, Hashable {
             self.position = spot.position
             self.stackDepth = spot.stackDepthBB
             self.facingAction = spot.facingAction
+            self.opponentPosition = spot.opponentPosition
             // Prefer an explicit tableSize if present; otherwise parse a known
             // token out of `format`. A bundled file with neither is a
             // packaging bug — throw rather than silently defaulting to 9-max
@@ -202,6 +206,7 @@ struct RangeChart: Codable, Identifiable, Hashable {
             // Flat schema (MTT_8max_*).
             self.stackDepth = try c.decode(Int.self, forKey: .stackDepth)
             self.position = try c.decode(TablePosition.self, forKey: .position)
+            self.opponentPosition = try c.decodeIfPresent(TablePosition.self, forKey: .opponentPosition)
             self.tableSize = try c.decode(Int.self, forKey: .tableSize)
             self.antePercent = try c.decode(Double.self, forKey: .antePercent)
             self.facingAction = try c.decode(FacingAction.self, forKey: .facingAction)
@@ -216,6 +221,7 @@ struct RangeChart: Codable, Identifiable, Hashable {
         try c.encode(id, forKey: .id)
         try c.encode(stackDepth, forKey: .stackDepth)
         try c.encode(position, forKey: .position)
+        try c.encodeIfPresent(opponentPosition, forKey: .opponentPosition)
         try c.encode(tableSize, forKey: .tableSize)
         try c.encode(antePercent, forKey: .antePercent)
         try c.encode(facingAction, forKey: .facingAction)

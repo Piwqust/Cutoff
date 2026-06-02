@@ -25,6 +25,9 @@ enum L10n {
         case tabRanges
         case tabReview
         case tabSettings
+        case tabStrategy
+        case strategyTitle
+        case pastGuides
 
         // Onboarding
         case onboardingSubtitle
@@ -116,6 +119,7 @@ enum L10n {
         // Ranges
         case rangesTitle
         case depth
+        case opponent
         case actionMix
         case swipeToChangeDepth
         case noChartMatches
@@ -449,8 +453,10 @@ enum L10n {
 
         .tabTrain: "Train",
         .tabRanges: "Ranges",
-        .tabReview: "Review",
         .tabSettings: "Settings",
+        .tabStrategy: "Strategy",
+        .strategyTitle: "Strategy Guide",
+        .pastGuides: "Past Guides",
 
         .onboardingSubtitle: "Drill the preflop spots you see in live MTTs.",
         .startTraining: "Start training",
@@ -534,6 +540,7 @@ enum L10n {
 
         .rangesTitle: "Ranges",
         .depth: "Depth",
+        .opponent: "Opponent",
         .actionMix: "Action mix",
         .swipeToChangeDepth: "swipe to change depth",
         .noChartMatches: "No chart matches these filters.",
@@ -699,8 +706,10 @@ enum L10n {
 
         .tabTrain: "Тренировка",
         .tabRanges: "Диапазоны",
-        .tabReview: "Разбор",
         .tabSettings: "Настройки",
+        .tabStrategy: "Стратегия",
+        .strategyTitle: "Гид по стратегии",
+        .pastGuides: "История гайдов",
 
         .onboardingSubtitle: "Тренируй префлоп-споты из живых MTT.",
         .startTraining: "Начать тренировку",
@@ -784,6 +793,7 @@ enum L10n {
 
         .rangesTitle: "Диапазоны",
         .depth: "Стек",
+        .opponent: "Оппонент",
         .actionMix: "Микс действий",
         .swipeToChangeDepth: "свайп — сменить стек",
         .noChartMatches: "Под эти фильтры чартов нет.",
@@ -949,8 +959,10 @@ enum L10n {
 
         .tabTrain: "тренить",
         .tabRanges: "ренжи",
-        .tabReview: "разбор",
         .tabSettings: "настройки",
+        .tabStrategy: "гид",
+        .strategyTitle: "гид по катке",
+        .pastGuides: "архив каток",
 
         .onboardingSubtitle: "дрочи префлоп-споты из живых турников. без вот этого вашего теоркрафта.",
         .startTraining: "погнали гриндить",
@@ -1034,6 +1046,7 @@ enum L10n {
 
         .rangesTitle: "ренжи",
         .depth: "стек",
+        .opponent: "оппонент",
         .actionMix: "микс экшнов",
         .swipeToChangeDepth: "свайпни, чтоб поменять стек",
         .noChartMatches: "под эти фильтры чартов нема.",

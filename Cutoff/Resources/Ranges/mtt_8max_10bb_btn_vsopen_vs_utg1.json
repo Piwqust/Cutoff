@@ -1,0 +1,139 @@
+{
+  "format" : "NLHE_MTT_8MAX",
+  "hands" : {
+    "55" : {
+      "call" : 0.055899999999999998,
+      "fold" : 0.51490000000000002,
+      "shove" : 0.42920000000000003
+    },
+    "66" : {
+      "call" : 0.23000000000000001,
+      "shove" : 0.77000000000000002
+    },
+    "77" : {
+      "call" : 0.11990000000000001,
+      "shove" : 0.88009999999999999
+    },
+    "88" : {
+      "call" : 0.47999999999999998,
+      "shove" : 0.52000000000000002
+    },
+    "99" : {
+      "call" : 0.1157,
+      "shove" : 0.88429999999999997
+    },
+    "A3s" : {
+      "call" : 0.1157,
+      "fold" : 0.87429999999999997,
+      "shove" : 0.01
+    },
+    "A4s" : {
+      "shove" : 1
+    },
+    "A5s" : {
+      "shove" : 1
+    },
+    "A6s" : {
+      "fold" : 0.19550000000000001,
+      "shove" : 0.80449999999999999
+    },
+    "A7s" : {
+      "shove" : 1
+    },
+    "A8s" : {
+      "call" : 1
+    },
+    "A9o" : {
+      "call" : 0.16,
+      "fold" : 0.83999999999999997
+    },
+    "A9s" : {
+      "call" : 0.67010000000000003,
+      "shove" : 0.32990000000000003
+    },
+    "AA" : {
+      "call" : 1
+    },
+    "AJo" : {
+      "shove" : 1
+    },
+    "AJs" : {
+      "shove" : 1
+    },
+    "AKo" : {
+      "shove" : 1
+    },
+    "AKs" : {
+      "shove" : 1
+    },
+    "AQo" : {
+      "shove" : 1
+    },
+    "AQs" : {
+      "shove" : 1
+    },
+    "ATo" : {
+      "call" : 0.016,
+      "shove" : 0.98399999999999999
+    },
+    "ATs" : {
+      "shove" : 1
+    },
+    "JJ" : {
+      "call" : 0.1057,
+      "shove" : 0.89429999999999998
+    },
+    "JTs" : {
+      "call" : 0.019900000000000001,
+      "fold" : 0.98009999999999997
+    },
+    "KJs" : {
+      "call" : 0.61470000000000002,
+      "shove" : 0.38529999999999998
+    },
+    "KK" : {
+      "shove" : 1
+    },
+    "KQs" : {
+      "call" : 0.14999999999999999,
+      "shove" : 0.84999999999999998
+    },
+    "KTs" : {
+      "call" : 0.96009999999999995,
+      "fold" : 0.039899999999999998
+    },
+    "QJs" : {
+      "call" : 0.82010000000000005,
+      "fold" : 0.1799
+    },
+    "QQ" : {
+      "shove" : 1
+    },
+    "TT" : {
+      "call" : 0.19989999999999999,
+      "shove" : 0.80010000000000003
+    }
+  },
+  "id" : "mtt_8max_10bb_btn_vsopen_vs_utg1",
+  "source" : {
+    "description" : "RangeConverter free PDF — 8-max 10bb 1bb ante (12.5%).",
+    "publisher" : {
+      "accessedDate" : "2026-06-01",
+      "name" : "RangeConverter",
+      "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
+      "treeParams" : "poker.academy CE-Symmetric Regular @ 10bb (GTO ChipEV, 1bb ante)",
+      "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
+    },
+    "solver" : {
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante."
+    },
+    "type" : "published"
+  },
+  "spot" : {
+    "anteType" : "bigBlindAnte",
+    "facingAction" : "vsOpen",
+    "opponentPosition" : "UTG1",
+    "position" : "BTN",
+    "stackDepthBB" : 10
+  }
+}

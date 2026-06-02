@@ -100,15 +100,20 @@ struct Emitter {
             "solver": ["assumptions": assumptions],
         ]
 
+        var spotDict: [String: Any] = [
+            "position": slug.position.jsonValue,
+            "stackDepthBB": slug.depthBB,
+            "facingAction": slug.facing.jsonValue,
+            "anteType": "bigBlindAnte",
+        ]
+        if let opponent = slug.opponentPosition {
+            spotDict["opponentPosition"] = opponent.jsonValue
+        }
+
         let root: [String: Any] = [
             "id": slug.id,
             "format": slug.format,
-            "spot": [
-                "position": slug.position.jsonValue,
-                "stackDepthBB": slug.depthBB,
-                "facingAction": slug.facing.jsonValue,
-                "anteType": "bigBlindAnte",
-            ],
+            "spot": spotDict,
             "source": source,
             "hands": hands,
         ]

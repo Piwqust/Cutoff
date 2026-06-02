@@ -1,0 +1,174 @@
+{
+  "format" : "NLHE_MTT_8MAX",
+  "hands" : {
+    "22" : {
+      "call" : 0.050000000000000003,
+      "fold" : 0.94999999999999996
+    },
+    "33" : {
+      "call" : 0.074999999999999997,
+      "fold" : 0.92500000000000004
+    },
+    "44" : {
+      "call" : 0.245,
+      "fold" : 0.755
+    },
+    "54s" : {
+      "call" : 0.019900000000000001,
+      "fold" : 0.98009999999999997
+    },
+    "55" : {
+      "call" : 0.33489999999999998,
+      "fold" : 0.66510000000000002
+    },
+    "66" : {
+      "call" : 0.67010000000000003,
+      "fold" : 0.32990000000000003
+    },
+    "76s" : {
+      "call" : 0.099900000000000003,
+      "fold" : 0.90010000000000001
+    },
+    "77" : {
+      "call" : 0.72509999999999997,
+      "raise3x" : 0.27489999999999998
+    },
+    "88" : {
+      "call" : 0.63490000000000002,
+      "raise3x" : 0.36509999999999998
+    },
+    "98s" : {
+      "call" : 0.024899999999999999,
+      "fold" : 0.97509999999999997
+    },
+    "99" : {
+      "call" : 0.63490000000000002,
+      "raise3x" : 0.36509999999999998
+    },
+    "A4s" : {
+      "call" : 0.039899999999999998,
+      "fold" : 0.96009999999999995
+    },
+    "A5s" : {
+      "call" : 0.63,
+      "raise3x" : 0.37
+    },
+    "A6s" : {
+      "fold" : 0.53500000000000003,
+      "raise3x" : 0.46500000000000002
+    },
+    "A8s" : {
+      "call" : 0.32500000000000001,
+      "raise3x" : 0.67500000000000004
+    },
+    "A9s" : {
+      "call" : 0.45000000000000001,
+      "raise3x" : 0.55000000000000004
+    },
+    "AA" : {
+      "raise3x" : 1
+    },
+    "AJo" : {
+      "call" : 0.19489999999999999,
+      "fold" : 0.1149,
+      "raise3x" : 0.69020000000000004
+    },
+    "AJs" : {
+      "call" : 1
+    },
+    "AKo" : {
+      "call" : 0.17000000000000001,
+      "raise3x" : 0.82999999999999996
+    },
+    "AKs" : {
+      "raise3x" : 1
+    },
+    "AQo" : {
+      "call" : 0.33489999999999998,
+      "raise3x" : 0.66510000000000002
+    },
+    "AQs" : {
+      "call" : 1
+    },
+    "ATo" : {
+      "fold" : 0.67500000000000004,
+      "raise3x" : 0.32500000000000001
+    },
+    "ATs" : {
+      "call" : 1
+    },
+    "JJ" : {
+      "call" : 0.12989999999999999,
+      "raise3x" : 0.87009999999999998
+    },
+    "JTs" : {
+      "call" : 0.45000000000000001,
+      "raise3x" : 0.55000000000000004
+    },
+    "K9s" : {
+      "fold" : 0.1608,
+      "raise3x" : 0.83919999999999995
+    },
+    "KJs" : {
+      "call" : 0.59009999999999996,
+      "raise3x" : 0.40989999999999999
+    },
+    "KK" : {
+      "raise3x" : 1
+    },
+    "KQo" : {
+      "call" : 0.27489999999999998,
+      "fold" : 0.26500000000000001,
+      "raise3x" : 0.46010000000000001
+    },
+    "KQs" : {
+      "call" : 1
+    },
+    "KTs" : {
+      "call" : 0.375,
+      "raise3x" : 0.625
+    },
+    "QJs" : {
+      "call" : 0.52500000000000002,
+      "raise3x" : 0.47499999999999998
+    },
+    "QQ" : {
+      "call" : 0.1099,
+      "raise3x" : 0.8901
+    },
+    "QTs" : {
+      "call" : 0.81010000000000004,
+      "raise3x" : 0.18990000000000001
+    },
+    "T9s" : {
+      "call" : 0.57509999999999994,
+      "raise3x" : 0.4249
+    },
+    "TT" : {
+      "call" : 0.44009999999999999,
+      "raise3x" : 0.55989999999999995
+    }
+  },
+  "id" : "mtt_8max_40bb_hj_vsopen_vs_utg1",
+  "source" : {
+    "description" : "RangeConverter free PDF — 8-max 40bb 1bb ante (12.5%).",
+    "publisher" : {
+      "accessedDate" : "2026-06-01",
+      "name" : "RangeConverter",
+      "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
+      "treeParams" : "poker.academy CE-Symmetric Regular @ 40bb (GTO ChipEV, 1bb ante)",
+      "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
+    },
+    "solver" : {
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante."
+    },
+    "type" : "published"
+  },
+  "spot" : {
+    "anteType" : "bigBlindAnte",
+    "facingAction" : "vsOpen",
+    "opponentPosition" : "UTG1",
+    "position" : "HJ",
+    "stackDepthBB" : 40
+  }
+}

@@ -1,0 +1,31 @@
+# poker.academy CE-Symmetric — 50bb vs3bet | hero BTN vs BB
+# Scraped 2026-06-01 via scrape_all_ranges.py
+# TreeParams: poker.academy CE-Symmetric Regular @ 50bb (GTO ChipEV, 1bb ante)
+notation,action,freq
+66,call,0.7841
+66,fold,0.2159
+77,call,1.0
+88,call,1.0
+99,call,1.0
+AA,call,1.0
+AKs,call,1.0
+AQs,call,1.0
+AJs,call,1.0
+ATs,call,1.0
+A9s,call,0.898
+A9s,fold,0.102
+AKo,call,1.0
+KK,call,1.0
+KQs,call,0.172
+KQs,fold,0.828
+KJs,call,1.0
+KTs,call,1.0
+AQo,call,1.0
+QQ,call,1.0
+AJo,call,0.594
+AJo,fold,0.406
+JJ,call,1.0
+JTs,call,1.0
+TT,call,1.0
+T9s,call,0.562
+T9s,fold,0.438

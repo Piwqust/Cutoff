@@ -1,0 +1,102 @@
+{
+  "format" : "NLHE_MTT_9MAX",
+  "hands" : {
+    "55" : {
+      "call" : 1
+    },
+    "66" : {
+      "call" : 1
+    },
+    "77" : {
+      "call" : 1
+    },
+    "88" : {
+      "call" : 1
+    },
+    "99" : {
+      "call" : 1
+    },
+    "A9s" : {
+      "call" : 1
+    },
+    "AA" : {
+      "call" : 1
+    },
+    "AJo" : {
+      "call" : 1
+    },
+    "AJs" : {
+      "call" : 1
+    },
+    "AKo" : {
+      "call" : 1
+    },
+    "AKs" : {
+      "call" : 1
+    },
+    "AQo" : {
+      "call" : 1
+    },
+    "AQs" : {
+      "call" : 1
+    },
+    "ATo" : {
+      "call" : 0.33989999999999998,
+      "fold" : 0.66010000000000002
+    },
+    "ATs" : {
+      "call" : 1
+    },
+    "JJ" : {
+      "call" : 1
+    },
+    "KJs" : {
+      "call" : 1
+    },
+    "KK" : {
+      "call" : 1
+    },
+    "KQs" : {
+      "call" : 1
+    },
+    "KTs" : {
+      "call" : 1
+    },
+    "QJs" : {
+      "call" : 0.084999999999999992,
+      "fold" : 0.91500000000000004
+    },
+    "QQ" : {
+      "call" : 1
+    },
+    "QTs" : {
+      "call" : 0.37,
+      "fold" : 0.63
+    },
+    "TT" : {
+      "call" : 1
+    }
+  },
+  "id" : "mtt_9max_20bb_hj_vs3bet_vs_bb",
+  "source" : {
+    "description" : "Adapted from RangeConverter 8-max baseline.",
+    "publisher" : {
+      "accessedDate" : "2026-06-01",
+      "name" : "RangeConverter",
+      "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
+      "treeParams" : "2.5x open, 3.5x 3bet IP, 4.5x 3bet OOP, 2.3x 4bet IP, 2.75x 4bet OOP, SB vs BB 3.2bb",
+      "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
+    },
+    "solver" : {
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante. Copied verbatim from 8-max HJ (same effective seat in 9-max)."
+    },
+    "type" : "published"
+  },
+  "spot" : {
+    "anteType" : "bigBlindAnte",
+    "facingAction" : "vs3Bet",
+    "opponentPosition" : "BB",
+    "position" : "HJ",
+    "stackDepthBB" : 20
+  }
+}

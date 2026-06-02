@@ -1,0 +1,199 @@
+{
+  "format" : "NLHE_MTT_9MAX",
+  "hands" : {
+    "22" : {
+      "call" : 1
+    },
+    "33" : {
+      "call" : 1
+    },
+    "44" : {
+      "call" : 1
+    },
+    "54s" : {
+      "call" : 0.28489999999999999,
+      "fold" : 0.55010000000000003,
+      "raise25x" : 0.16500000000000001
+    },
+    "55" : {
+      "call" : 1
+    },
+    "65s" : {
+      "call" : 0.32319999999999999,
+      "fold" : 0.66679999999999995,
+      "raise25x" : 0.01
+    },
+    "66" : {
+      "call" : 1
+    },
+    "76s" : {
+      "call" : 0.86519999999999997,
+      "fold" : 0.1348
+    },
+    "77" : {
+      "call" : 0.95009999999999994,
+      "raise25x" : 0.0499
+    },
+    "87s" : {
+      "call" : 0.43509999999999999,
+      "fold" : 0.56489999999999996
+    },
+    "88" : {
+      "call" : 0.82999999999999996,
+      "raise25x" : 0.17000000000000001
+    },
+    "98s" : {
+      "call" : 0.83499999999999996,
+      "raise25x" : 0.16500000000000001
+    },
+    "99" : {
+      "call" : 0.83499999999999996,
+      "raise25x" : 0.16500000000000001
+    },
+    "A3s" : {
+      "call" : 0.10489999999999999,
+      "fold" : 0.89510000000000001
+    },
+    "A4s" : {
+      "call" : 0.69499999999999995,
+      "raise25x" : 0.30499999999999999
+    },
+    "A5s" : {
+      "call" : 1
+    },
+    "A6s" : {
+      "fold" : 0.81510000000000005,
+      "raise25x" : 0.18490000000000001
+    },
+    "A7s" : {
+      "call" : 0.56489999999999996,
+      "raise25x" : 0.43509999999999999
+    },
+    "A8s" : {
+      "call" : 0.72009999999999996,
+      "raise25x" : 0.27989999999999998
+    },
+    "A9s" : {
+      "call" : 0.68999999999999995,
+      "raise25x" : 0.31
+    },
+    "AA" : {
+      "raise25x" : 1
+    },
+    "AJo" : {
+      "call" : 0.80010000000000003,
+      "raise25x" : 0.19989999999999999
+    },
+    "AJs" : {
+      "call" : 1
+    },
+    "AKo" : {
+      "call" : 0.039899999999999998,
+      "raise25x" : 0.96009999999999995
+    },
+    "AKs" : {
+      "raise25x" : 1
+    },
+    "AQo" : {
+      "call" : 0.74009999999999998,
+      "raise25x" : 0.25990000000000002
+    },
+    "AQs" : {
+      "call" : 1
+    },
+    "ATo" : {
+      "fold" : 0.19989999999999999,
+      "raise25x" : 0.80010000000000003
+    },
+    "ATs" : {
+      "call" : 1
+    },
+    "J9s" : {
+      "call" : 0.53000000000000003,
+      "raise25x" : 0.46999999999999997
+    },
+    "JJ" : {
+      "call" : 0.084999999999999992,
+      "raise25x" : 0.91500000000000004
+    },
+    "JTs" : {
+      "call" : 1
+    },
+    "K9s" : {
+      "call" : 0.59999999999999998,
+      "raise25x" : 0.40000000000000002
+    },
+    "KJo" : {
+      "call" : 0.064600000000000019,
+      "fold" : 0.50749999999999995,
+      "raise25x" : 0.4279
+    },
+    "KJs" : {
+      "call" : 1
+    },
+    "KK" : {
+      "raise25x" : 1
+    },
+    "KQo" : {
+      "call" : 0.83499999999999996,
+      "raise25x" : 0.16500000000000001
+    },
+    "KQs" : {
+      "call" : 1
+    },
+    "KTs" : {
+      "call" : 1
+    },
+    "Q9s" : {
+      "call" : 0.70999999999999996,
+      "raise25x" : 0.28999999999999998
+    },
+    "QJo" : {
+      "fold" : 0.86019999999999996,
+      "raise25x" : 0.13980000000000001
+    },
+    "QJs" : {
+      "call" : 0.83499999999999996,
+      "raise25x" : 0.16500000000000001
+    },
+    "QQ" : {
+      "raise25x" : 1
+    },
+    "QTs" : {
+      "call" : 1
+    },
+    "T8s" : {
+      "call" : 0.54500000000000004,
+      "raise25x" : 0.45500000000000002
+    },
+    "T9s" : {
+      "call" : 1
+    },
+    "TT" : {
+      "call" : 0.45000000000000001,
+      "raise25x" : 0.55000000000000004
+    }
+  },
+  "id" : "mtt_9max_30bb_btn_vsopen_vs_utg",
+  "source" : {
+    "description" : "Adapted from RangeConverter 8-max baseline.",
+    "publisher" : {
+      "accessedDate" : "2026-06-01",
+      "name" : "RangeConverter",
+      "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
+      "treeParams" : "2.5x open, 3.5x 3bet IP, 4.5x 3bet OOP, 2.3x 4bet IP, 2.75x 4bet OOP, SB vs BB 3.2bb",
+      "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
+    },
+    "solver" : {
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante. Copied verbatim from 8-max BTN (same effective seat in 9-max)."
+    },
+    "type" : "published"
+  },
+  "spot" : {
+    "anteType" : "bigBlindAnte",
+    "facingAction" : "vsOpen",
+    "opponentPosition" : "UTG",
+    "position" : "BTN",
+    "stackDepthBB" : 30
+  }
+}

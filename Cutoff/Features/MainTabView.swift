@@ -25,8 +25,8 @@ struct MainTabView: View {
                 .tabItem { Label(l10n.t(.tabReview), systemImage: "exclamationmark.bubble.fill") }
                 .tag(2)
 
-            NavigationStack { SettingsView() }
-                .tabItem { Label(l10n.t(.tabSettings), systemImage: "gearshape.fill") }
+            NavigationStack { StrategyGuideView() }
+                .tabItem { Label(l10n.t(.tabStrategy), systemImage: "map.fill") }
                 .tag(3)
         }
         .tint(AppColors.primaryMint)

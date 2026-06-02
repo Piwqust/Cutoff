@@ -1,0 +1,210 @@
+{
+  "format" : "NLHE_MTT_8MAX",
+  "hands" : {
+    "22" : {
+      "call" : 1
+    },
+    "33" : {
+      "call" : 1
+    },
+    "44" : {
+      "call" : 1
+    },
+    "55" : {
+      "call" : 1
+    },
+    "66" : {
+      "call" : 1
+    },
+    "76s" : {
+      "call" : 0.46000000000000002,
+      "fold" : 0.54000000000000004
+    },
+    "77" : {
+      "call" : 0.96509999999999996,
+      "raise3x" : 0.0349
+    },
+    "87s" : {
+      "call" : 0.67010000000000003,
+      "fold" : 0.25490000000000002,
+      "raise3x" : 0.074999999999999997
+    },
+    "88" : {
+      "call" : 0.76000000000000001,
+      "raise3x" : 0.23999999999999999
+    },
+    "98s" : {
+      "call" : 0.8851,
+      "raise3x" : 0.1149
+    },
+    "99" : {
+      "call" : 0.6331,
+      "raise3x" : 0.3669
+    },
+    "A3s" : {
+      "call" : 0.77000000000000002,
+      "raise3x" : 0.23000000000000001
+    },
+    "A4s" : {
+      "call" : 0.82010000000000005,
+      "raise3x" : 0.1799
+    },
+    "A5s" : {
+      "call" : 0.67500000000000004,
+      "raise3x" : 0.32500000000000001
+    },
+    "A6s" : {
+      "call" : 0.55500000000000005,
+      "raise3x" : 0.44500000000000001
+    },
+    "A7s" : {
+      "call" : 0.53000000000000003,
+      "raise3x" : 0.46999999999999997
+    },
+    "A8s" : {
+      "call" : 0.90010000000000001,
+      "raise3x" : 0.099900000000000003
+    },
+    "A9s" : {
+      "call" : 0.63490000000000002,
+      "raise3x" : 0.36509999999999998
+    },
+    "AA" : {
+      "raise3x" : 1
+    },
+    "AJo" : {
+      "call" : 0.58009999999999995,
+      "raise3x" : 0.4199
+    },
+    "AJs" : {
+      "call" : 1
+    },
+    "AKo" : {
+      "raise3x" : 0.98999999999999999,
+      "shove" : 0.01
+    },
+    "AKs" : {
+      "raise3x" : 1
+    },
+    "AQo" : {
+      "call" : 0.74509999999999998,
+      "raise3x" : 0.25490000000000002
+    },
+    "AQs" : {
+      "call" : 0.4199,
+      "raise3x" : 0.58009999999999995
+    },
+    "ATo" : {
+      "call" : 0.215,
+      "raise3x" : 0.78500000000000003
+    },
+    "ATs" : {
+      "call" : 1
+    },
+    "J9s" : {
+      "call" : 0.69999999999999996,
+      "raise3x" : 0.29999999999999999
+    },
+    "JJ" : {
+      "call" : 0.024899999999999999,
+      "raise3x" : 0.97509999999999997
+    },
+    "JTs" : {
+      "call" : 0.89510000000000001,
+      "raise3x" : 0.10489999999999999
+    },
+    "K8s" : {
+      "call" : 0.019900000000000001,
+      "fold" : 0.98009999999999997
+    },
+    "K9s" : {
+      "call" : 0.29499999999999998,
+      "raise3x" : 0.70499999999999996
+    },
+    "KJo" : {
+      "call" : 0.67010000000000003,
+      "raise3x" : 0.32990000000000003
+    },
+    "KJs" : {
+      "call" : 1
+    },
+    "KK" : {
+      "raise3x" : 1
+    },
+    "KQo" : {
+      "call" : 0.76500000000000001,
+      "raise3x" : 0.23499999999999999
+    },
+    "KQs" : {
+      "call" : 1
+    },
+    "KTo" : {
+      "fold" : 0.94510000000000005,
+      "raise3x" : 0.054899999999999997
+    },
+    "KTs" : {
+      "call" : 1
+    },
+    "Q8s" : {
+      "fold" : 0.79510000000000003,
+      "raise3x" : 0.2049
+    },
+    "Q9s" : {
+      "call" : 0.4199,
+      "raise3x" : 0.58009999999999995
+    },
+    "QJo" : {
+      "fold" : 0.84999999999999998,
+      "raise3x" : 0.14999999999999999
+    },
+    "QJs" : {
+      "call" : 0.97009999999999996,
+      "shove" : 0.029899999999999999
+    },
+    "QQ" : {
+      "raise3x" : 1
+    },
+    "QTo" : {
+      "fold" : 0.91500000000000004,
+      "raise3x" : 0.085000000000000006
+    },
+    "QTs" : {
+      "call" : 1
+    },
+    "T8s" : {
+      "call" : 0.37,
+      "raise3x" : 0.63
+    },
+    "T9s" : {
+      "call" : 0.88009999999999999,
+      "raise3x" : 0.11990000000000001
+    },
+    "TT" : {
+      "call" : 0.2437,
+      "raise3x" : 0.74629999999999996,
+      "shove" : 0.01
+    }
+  },
+  "id" : "mtt_8max_30bb_btn_vsopen_vs_utg1",
+  "source" : {
+    "description" : "RangeConverter free PDF — 8-max 30bb 1bb ante (12.5%).",
+    "publisher" : {
+      "accessedDate" : "2026-06-01",
+      "name" : "RangeConverter",
+      "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
+      "treeParams" : "poker.academy CE-Symmetric Regular @ 30bb (GTO ChipEV, 1bb ante)",
+      "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
+    },
+    "solver" : {
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante."
+    },
+    "type" : "published"
+  },
+  "spot" : {
+    "anteType" : "bigBlindAnte",
+    "facingAction" : "vsOpen",
+    "opponentPosition" : "UTG1",
+    "position" : "BTN",
+    "stackDepthBB" : 30
+  }
+}

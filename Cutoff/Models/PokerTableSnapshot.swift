@@ -65,10 +65,11 @@ extension PokerTableSnapshot {
         }
         // Hero never folded. Anything after hero is yet to act.
         if posIdx >= heroIdx { return false }
-        // For unopened first-in spots, no one has acted before hero.
-        if spot.facingAction == .unopened || spot.facingAction == .pushFold {
-            return false
+        // If an opponent is explicitly specified, only that opponent remains active.
+        if let opp = spot.opponentPosition {
+            return position != opp
         }
+        
         return true
     }
 

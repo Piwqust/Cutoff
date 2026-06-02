@@ -401,6 +401,9 @@ def run_cmd(cmd, cwd=None):
 
 
 def compile_and_validate():
+    log(f"\n{C}=== Copying all multi-opener charts to crib/ ==={X}")
+    run_cmd("cp crib_multi_opener/*.csv crib/", cwd=IMPORTER_DIR)
+    
     log(f"\n{C}=== Compiling crib → JSON + deriving 9-max ==={X}")
     run_cmd("swift run RangeImporter import --input crib/ --output ../../Cutoff/Resources/Ranges/", cwd=IMPORTER_DIR)
     run_cmd("swift run RangeImporter derive-9max --input ../../Cutoff/Resources/Ranges/ --output ../../Cutoff/Resources/Ranges/", cwd=IMPORTER_DIR)
