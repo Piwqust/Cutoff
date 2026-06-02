@@ -1,29 +1,64 @@
 import SwiftUI
 
-/// Renders a combo notation like "K2s+" as a small white badge inline
+/// Renders a combo notation like "K2s+" with overlapping mini cards and a category badge
 struct ComboView: View {
     let combo: String
     var size: CardView.Size = .regular
 
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
-                .fill(Color.white)
-                .shadow(color: Color.black.opacity(0.3), radius: 2, y: 1)
-                .overlay(
-                    RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
-                        .strokeBorder(Color.black.opacity(0.2), lineWidth: 1)
-                )
-            
+        let cleanStr = combo.replacingOccurrences(of: "+", with: "")
+        let hasPlus = combo.hasSuffix("+")
+        let parsed = HandCombo.parse(cleanStr)
+        
+        if let comboParsed = parsed {
+            HStack(spacing: 2) {
+                // The two ranks overlapping
+                HStack(spacing: -6) {
+                    rankCard(comboParsed.highRank.rawValue)
+                    rankCard(comboParsed.lowRank.rawValue)
+                }
+                
+                // The modifier badge
+                let modifier = (comboParsed.category == .suited ? "s" : (comboParsed.category == .offsuit ? "o" : "")) + (hasPlus ? "+" : "")
+                if !modifier.isEmpty {
+                    Text(modifier)
+                        .font(.system(size: size.rankSize + 1, weight: .bold, design: .rounded))
+                        .foregroundStyle(categoryColor(comboParsed.category))
+                }
+            }
+            .fixedSize(horizontal: true, vertical: true)
+            .accessibilityLabel("\(combo) combo")
+        } else {
+            // Fallback to text
             Text(combo)
                 .font(.system(size: size.rankSize + 1, weight: .bold, design: .rounded))
-                .foregroundStyle(Color.black)
-                .padding(.horizontal, 4)
+                .foregroundStyle(Color.white)
         }
-        // Make width dynamic based on content, but ensure min width is same as a card
-        .frame(minWidth: size.width, idealHeight: size.height, maxHeight: size.height)
-        .fixedSize(horizontal: true, vertical: true)
-        .accessibilityLabel("\(combo) combo")
+    }
+    
+    @ViewBuilder
+    private func rankCard(_ rank: String) -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 3, style: .continuous)
+                .fill(Color.white)
+                .shadow(color: Color.black.opacity(0.3), radius: 1, y: 1)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 3, style: .continuous)
+                        .strokeBorder(Color.black.opacity(0.2), lineWidth: 0.5)
+                )
+            Text(rank)
+                .font(.system(size: size.rankSize + 1, weight: .bold, design: .rounded))
+                .foregroundStyle(Color.black)
+        }
+        .frame(width: size.width * 0.85, height: size.height) // Slightly narrower than a real card
+    }
+    
+    private func categoryColor(_ cat: HandCombo.Category) -> Color {
+        switch cat {
+        case .pair: return AppColors.primaryMint
+        case .suited: return AppColors.accentLime
+        case .offsuit: return AppColors.accentPeach
+        }
     }
 }
 
@@ -33,6 +68,8 @@ struct ComboView: View {
         HStack {
             ComboView(combo: "K2s+", size: .inline)
             ComboView(combo: "AA", size: .inline)
+            ComboView(combo: "A3o+", size: .inline)
+            ComboView(combo: "22+", size: .inline)
         }
     }
 }

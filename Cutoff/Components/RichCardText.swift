@@ -94,7 +94,7 @@ struct RichCardText: View {
         renderer.scale = UIScreen.main.scale
         
         if let uiImage = renderer.uiImage {
-            return Text(Image(uiImage: uiImage)).baselineOffset(-6.0)
+            return Text(Image(uiImage: uiImage)).baselineOffset(-2.0)
         }
         
         return Text(card.notation)
@@ -108,7 +108,7 @@ struct RichCardText: View {
         renderer.scale = UIScreen.main.scale
         
         if let uiImage = renderer.uiImage {
-            return Text(Image(uiImage: uiImage)).baselineOffset(-6.0)
+            return Text(Image(uiImage: uiImage)).baselineOffset(-2.0)
         }
         
         return Text(combo)

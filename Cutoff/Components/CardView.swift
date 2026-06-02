@@ -15,28 +15,28 @@ struct CardView: View {
             switch self {
             case .regular: return 56
             case .compact: return 38
-            case .inline: return 22
+            case .inline: return 16
             }
         }
         var height: CGFloat {
             switch self {
             case .regular: return 76
             case .compact: return 52
-            case .inline: return 32
+            case .inline: return 22
             }
         }
         var rankSize: CGFloat {
             switch self {
             case .regular: return 22
             case .compact: return 14
-            case .inline: return 11
+            case .inline: return 10
             }
         }
         var suitSize: CGFloat {
             switch self {
             case .regular: return 20
             case .compact: return 12
-            case .inline: return 9
+            case .inline: return 7
             }
         }
     }
