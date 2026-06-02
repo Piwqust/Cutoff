@@ -407,12 +407,12 @@ struct CBetSituationCard: View {
         case .paired:
             return Config(
                 subtitle: "(Paired)",
-                cbetLabel: "C-Bet: 65-75%",
+                cbetLabel: "C-Bet: 85%+",
                 cbetTint: AppColors.primaryMint,
                 board: ["Kc", "Kd", "4s"],
                 sizingLabel: "25-33% пота",
                 sizingTint: AppColors.accentLime,
-                detail: "У коллера редко тройка — лупим частый мелкий контбет почти всем диапазоном за счёт перевеса в старших картах."
+                detail: "Высокая спаренная доска — топ-текстура для контбета: у коллера почти нет тройки, лупим мелко почти всегда за счёт перевеса в старших картах."
             )
         case .monotone:
             return Config(
