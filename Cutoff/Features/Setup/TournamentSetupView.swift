@@ -11,7 +11,7 @@ struct TournamentSetupView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                AppBackground()
+                // No background — the presenting sheet supplies its own surface.
                 ScrollView {
                     VStack(alignment: .leading, spacing: AppSpacing.lg) {
                         TournamentSummaryCard(
@@ -38,6 +38,7 @@ struct TournamentSetupView: View {
                     .padding(.horizontal, AppSpacing.pageHorizontal)
                     .padding(.vertical, AppSpacing.lg)
                 }
+                .scrollContentBackground(.hidden)
             }
             .navigationTitle(l10n.t(.tournamentProfile))
             .navigationBarTitleDisplayMode(.inline)

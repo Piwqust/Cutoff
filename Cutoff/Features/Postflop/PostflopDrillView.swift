@@ -5,6 +5,7 @@ struct PostflopDrillView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(LocalizationManager.self) private var l10n
+    @Environment(ConfigStore.self) private var config
     @State private var vm = PostflopDrillViewModel()
 
     @State private var silentCorrectToken: UUID?
@@ -150,6 +151,7 @@ struct PostflopDrillView: View {
     // MARK: - Haptics
 
     private func haptic(for outcome: AnswerOutcome?) -> SensoryFeedback? {
+        guard config.hapticsEnabled else { return nil }
         switch outcome {
         case .correct: return .success
         case .close:   return .impact(weight: .medium, intensity: 0.7)
