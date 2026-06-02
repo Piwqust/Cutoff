@@ -36,6 +36,9 @@ struct RichCardText: View {
         let trimmed = string.trimmingCharacters(in: punctuation)
         guard trimmed.count > 0 else { return nil }
         
+        // Prevent numbers with % (like 33%) from being parsed as hand combos
+        if string.contains("%") { return nil }
+        
         let nsString = string as NSString
         let range = nsString.range(of: trimmed)
         let pre = range.location > 0 ? nsString.substring(to: range.location) : ""
@@ -51,7 +54,7 @@ struct RichCardText: View {
                     if let card = Card(notation: String(part)) {
                         localText = localText + render(card: card)
                         if i < parts.count - 1 {
-                            localText = localText + Text(" ")
+                            localText = localText + Text("   ") // wider space between board cards
                         }
                     }
                 }
@@ -72,8 +75,7 @@ struct RichCardText: View {
             let withoutPlus = trimmed.replacingOccurrences(of: "+", with: "")
             if let c1 = Card(notation: String(trimmed.prefix(2))),
                let c2 = Card(notation: String(trimmed.suffix(2))) {
-                generatedText = render(card: c1) + Text(Image(systemName: "flexbox")) 
-                generatedText = render(card: c1) + Text(" ") + render(card: c2)
+                generatedText = render(card: c1) + Text("  ") + render(card: c2) // slightly wider space between hole cards
             } else if HandCombo.parse(trimmed) != nil || HandCombo.parse(withoutPlus) != nil {
                 generatedText = render(combo: trimmed)
             }

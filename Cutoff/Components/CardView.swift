@@ -15,7 +15,7 @@ struct CardView: View {
             switch self {
             case .regular: return 56
             case .compact: return 38
-            case .inline: return 16
+            case .inline: return 18
             }
         }
         var height: CGFloat {
@@ -47,12 +47,13 @@ struct CardView: View {
     }
 
     var body: some View {
+        let radius = size == .inline ? 4.0 : AppRadius.card
         ZStack {
-            RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
+            RoundedRectangle(cornerRadius: radius, style: .continuous)
                 .fill(Color.white)
                 .shadow(color: Color.black.opacity(0.3), radius: 2, y: 1)
                 .overlay(
-                    RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
+                    RoundedRectangle(cornerRadius: radius, style: .continuous)
                         .strokeBorder(Color.black.opacity(0.2), lineWidth: 1)
                 )
             VStack(spacing: 2) {
