@@ -12,19 +12,31 @@ struct CutoffApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView()
-                .environment(configStore)
-                .environment(rangeService)
-                .environment(progressStore)
-                .environment(router)
-                .environment(localization)
-                .modelContainer(modelContainer)
-                .preferredColorScheme(.dark)
-                .tint(AppColors.primaryMint)
-                .onOpenURL { url in
-                    router.handle(url: url)
-                }
+            #if DEBUG
+            if ProcessInfo.processInfo.arguments.contains("--icon-export") {
+                IconExportView()
+            } else {
+                root
+            }
+            #else
+            root
+            #endif
         }
+    }
+
+    private var root: some View {
+        RootView()
+            .environment(configStore)
+            .environment(rangeService)
+            .environment(progressStore)
+            .environment(router)
+            .environment(localization)
+            .modelContainer(modelContainer)
+            .preferredColorScheme(.dark)
+            .tint(AppColors.primaryMint)
+            .onOpenURL { url in
+                router.handle(url: url)
+            }
     }
 }
 
