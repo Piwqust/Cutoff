@@ -59,6 +59,15 @@ struct RichCardText: View {
                     }
                 }
                 generatedText = localText
+            } else if parts.allSatisfy({ HandCombo.parse(String($0).replacingOccurrences(of: "+", with: "")) != nil }) {
+                var localText = Text("")
+                for (i, part) in parts.enumerated() {
+                    localText = localText + render(combo: String(part))
+                    if i < parts.count - 1 {
+                        localText = localText + Text("-")
+                    }
+                }
+                generatedText = localText
             }
         } else if trimmed.count == 2 {
             if let card = Card(notation: trimmed) {

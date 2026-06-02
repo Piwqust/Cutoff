@@ -11,9 +11,9 @@ struct ComboView: View {
         let parsed = HandCombo.parse(cleanStr)
         
         if let comboParsed = parsed {
-            HStack(spacing: 2) {
+            HStack(alignment: .bottom, spacing: 1) {
                 // The two ranks overlapping
-                HStack(spacing: -6) {
+                HStack(spacing: -3) {
                     rankCard(comboParsed.highRank.rawValue)
                     rankCard(comboParsed.lowRank.rawValue)
                 }
@@ -24,6 +24,7 @@ struct ComboView: View {
                     Text(modifier)
                         .font(.system(size: size.rankSize + 1, weight: .bold, design: .rounded))
                         .foregroundStyle(categoryColor(comboParsed.category))
+                        .offset(y: -1) // nudge up slightly from absolute bottom
                 }
             }
             .fixedSize(horizontal: true, vertical: true)
