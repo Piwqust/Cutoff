@@ -1,0 +1,42 @@
+# poker.academy CE-Symmetric — 50bb vs3bet | hero EP vs HJ
+# Scraped 2026-06-01 via scrape_all_ranges.py
+# TreeParams: poker.academy CE-Symmetric Regular @ 50bb (GTO ChipEV, 1bb ante)
+notation,action,freq
+55,call,1.0
+66,call,1.0
+77,call,0.9242
+77,fold,0.0758
+88,call,0.8381
+88,fold,0.1619
+99,call,1.0
+AA,call,0.256
+AA,jam,0.744
+AKs,jam,1.0
+AQs,call,1.0
+AJs,call,1.0
+ATs,call,1.0
+A9s,call,0.8801
+A9s,fold,0.1199
+A8s,call,0.0758
+A8s,fold,0.9242
+A6s,call,1.0
+A5s,call,0.016
+A5s,jam,0.984
+A4s,call,0.22
+A4s,jam,0.78
+AKo,jam,1.0
+KK,jam,1.0
+KQs,call,1.0
+KJs,call,1.0
+KTs,call,1.0
+AQo,call,1.0
+QQ,call,0.2539
+QQ,jam,0.7461
+QTs,call,0.6061
+QTs,fold,0.3939
+JJ,call,0.9061
+JJ,jam,0.0939
+JTs,call,0.646
+JTs,fold,0.354
+TT,call,1.0
+T9s,call,1.0

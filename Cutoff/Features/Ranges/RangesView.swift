@@ -43,10 +43,8 @@ struct RangeDetailSheet: View {
                     Text("\(payload.chart.position.displayName) · \(payload.chart.stackDepth) BB · \(payload.chart.facingAction.displayName(in: l10n.language))")
                         .font(AppTypography.subheadline)
                         .foregroundStyle(AppColors.textSecondary)
+                        .lineLimit(1)
                 }
-                Spacer()
-                PokerTableView(snapshot: .from(spot: payload.chart.trainingSpot), size: .compact)
-                    .frame(width: 130)
             }
 
             HStack(spacing: 6) {
@@ -66,7 +64,7 @@ struct RangeDetailSheet: View {
 
         }
         .padding(AppSpacing.xl)
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(minWidth: 300, idealWidth: 340, maxWidth: .infinity, alignment: .leading)
     }
 }
 

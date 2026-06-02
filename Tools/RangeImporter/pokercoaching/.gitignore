@@ -1,0 +1,4 @@
+# Downloaded source PDFs and rendered PNGs are large binaries — regenerate via
+# scripts/fetch_pokercoaching.sh and pdftoppm; do not commit them.
+pdf/
+png/

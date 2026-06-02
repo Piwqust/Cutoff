@@ -11,6 +11,7 @@ enum FacingAction: String, Codable, CaseIterable, Identifiable, Hashable {
     case unopened
     case vsOpen
     case vs3Bet
+    case vs3BetJam
     case blindDefense
     case squeeze
     case pushFold
@@ -22,6 +23,7 @@ enum FacingAction: String, Codable, CaseIterable, Identifiable, Hashable {
         case .unopened:     return "RFI"
         case .vsOpen:       return "vs Open"
         case .vs3Bet:       return "vs 3-bet"
+        case .vs3BetJam:    return "vs 3-bet jam"
         case .blindDefense: return "Blind defense"
         case .squeeze:      return "Squeeze"
         case .pushFold:     return "Push/Fold"
@@ -34,6 +36,7 @@ enum FacingAction: String, Codable, CaseIterable, Identifiable, Hashable {
         case .unopened:     return "First in"
         case .vsOpen:       return "Facing an open"
         case .vs3Bet:       return "Facing a 3-bet"
+        case .vs3BetJam:    return "Facing a 3-bet jam"
         case .blindDefense: return "Defending the blinds"
         case .squeeze:      return "Squeeze spot"
         case .pushFold:     return "Push or fold"
@@ -45,6 +48,7 @@ enum FacingAction: String, Codable, CaseIterable, Identifiable, Hashable {
         case .unopened:     return "play.fill"
         case .vsOpen:       return "person.fill"
         case .vs3Bet:       return "arrow.up.right.circle.fill"
+        case .vs3BetJam:    return "flame.circle.fill"
         case .blindDefense: return "shield.fill"
         case .squeeze:      return "rectangle.compress.vertical"
         case .pushFold:     return "flame.fill"
@@ -59,6 +63,7 @@ enum FacingAction: String, Codable, CaseIterable, Identifiable, Hashable {
         case "unopened", "RFI", "rfi":                self = .unopened
         case "vsOpen", "vs-open", "vs-open-call":     self = .vsOpen
         case "vs3Bet", "vs-3bet":                     self = .vs3Bet
+        case "vs3BetJam", "vs-3bet-jam":              self = .vs3BetJam
         case "blindDefense", "blind-defense":         self = .blindDefense
         case "squeeze":                               self = .squeeze
         case "pushFold", "push/fold", "push-fold":    self = .pushFold
@@ -72,12 +77,27 @@ enum FacingAction: String, Codable, CaseIterable, Identifiable, Hashable {
 }
 
 struct TrainingSpot: Hashable, Codable, Identifiable {
-    var id: String { "\(position.rawValue)_\(stackDepthBB)_\(facingAction.rawValue)" }
+    var id: String { 
+        if let opp = opponentPosition {
+            return "\(position.rawValue)_\(stackDepthBB)_\(facingAction.rawValue)_vs_\(opp.rawValue)"
+        }
+        return "\(position.rawValue)_\(stackDepthBB)_\(facingAction.rawValue)"
+    }
     let position: TablePosition
     let stackDepthBB: Int
     let facingAction: FacingAction
+    let opponentPosition: TablePosition?
     let anteType: AnteType
     let tableSize: Int
+
+    init(position: TablePosition, stackDepthBB: Int, facingAction: FacingAction, opponentPosition: TablePosition? = nil, anteType: AnteType, tableSize: Int) {
+        self.position = position
+        self.stackDepthBB = stackDepthBB
+        self.facingAction = facingAction
+        self.opponentPosition = opponentPosition
+        self.anteType = anteType
+        self.tableSize = tableSize
+    }
 
     var summary: String {
         "\(position.displayName) · \(stackDepthBB) BB · \(facingAction.displayName)"
@@ -88,10 +108,11 @@ struct TrainingSpot: Hashable, Codable, Identifiable {
     /// (e.g. "UTG vsOpen" stating UTG acts first) — those need to be excluded
     /// from the loaded catalog so the filter UI never offers them.
     var isSemanticallyValid: Bool {
-        Self.isValid(position: position, facing: facingAction)
+        Self.isValid(position: position, facing: facingAction, opponentPosition: opponentPosition)
     }
 
-    static func isValid(position: TablePosition, facing: FacingAction) -> Bool {
+    static func isValid(position: TablePosition, facing: FacingAction, opponentPosition: TablePosition? = nil) -> Bool {
+        if let opp = opponentPosition, opp == position { return false }
         switch (position, facing) {
         case (.bb, .unopened):                                        return false
         case (.utg, .vsOpen):                                         return false

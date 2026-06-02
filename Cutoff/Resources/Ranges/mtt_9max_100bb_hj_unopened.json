@@ -1,68 +1,216 @@
 {
-  "id": "mtt_9max_100bb_hj_unopened",
-  "format": "NLHE_MTT_9MAX",
-  "spot": {
-    "position": "HJ",
-    "stackDepthBB": 100,
-    "facingAction": "unopened",
-    "anteType": "bigBlindAnte"
-  },
-  "source": {
-    "type": "solverDump",
-    "description": "Solver-verified MTT preflop range.",
-    "solver": {
-      "solverName": "MTT Trainer canonical solver set",
-      "solverVersion": "1.0",
-      "assumptions": "9-max NLHE, 12.5% big-blind ante, chipEV (non-ICM). Push/fold spots use the Nash equilibrium; 100 BB opens use the canonical solver-derived charts; intermediate depths interpolate between the two anchors."
+  "format" : "NLHE_MTT_9MAX",
+  "hands" : {
+    "22" : {
+      "fold" : 0.14999999999999999,
+      "raise25x" : 0.84999999999999998
+    },
+    "33" : {
+      "raise25x" : 1
+    },
+    "44" : {
+      "raise25x" : 1
+    },
+    "54s" : {
+      "fold" : 0.69810000000000005,
+      "raise25x" : 0.3019
+    },
+    "55" : {
+      "raise25x" : 1
+    },
+    "65s" : {
+      "fold" : 0.39789999999999998,
+      "raise25x" : 0.60209999999999997
+    },
+    "66" : {
+      "raise25x" : 1
+    },
+    "76s" : {
+      "raise25x" : 1
+    },
+    "77" : {
+      "raise25x" : 1
+    },
+    "87s" : {
+      "raise25x" : 1
+    },
+    "88" : {
+      "raise25x" : 1
+    },
+    "97s" : {
+      "raise25x" : 1
+    },
+    "98s" : {
+      "raise25x" : 1
+    },
+    "99" : {
+      "raise25x" : 1
+    },
+    "A2s" : {
+      "raise25x" : 1
+    },
+    "A3s" : {
+      "raise25x" : 1
+    },
+    "A4s" : {
+      "raise25x" : 1
+    },
+    "A5s" : {
+      "raise25x" : 1
+    },
+    "A6s" : {
+      "raise25x" : 1
+    },
+    "A7s" : {
+      "raise25x" : 1
+    },
+    "A8o" : {
+      "fold" : 0.41599999999999998,
+      "raise25x" : 0.58399999999999996
+    },
+    "A8s" : {
+      "raise25x" : 1
+    },
+    "A9o" : {
+      "raise25x" : 1
+    },
+    "A9s" : {
+      "raise25x" : 1
+    },
+    "AA" : {
+      "raise25x" : 1
+    },
+    "AJo" : {
+      "raise25x" : 1
+    },
+    "AJs" : {
+      "raise25x" : 1
+    },
+    "AKo" : {
+      "raise25x" : 1
+    },
+    "AKs" : {
+      "raise25x" : 1
+    },
+    "AQo" : {
+      "raise25x" : 1
+    },
+    "AQs" : {
+      "raise25x" : 1
+    },
+    "ATo" : {
+      "raise25x" : 1
+    },
+    "ATs" : {
+      "raise25x" : 1
+    },
+    "J8s" : {
+      "raise25x" : 1
+    },
+    "J9s" : {
+      "raise25x" : 1
+    },
+    "JJ" : {
+      "raise25x" : 1
+    },
+    "JTo" : {
+      "raise25x" : 1
+    },
+    "JTs" : {
+      "raise25x" : 1
+    },
+    "K4s" : {
+      "raise25x" : 1
+    },
+    "K5s" : {
+      "raise25x" : 1
+    },
+    "K6s" : {
+      "raise25x" : 1
+    },
+    "K7s" : {
+      "raise25x" : 1
+    },
+    "K8s" : {
+      "raise25x" : 1
+    },
+    "K9s" : {
+      "raise25x" : 1
+    },
+    "KJo" : {
+      "raise25x" : 1
+    },
+    "KJs" : {
+      "raise25x" : 1
+    },
+    "KK" : {
+      "raise25x" : 1
+    },
+    "KQo" : {
+      "raise25x" : 1
+    },
+    "KQs" : {
+      "raise25x" : 1
+    },
+    "KTo" : {
+      "raise25x" : 1
+    },
+    "KTs" : {
+      "raise25x" : 1
+    },
+    "Q8s" : {
+      "raise25x" : 1
+    },
+    "Q9s" : {
+      "raise25x" : 1
+    },
+    "QJo" : {
+      "raise25x" : 1
+    },
+    "QJs" : {
+      "raise25x" : 1
+    },
+    "QQ" : {
+      "raise25x" : 1
+    },
+    "QTo" : {
+      "raise25x" : 1
+    },
+    "QTs" : {
+      "raise25x" : 1
+    },
+    "T7s" : {
+      "raise25x" : 1
+    },
+    "T8s" : {
+      "raise25x" : 1
+    },
+    "T9s" : {
+      "raise25x" : 1
+    },
+    "TT" : {
+      "raise25x" : 1
     }
   },
-  "hands": {
-    "A8s": "raise",
-    "KK": "raise",
-    "Q9s": "raise",
-    "AJo": "raise",
-    "A3s": "raise",
-    "J8s": "raise",
-    "JTs": "raise",
-    "A6s": "raise",
-    "A5s": "raise",
-    "99": "raise",
-    "76s": "raise",
-    "QTo": "raise",
-    "J9o": "raise",
-    "97s": "raise",
-    "87s": "raise",
-    "KQo": "raise",
-    "AKs": "raise",
-    "QQ": "raise",
-    "TT": "raise",
-    "ATs": "raise",
-    "KJo": "raise",
-    "QJo": "raise",
-    "A2s": "raise",
-    "77": "raise",
-    "A4s": "raise",
-    "K9s": "raise",
-    "A7s": "raise",
-    "T8s": "raise",
-    "KQs": "raise",
-    "T9s": "raise",
-    "ATo": "raise",
-    "JJ": "raise",
-    "KTo": "raise",
-    "QTs": "raise",
-    "J9s": "raise",
-    "AA": "raise",
-    "KTs": "raise",
-    "AJs": "raise",
-    "88": "raise",
-    "AQs": "raise",
-    "98s": "raise",
-    "AKo": "raise",
-    "A9s": "raise",
-    "JTo": "raise",
-    "KJs": "raise",
-    "AQo": "raise",
-    "QJs": "raise"
+  "id" : "mtt_9max_100bb_hj_unopened",
+  "source" : {
+    "description" : "Adapted from RangeConverter 8-max baseline.",
+    "publisher" : {
+      "accessedDate" : "2026-06-01",
+      "name" : "RangeConverter",
+      "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
+      "treeParams" : "2.5x open, 3.5x 3bet IP, 4.5x 3bet OOP, 2.3x 4bet IP, 2.75x 4bet OOP, SB vs BB 3.2bb",
+      "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
+    },
+    "solver" : {
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante. Copied verbatim from 8-max HJ (same effective seat in 9-max)."
+    },
+    "type" : "published"
+  },
+  "spot" : {
+    "anteType" : "bigBlindAnte",
+    "facingAction" : "unopened",
+    "position" : "HJ",
+    "stackDepthBB" : 100
   }
 }

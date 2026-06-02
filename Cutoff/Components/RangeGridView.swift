@@ -3,7 +3,7 @@ import SwiftUI
 /// 13×13 hand matrix laid out edge-to-edge in the parent's width.
 struct RangeGridView: View {
     let chart: RangeChart?
-    var onCellTap: ((HandCombo, HandFrequencies) -> Void)? = nil
+    @Binding var activePayload: RangeDetailPayload?
 
     private let cols = Array(repeating: GridItem(.flexible(), spacing: 2), count: 13)
 
@@ -12,11 +12,22 @@ struct RangeGridView: View {
             ForEach(HandCombo.allInMatrixOrder, id: \.notation) { combo in
                 let freqs: HandFrequencies = chart?.frequencies(for: combo) ?? HandFrequencies([.fold: 1.0])
                 Button {
-                    onCellTap?(combo, freqs)
+                    if let chart = chart {
+                        activePayload = RangeDetailPayload(combo: combo, frequencies: freqs, chart: chart)
+                    }
                 } label: {
                     RangeCellView(combo: combo, frequencies: freqs)
                 }
                 .buttonStyle(.plain)
+                .popover(isPresented: Binding(
+                    get: { activePayload?.combo == combo },
+                    set: { if !$0 && activePayload?.combo == combo { activePayload = nil } }
+                )) {
+                    if let payload = activePayload, payload.combo == combo {
+                        RangeDetailSheet(payload: payload)
+                            .presentationCompactAdaptation(.popover)
+                    }
+                }
             }
         }
     }
@@ -43,7 +54,7 @@ struct RangeLegendView: View {
     ZStack {
         AppBackground()
         VStack(spacing: AppSpacing.md) {
-            RangeGridView(chart: nil)
+            RangeGridView(chart: nil, activePayload: .constant(nil))
                 .padding(.horizontal, AppSpacing.pageHorizontal)
             RangeLegendView()
         }

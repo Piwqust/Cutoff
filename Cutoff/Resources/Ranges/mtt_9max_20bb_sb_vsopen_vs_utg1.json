@@ -1,0 +1,224 @@
+{
+  "format" : "NLHE_MTT_9MAX",
+  "hands" : {
+    "22" : {
+      "shove" : 1
+    },
+    "33" : {
+      "shove" : 1
+    },
+    "44" : {
+      "shove" : 1
+    },
+    "54s" : {
+      "call" : 1
+    },
+    "55" : {
+      "shove" : 1
+    },
+    "65s" : {
+      "call" : 0.64510000000000001,
+      "fold" : 0.35489999999999999
+    },
+    "66" : {
+      "shove" : 1
+    },
+    "76s" : {
+      "call" : 0.78500000000000003,
+      "fold" : 0.215
+    },
+    "77" : {
+      "shove" : 1
+    },
+    "87s" : {
+      "call" : 1
+    },
+    "88" : {
+      "shove" : 1
+    },
+    "98s" : {
+      "call" : 1
+    },
+    "99" : {
+      "shove" : 1
+    },
+    "A2s" : {
+      "call" : 1
+    },
+    "A3s" : {
+      "call" : 0.97009999999999996,
+      "shove" : 0.029899999999999999
+    },
+    "A4s" : {
+      "shove" : 1
+    },
+    "A5o" : {
+      "call" : 0.1305,
+      "fold" : 0.86950000000000005
+    },
+    "A5s" : {
+      "shove" : 1
+    },
+    "A6s" : {
+      "call" : 0.080000000000000002,
+      "shove" : 0.92000000000000004
+    },
+    "A7o" : {
+      "call" : 0.25119999999999998,
+      "fold" : 0.74880000000000002
+    },
+    "A7s" : {
+      "call" : 0.11990000000000001,
+      "shove" : 0.88009999999999999
+    },
+    "A8o" : {
+      "call" : 0.95489999999999997,
+      "shove" : 0.045099999999999994
+    },
+    "A8s" : {
+      "shove" : 1
+    },
+    "A9o" : {
+      "call" : 0.4874,
+      "shove" : 0.51259999999999994
+    },
+    "A9s" : {
+      "shove" : 1
+    },
+    "AA" : {
+      "call" : 0.98999999999999999,
+      "raise25x" : 0.01
+    },
+    "AJo" : {
+      "shove" : 1
+    },
+    "AJs" : {
+      "shove" : 1
+    },
+    "AKo" : {
+      "shove" : 1
+    },
+    "AKs" : {
+      "shove" : 1
+    },
+    "AQo" : {
+      "shove" : 1
+    },
+    "AQs" : {
+      "shove" : 1
+    },
+    "ATo" : {
+      "shove" : 1
+    },
+    "ATs" : {
+      "shove" : 1
+    },
+    "J8s" : {
+      "call" : 1
+    },
+    "J9s" : {
+      "call" : 0.38,
+      "shove" : 0.62
+    },
+    "JJ" : {
+      "shove" : 1
+    },
+    "JTo" : {
+      "call" : 0.53280000000000005,
+      "fold" : 0.2863,
+      "shove" : 0.18090000000000001
+    },
+    "JTs" : {
+      "shove" : 1
+    },
+    "K6s" : {
+      "call" : 1
+    },
+    "K7s" : {
+      "call" : 1
+    },
+    "K8s" : {
+      "call" : 1
+    },
+    "K9s" : {
+      "call" : 0.78500000000000003,
+      "shove" : 0.215
+    },
+    "KJo" : {
+      "call" : 0.46500000000000002,
+      "shove" : 0.53500000000000003
+    },
+    "KJs" : {
+      "call" : 1
+    },
+    "KK" : {
+      "shove" : 1
+    },
+    "KQo" : {
+      "shove" : 1
+    },
+    "KQs" : {
+      "shove" : 1
+    },
+    "KTo" : {
+      "call" : 1
+    },
+    "KTs" : {
+      "shove" : 1
+    },
+    "Q8s" : {
+      "call" : 1
+    },
+    "Q9s" : {
+      "call" : 1
+    },
+    "QJo" : {
+      "call" : 0.63990000000000002,
+      "shove" : 0.36009999999999998
+    },
+    "QJs" : {
+      "shove" : 1
+    },
+    "QQ" : {
+      "shove" : 1
+    },
+    "QTo" : {
+      "call" : 1
+    },
+    "QTs" : {
+      "shove" : 1
+    },
+    "T8s" : {
+      "call" : 1
+    },
+    "T9s" : {
+      "call" : 0.52500000000000002,
+      "shove" : 0.47499999999999998
+    },
+    "TT" : {
+      "shove" : 1
+    }
+  },
+  "id" : "mtt_9max_20bb_sb_vsopen_vs_utg1",
+  "source" : {
+    "description" : "Adapted from RangeConverter 8-max baseline.",
+    "publisher" : {
+      "accessedDate" : "2026-06-01",
+      "name" : "RangeConverter",
+      "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
+      "treeParams" : "2.5x open, 3.5x 3bet IP, 4.5x 3bet OOP, 2.3x 4bet IP, 2.75x 4bet OOP, SB vs BB 3.2bb",
+      "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
+    },
+    "solver" : {
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante. Copied verbatim from 8-max SB (same effective seat in 9-max)."
+    },
+    "type" : "published"
+  },
+  "spot" : {
+    "anteType" : "bigBlindAnte",
+    "facingAction" : "vsOpen",
+    "opponentPosition" : "UTG1",
+    "position" : "SB",
+    "stackDepthBB" : 20
+  }
+}

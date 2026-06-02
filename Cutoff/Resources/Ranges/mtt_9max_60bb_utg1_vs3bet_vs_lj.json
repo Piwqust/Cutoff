@@ -1,0 +1,187 @@
+{
+  "format" : "NLHE_MTT_9MAX",
+  "hands" : {
+    "22" : {
+      "call" : 1
+    },
+    "33" : {
+      "call" : 1
+    },
+    "44" : {
+      "call" : 1
+    },
+    "54s" : {
+      "call" : 1
+    },
+    "55" : {
+      "call" : 1
+    },
+    "65s" : {
+      "call" : 1
+    },
+    "66" : {
+      "call" : 1
+    },
+    "76s" : {
+      "call" : 1
+    },
+    "77" : {
+      "call" : 1
+    },
+    "87s" : {
+      "call" : 1
+    },
+    "88" : {
+      "call" : 1
+    },
+    "98s" : {
+      "call" : 1
+    },
+    "99" : {
+      "call" : 0.99419999999999997,
+      "raise25x" : 0.0057999999999999996
+    },
+    "A3s" : {
+      "call" : 0.37869999999999998,
+      "fold" : 0.58169999999999999,
+      "raise25x" : 0.039600000000000003
+    },
+    "A4s" : {
+      "call" : 0.83399999999999996,
+      "raise25x" : 0.16600000000000001
+    },
+    "A5s" : {
+      "call" : 0.79410000000000003,
+      "raise25x" : 0.2059
+    },
+    "A6s" : {
+      "call" : 0.13400000000000001,
+      "fold" : 0.86599999999999999
+    },
+    "A7s" : {
+      "fold" : 0.93600000000000005,
+      "raise25x" : 0.064000000000000001
+    },
+    "A8s" : {
+      "call" : 0.2059,
+      "fold" : 0.52610000000000001,
+      "raise25x" : 0.26800000000000002
+    },
+    "A9s" : {
+      "call" : 1
+    },
+    "AA" : {
+      "raise25x" : 1
+    },
+    "AJs" : {
+      "call" : 0.93020000000000003,
+      "raise25x" : 0.069800000000000001
+    },
+    "AKo" : {
+      "call" : 0.28589999999999999,
+      "raise25x" : 0.032000000000000001,
+      "shove" : 0.68210000000000004
+    },
+    "AKs" : {
+      "call" : 0.0057999999999999996,
+      "raise25x" : 0.97430000000000005,
+      "shove" : 0.019899999999999998
+    },
+    "AQo" : {
+      "call" : 0.66610000000000003,
+      "raise25x" : 0.33389999999999997
+    },
+    "AQs" : {
+      "call" : 1
+    },
+    "ATs" : {
+      "call" : 0.85809999999999997,
+      "raise25x" : 0.1419
+    },
+    "J9s" : {
+      "call" : 0.032000000000000001,
+      "fold" : 0.96799999999999997
+    },
+    "JJ" : {
+      "call" : 0.56410000000000005,
+      "raise25x" : 0.43590000000000001
+    },
+    "JTs" : {
+      "call" : 1
+    },
+    "K6s" : {
+      "call" : 1
+    },
+    "K7s" : {
+      "call" : 0.92110000000000003,
+      "raise25x" : 0.078899999999999998
+    },
+    "K9s" : {
+      "call" : 0.22589999999999999,
+      "fold" : 0.58209999999999995,
+      "raise25x" : 0.192
+    },
+    "KJs" : {
+      "call" : 0.63600000000000001,
+      "raise25x" : 0.36399999999999999
+    },
+    "KK" : {
+      "raise25x" : 0.39389999999999997,
+      "shove" : 0.60609999999999997
+    },
+    "KQs" : {
+      "call" : 0.99209999999999998,
+      "raise25x" : 0.0079000000000000008
+    },
+    "KTs" : {
+      "call" : 0.80010000000000003,
+      "raise25x" : 0.19989999999999999
+    },
+    "QJs" : {
+      "call" : 0.95799999999999996,
+      "fold" : 0.042000000000000003
+    },
+    "QQ" : {
+      "call" : 0.58330000000000004,
+      "raise25x" : 0.37880000000000003,
+      "shove" : 0.037900000000000003
+    },
+    "QTs" : {
+      "call" : 1
+    },
+    "T8s" : {
+      "call" : 0.15529999999999999,
+      "fold" : 0.84470000000000001
+    },
+    "T9s" : {
+      "call" : 0.97399999999999998,
+      "fold" : 0.026000000000000002
+    },
+    "TT" : {
+      "call" : 0.87009999999999998,
+      "raise25x" : 0.12989999999999999
+    }
+  },
+  "id" : "mtt_9max_60bb_utg1_vs3bet_vs_lj",
+  "source" : {
+    "description" : "Adapted from RangeConverter 8-max baseline.",
+    "publisher" : {
+      "accessedDate" : "2026-06-01",
+      "name" : "RangeConverter",
+      "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
+      "treeParams" : "2.5x open, 3.5x 3bet IP, 4.5x 3bet OOP, 2.3x 4bet IP, 2.75x 4bet OOP, SB vs BB 3.2bb",
+      "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
+    },
+    "solver" : {
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante. Adapted from 8-max UTG (9-max UTG+1 plays the same role as 8-max UTG)."
+    },
+    "type" : "published"
+  },
+  "spot" : {
+    "anteType" : "bigBlindAnte",
+    "facingAction" : "vs3Bet",
+    "opponentPosition" : "LJ",
+    "position" : "UTG1",
+    "stackDepthBB" : 60
+  }
+}

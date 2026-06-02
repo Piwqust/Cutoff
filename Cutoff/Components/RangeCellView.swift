@@ -7,19 +7,30 @@ struct RangeCellView: View {
 
     var body: some View {
         let dominant = frequencies.dominantAction
-        let weight = frequencies[dominant]
+        let actions = PreflopAction.allCases.sorted { $0.aggressionTier > $1.aggressionTier }
+        
         ZStack {
-            RoundedRectangle(cornerRadius: 4, style: .continuous)
-                .fill(dominant.tint.opacity(dominant == .fold ? 0.35 : max(0.4, 0.4 + 0.6 * weight)))
+            GeometryReader { geo in
+                HStack(spacing: 0) {
+                    ForEach(actions, id: \.self) { action in
+                        let w = frequencies[action]
+                        if w > 0 {
+                            action.tint
+                                .frame(width: geo.size.width * w)
+                        }
+                    }
+                }
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
+            
             Text(combo.notation)
-                // Fixed size: 13×13 grid cells are tiny and won't accommodate
-                // Dynamic Type growth. `minimumScaleFactor` below handles the
-                // long "AKo" / "QJs" cases at large container scales.
                 .font(.system(size: 9, weight: .semibold, design: .rounded))
-                .foregroundStyle(dominant.prefersDarkForeground ? AppColors.backgroundDeep : AppColors.textPrimary)
+                .foregroundStyle(frequencies.isMixed ? Color.white : (dominant.prefersDarkForeground ? AppColors.backgroundDeep : AppColors.textPrimary))
+                .padding(.horizontal, frequencies.isMixed ? 2.5 : 0)
+                .padding(.vertical, frequencies.isMixed ? 1.0 : 0)
+                .background(frequencies.isMixed ? Capsule().fill(Color.black.opacity(0.45)) : Capsule().fill(Color.clear))
                 .minimumScaleFactor(0.7)
                 .lineLimit(1)
-                .padding(.horizontal, 1)
         }
         .overlay(
             RoundedRectangle(cornerRadius: 4, style: .continuous)

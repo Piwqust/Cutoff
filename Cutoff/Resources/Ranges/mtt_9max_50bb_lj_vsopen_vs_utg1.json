@@ -1,0 +1,165 @@
+{
+  "format" : "NLHE_MTT_9MAX",
+  "hands" : {
+    "22" : {
+      "call" : 0.25990000000000002,
+      "fold" : 0.74009999999999998
+    },
+    "33" : {
+      "call" : 0.2258,
+      "fold" : 0.7742
+    },
+    "44" : {
+      "call" : 0.20200000000000001,
+      "fold" : 0.79800000000000004
+    },
+    "54s" : {
+      "call" : 0.097900000000000015,
+      "fold" : 0.90210000000000001
+    },
+    "55" : {
+      "call" : 0.29189999999999999,
+      "fold" : 0.70809999999999995
+    },
+    "65s" : {
+      "call" : 0.032000000000000001,
+      "fold" : 0.96799999999999997
+    },
+    "66" : {
+      "call" : 0.53790000000000004,
+      "fold" : 0.46210000000000001
+    },
+    "77" : {
+      "call" : 0.71609999999999996,
+      "fold" : 0.097900000000000015,
+      "raise25x" : 0.186
+    },
+    "88" : {
+      "call" : 0.77210000000000001,
+      "raise25x" : 0.22789999999999999
+    },
+    "99" : {
+      "call" : 0.72799999999999998,
+      "raise25x" : 0.27200000000000002
+    },
+    "A4s" : {
+      "call" : 0.16789999999999999,
+      "fold" : 0.66420000000000001,
+      "raise25x" : 0.16789999999999999
+    },
+    "A5s" : {
+      "call" : 0.40389999999999998,
+      "raise25x" : 0.59609999999999996
+    },
+    "A8s" : {
+      "call" : 0.14219999999999999,
+      "fold" : 0.20449999999999999,
+      "raise25x" : 0.65329999999999999
+    },
+    "A9s" : {
+      "call" : 0.58009999999999995,
+      "raise25x" : 0.4199
+    },
+    "AA" : {
+      "raise25x" : 1
+    },
+    "AJo" : {
+      "fold" : 0.68210000000000004,
+      "raise25x" : 0.31790000000000002
+    },
+    "AJs" : {
+      "call" : 1
+    },
+    "AKo" : {
+      "call" : 0.50590000000000002,
+      "raise25x" : 0.49409999999999998
+    },
+    "AKs" : {
+      "raise25x" : 1
+    },
+    "AQo" : {
+      "call" : 0.186,
+      "raise25x" : 0.81399999999999995
+    },
+    "AQs" : {
+      "call" : 1
+    },
+    "ATs" : {
+      "call" : 0.38600000000000001,
+      "raise25x" : 0.61399999999999999
+    },
+    "JJ" : {
+      "call" : 0.69999999999999996,
+      "raise25x" : 0.29999999999999999
+    },
+    "JTs" : {
+      "call" : 0.91610000000000003,
+      "raise25x" : 0.083900000000000002
+    },
+    "K9s" : {
+      "fold" : 0.24890000000000001,
+      "raise25x" : 0.75109999999999999
+    },
+    "KJs" : {
+      "call" : 0.13800000000000001,
+      "raise25x" : 0.86199999999999999
+    },
+    "KK" : {
+      "raise25x" : 1
+    },
+    "KQo" : {
+      "call" : 0.069800000000000001,
+      "fold" : 0.56820000000000004,
+      "raise25x" : 0.36199999999999999
+    },
+    "KQs" : {
+      "call" : 1
+    },
+    "KTs" : {
+      "call" : 0.27400000000000002,
+      "raise25x" : 0.72599999999999998
+    },
+    "QJs" : {
+      "call" : 0.83999999999999997,
+      "raise25x" : 0.16
+    },
+    "QQ" : {
+      "call" : 0.31190000000000001,
+      "raise25x" : 0.68810000000000004
+    },
+    "QTs" : {
+      "call" : 0.92810000000000004,
+      "fold" : 0.071900000000000019
+    },
+    "T9s" : {
+      "call" : 0.064000000000000001,
+      "fold" : 0.93600000000000005
+    },
+    "TT" : {
+      "call" : 0.44800000000000001,
+      "raise25x" : 0.55200000000000005
+    }
+  },
+  "id" : "mtt_9max_50bb_lj_vsopen_vs_utg1",
+  "source" : {
+    "description" : "Adapted from RangeConverter 8-max baseline.",
+    "publisher" : {
+      "accessedDate" : "2026-06-01",
+      "name" : "RangeConverter",
+      "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
+      "treeParams" : "2.5x open, 3.5x 3bet IP, 4.5x 3bet OOP, 2.3x 4bet IP, 2.75x 4bet OOP, SB vs BB 3.2bb",
+      "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
+    },
+    "solver" : {
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante. Copied verbatim from 8-max LJ (same effective seat in 9-max)."
+    },
+    "type" : "published"
+  },
+  "spot" : {
+    "anteType" : "bigBlindAnte",
+    "facingAction" : "vsOpen",
+    "opponentPosition" : "UTG1",
+    "position" : "LJ",
+    "stackDepthBB" : 50
+  }
+}

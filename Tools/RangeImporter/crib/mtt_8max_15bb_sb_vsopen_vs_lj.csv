@@ -1,0 +1,46 @@
+# poker.academy CE-Symmetric — 15bb vsopen | hero SB vs LJ
+# Scraped 2026-06-01 via scrape_all_ranges.py
+# TreeParams: poker.academy CE-Symmetric Regular @ 15bb (GTO ChipEV, 1bb ante)
+notation,action,freq
+66,call,0.1049
+66,fold,0.35
+66,jam,0.5451
+77,call,0.1849
+77,fold,0.8151
+88,call,0.23
+88,jam,0.77
+99,call,0.1249
+99,jam,0.8751
+AA,call,1.0
+AKs,jam,1.0
+AQs,jam,1.0
+AJs,call,0.2849
+AJs,jam,0.7151
+ATs,call,0.8602
+ATs,jam,0.1398
+A9s,call,0.3299
+A9s,fold,0.6701
+A8s,call,0.0999
+A8s,fold,0.9001
+A5s,call,0.095
+A5s,fold,0.905
+AKo,jam,1.0
+KK,jam,1.0
+KQs,jam,1.0
+KJs,jam,1.0
+KTs,call,0.5851
+KTs,fold,0.4149
+AQo,jam,1.0
+KQo,call,0.1999
+KQo,fold,0.8001
+QQ,jam,1.0
+QJs,call,0.2549
+QJs,jam,0.7451
+QTs,call,0.3399
+QTs,fold,0.6601
+AJo,call,0.1899
+AJo,fold,0.8101
+JJ,jam,1.0
+JTs,call,0.09
+JTs,fold,0.91
+TT,jam,1.0

@@ -11,6 +11,10 @@ enum AppTypography {
     static let subheadline = Font.subheadline.weight(.medium)
     static let footnote    = Font.footnote
     static let caption     = Font.caption
+    static let caption2    = Font.caption2
+
+    /// Small monospaced readout for raw range shorthand / poker codes.
+    static let monoCaption = Font.system(size: 11, weight: .medium, design: .monospaced)
 
     /// Hero splash — the single biggest readout on a screen (e.g., the
     /// tournament summary's "125" BB count). Scales with Dynamic Type via

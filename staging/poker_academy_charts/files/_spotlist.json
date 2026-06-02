@@ -1,0 +1,1192 @@
+[
+ {
+  "cat": "BvB",
+  "hero": "BB",
+  "vil": "SB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/BvB/BB/SB//",
+  "fn": "CE-Symmetric_100bb_Regular_BvB_BB_vs_SB"
+ },
+ {
+  "cat": "BvB",
+  "hero": "SB",
+  "vil": "BB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/BvB/SB/BB//",
+  "fn": "CE-Symmetric_100bb_Regular_BvB_SB_vs_BB"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "BB",
+  "vil": "BTN",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/BB/BTN//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_BB_vs_BTN"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "BB",
+  "vil": "CO",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/BB/CO//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_BB_vs_CO"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "BB",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/BB/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_BB_vs_HJ"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "BB",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/BB/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_BB_vs_LJ"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "BB",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/BB/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_BB_vs_MP"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "BB",
+  "vil": "SB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/BB/SB//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_BB_vs_SB"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "BTN",
+  "vil": "CO",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/BTN/CO//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_BTN_vs_CO"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "BTN",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/BTN/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_BTN_vs_HJ"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "BTN",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/BTN/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_BTN_vs_LJ"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "BTN",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/BTN/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_BTN_vs_MP"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "CO",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/CO/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_CO_vs_HJ"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "CO",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/CO/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_CO_vs_LJ"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "CO",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/CO/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_CO_vs_MP"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "HJ",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/HJ/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_HJ_vs_LJ"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "HJ",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/HJ/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_HJ_vs_MP"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "LJ",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/LJ/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_LJ_vs_MP"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "SB",
+  "vil": "BTN",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/SB/BTN//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_SB_vs_BTN"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "SB",
+  "vil": "CO",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/SB/CO//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_SB_vs_CO"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "SB",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/SB/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_SB_vs_HJ"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "SB",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/SB/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_SB_vs_LJ"
+ },
+ {
+  "cat": "Cold 4-bet",
+  "hero": "SB",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Cold%204-bet/SB/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_Cold-4-bet_SB_vs_MP"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "BB",
+  "vil": "BTN",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/BB/BTN//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_BB_vs_BTN"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "BB",
+  "vil": "CO",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/BB/CO//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_BB_vs_CO"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "BB",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/BB/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_BB_vs_EP"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "BB",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/BB/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_BB_vs_HJ"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "BB",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/BB/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_BB_vs_LJ"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "BB",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/BB/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_BB_vs_MP"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "BTN",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/BTN/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_BTN_vs_EP"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "BTN",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/BTN/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_BTN_vs_HJ"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "BTN",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/BTN/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_BTN_vs_LJ"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "BTN",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/BTN/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_BTN_vs_MP"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "CO",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/CO/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_CO_vs_EP"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "CO",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/CO/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_CO_vs_LJ"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "CO",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/CO/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_CO_vs_MP"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "HJ",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/HJ/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_HJ_vs_EP"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "HJ",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/HJ/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_HJ_vs_MP"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "LJ",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/LJ/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_LJ_vs_EP"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "SB",
+  "vil": "CO",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/SB/CO//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_SB_vs_CO"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "SB",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/SB/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_SB_vs_EP"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "SB",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/SB/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_SB_vs_HJ"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "SB",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/SB/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_SB_vs_LJ"
+ },
+ {
+  "cat": "Multiway",
+  "hero": "SB",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/Multiway/SB/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_Multiway_SB_vs_MP"
+ },
+ {
+  "cat": "RFI",
+  "hero": "BTN",
+  "vil": null,
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/RFI/BTN///",
+  "fn": "CE-Symmetric_100bb_Regular_RFI_BTN"
+ },
+ {
+  "cat": "RFI",
+  "hero": "CO",
+  "vil": null,
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/RFI/CO///",
+  "fn": "CE-Symmetric_100bb_Regular_RFI_CO"
+ },
+ {
+  "cat": "RFI",
+  "hero": "EP",
+  "vil": null,
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/RFI/EP///",
+  "fn": "CE-Symmetric_100bb_Regular_RFI_EP"
+ },
+ {
+  "cat": "RFI",
+  "hero": "HJ",
+  "vil": null,
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/RFI/HJ///",
+  "fn": "CE-Symmetric_100bb_Regular_RFI_HJ"
+ },
+ {
+  "cat": "RFI",
+  "hero": "LJ",
+  "vil": null,
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/RFI/LJ///",
+  "fn": "CE-Symmetric_100bb_Regular_RFI_LJ"
+ },
+ {
+  "cat": "RFI",
+  "hero": "MP",
+  "vil": null,
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/RFI/MP///",
+  "fn": "CE-Symmetric_100bb_Regular_RFI_MP"
+ },
+ {
+  "cat": "RFI",
+  "hero": "SB",
+  "vil": null,
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/RFI/SB///",
+  "fn": "CE-Symmetric_100bb_Regular_RFI_SB"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "BTN",
+  "vil": "BB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/BTN/BB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_BTN_vs_BB"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "BTN",
+  "vil": "SB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/BTN/SB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_BTN_vs_SB"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "CO",
+  "vil": "BB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/CO/BB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_CO_vs_BB"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "CO",
+  "vil": "BTN",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/CO/BTN//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_CO_vs_BTN"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "CO",
+  "vil": "SB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/CO/SB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_CO_vs_SB"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "EP",
+  "vil": "BB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/EP/BB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_EP_vs_BB"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "EP",
+  "vil": "BTN",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/EP/BTN//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_EP_vs_BTN"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "EP",
+  "vil": "CO",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/EP/CO//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_EP_vs_CO"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "EP",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/EP/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_EP_vs_HJ"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "EP",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/EP/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_EP_vs_LJ"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "EP",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/EP/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_EP_vs_MP"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "EP",
+  "vil": "SB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/EP/SB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_EP_vs_SB"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "HJ",
+  "vil": "BB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/HJ/BB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_HJ_vs_BB"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "HJ",
+  "vil": "BTN",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/HJ/BTN//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_HJ_vs_BTN"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "HJ",
+  "vil": "CO",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/HJ/CO//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_HJ_vs_CO"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "HJ",
+  "vil": "SB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/HJ/SB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_HJ_vs_SB"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "LJ",
+  "vil": "BB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/LJ/BB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_LJ_vs_BB"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "LJ",
+  "vil": "BTN",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/LJ/BTN//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_LJ_vs_BTN"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "LJ",
+  "vil": "CO",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/LJ/CO//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_LJ_vs_CO"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "LJ",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/LJ/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_LJ_vs_HJ"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "LJ",
+  "vil": "SB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/LJ/SB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_LJ_vs_SB"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "MP",
+  "vil": "BB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/MP/BB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_MP_vs_BB"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "MP",
+  "vil": "BTN",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/MP/BTN//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_MP_vs_BTN"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "MP",
+  "vil": "CO",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/MP/CO//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_MP_vs_CO"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "MP",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/MP/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_MP_vs_HJ"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "MP",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/MP/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_MP_vs_LJ"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "MP",
+  "vil": "SB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/MP/SB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_MP_vs_SB"
+ },
+ {
+  "cat": "vs. 3bet",
+  "hero": "SB",
+  "vil": "BB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%203bet/SB/BB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-3bet_SB_vs_BB"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "BB",
+  "vil": "BTN",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/BB/BTN//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_BB_vs_BTN"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "BB",
+  "vil": "CO",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/BB/CO//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_BB_vs_CO"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "BB",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/BB/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_BB_vs_EP"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "BB",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/BB/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_BB_vs_HJ"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "BB",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/BB/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_BB_vs_LJ"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "BB",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/BB/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_BB_vs_MP"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "BB",
+  "vil": "SB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/BB/SB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_BB_vs_SB"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "BTN",
+  "vil": "CO",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/BTN/CO//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_BTN_vs_CO"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "BTN",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/BTN/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_BTN_vs_EP"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "BTN",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/BTN/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_BTN_vs_HJ"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "BTN",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/BTN/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_BTN_vs_LJ"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "BTN",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/BTN/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_BTN_vs_MP"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "CO",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/CO/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_CO_vs_EP"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "CO",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/CO/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_CO_vs_HJ"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "CO",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/CO/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_CO_vs_LJ"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "CO",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/CO/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_CO_vs_MP"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "HJ",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/HJ/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_HJ_vs_EP"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "HJ",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/HJ/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_HJ_vs_LJ"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "HJ",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/HJ/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_HJ_vs_MP"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "LJ",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/LJ/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_LJ_vs_EP"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "LJ",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/LJ/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_LJ_vs_MP"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "MP",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/MP/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_MP_vs_EP"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "SB",
+  "vil": "BTN",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/SB/BTN//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_SB_vs_BTN"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "SB",
+  "vil": "CO",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/SB/CO//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_SB_vs_CO"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "SB",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/SB/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_SB_vs_EP"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "SB",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/SB/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_SB_vs_HJ"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "SB",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/SB/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_SB_vs_LJ"
+ },
+ {
+  "cat": "vs. 4bet",
+  "hero": "SB",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%204bet/SB/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-4bet_SB_vs_MP"
+ },
+ {
+  "cat": "vs. ISO",
+  "hero": "SB",
+  "vil": "BB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20ISO/SB/BB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-ISO_SB_vs_BB"
+ },
+ {
+  "cat": "vs. Limp",
+  "hero": "BB",
+  "vil": "SB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Limp/BB/SB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Limp_BB_vs_SB"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "BB",
+  "vil": "BTN",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/BB/BTN//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_BB_vs_BTN"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "BB",
+  "vil": "CO",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/BB/CO//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_BB_vs_CO"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "BB",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/BB/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_BB_vs_EP"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "BB",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/BB/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_BB_vs_HJ"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "BB",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/BB/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_BB_vs_LJ"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "BB",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/BB/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_BB_vs_MP"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "BB",
+  "vil": "SB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/BB/SB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_BB_vs_SB"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "BTN",
+  "vil": "CO",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/BTN/CO//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_BTN_vs_CO"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "BTN",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/BTN/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_BTN_vs_EP"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "BTN",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/BTN/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_BTN_vs_HJ"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "BTN",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/BTN/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_BTN_vs_LJ"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "BTN",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/BTN/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_BTN_vs_MP"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "CO",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/CO/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_CO_vs_EP"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "CO",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/CO/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_CO_vs_HJ"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "CO",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/CO/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_CO_vs_LJ"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "CO",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/CO/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_CO_vs_MP"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "HJ",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/HJ/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_HJ_vs_EP"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "HJ",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/HJ/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_HJ_vs_LJ"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "HJ",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/HJ/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_HJ_vs_MP"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "LJ",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/LJ/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_LJ_vs_EP"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "LJ",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/LJ/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_LJ_vs_MP"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "MP",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/MP/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_MP_vs_EP"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "SB",
+  "vil": "BTN",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/SB/BTN//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_SB_vs_BTN"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "SB",
+  "vil": "CO",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/SB/CO//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_SB_vs_CO"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "SB",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/SB/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_SB_vs_EP"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "SB",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/SB/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_SB_vs_HJ"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "SB",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/SB/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_SB_vs_LJ"
+ },
+ {
+  "cat": "vs. RFI",
+  "hero": "SB",
+  "vil": "MP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20RFI/SB/MP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-RFI_SB_vs_MP"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "BTN",
+  "vil": "BB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/BTN/BB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_BTN_vs_BB"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "BTN",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/BTN/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_BTN_vs_EP"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "BTN",
+  "vil": "SB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/BTN/SB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_BTN_vs_SB"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "CO",
+  "vil": "BB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/CO/BB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_CO_vs_BB"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "CO",
+  "vil": "BTN",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/CO/BTN//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_CO_vs_BTN"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "CO",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/CO/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_CO_vs_EP"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "CO",
+  "vil": "SB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/CO/SB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_CO_vs_SB"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "EP",
+  "vil": "BB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/EP/BB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_EP_vs_BB"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "EP",
+  "vil": "BTN",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/EP/BTN//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_EP_vs_BTN"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "EP",
+  "vil": "CO",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/EP/CO//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_EP_vs_CO"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "EP",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/EP/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_EP_vs_EP"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "EP",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/EP/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_EP_vs_HJ"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "EP",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/EP/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_EP_vs_LJ"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "EP",
+  "vil": "SB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/EP/SB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_EP_vs_SB"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "HJ",
+  "vil": "BB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/HJ/BB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_HJ_vs_BB"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "HJ",
+  "vil": "BTN",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/HJ/BTN//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_HJ_vs_BTN"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "HJ",
+  "vil": "CO",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/HJ/CO//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_HJ_vs_CO"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "HJ",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/HJ/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_HJ_vs_EP"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "HJ",
+  "vil": "SB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/HJ/SB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_HJ_vs_SB"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "LJ",
+  "vil": "BB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/LJ/BB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_LJ_vs_BB"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "LJ",
+  "vil": "BTN",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/LJ/BTN//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_LJ_vs_BTN"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "LJ",
+  "vil": "CO",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/LJ/CO//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_LJ_vs_CO"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "LJ",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/LJ/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_LJ_vs_EP"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "LJ",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/LJ/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_LJ_vs_HJ"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "LJ",
+  "vil": "SB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/LJ/SB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_LJ_vs_SB"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "MP",
+  "vil": "BB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/MP/BB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_MP_vs_BB"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "MP",
+  "vil": "BTN",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/MP/BTN//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_MP_vs_BTN"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "MP",
+  "vil": "CO",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/MP/CO//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_MP_vs_CO"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "MP",
+  "vil": "EP",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/MP/EP//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_MP_vs_EP"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "MP",
+  "vil": "HJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/MP/HJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_MP_vs_HJ"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "MP",
+  "vil": "LJ",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/MP/LJ//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_MP_vs_LJ"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "MP",
+  "vil": "SB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/MP/SB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_MP_vs_SB"
+ },
+ {
+  "cat": "vs. Sqz",
+  "hero": "SB",
+  "vil": "BB",
+  "path": "/tournaments/s/CE-Symmetric/100/Regular/vs.%20Sqz/SB/BB//",
+  "fn": "CE-Symmetric_100bb_Regular_vs-Sqz_SB_vs_BB"
+ }
+]

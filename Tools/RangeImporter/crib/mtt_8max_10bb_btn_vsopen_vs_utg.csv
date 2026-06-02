@@ -1,0 +1,41 @@
+# poker.academy CE-Symmetric — 10bb vsopen | hero BTN vs EP
+# Scraped 2026-06-01 via scrape_all_ranges.py
+# TreeParams: poker.academy CE-Symmetric Regular @ 10bb (GTO ChipEV, 1bb ante)
+notation,action,freq
+55,call,0.026
+55,fold,0.974
+66,call,0.23
+66,jam,0.77
+77,call,0.1199
+77,jam,0.8801
+88,jam,1.0
+99,call,0.6
+99,jam,0.4
+AA,call,1.0
+AKs,jam,1.0
+AQs,jam,1.0
+AJs,jam,1.0
+ATs,jam,1.0
+A9s,call,1.0
+A8s,call,0.585
+A8s,fold,0.415
+A5s,call,0.1057
+A5s,fold,0.2094
+A5s,jam,0.6849
+AKo,jam,1.0
+KK,jam,1.0
+KQs,jam,1.0
+KJs,call,1.0
+AQo,jam,1.0
+KQo,call,0.2792
+KQo,fold,0.6849
+KQo,jam,0.0359
+QQ,jam,1.0
+QJs,call,0.37
+QJs,fold,0.63
+AJo,jam,1.0
+JJ,call,0.2356
+JJ,jam,0.7644
+ATo,call,0.37
+ATo,jam,0.63
+TT,jam,1.0

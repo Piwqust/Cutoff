@@ -1,0 +1,75 @@
+{
+  "format" : "NLHE_MTT_8MAX",
+  "hands" : {
+    "66" : {
+      "call" : 0.1106,
+      "fold" : 0.88939999999999997
+    },
+    "77" : {
+      "call" : 0.12989999999999999,
+      "fold" : 0.87009999999999998
+    },
+    "88" : {
+      "call" : 1
+    },
+    "99" : {
+      "call" : 1
+    },
+    "AA" : {
+      "call" : 1
+    },
+    "AJs" : {
+      "call" : 0.40989999999999999,
+      "fold" : 0.59009999999999996
+    },
+    "AKo" : {
+      "call" : 1
+    },
+    "AKs" : {
+      "call" : 1
+    },
+    "AQo" : {
+      "call" : 1
+    },
+    "AQs" : {
+      "call" : 1
+    },
+    "JJ" : {
+      "call" : 1
+    },
+    "KK" : {
+      "call" : 1
+    },
+    "KQs" : {
+      "call" : 1
+    },
+    "QQ" : {
+      "call" : 1
+    },
+    "TT" : {
+      "call" : 1
+    }
+  },
+  "id" : "mtt_8max_20bb_utg_vs3bet_vs_btn",
+  "source" : {
+    "description" : "RangeConverter free PDF — 8-max 20bb 1bb ante (12.5%).",
+    "publisher" : {
+      "accessedDate" : "2026-06-01",
+      "name" : "RangeConverter",
+      "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
+      "treeParams" : "poker.academy CE-Symmetric Regular @ 20bb (GTO ChipEV, 1bb ante)",
+      "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
+    },
+    "solver" : {
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante."
+    },
+    "type" : "published"
+  },
+  "spot" : {
+    "anteType" : "bigBlindAnte",
+    "facingAction" : "vs3Bet",
+    "opponentPosition" : "BTN",
+    "position" : "UTG",
+    "stackDepthBB" : 20
+  }
+}

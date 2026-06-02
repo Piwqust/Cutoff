@@ -10,6 +10,7 @@ final class RangesViewModel {
     var selectedPosition: TablePosition?
     var selectedDepthBucket: StackDepthBucket?
     var selectedFacing: FacingAction?
+    var selectedOpponent: TablePosition?
 
     func load(using service: RangeService) {
         service.ensureLoaded()
@@ -19,6 +20,7 @@ final class RangesViewModel {
                 selectedPosition = first.position
                 selectedDepthBucket = StackDepthBucket.nearest(to: first.stackDepth)
                 selectedFacing = first.facingAction
+                selectedOpponent = first.opponentPosition
             }
         }
     }
@@ -29,8 +31,9 @@ final class RangesViewModel {
     /// same spot.
     private static func normalize(_ source: [RangeChart]) -> [RangeChart] {
         var byKey: [String: RangeChart] = [:]
-        for c in source where TrainingSpot.isValid(position: c.position, facing: c.facingAction) {
-            let key = "\(c.position.rawValue)_\(c.stackDepth)_\(c.facingAction.rawValue)"
+        for c in source where TrainingSpot.isValid(position: c.position, facing: c.facingAction, opponentPosition: c.opponentPosition) {
+            let oppPart = c.opponentPosition.map { "_vs_\($0.rawValue)" } ?? ""
+            let key = "\(c.position.rawValue)_\(c.stackDepth)_\(c.facingAction.rawValue)\(oppPart)"
             if let existing = byKey[key] {
                 if c.tableSize == 9 && existing.tableSize != 9 { byKey[key] = c }
             } else {
@@ -104,11 +107,17 @@ final class RangesViewModel {
         syncOtherFiltersTo(activeChart)
     }
 
+    func selectOpponent(_ opp: TablePosition) {
+        selectedOpponent = opp
+        syncOtherFiltersTo(activeChart)
+    }
+
     private func syncOtherFiltersTo(_ chart: RangeChart?) {
         guard let chart else { return }
         selectedPosition = chart.position
         selectedDepthBucket = StackDepthBucket.nearest(to: chart.stackDepth)
         selectedFacing = chart.facingAction
+        selectedOpponent = chart.opponentPosition
     }
 
     /// Best-match chart for the current filters. Prefers an exact triple
@@ -122,8 +131,13 @@ final class RangesViewModel {
 
         let scored = charts.map { chart -> (chart: RangeChart, score: Int, depthDelta: Int) in
             var score = 0
-            if let pos, chart.position == pos { score += 4 }
-            if let facing, chart.facingAction == facing { score += 2 }
+            if let pos, chart.position == pos { score += 8 }
+            if let facing, chart.facingAction == facing { score += 4 }
+            if let opp = selectedOpponent {
+                if chart.opponentPosition == opp { score += 2 }
+            } else {
+                if chart.opponentPosition == nil { score += 2 }
+            }
             let delta = depthBB.map { abs(chart.stackDepth - $0) } ?? .max
             if let depthBB, chart.stackDepth == depthBB { score += 1 }
             return (chart, score, delta)

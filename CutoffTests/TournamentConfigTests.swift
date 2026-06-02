@@ -2,12 +2,14 @@ import XCTest
 @testable import Cutoff
 
 final class TournamentConfigTests: XCTestCase {
-    func test_defaultIs9MaxMTTAt125BB() {
+    func test_defaultIs8MaxMTTAt125BB() {
+        // 8-max is the canonical baseline for modern MTT solver libraries
+        // (RangeConverter, GTO Wizard); 9-max charts are derived adaptations.
         let c = TournamentConfig.default
         XCTAssertEqual(c.startingStack, 25_000)
         XCTAssertEqual(c.smallBlind, 100)
         XCTAssertEqual(c.bigBlind, 200)
-        XCTAssertEqual(c.tableSize, 9)
+        XCTAssertEqual(c.tableSize, 8)
         XCTAssertEqual(c.startingBB, 125)
         XCTAssertEqual(c.blindLevelDuration, .fifteen)
         XCTAssertEqual(c.anteType, .unknown)

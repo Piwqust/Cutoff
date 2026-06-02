@@ -1,37 +1,79 @@
 {
-  "id": "mtt_9max_25bb_hj_vs3bet",
-  "format": "NLHE_MTT_9MAX",
-  "spot": {
-    "position": "HJ",
-    "stackDepthBB": 25,
-    "facingAction": "vs3Bet",
-    "anteType": "bigBlindAnte"
-  },
-  "source": {
-    "type": "solverDump",
-    "description": "Solver-verified MTT preflop range.",
-    "solver": {
-      "solverName": "MTT Trainer canonical solver set",
-      "solverVersion": "1.0",
-      "assumptions": "9-max NLHE, 12.5% big-blind ante, chipEV (non-ICM). Push/fold spots use the Nash equilibrium; 100 BB opens use the canonical solver-derived charts; intermediate depths interpolate between the two anchors."
+  "format" : "NLHE_MTT_9MAX",
+  "hands" : {
+    "77" : {
+      "call" : 1
+    },
+    "88" : {
+      "call" : 1
+    },
+    "99" : {
+      "call" : 1
+    },
+    "AA" : {
+      "call" : 1
+    },
+    "AJo" : {
+      "call" : 0.39500000000000002,
+      "fold" : 0.60499999999999998
+    },
+    "AJs" : {
+      "call" : 1
+    },
+    "AKo" : {
+      "call" : 1
+    },
+    "AKs" : {
+      "call" : 1
+    },
+    "AQo" : {
+      "call" : 1
+    },
+    "AQs" : {
+      "call" : 1
+    },
+    "ATs" : {
+      "call" : 1
+    },
+    "JJ" : {
+      "call" : 1
+    },
+    "KJs" : {
+      "call" : 0.83499999999999996,
+      "fold" : 0.16500000000000001
+    },
+    "KK" : {
+      "call" : 1
+    },
+    "KQs" : {
+      "call" : 1
+    },
+    "QQ" : {
+      "call" : 1
+    },
+    "TT" : {
+      "call" : 1
     }
   },
-  "hands": {
-    "AA": "jam",
-    "KQs": "jam",
-    "KK": "jam",
-    "AKs": "jam",
-    "AJs": "jam",
-    "QQ": "jam",
-    "JJ": "jam",
-    "AQs": "jam",
-    "TT": "jam",
-    "JTs": "call",
-    "QTs": "call",
-    "AKo": "jam",
-    "99": "call",
-    "KJs": "jam",
-    "AQo": "jam",
-    "QJs": "jam"
+  "id" : "mtt_9max_25bb_hj_vs3bet",
+  "source" : {
+    "description" : "Adapted from RangeConverter 8-max baseline.",
+    "publisher" : {
+      "accessedDate" : "2026-06-01",
+      "name" : "RangeConverter",
+      "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
+      "treeParams" : "2.5x open, 3.5x 3bet IP, 4.5x 3bet OOP, 2.3x 4bet IP, 2.75x 4bet OOP, SB vs BB 3.2bb",
+      "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
+    },
+    "solver" : {
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante. Copied verbatim from 8-max HJ (same effective seat in 9-max)."
+    },
+    "type" : "published"
+  },
+  "spot" : {
+    "anteType" : "bigBlindAnte",
+    "facingAction" : "vs3Bet",
+    "position" : "HJ",
+    "stackDepthBB" : 25
   }
 }

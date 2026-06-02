@@ -1,0 +1,27 @@
+# poker.academy CE-Symmetric — 20bb vs3bet | hero HJ vs CO
+# Scraped 2026-06-01 via scrape_all_ranges.py
+# TreeParams: poker.academy CE-Symmetric Regular @ 20bb (GTO ChipEV, 1bb ante)
+notation,action,freq
+66,call,1.0
+77,call,1.0
+88,call,1.0
+99,call,1.0
+AA,call,1.0
+AKs,call,1.0
+AQs,call,1.0
+AJs,call,1.0
+ATs,call,1.0
+AKo,call,1.0
+KK,call,1.0
+KQs,call,1.0
+KJs,call,0.075
+KJs,fold,0.925
+AQo,call,1.0
+KQo,call,0.605
+KQo,fold,0.395
+QQ,call,1.0
+AJo,call,1.0
+JJ,call,1.0
+ATo,call,0.22
+ATo,fold,0.78
+TT,call,1.0

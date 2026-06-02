@@ -34,7 +34,7 @@ struct PokerTableView: View {
                         dealerButton
                             .position(buttonPoint(seatPoint: point, canvas: geo.size, diameter: diameter))
                     }
-                    if let blind = seat.postedBlindBB {
+                    if let blind = seat.postedBlindBB, size != .compact {
                         chip(value: blind)
                             .position(blindChipPoint(seatPoint: point, canvas: geo.size, diameter: diameter))
                     }
@@ -78,14 +78,14 @@ struct PokerTableView: View {
         case .compact:
             return Metrics(
                 aspect: 1.55,
-                seatDiameter: 28,
-                heroDiameter: 32,
-                positionFont: .system(size: 8,  weight: .semibold, design: .rounded),
-                stackFont:    .system(size: 9,  weight: .bold,     design: .rounded).monospacedDigit(),
-                potFont:      .system(size: 12, weight: .bold,     design: .rounded).monospacedDigit(),
-                chipDiameter: 12,
-                chipFont:     .system(size: 6,  weight: .bold,     design: .rounded).monospacedDigit(),
-                ovalInset: 18
+                seatDiameter: 18,
+                heroDiameter: 22,
+                positionFont: .system(size: 6,  weight: .semibold, design: .rounded),
+                stackFont:    .system(size: 6,  weight: .bold,     design: .rounded).monospacedDigit(),
+                potFont:      .system(size: 10, weight: .bold,     design: .rounded).monospacedDigit(),
+                chipDiameter: 10,
+                chipFont:     .system(size: 5,  weight: .bold,     design: .rounded).monospacedDigit(),
+                ovalInset: 14
             )
         }
     }
@@ -108,8 +108,8 @@ struct PokerTableView: View {
             width:  canvas.width  - metrics.ovalInset * 2,
             height: canvas.height - metrics.ovalInset * 2
         )
-        return Ellipse()
-            .strokeBorder(AppColors.divider.opacity(0.55), lineWidth: 0.8)
+        return Capsule()
+            .strokeBorder(AppColors.divider.opacity(0.4), lineWidth: 1.5)
             .frame(width: rect.width, height: rect.height)
             .position(x: canvas.width / 2, y: canvas.height / 2)
     }
@@ -118,57 +118,72 @@ struct PokerTableView: View {
         Text(formatBB(snapshot.potBB))
             .font(metrics.potFont)
             .foregroundStyle(AppColors.textPrimary)
+            .padding(.horizontal, 6)
+            .background(AppColors.backgroundDeep)
             .accessibilityHidden(true)
     }
 
     private func seatCircle(seat: PokerTableSeat, diameter: CGFloat) -> some View {
-        let ringColor: Color = seat.isHero ? AppColors.accentPeach : .clear
-        let fillOpacity: Double = seat.isFolded ? 0.4 : 1.0
-        return ZStack {
-            Circle()
-                .fill(AppColors.backgroundSurface)
-            Circle()
-                .strokeBorder(ringColor, lineWidth: seat.isHero ? 2.5 : 0)
-            VStack(spacing: 0) {
+        let isFolded = seat.isFolded
+        
+        if isFolded {
+            return AnyView(
                 Text(seat.position.displayName)
                     .font(metrics.positionFont)
-                    .foregroundStyle(seat.isHero ? AppColors.accentPeach : AppColors.textSecondary)
-                Text(formatStack(seat.stackBB))
-                    .font(metrics.stackFont)
-                    .foregroundStyle(AppColors.textPrimary)
-            }
+                    .foregroundStyle(AppColors.textSecondary.opacity(0.5))
+            )
         }
-        .frame(width: diameter, height: diameter)
-        .opacity(fillOpacity)
+        
+        let ringColor: Color = seat.isHero ? AppColors.accentPeach : .clear
+        return AnyView(
+            ZStack {
+                Circle()
+                    .fill(AppColors.backgroundDeep)
+                
+                if seat.isHero {
+                    Circle().strokeBorder(ringColor, lineWidth: 1.5)
+                } else {
+                    Circle().strokeBorder(AppColors.divider.opacity(0.5), lineWidth: 1)
+                }
+                
+                VStack(spacing: 0) {
+                    Text(seat.position.displayName)
+                        .font(metrics.positionFont)
+                        .foregroundStyle(seat.isHero ? AppColors.accentPeach : AppColors.textSecondary)
+                    Text(formatStack(seat.stackBB))
+                        .font(metrics.stackFont)
+                        .foregroundStyle(AppColors.textPrimary)
+                }
+            }
+            .frame(width: diameter, height: diameter)
+        )
     }
 
     private func chip(value: Double) -> some View {
         ZStack {
             Circle()
-                .fill(AppColors.primaryEmerald)
-                .overlay(Circle().strokeBorder(AppColors.primaryMint.opacity(0.8), lineWidth: 1))
+                .fill(AppColors.primaryEmerald.opacity(0.2))
+                .overlay(Circle().strokeBorder(AppColors.primaryMint.opacity(0.6), lineWidth: 1))
             Text(formatStack(value))
                 .font(metrics.chipFont)
-                .foregroundStyle(AppColors.textPrimary)
+                .foregroundStyle(AppColors.primaryMint)
         }
         .frame(width: metrics.chipDiameter, height: metrics.chipDiameter)
-        .shadow(color: .black.opacity(0.35), radius: 3, x: 0, y: 1)
     }
 
     private var dealerButton: some View {
-        RoundedRectangle(cornerRadius: 4, style: .continuous)
+        Circle()
             .fill(AppColors.cardSurface)
-            .overlay(
-                RoundedRectangle(cornerRadius: 4, style: .continuous)
-                    .strokeBorder(AppColors.divider.opacity(0.5), lineWidth: 0.5)
-            )
+            .overlay(Circle().strokeBorder(AppColors.divider.opacity(0.8), lineWidth: 1))
             .overlay(
                 Text("D")
                     .font(.system(size: max(8, metrics.chipDiameter * 0.55), weight: .bold, design: .rounded))
-                    .foregroundStyle(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textPrimary)
             )
             .frame(width: metrics.chipDiameter, height: metrics.chipDiameter)
     }
+
+
 
     // MARK: - Geometry helpers
 
@@ -208,10 +223,10 @@ struct PokerTableView: View {
         )
     }
 
-    /// Dealer button sits inboard of BTN, on the line toward the table centre.
-    /// BTN never has a blind chip, so no offset is needed to avoid collisions.
     private func buttonPoint(seatPoint: CGPoint, canvas: CGSize, diameter: CGFloat) -> CGPoint {
-        blindChipPoint(seatPoint: seatPoint, canvas: canvas, diameter: diameter)
+        let base = blindChipPoint(seatPoint: seatPoint, canvas: canvas, diameter: diameter)
+        // Shift radially along X slightly to avoid exact overlap with blind chip
+        return CGPoint(x: base.x + metrics.chipDiameter * 0.75, y: base.y)
     }
 
     // MARK: - Formatting

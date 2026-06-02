@@ -1,0 +1,21 @@
+# poker.academy CE-Symmetric — 30bb vs3bet | hero EP vs SB
+# Scraped 2026-06-01 via scrape_all_ranges.py
+# TreeParams: poker.academy CE-Symmetric Regular @ 30bb (GTO ChipEV, 1bb ante)
+notation,action,freq
+88,call,0.4199
+88,fold,0.5801
+99,call,1.0
+AA,call,1.0
+AKs,call,1.0
+AQs,call,1.0
+AJs,call,0.5801
+AJs,fold,0.4199
+AKo,call,1.0
+KK,call,1.0
+KQs,call,0.01
+KQs,fold,0.99
+AQo,call,0.145
+AQo,fold,0.855
+QQ,call,1.0
+JJ,call,1.0
+TT,call,1.0

@@ -1,0 +1,113 @@
+{
+  "format" : "NLHE_MTT_8MAX",
+  "hands" : {
+    "55" : {
+      "fold" : 0.95009999999999994,
+      "shove" : 0.0499
+    },
+    "66" : {
+      "shove" : 1
+    },
+    "77" : {
+      "shove" : 1
+    },
+    "88" : {
+      "fold" : 0.016,
+      "shove" : 0.98399999999999999
+    },
+    "99" : {
+      "shove" : 1
+    },
+    "A3s" : {
+      "fold" : 0.7046,
+      "shove" : 0.2954
+    },
+    "A4s" : {
+      "shove" : 1
+    },
+    "A5s" : {
+      "shove" : 1
+    },
+    "A6s" : {
+      "fold" : 0.29999999999999999,
+      "shove" : 0.69999999999999996
+    },
+    "A7s" : {
+      "shove" : 1
+    },
+    "A9s" : {
+      "shove" : 1
+    },
+    "AA" : {
+      "shove" : 1
+    },
+    "AJo" : {
+      "shove" : 1
+    },
+    "AJs" : {
+      "shove" : 1
+    },
+    "AKo" : {
+      "shove" : 1
+    },
+    "AKs" : {
+      "shove" : 1
+    },
+    "AQo" : {
+      "shove" : 1
+    },
+    "AQs" : {
+      "shove" : 1
+    },
+    "ATo" : {
+      "shove" : 1
+    },
+    "ATs" : {
+      "shove" : 1
+    },
+    "JJ" : {
+      "shove" : 1
+    },
+    "KJs" : {
+      "shove" : 1
+    },
+    "KK" : {
+      "shove" : 1
+    },
+    "KQs" : {
+      "shove" : 1
+    },
+    "KTs" : {
+      "fold" : 0.91000000000000003,
+      "shove" : 0.089999999999999997
+    },
+    "QQ" : {
+      "shove" : 1
+    },
+    "TT" : {
+      "shove" : 1
+    }
+  },
+  "id" : "mtt_8max_10bb_hj_vsopen_vs_utg1",
+  "source" : {
+    "description" : "RangeConverter free PDF — 8-max 10bb 1bb ante (12.5%).",
+    "publisher" : {
+      "accessedDate" : "2026-06-01",
+      "name" : "RangeConverter",
+      "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
+      "treeParams" : "poker.academy CE-Symmetric Regular @ 10bb (GTO ChipEV, 1bb ante)",
+      "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
+    },
+    "solver" : {
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante."
+    },
+    "type" : "published"
+  },
+  "spot" : {
+    "anteType" : "bigBlindAnte",
+    "facingAction" : "vsOpen",
+    "opponentPosition" : "UTG1",
+    "position" : "HJ",
+    "stackDepthBB" : 10
+  }
+}

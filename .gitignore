@@ -49,3 +49,8 @@ venv/
 # Scratch
 .tmp/
 tmp/
+
+# Range scraper run artifacts
+Tools/RangeImporter/scrape_log.txt
+Tools/RangeImporter/scripts/run_full.log
+Tools/RangeImporter/scripts/.chrome_eval.applescript

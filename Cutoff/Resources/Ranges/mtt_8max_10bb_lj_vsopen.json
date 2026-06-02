@@ -1,0 +1,109 @@
+{
+  "format" : "NLHE_MTT_8MAX",
+  "hands" : {
+    "66" : {
+      "fold" : 0.27539999999999998,
+      "shove" : 0.72460000000000002
+    },
+    "77" : {
+      "shove" : 1
+    },
+    "88" : {
+      "fold" : 0.68469999999999998,
+      "shove" : 0.31530000000000002
+    },
+    "99" : {
+      "shove" : 1
+    },
+    "A3s" : {
+      "fold" : 0.85440000000000005,
+      "shove" : 0.14560000000000001
+    },
+    "A4s" : {
+      "shove" : 1
+    },
+    "A5s" : {
+      "shove" : 1
+    },
+    "A6s" : {
+      "fold" : 0.069800000000000001,
+      "shove" : 0.93020000000000003
+    },
+    "A7s" : {
+      "shove" : 1
+    },
+    "A9s" : {
+      "shove" : 1
+    },
+    "AA" : {
+      "shove" : 1
+    },
+    "AJo" : {
+      "shove" : 1
+    },
+    "AJs" : {
+      "shove" : 1
+    },
+    "AKo" : {
+      "shove" : 1
+    },
+    "AKs" : {
+      "shove" : 1
+    },
+    "AQo" : {
+      "shove" : 1
+    },
+    "AQs" : {
+      "shove" : 1
+    },
+    "ATo" : {
+      "shove" : 1
+    },
+    "ATs" : {
+      "shove" : 1
+    },
+    "JJ" : {
+      "shove" : 1
+    },
+    "KJs" : {
+      "shove" : 1
+    },
+    "KK" : {
+      "shove" : 1
+    },
+    "KQs" : {
+      "shove" : 1
+    },
+    "KTs" : {
+      "fold" : 0.23000000000000001,
+      "shove" : 0.77000000000000002
+    },
+    "QQ" : {
+      "shove" : 1
+    },
+    "TT" : {
+      "shove" : 1
+    }
+  },
+  "id" : "mtt_8max_10bb_lj_vsopen",
+  "source" : {
+    "description" : "RangeConverter free PDF — 8-max 10bb 1bb ante (12.5%).",
+    "publisher" : {
+      "accessedDate" : "2026-06-01",
+      "name" : "RangeConverter",
+      "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
+      "treeParams" : "poker.academy CE-Symmetric Regular @ 10bb (GTO ChipEV, 1bb ante)",
+      "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
+    },
+    "solver" : {
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante."
+    },
+    "type" : "published"
+  },
+  "spot" : {
+    "anteType" : "bigBlindAnte",
+    "facingAction" : "vsOpen",
+    "position" : "LJ",
+    "stackDepthBB" : 10
+  }
+}

@@ -12,10 +12,10 @@ settings:
     SWIFT_VERSION: "5.10"
     ENABLE_USER_SCRIPT_SANDBOXING: YES
     SWIFT_STRICT_CONCURRENCY: minimal
-    DEVELOPMENT_TEAM: ""
+    DEVELOPMENT_TEAM: WNRXX7YZ2U
     CODE_SIGN_STYLE: Automatic
-    CODE_SIGNING_REQUIRED: NO
-    CODE_SIGN_IDENTITY: ""
+    CODE_SIGNING_REQUIRED: YES
+    CODE_SIGN_IDENTITY: "Apple Development"
 
 targets:
   Cutoff:
@@ -48,7 +48,7 @@ targets:
               - cutoff
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.cutoff.app
+        PRODUCT_BUNDLE_IDENTIFIER: com.damirkadyroff.cutoff
         GENERATE_INFOPLIST_FILE: NO
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         TARGETED_DEVICE_FAMILY: "1"
@@ -64,7 +64,7 @@ targets:
       - target: Cutoff
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.cutoff.app.tests
+        PRODUCT_BUNDLE_IDENTIFIER: com.damirkadyroff.cutoff.tests
         GENERATE_INFOPLIST_FILE: YES
 
 schemes:

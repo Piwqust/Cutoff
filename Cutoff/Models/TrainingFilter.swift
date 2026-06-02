@@ -6,17 +6,21 @@ struct TrainingFilter: Hashable {
     var positions: Set<TablePosition>?
     var depthBuckets: Set<StackDepthBucket>?
     var facingActions: Set<FacingAction>?
+    /// When set, only charts whose `tableSize` matches one of the values pass.
+    /// Used to prefer 8-max ranges for 8-max tournaments and vice versa.
+    var tableSizes: Set<Int>?
 
     /// No constraints — every loaded chart qualifies.
     static let all = TrainingFilter()
 
     var isEmpty: Bool {
-        positions == nil && depthBuckets == nil && facingActions == nil
+        positions == nil && depthBuckets == nil && facingActions == nil && tableSizes == nil
     }
 
     func matches(_ chart: RangeChart) -> Bool {
         if let positions, !positions.contains(chart.spot.position) { return false }
         if let facingActions, !facingActions.contains(chart.spot.facingAction) { return false }
+        if let tableSizes, !tableSizes.contains(chart.tableSize) { return false }
         if let depthBuckets {
             let bucket = StackDepthBucket.nearest(to: chart.spot.stackDepthBB)
             if !depthBuckets.contains(bucket) { return false }

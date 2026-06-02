@@ -1,68 +1,247 @@
 {
-  "id": "mtt_9max_10bb_co_unopened",
-  "format": "NLHE_MTT_9MAX",
-  "spot": {
-    "position": "CO",
-    "stackDepthBB": 10,
-    "facingAction": "unopened",
-    "anteType": "bigBlindAnte"
-  },
-  "source": {
-    "type": "solverDump",
-    "description": "Solver-verified MTT preflop range.",
-    "solver": {
-      "solverName": "MTT Trainer canonical solver set",
-      "solverVersion": "1.0",
-      "assumptions": "9-max NLHE, 12.5% big-blind ante, chipEV (non-ICM). Push/fold spots use the Nash equilibrium; 100 BB opens use the canonical solver-derived charts; intermediate depths interpolate between the two anchors."
+  "format" : "NLHE_MTT_9MAX",
+  "hands" : {
+    "22" : {
+      "raise25x" : 0.016,
+      "shove" : 0.98399999999999999
+    },
+    "33" : {
+      "raise25x" : 0.039899999999999998,
+      "shove" : 0.96009999999999995
+    },
+    "44" : {
+      "shove" : 1
+    },
+    "55" : {
+      "shove" : 1
+    },
+    "66" : {
+      "shove" : 1
+    },
+    "77" : {
+      "shove" : 1
+    },
+    "87s" : {
+      "shove" : 1
+    },
+    "88" : {
+      "shove" : 1
+    },
+    "98s" : {
+      "shove" : 1
+    },
+    "99" : {
+      "shove" : 1
+    },
+    "A2o" : {
+      "raise25x" : 0.069800000000000001,
+      "shove" : 0.93020000000000003
+    },
+    "A2s" : {
+      "shove" : 1
+    },
+    "A3o" : {
+      "shove" : 1
+    },
+    "A3s" : {
+      "shove" : 1
+    },
+    "A4o" : {
+      "shove" : 1
+    },
+    "A4s" : {
+      "shove" : 1
+    },
+    "A5o" : {
+      "shove" : 1
+    },
+    "A5s" : {
+      "shove" : 1
+    },
+    "A6o" : {
+      "shove" : 1
+    },
+    "A6s" : {
+      "shove" : 1
+    },
+    "A7o" : {
+      "raise25x" : 0.016,
+      "shove" : 0.98399999999999999
+    },
+    "A7s" : {
+      "shove" : 1
+    },
+    "A8o" : {
+      "raise25x" : 0.080000000000000002,
+      "shove" : 0.92000000000000004
+    },
+    "A8s" : {
+      "shove" : 1
+    },
+    "A9o" : {
+      "raise25x" : 0.035900000000000001,
+      "shove" : 0.96409999999999996
+    },
+    "A9s" : {
+      "shove" : 1
+    },
+    "AA" : {
+      "raise25x" : 0.39000000000000001,
+      "shove" : 0.60999999999999999
+    },
+    "AJo" : {
+      "shove" : 1
+    },
+    "AJs" : {
+      "shove" : 1
+    },
+    "AKo" : {
+      "shove" : 1
+    },
+    "AKs" : {
+      "shove" : 1
+    },
+    "AQo" : {
+      "shove" : 1
+    },
+    "AQs" : {
+      "shove" : 1
+    },
+    "ATo" : {
+      "shove" : 1
+    },
+    "ATs" : {
+      "shove" : 1
+    },
+    "J7s" : {
+      "fold" : 0.9042,
+      "raise25x" : 0.095799999999999996
+    },
+    "J8s" : {
+      "raise25x" : 0.019899999999999998,
+      "shove" : 0.98009999999999997
+    },
+    "J9s" : {
+      "shove" : 1
+    },
+    "JJ" : {
+      "raise25x" : 0.026000000000000002,
+      "shove" : 0.97399999999999998
+    },
+    "JTo" : {
+      "raise25x" : 0.0557,
+      "shove" : 0.94430000000000003
+    },
+    "JTs" : {
+      "shove" : 1
+    },
+    "K5s" : {
+      "fold" : 0.83420000000000005,
+      "raise25x" : 0.1658
+    },
+    "K6s" : {
+      "shove" : 1
+    },
+    "K7s" : {
+      "shove" : 1
+    },
+    "K8s" : {
+      "shove" : 1
+    },
+    "K9o" : {
+      "fold" : 0.83999999999999997,
+      "raise25x" : 0.16
+    },
+    "K9s" : {
+      "shove" : 1
+    },
+    "KJo" : {
+      "shove" : 1
+    },
+    "KJs" : {
+      "shove" : 1
+    },
+    "KK" : {
+      "shove" : 1
+    },
+    "KQo" : {
+      "shove" : 1
+    },
+    "KQs" : {
+      "shove" : 1
+    },
+    "KTo" : {
+      "shove" : 1
+    },
+    "KTs" : {
+      "shove" : 1
+    },
+    "Q6s" : {
+      "fold" : 0.95409999999999995,
+      "raise25x" : 0.045899999999999996
+    },
+    "Q7s" : {
+      "fold" : 0.93020000000000003,
+      "raise25x" : 0.069800000000000001
+    },
+    "Q8s" : {
+      "raise25x" : 0.11990000000000001,
+      "shove" : 0.88009999999999999
+    },
+    "Q9s" : {
+      "shove" : 1
+    },
+    "QJo" : {
+      "shove" : 1
+    },
+    "QJs" : {
+      "raise25x" : 0.2954,
+      "shove" : 0.7046
+    },
+    "QQ" : {
+      "shove" : 1
+    },
+    "QTo" : {
+      "raise25x" : 0.01,
+      "shove" : 0.98999999999999999
+    },
+    "QTs" : {
+      "shove" : 1
+    },
+    "T7s" : {
+      "fold" : 0.95409999999999995,
+      "raise25x" : 0.045899999999999996
+    },
+    "T8s" : {
+      "shove" : 1
+    },
+    "T9s" : {
+      "shove" : 1
+    },
+    "TT" : {
+      "raise25x" : 0.17000000000000001,
+      "shove" : 0.82999999999999996
     }
   },
-  "hands": {
-    "A8s": "raise",
-    "KK": "jam",
-    "Q9s": "raise",
-    "AJo": "raise",
-    "A3s": "raise",
-    "J8s": "raise",
-    "JTs": "raise",
-    "A6s": "raise",
-    "A5s": "raise",
-    "99": "raise",
-    "76s": "raise",
-    "QTo": "raise",
-    "J9o": "raise",
-    "97s": "raise",
-    "87s": "raise",
-    "KQo": "raise",
-    "AKs": "jam",
-    "QQ": "jam",
-    "TT": "jam",
-    "ATs": "raise",
-    "KJo": "raise",
-    "QJo": "raise",
-    "A2s": "raise",
-    "77": "raise",
-    "A4s": "raise",
-    "K9s": "raise",
-    "A7s": "raise",
-    "T8s": "raise",
-    "KQs": "jam",
-    "T9s": "raise",
-    "ATo": "raise",
-    "JJ": "jam",
-    "KTo": "raise",
-    "QTs": "jam",
-    "J9s": "raise",
-    "AA": "jam",
-    "KTs": "raise",
-    "AJs": "jam",
-    "88": "raise",
-    "AQs": "jam",
-    "98s": "raise",
-    "AKo": "jam",
-    "A9s": "raise",
-    "JTo": "raise",
-    "KJs": "jam",
-    "AQo": "jam",
-    "QJs": "jam"
+  "id" : "mtt_9max_10bb_co_unopened",
+  "source" : {
+    "description" : "Adapted from RangeConverter 8-max baseline.",
+    "publisher" : {
+      "accessedDate" : "2026-06-01",
+      "name" : "RangeConverter",
+      "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
+      "treeParams" : "2.5x open, 3.5x 3bet IP, 4.5x 3bet OOP, 2.3x 4bet IP, 2.75x 4bet OOP, SB vs BB 3.2bb",
+      "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
+    },
+    "solver" : {
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante. Copied verbatim from 8-max CO (same effective seat in 9-max)."
+    },
+    "type" : "published"
+  },
+  "spot" : {
+    "anteType" : "bigBlindAnte",
+    "facingAction" : "unopened",
+    "position" : "CO",
+    "stackDepthBB" : 10
   }
 }

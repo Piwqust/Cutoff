@@ -64,11 +64,46 @@ struct RangeLoader {
         return charts
     }
 
-    /// Find the chart that best matches a target spot. Falls back to nearest
-    /// stack-depth bucket for the same position+facingAction.
-    func chart(matching position: TablePosition, depthBB: Int, facing: FacingAction, in charts: [RangeChart]) -> RangeChart? {
-        let candidates = charts.filter { $0.position == position && $0.facingAction == facing }
-        guard !candidates.isEmpty else { return nil }
-        return candidates.min(by: { abs($0.stackDepth - depthBB) < abs($1.stackDepth - depthBB) })
+    func chart(matching position: TablePosition, depthBB: Int, facing: FacingAction, tableSize: Int? = nil, opponentPosition: TablePosition? = nil, in charts: [RangeChart]) -> RangeChart? {
+        let positional = charts.filter { $0.position == position && $0.facingAction == facing }
+        guard !positional.isEmpty else { return nil }
+
+        let opponentMatched: [RangeChart]
+        if let opp = opponentPosition {
+            let exact = positional.filter { $0.opponentPosition == opp }
+            if !exact.isEmpty {
+                opponentMatched = exact
+            } else if let targetIdx = TablePosition.nineMaxOrder.firstIndex(of: opp) {
+                let validOpps = positional.compactMap { $0.opponentPosition }
+                if !validOpps.isEmpty {
+                    let closest = validOpps.min { a, b in
+                        let idxA = TablePosition.nineMaxOrder.firstIndex(of: a) ?? -1
+                        let idxB = TablePosition.nineMaxOrder.firstIndex(of: b) ?? -1
+                        return abs(idxA - targetIdx) < abs(idxB - targetIdx)
+                    }
+                    opponentMatched = positional.filter { $0.opponentPosition == closest }
+                } else {
+                    opponentMatched = positional
+                }
+            } else {
+                opponentMatched = positional
+            }
+        } else {
+            opponentMatched = positional
+        }
+
+        let preferred: [RangeChart]
+        if let tableSize {
+            let exact = opponentMatched.filter { $0.tableSize == tableSize }
+            if !exact.isEmpty {
+                preferred = exact
+            } else {
+                rangeLog.warning("no \(tableSize, privacy: .public)-max chart for \(position.rawValue, privacy: .public)/\(facing.rawValue, privacy: .public); falling back to any table size")
+                preferred = opponentMatched
+            }
+        } else {
+            preferred = opponentMatched
+        }
+        return preferred.min(by: { abs($0.stackDepth - depthBB) < abs($1.stackDepth - depthBB) })
     }
 }

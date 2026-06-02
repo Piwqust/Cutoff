@@ -68,9 +68,9 @@ enum DrillCategory: String, Codable, CaseIterable, Identifiable, Hashable {
         case .standardRoutine: return Set(FacingAction.allCases)
         case .firstInJam:  return [.pushFold, .unopened]
         case .reJam:       return [.vsOpen, .squeeze]
-        case .callJam:     return [.pushFold, .vs3Bet]
+        case .callJam:     return [.pushFold, .vs3Bet, .vs3BetJam]
         case .stealBlinds: return [.unopened]
-        case .vsManiac:    return [.vs3Bet, .vsOpen]
+        case .vsManiac:    return [.vs3Bet, .vs3BetJam, .vsOpen]
         case .mixed:       return Set(FacingAction.allCases)
         }
     }

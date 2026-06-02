@@ -21,7 +21,7 @@ struct GlassCard<Content: View>: View {
     var body: some View {
         content
             .padding(padding)
-            .glassBackground(cornerRadius: cornerRadius, tint: tint)
+            .liquidGlass(in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous), tint: tint)
     }
 }
 

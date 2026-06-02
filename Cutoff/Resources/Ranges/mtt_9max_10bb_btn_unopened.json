@@ -1,91 +1,289 @@
 {
-  "id": "mtt_9max_10bb_btn_unopened",
-  "format": "NLHE_MTT_9MAX",
-  "spot": {
-    "position": "BTN",
-    "stackDepthBB": 10,
-    "facingAction": "unopened",
-    "anteType": "bigBlindAnte"
-  },
-  "source": {
-    "type": "solverDump",
-    "description": "Solver-verified MTT preflop range.",
-    "solver": {
-      "solverName": "MTT Trainer canonical solver set",
-      "solverVersion": "1.0",
-      "assumptions": "9-max NLHE, 12.5% big-blind ante, chipEV (non-ICM). Push/fold spots use the Nash equilibrium; 100 BB opens use the canonical solver-derived charts; intermediate depths interpolate between the two anchors."
+  "format" : "NLHE_MTT_9MAX",
+  "hands" : {
+    "22" : {
+      "shove" : 1
+    },
+    "33" : {
+      "shove" : 1
+    },
+    "44" : {
+      "shove" : 1
+    },
+    "55" : {
+      "shove" : 1
+    },
+    "66" : {
+      "shove" : 1
+    },
+    "76s" : {
+      "shove" : 1
+    },
+    "77" : {
+      "shove" : 1
+    },
+    "87s" : {
+      "shove" : 1
+    },
+    "88" : {
+      "raise25x" : 0.12989999999999999,
+      "shove" : 0.87009999999999998
+    },
+    "97s" : {
+      "shove" : 1
+    },
+    "98s" : {
+      "shove" : 1
+    },
+    "99" : {
+      "raise25x" : 0.59489999999999998,
+      "shove" : 0.40510000000000002
+    },
+    "A2o" : {
+      "raise25x" : 0.27989999999999998,
+      "shove" : 0.72009999999999996
+    },
+    "A2s" : {
+      "shove" : 1
+    },
+    "A3o" : {
+      "shove" : 1
+    },
+    "A3s" : {
+      "shove" : 1
+    },
+    "A4o" : {
+      "raise25x" : 0.035900000000000001,
+      "shove" : 0.96409999999999996
+    },
+    "A4s" : {
+      "shove" : 1
+    },
+    "A5o" : {
+      "shove" : 1
+    },
+    "A5s" : {
+      "shove" : 1
+    },
+    "A6o" : {
+      "raise25x" : 0.12989999999999999,
+      "shove" : 0.87009999999999998
+    },
+    "A6s" : {
+      "shove" : 1
+    },
+    "A7o" : {
+      "shove" : 1
+    },
+    "A7s" : {
+      "shove" : 1
+    },
+    "A8o" : {
+      "shove" : 1
+    },
+    "A8s" : {
+      "shove" : 1
+    },
+    "A9o" : {
+      "shove" : 1
+    },
+    "A9s" : {
+      "shove" : 1
+    },
+    "AA" : {
+      "raise25x" : 1
+    },
+    "AJo" : {
+      "shove" : 1
+    },
+    "AJs" : {
+      "shove" : 1
+    },
+    "AKo" : {
+      "shove" : 1
+    },
+    "AKs" : {
+      "raise25x" : 0.069800000000000001,
+      "shove" : 0.93020000000000003
+    },
+    "AQo" : {
+      "shove" : 1
+    },
+    "AQs" : {
+      "shove" : 1
+    },
+    "ATo" : {
+      "shove" : 1
+    },
+    "ATs" : {
+      "shove" : 1
+    },
+    "J6s" : {
+      "fold" : 0.73450000000000004,
+      "raise25x" : 0.26550000000000001
+    },
+    "J7s" : {
+      "shove" : 1
+    },
+    "J8s" : {
+      "shove" : 1
+    },
+    "J9o" : {
+      "fold" : 0.56479999999999997,
+      "raise25x" : 0.43519999999999998
+    },
+    "J9s" : {
+      "shove" : 1
+    },
+    "JJ" : {
+      "raise25x" : 0.47999999999999998,
+      "shove" : 0.52000000000000002
+    },
+    "JTo" : {
+      "shove" : 1
+    },
+    "JTs" : {
+      "shove" : 1
+    },
+    "K2s" : {
+      "shove" : 1
+    },
+    "K3s" : {
+      "shove" : 1
+    },
+    "K4s" : {
+      "shove" : 1
+    },
+    "K5s" : {
+      "shove" : 1
+    },
+    "K6o" : {
+      "fold" : 0.96009999999999995,
+      "raise25x" : 0.039899999999999998
+    },
+    "K6s" : {
+      "shove" : 1
+    },
+    "K7o" : {
+      "fold" : 0.4551,
+      "raise25x" : 0.54490000000000005
+    },
+    "K7s" : {
+      "shove" : 1
+    },
+    "K8o" : {
+      "fold" : 0.095799999999999996,
+      "raise25x" : 0.9042
+    },
+    "K8s" : {
+      "shove" : 1
+    },
+    "K9o" : {
+      "shove" : 1
+    },
+    "K9s" : {
+      "raise25x" : 0.495,
+      "shove" : 0.505
+    },
+    "KJo" : {
+      "shove" : 1
+    },
+    "KJs" : {
+      "shove" : 1
+    },
+    "KK" : {
+      "raise25x" : 1
+    },
+    "KQo" : {
+      "shove" : 1
+    },
+    "KQs" : {
+      "shove" : 1
+    },
+    "KTo" : {
+      "shove" : 1
+    },
+    "KTs" : {
+      "raise25x" : 0.069800000000000001,
+      "shove" : 0.93020000000000003
+    },
+    "Q5s" : {
+      "fold" : 0.2356,
+      "raise25x" : 0.76439999999999997
+    },
+    "Q6s" : {
+      "shove" : 1
+    },
+    "Q7s" : {
+      "shove" : 1
+    },
+    "Q8s" : {
+      "shove" : 1
+    },
+    "Q9o" : {
+      "fold" : 0.12039999999999999,
+      "raise25x" : 0.62260000000000004,
+      "shove" : 0.25700000000000001
+    },
+    "Q9s" : {
+      "shove" : 1
+    },
+    "QJo" : {
+      "shove" : 1
+    },
+    "QJs" : {
+      "shove" : 1
+    },
+    "QQ" : {
+      "raise25x" : 1
+    },
+    "QTo" : {
+      "shove" : 1
+    },
+    "QTs" : {
+      "shove" : 1
+    },
+    "T6s" : {
+      "fold" : 0.62460000000000004,
+      "raise25x" : 0.37540000000000001
+    },
+    "T7s" : {
+      "shove" : 1
+    },
+    "T8s" : {
+      "shove" : 1
+    },
+    "T9o" : {
+      "raise25x" : 0.23999999999999999,
+      "shove" : 0.76000000000000001
+    },
+    "T9s" : {
+      "shove" : 1
+    },
+    "TT" : {
+      "raise25x" : 0.2455,
+      "shove" : 0.75449999999999995
     }
   },
-  "hands": {
-    "A8s": "raise",
-    "KK": "jam",
-    "Q9s": "raise",
-    "A9o": "raise",
-    "AJo": "raise",
-    "A3s": "raise",
-    "86s": "raise",
-    "J8s": "raise",
-    "JTs": "raise",
-    "A6s": "raise",
-    "A5s": "raise",
-    "99": "raise",
-    "76s": "raise",
-    "QTo": "raise",
-    "J9o": "raise",
-    "97s": "raise",
-    "87s": "raise",
-    "KQo": "raise",
-    "K8s": "raise",
-    "T7s": "raise",
-    "AKs": "jam",
-    "QQ": "jam",
-    "TT": "jam",
-    "ATs": "raise",
-    "KJo": "raise",
-    "QJo": "raise",
-    "A2s": "raise",
-    "77": "raise",
-    "A4s": "raise",
-    "K9s": "raise",
-    "54s": "raise",
-    "Q9o": "raise",
-    "A8o": "raise",
-    "A7s": "raise",
-    "T8s": "raise",
-    "98o": "raise",
-    "65s": "raise",
-    "K7s": "raise",
-    "K4s": "raise",
-    "KQs": "jam",
-    "T9s": "raise",
-    "ATo": "raise",
-    "K2s": "raise",
-    "K5s": "raise",
-    "JJ": "jam",
-    "KTo": "raise",
-    "QTs": "jam",
-    "T9o": "raise",
-    "75s": "raise",
-    "T8o": "raise",
-    "K6s": "raise",
-    "87o": "raise",
-    "J9s": "raise",
-    "A6o": "raise",
-    "AA": "jam",
-    "KTs": "raise",
-    "AJs": "jam",
-    "88": "raise",
-    "66": "raise",
-    "AQs": "jam",
-    "98s": "raise",
-    "K3s": "raise",
-    "A7o": "raise",
-    "AKo": "jam",
-    "A9s": "raise",
-    "JTo": "raise",
-    "Q8s": "raise",
-    "KJs": "jam",
-    "AQo": "jam",
-    "QJs": "jam"
+  "id" : "mtt_9max_10bb_btn_unopened",
+  "source" : {
+    "description" : "Adapted from RangeConverter 8-max baseline.",
+    "publisher" : {
+      "accessedDate" : "2026-06-01",
+      "name" : "RangeConverter",
+      "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
+      "treeParams" : "2.5x open, 3.5x 3bet IP, 4.5x 3bet OOP, 2.3x 4bet IP, 2.75x 4bet OOP, SB vs BB 3.2bb",
+      "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
+    },
+    "solver" : {
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante. Copied verbatim from 8-max BTN (same effective seat in 9-max)."
+    },
+    "type" : "published"
+  },
+  "spot" : {
+    "anteType" : "bigBlindAnte",
+    "facingAction" : "unopened",
+    "position" : "BTN",
+    "stackDepthBB" : 10
   }
 }

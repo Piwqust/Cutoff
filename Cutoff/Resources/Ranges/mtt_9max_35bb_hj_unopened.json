@@ -1,0 +1,237 @@
+{
+  "format" : "NLHE_MTT_9MAX",
+  "hands" : {
+    "44" : {
+      "raise25x" : 1
+    },
+    "54s" : {
+      "fold" : 0.25490000000000002,
+      "raise25x" : 0.74509999999999998
+    },
+    "55" : {
+      "raise25x" : 1
+    },
+    "65s" : {
+      "raise25x" : 1
+    },
+    "66" : {
+      "raise25x" : 1
+    },
+    "76s" : {
+      "raise25x" : 1
+    },
+    "77" : {
+      "raise25x" : 1
+    },
+    "86s" : {
+      "raise25x" : 1
+    },
+    "87s" : {
+      "raise25x" : 1
+    },
+    "88" : {
+      "raise25x" : 1
+    },
+    "96s" : {
+      "fold" : 0.98009999999999997,
+      "raise25x" : 0.019899999999999998
+    },
+    "97s" : {
+      "raise25x" : 1
+    },
+    "98s" : {
+      "raise25x" : 1
+    },
+    "99" : {
+      "raise25x" : 1
+    },
+    "A2s" : {
+      "raise25x" : 1
+    },
+    "A3s" : {
+      "raise25x" : 1
+    },
+    "A4s" : {
+      "raise25x" : 1
+    },
+    "A5s" : {
+      "raise25x" : 1
+    },
+    "A6s" : {
+      "raise25x" : 1
+    },
+    "A7o" : {
+      "fold" : 0.55000000000000004,
+      "raise25x" : 0.45000000000000001
+    },
+    "A7s" : {
+      "raise25x" : 1
+    },
+    "A8o" : {
+      "raise25x" : 1
+    },
+    "A8s" : {
+      "raise25x" : 1
+    },
+    "A9o" : {
+      "raise25x" : 1
+    },
+    "A9s" : {
+      "raise25x" : 1
+    },
+    "AA" : {
+      "raise25x" : 1
+    },
+    "AJo" : {
+      "raise25x" : 1
+    },
+    "AJs" : {
+      "raise25x" : 1
+    },
+    "AKo" : {
+      "raise25x" : 1
+    },
+    "AKs" : {
+      "raise25x" : 1
+    },
+    "AQo" : {
+      "raise25x" : 1
+    },
+    "AQs" : {
+      "raise25x" : 1
+    },
+    "ATo" : {
+      "raise25x" : 1
+    },
+    "ATs" : {
+      "raise25x" : 1
+    },
+    "J7s" : {
+      "fold" : 0.45000000000000001,
+      "raise25x" : 0.55000000000000004
+    },
+    "J8s" : {
+      "raise25x" : 1
+    },
+    "J9s" : {
+      "raise25x" : 1
+    },
+    "JJ" : {
+      "raise25x" : 1
+    },
+    "JTo" : {
+      "raise25x" : 1
+    },
+    "JTs" : {
+      "raise25x" : 1
+    },
+    "K4s" : {
+      "fold" : 0.059799999999999999,
+      "raise25x" : 0.94020000000000004
+    },
+    "K5s" : {
+      "raise25x" : 1
+    },
+    "K6s" : {
+      "raise25x" : 1
+    },
+    "K7s" : {
+      "raise25x" : 1
+    },
+    "K8s" : {
+      "raise25x" : 1
+    },
+    "K9o" : {
+      "fold" : 0.67010000000000003,
+      "raise25x" : 0.32990000000000003
+    },
+    "K9s" : {
+      "raise25x" : 1
+    },
+    "KJo" : {
+      "raise25x" : 1
+    },
+    "KJs" : {
+      "raise25x" : 1
+    },
+    "KK" : {
+      "raise25x" : 1
+    },
+    "KQo" : {
+      "raise25x" : 1
+    },
+    "KQs" : {
+      "raise25x" : 1
+    },
+    "KTo" : {
+      "raise25x" : 1
+    },
+    "KTs" : {
+      "raise25x" : 1
+    },
+    "Q6s" : {
+      "raise25x" : 1
+    },
+    "Q7s" : {
+      "raise25x" : 1
+    },
+    "Q8s" : {
+      "raise25x" : 1
+    },
+    "Q9s" : {
+      "raise25x" : 1
+    },
+    "QJo" : {
+      "raise25x" : 1
+    },
+    "QJs" : {
+      "raise25x" : 1
+    },
+    "QQ" : {
+      "raise25x" : 1
+    },
+    "QTo" : {
+      "raise25x" : 1
+    },
+    "QTs" : {
+      "raise25x" : 1
+    },
+    "T7s" : {
+      "raise25x" : 1
+    },
+    "T8s" : {
+      "raise25x" : 1
+    },
+    "T9o" : {
+      "fold" : 0.59509999999999996,
+      "raise25x" : 0.40489999999999998
+    },
+    "T9s" : {
+      "raise25x" : 1
+    },
+    "TT" : {
+      "raise25x" : 1
+    }
+  },
+  "id" : "mtt_9max_35bb_hj_unopened",
+  "source" : {
+    "description" : "Adapted from RangeConverter 8-max baseline.",
+    "publisher" : {
+      "accessedDate" : "2026-06-01",
+      "name" : "RangeConverter",
+      "product" : "Free Poker Charts — 8 max 1bb ante MTT GTO Ranges",
+      "treeParams" : "2.5x open, 3.5x 3bet IP, 4.5x 3bet OOP, 2.3x 4bet IP, 2.75x 4bet OOP, SB vs BB 3.2bb",
+      "url" : "https:\/\/rangeconverter.com\/free-poker-charts"
+    },
+    "solver" : {
+      "assumptions" : "Frequencies rounded to nearest 25% per source. ChipEV (non-ICM). 1bb (12.5%) big-blind ante. Copied verbatim from 8-max HJ (same effective seat in 9-max)."
+    },
+    "type" : "published"
+  },
+  "spot" : {
+    "anteType" : "bigBlindAnte",
+    "facingAction" : "unopened",
+    "position" : "HJ",
+    "stackDepthBB" : 35
+  }
+}
