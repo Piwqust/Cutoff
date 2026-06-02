@@ -1,18 +1,111 @@
 import SwiftUI
 
+// MARK: - Reusable Selectable Chip
+/// Segmented-style toggle chip used across the strategy sandbox cards.
+/// Filled with `tint` when selected, liquid glass otherwise.
+struct StrategyChip: View {
+    let title: String
+    let isSelected: Bool
+    var tint: Color = AppColors.primaryMint
+    var font: Font = AppTypography.subheadline
+    var fillWidth: Bool = true
+    var verticalPadding: CGFloat = AppSpacing.xs
+    var horizontalPadding: CGFloat = 0
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Text(title)
+                .font(font)
+                .foregroundStyle(isSelected ? AppColors.backgroundDeep : AppColors.textPrimary)
+                .padding(.vertical, verticalPadding)
+                .padding(.horizontal, horizontalPadding)
+                .frame(maxWidth: fillWidth ? .infinity : nil)
+                .background(
+                    Group {
+                        if isSelected {
+                            RoundedRectangle(cornerRadius: AppRadius.chip).fill(tint)
+                        } else {
+                            RoundedRectangle(cornerRadius: AppRadius.chip)
+                                .fill(Color.clear)
+                                .liquidGlass(in: RoundedRectangle(cornerRadius: AppRadius.chip), interactive: true)
+                        }
+                    }
+                )
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+// MARK: - Reusable Range Visualizer + Copyable Shorthand
+/// Pairs the 13×13 mini grid with a tap-to-copy shorthand string, with a
+/// clear copy affordance and an accessible button trait.
+struct RangeShorthandDisplay: View {
+    let shorthand: String
+    let activeColor: Color
+
+    @State private var didCopy = false
+
+    var body: some View {
+        HStack(alignment: .top, spacing: AppSpacing.md) {
+            MiniRangeGridView(shorthand: shorthand, activeColor: activeColor)
+
+            VStack(alignment: .leading, spacing: AppSpacing.xs) {
+                Text("Визуальный спектр:")
+                    .font(AppTypography.caption)
+                    .foregroundStyle(AppColors.textSecondary)
+                    .bold()
+
+                HStack(spacing: AppSpacing.xxs) {
+                    Image(systemName: didCopy ? "checkmark" : "doc.on.doc")
+                        .font(.system(size: 10))
+                    Text(didCopy ? "Скопировано!" : "Шорткод (клик для копии):")
+                        .font(AppTypography.caption2)
+                }
+                .foregroundStyle(didCopy ? AppColors.accentLime : AppColors.textSecondary.opacity(0.8))
+
+                Text(shorthand)
+                    .font(AppTypography.monoCaption)
+                    .foregroundStyle(AppColors.textPrimary)
+                    .padding(AppSpacing.xs)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(
+                        RoundedRectangle(cornerRadius: 6, style: .continuous)
+                            .fill(Color.clear)
+                            .liquidGlass(in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+                    )
+                    .onTapGesture { copyShorthand() }
+                    .accessibilityElement()
+                    .accessibilityLabel("Диапазон рук: \(shorthand)")
+                    .accessibilityHint("Дважды коснитесь, чтобы скопировать")
+                    .accessibilityAddTraits(.isButton)
+            }
+        }
+    }
+
+    private func copyShorthand() {
+        UIPasteboard.general.string = shorthand
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
+        withAnimation(.easeInOut(duration: 0.2)) { didCopy = true }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            withAnimation(.easeInOut(duration: 0.2)) { didCopy = false }
+        }
+    }
+}
+
 // MARK: - 1. Limper Isolation Card
 struct LimperIsolationCard: View {
     @State private var limperCount = 1
     @State private var inPosition = true
-    
+
     var baseSizing: Int {
         return inPosition ? 4 : 5
     }
-    
+
     var finalSizing: Int {
         return baseSizing + limperCount
     }
-    
+
     var body: some View {
         GlassCard {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
@@ -27,38 +120,17 @@ struct LimperIsolationCard: View {
                         .font(AppTypography.caption)
                         .foregroundStyle(AppColors.primaryMint)
                         .padding(.horizontal, AppSpacing.xs)
-                        .padding(.vertical, 4)
+                        .padding(.vertical, AppSpacing.xxs)
                         .background(AppColors.primaryMint.opacity(0.15))
                         .clipShape(Capsule())
                 }
-                
+
                 // Position Selector
                 HStack(spacing: AppSpacing.sm) {
-                    Button(action: { inPosition = true }) {
-                        Text("В позиции (IP)")
-                            .font(AppTypography.subheadline)
-                            .foregroundStyle(inPosition ? AppColors.backgroundDeep : AppColors.textPrimary)
-                            .padding(.vertical, AppSpacing.xs)
-                            .frame(maxWidth: .infinity)
-                            .background(inPosition ? AppColors.primaryMint : Color.clear)
-                            .overlay(RoundedRectangle(cornerRadius: AppRadius.chip).stroke(AppColors.divider, lineWidth: inPosition ? 0 : 1))
-                            .clipShape(RoundedRectangle(cornerRadius: AppRadius.chip))
-                    }
-                    .buttonStyle(.plain)
-                    
-                    Button(action: { inPosition = false }) {
-                        Text("Вне позы (OOP)")
-                            .font(AppTypography.subheadline)
-                            .foregroundStyle(!inPosition ? AppColors.backgroundDeep : AppColors.textPrimary)
-                            .padding(.vertical, AppSpacing.xs)
-                            .frame(maxWidth: .infinity)
-                            .background(!inPosition ? AppColors.primaryMint : Color.clear)
-                            .overlay(RoundedRectangle(cornerRadius: AppRadius.chip).stroke(AppColors.divider, lineWidth: !inPosition ? 0 : 1))
-                            .clipShape(RoundedRectangle(cornerRadius: AppRadius.chip))
-                    }
-                    .buttonStyle(.plain)
+                    StrategyChip(title: "В позиции (IP)", isSelected: inPosition) { inPosition = true }
+                    StrategyChip(title: "Вне позы (OOP)", isSelected: !inPosition) { inPosition = false }
                 }
-                
+
                 // Limper Slider
                 VStack(alignment: .leading, spacing: AppSpacing.xxs) {
                     HStack {
@@ -76,9 +148,9 @@ struct LimperIsolationCard: View {
                     ), in: 1...4, step: 1)
                     .tint(AppColors.primaryMint)
                 }
-                
+
                 Divider().overlay(AppColors.divider)
-                
+
                 // Sizing Output
                 HStack {
                     VStack(alignment: .leading, spacing: 2) {
@@ -108,9 +180,9 @@ struct LimperIsolationCard: View {
 struct StealRangesCard: View {
     @State private var positionIndex = 1 // 0: CO, 1: BTN, 2: SB
     @State private var isExploitative = true
-    
+
     private let positions = ["CO", "BTN", "SB"]
-    
+
     // Hand definitions for visual presentation
     var handText: String {
         switch (positionIndex, isExploitative) {
@@ -123,7 +195,7 @@ struct StealRangesCard: View {
         default:         return "22+, A2s+"
         }
     }
-    
+
     var openPercentage: Int {
         switch (positionIndex, isExploitative) {
         case (0, false): return 28
@@ -135,7 +207,7 @@ struct StealRangesCard: View {
         default:         return 40
         }
     }
-    
+
     var body: some View {
         GlassCard {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
@@ -150,78 +222,46 @@ struct StealRangesCard: View {
                         .font(AppTypography.numericSmall)
                         .foregroundStyle(AppColors.accentLime)
                         .padding(.horizontal, AppSpacing.xs)
-                        .padding(.vertical, 4)
+                        .padding(.vertical, AppSpacing.xxs)
                         .background(AppColors.accentLime.opacity(0.15))
                         .clipShape(Capsule())
                 }
-                
+
                 // Position Selector
                 HStack(spacing: AppSpacing.sm) {
                     ForEach(0..<positions.count, id: \.self) { i in
-                        Button(action: { positionIndex = i }) {
-                            Text(positions[i])
-                                .font(AppTypography.subheadline)
-                                .foregroundStyle(positionIndex == i ? AppColors.backgroundDeep : AppColors.textPrimary)
-                                .padding(.vertical, AppSpacing.xs)
-                                .frame(maxWidth: .infinity)
-                                .background(positionIndex == i ? AppColors.primaryMint : Color.clear)
-                                .overlay(RoundedRectangle(cornerRadius: AppRadius.chip).stroke(AppColors.divider, lineWidth: positionIndex == i ? 0 : 1))
-                                .clipShape(RoundedRectangle(cornerRadius: AppRadius.chip))
-                        }
-                        .buttonStyle(.plain)
+                        StrategyChip(title: positions[i], isSelected: positionIndex == i) { positionIndex = i }
                     }
                 }
-                
+
                 // Strategy Selector
                 HStack(spacing: AppSpacing.sm) {
-                    Button(action: { isExploitative = false }) {
-                        Text("Стандартный TAG")
-                            .font(AppTypography.footnote)
-                            .foregroundStyle(!isExploitative ? AppColors.backgroundDeep : AppColors.textPrimary)
-                            .padding(.vertical, 6)
-                            .frame(maxWidth: .infinity)
-                            .background(!isExploitative ? AppColors.accentPeach : Color.clear)
-                            .overlay(RoundedRectangle(cornerRadius: AppRadius.chip).stroke(AppColors.divider, lineWidth: !isExploitative ? 0 : 1))
-                            .clipShape(RoundedRectangle(cornerRadius: AppRadius.chip))
+                    StrategyChip(title: "Стандартный TAG", isSelected: !isExploitative,
+                                 tint: AppColors.accentPeach, font: AppTypography.footnote, verticalPadding: 6) {
+                        isExploitative = false
                     }
-                    .buttonStyle(.plain)
-                    
-                    Button(action: { isExploitative = true }) {
-                        Text("Широкий эксплойт")
-                            .font(AppTypography.footnote)
-                            .foregroundStyle(isExploitative ? AppColors.backgroundDeep : AppColors.textPrimary)
-                            .padding(.vertical, 6)
-                            .frame(maxWidth: .infinity)
-                            .background(isExploitative ? AppColors.accentPeach : Color.clear)
-                            .overlay(RoundedRectangle(cornerRadius: AppRadius.chip).stroke(AppColors.divider, lineWidth: isExploitative ? 0 : 1))
-                            .clipShape(RoundedRectangle(cornerRadius: AppRadius.chip))
+                    StrategyChip(title: "Широкий эксплойт", isSelected: isExploitative,
+                                 tint: AppColors.accentPeach, font: AppTypography.footnote, verticalPadding: 6) {
+                        isExploitative = true
                     }
-                    .buttonStyle(.plain)
                 }
-                
-                // Range display
-                VStack(alignment: .leading, spacing: AppSpacing.xxs) {
-                    Text("Диапазон открытия:")
-                        .font(AppTypography.caption)
+
+                // Range display with Visual Grid on the left
+                RangeShorthandDisplay(shorthand: handText, activeColor: AppColors.primaryMint)
+
+                HStack(alignment: .top, spacing: AppSpacing.xs) {
+                    Image(systemName: isExploitative ? "flame.fill" : "shield.fill")
+                        .foregroundStyle(isExploitative ? AppColors.accentPeach : AppColors.primaryMint)
+                        .font(.footnote)
+                        .padding(.top, 2)
+
+                    Text(isExploitative ?
+                         "Эксплойт: блайнды слишком тайтовые! Открываем широчайший спектр рук, чтобы забрать мертвые деньги." :
+                         "Стандарт: классический плотный спектр открытия для защиты от 3-бетов.")
+                        .font(AppTypography.footnote)
                         .foregroundStyle(AppColors.textSecondary)
-                    
-                    Text(handText)
-                        .font(.system(.subheadline, design: .monospaced))
-                        .foregroundStyle(AppColors.textPrimary)
-                        .padding(AppSpacing.sm)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(AppColors.backgroundDeep.opacity(0.4))
-                        .clipShape(RoundedRectangle(cornerRadius: AppRadius.chip))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: AppRadius.chip)
-                                .stroke(AppColors.divider, lineWidth: 0.5)
-                        )
+                        .italic()
                 }
-                
-                Text(isExploitative ? "🔥 Эксплойт: блайнды слишком тайтовые! Открываем широчайший спектр рук, чтобы забрать мертвые деньги." : "🛡️ Стандарт: классический плотный спектр открытия для защиты от 3-бетов.")
-                    .font(AppTypography.footnote)
-                    .foregroundStyle(AppColors.textSecondary)
-                    .italic()
             }
         }
     }
@@ -231,10 +271,10 @@ struct StealRangesCard: View {
 struct FirstInJamCard: View {
     @State private var selectedDepth = 15 // 12, 15, 18
     @State private var positionIndex = 1 // 0: CO, 1: BTN, 2: SB
-    
+
     private let positions = ["CO", "BTN", "SB"]
     private let depths = [12, 15, 18]
-    
+
     var shovingRange: String {
         switch (selectedDepth, positionIndex) {
         case (12, 0): return "22+, A2s+, A8o+, KJs+, KQo, QJs"
@@ -249,7 +289,7 @@ struct FirstInJamCard: View {
         default: return "22+, A2s+"
         }
     }
-    
+
     var body: some View {
         GlassCard {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
@@ -264,11 +304,11 @@ struct FirstInJamCard: View {
                         .font(AppTypography.caption)
                         .foregroundStyle(AppColors.accentPeach)
                         .padding(.horizontal, AppSpacing.xs)
-                        .padding(.vertical, 4)
+                        .padding(.vertical, AppSpacing.xxs)
                         .background(AppColors.accentPeach.opacity(0.15))
                         .clipShape(Capsule())
                 }
-                
+
                 // Stack Depth Selector
                 HStack(spacing: AppSpacing.sm) {
                     Text("Стек (BB):")
@@ -277,61 +317,38 @@ struct FirstInJamCard: View {
                     Spacer()
                     HStack(spacing: AppSpacing.xs) {
                         ForEach(depths, id: \.self) { d in
-                            Button(action: { selectedDepth = d }) {
-                                Text("\(d) BB")
-                                    .font(AppTypography.numericSmall)
-                                    .foregroundStyle(selectedDepth == d ? AppColors.backgroundDeep : AppColors.textPrimary)
-                                    .padding(.horizontal, AppSpacing.sm)
-                                    .padding(.vertical, 6)
-                                    .background(selectedDepth == d ? AppColors.accentPeach : Color.clear)
-                                    .overlay(RoundedRectangle(cornerRadius: AppRadius.chip).stroke(AppColors.divider, lineWidth: selectedDepth == d ? 0 : 1))
-                                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.chip))
+                            StrategyChip(title: "\(d) BB", isSelected: selectedDepth == d,
+                                         tint: AppColors.accentPeach, font: AppTypography.numericSmall,
+                                         fillWidth: false, verticalPadding: 6, horizontalPadding: AppSpacing.sm) {
+                                selectedDepth = d
                             }
-                            .buttonStyle(.plain)
                         }
                     }
                 }
-                
+
                 // Position Selector
                 HStack(spacing: AppSpacing.sm) {
                     ForEach(0..<positions.count, id: \.self) { i in
-                        Button(action: { positionIndex = i }) {
-                            Text(positions[i])
-                                .font(AppTypography.subheadline)
-                                .foregroundStyle(positionIndex == i ? AppColors.backgroundDeep : AppColors.textPrimary)
-                                .padding(.vertical, AppSpacing.xs)
-                                .frame(maxWidth: .infinity)
-                                .background(positionIndex == i ? AppColors.primaryMint : Color.clear)
-                                .overlay(RoundedRectangle(cornerRadius: AppRadius.chip).stroke(AppColors.divider, lineWidth: positionIndex == i ? 0 : 1))
-                                .clipShape(RoundedRectangle(cornerRadius: AppRadius.chip))
-                        }
-                        .buttonStyle(.plain)
+                        StrategyChip(title: positions[i], isSelected: positionIndex == i) { positionIndex = i }
                     }
                 }
-                
-                // Range display
-                VStack(alignment: .leading, spacing: AppSpacing.xxs) {
-                    Text("Диапазон прямого пуша:")
-                        .font(AppTypography.caption)
+
+                // Range display with Visual Grid on the left
+                RangeShorthandDisplay(shorthand: shovingRange, activeColor: AppColors.accentPeach)
+
+                HStack(alignment: .top, spacing: AppSpacing.xs) {
+                    Image(systemName: selectedDepth >= 18 ? "exclamationmark.triangle.fill" : "lightbulb.fill")
+                        .foregroundStyle(selectedDepth >= 18 ? AppColors.accentPeach : AppColors.accentLime)
+                        .font(.footnote)
+                        .padding(.top, 2)
+
+                    Text(selectedDepth >= 18 ?
+                         "При 18 ББ диапазон пуша очень тайтовый. Здесь уже можно прибыльно минрейзить сильный бродвей для провокации." :
+                         "При \(selectedDepth) ББ мин-рейзить маргинально — прямой пуш максимизирует фолд-эквити.")
+                        .font(AppTypography.footnote)
                         .foregroundStyle(AppColors.textSecondary)
-                    
-                    Text(shovingRange)
-                        .font(.system(.subheadline, design: .monospaced))
-                        .foregroundStyle(AppColors.textPrimary)
-                        .padding(AppSpacing.sm)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(AppColors.backgroundDeep.opacity(0.4))
-                        .clipShape(RoundedRectangle(cornerRadius: AppRadius.chip))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: AppRadius.chip)
-                                .stroke(AppColors.divider, lineWidth: 0.5)
-                        )
+                        .italic()
                 }
-                
-                Text(selectedDepth >= 18 ? "⚠️ При 18 ББ диапазон пуша очень тайтовый. Здесь уже можно прибыльно минрейзить сильный бродвей для провокации." : "💡 При \(selectedDepth) ББ мин-рейзить маргинально — прямой пуш максимизирует фолд-эквити.")
-                    .font(AppTypography.footnote)
-                    .foregroundStyle(AppColors.textSecondary)
-                    .italic()
             }
         }
     }
@@ -349,82 +366,103 @@ struct CBetSituationCard: View {
                         .font(AppTypography.headline)
                         .foregroundStyle(AppColors.textPrimary)
                 }
-                
+
                 // Situation 1: Dry Board
-                VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                    HStack {
-                        Text("1. Сухая доска (Dry Rainbow)")
-                            .font(AppTypography.subheadline)
-                            .foregroundStyle(AppColors.textPrimary)
-                            .bold()
-                        Spacer()
-                        Text("C-Bet: 80%+")
-                            .font(AppTypography.caption)
-                            .foregroundStyle(AppColors.primaryMint)
-                            .bold()
-                    }
-                    
-                    HStack(spacing: AppSpacing.md) {
-                        // Let's render visual cards: Kc 7d 2s
-                        BoardView(board: [
-                            Card(notation: "Kc")!,
-                            Card(notation: "7d")!,
-                            Card(notation: "2s")!
-                        ])
-                        
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("Сайзинг: 25-33% пота")
-                                .font(AppTypography.footnote)
-                                .foregroundStyle(AppColors.accentLime)
-                                .bold()
-                            Text("Ставим со всем спектром. Оппоненты редко попадут и легко выкинут мусор.")
-                                .font(AppTypography.footnote)
-                                .foregroundStyle(AppColors.textSecondary)
-                        }
-                    }
-                }
-                .padding(AppSpacing.sm)
-                .background(AppColors.backgroundDeep.opacity(0.3))
-                .clipShape(RoundedRectangle(cornerRadius: AppRadius.chip))
-                
+                boardSituation(
+                    title: "1. Сухая доска",
+                    subtitle: "(Dry Rainbow)",
+                    cbetLabel: "C-Bet: 80%+",
+                    cbetTint: AppColors.primaryMint,
+                    board: ["Kc", "7d", "2s"],
+                    sizingLabel: "25-33% пота",
+                    sizingTint: AppColors.accentLime,
+                    detail: "Ставим со всем спектром. Оппоненты редко попадут и легко выкинут мусор."
+                )
+
                 // Situation 2: Wet Board
-                VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                    HStack {
-                        Text("2. Дровяная доска (Wet Board)")
-                            .font(AppTypography.subheadline)
-                            .foregroundStyle(AppColors.textPrimary)
-                            .bold()
-                        Spacer()
-                        Text("C-Bet: 30-40%")
-                            .font(AppTypography.caption)
-                            .foregroundStyle(AppColors.accentPeach)
-                            .bold()
-                    }
-                    
-                    HStack(spacing: AppSpacing.md) {
-                        // Let's render visual cards: Qc Jd 9c
-                        BoardView(board: [
-                            Card(notation: "Qc")!,
-                            Card(notation: "Jd")!,
-                            Card(notation: "9c")!
-                        ])
-                        
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("Сайзинг: 65% - 75% пота")
-                                .font(AppTypography.footnote)
-                                .foregroundStyle(AppColors.accentCoral)
-                                .bold()
-                            Text("Только плотное велью или супер-дро. Пустые руки чекаем и сдаемся.")
-                                .font(AppTypography.footnote)
-                                .foregroundStyle(AppColors.textSecondary)
-                        }
-                    }
-                }
-                .padding(AppSpacing.sm)
-                .background(AppColors.backgroundDeep.opacity(0.3))
-                .clipShape(RoundedRectangle(cornerRadius: AppRadius.chip))
+                boardSituation(
+                    title: "2. Дровяная доска",
+                    subtitle: "(Wet Board)",
+                    cbetLabel: "C-Bet: 30-40%",
+                    cbetTint: AppColors.accentPeach,
+                    board: ["Qc", "Jd", "9c"],
+                    sizingLabel: "65-75% пота",
+                    sizingTint: AppColors.accentCoral,
+                    detail: "Только плотное велью или супер-дро. Пустые руки чекаем и сдаемся."
+                )
             }
         }
+    }
+
+    @ViewBuilder
+    private func boardSituation(title: String, subtitle: String, cbetLabel: String, cbetTint: Color,
+                                board: [String], sizingLabel: String, sizingTint: Color, detail: String) -> some View {
+        VStack(alignment: .leading, spacing: AppSpacing.sm) {
+            // Header Row
+            HStack(alignment: .center) {
+                HStack(spacing: AppSpacing.xxs) {
+                    Text(title)
+                        .font(AppTypography.bodyBold)
+                        .foregroundStyle(AppColors.textPrimary)
+                    Text(subtitle)
+                        .font(AppTypography.caption)
+                        .foregroundStyle(AppColors.textSecondary)
+                }
+
+                Spacer()
+
+                Text(cbetLabel)
+                    .font(AppTypography.caption)
+                    .bold()
+                    .foregroundStyle(AppColors.backgroundDeep)
+                    .padding(.horizontal, AppSpacing.sm)
+                    .padding(.vertical, AppSpacing.xxs)
+                    .background(cbetTint)
+                    .clipShape(Capsule())
+            }
+
+            Divider()
+                .background(AppColors.divider.opacity(0.3))
+
+            HStack(spacing: AppSpacing.md) {
+                // Left Column: Visual Cards
+                BoardView(board: board.compactMap { Card(notation: $0) })
+                    .frame(width: 172)
+
+                // Vertical divider line for beautiful structure
+                RoundedRectangle(cornerRadius: 1)
+                    .fill(AppColors.divider.opacity(0.3))
+                    .frame(width: 1)
+                    .frame(maxHeight: .infinity)
+
+                // Right Column: Tactical details
+                VStack(alignment: .leading, spacing: 6) {
+                    HStack(spacing: 6) {
+                        Text("САЙЗИНГ:")
+                            .font(AppTypography.caption)
+                            .bold()
+                            .foregroundStyle(AppColors.textSecondary)
+
+                        Text(sizingLabel)
+                            .font(AppTypography.footnote)
+                            .bold()
+                            .foregroundStyle(sizingTint)
+                    }
+
+                    Text(detail)
+                        .font(AppTypography.footnote)
+                        .foregroundStyle(AppColors.textSecondary)
+                        .lineSpacing(3)
+                }
+            }
+            .frame(height: 76) // Match standard card height (76pt) to align grid perfectly
+        }
+        .padding(AppSpacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
+                .fill(Color.clear)
+                .liquidGlass(in: RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous))
+        )
     }
 }
 
@@ -432,25 +470,26 @@ struct CBetSituationCard: View {
 struct PotOddsTrainerCard: View {
     @State private var outs = 9
     @State private var betFraction = 0.5 // Bet size as fraction of pot (0.25 to 1.5)
-    
-    var equityFlop: Int {
-        return outs * 4
-    }
-    
-    var equityTurn: Int {
-        return outs * 2
-    }
-    
+    @State private var cardsToCome = 1   // 1 = facing a bet on one street, 2 = all-in (both cards)
+
+    /// Rule of 4 — equity across both remaining cards (only realised when all-in).
+    var equityBothCards: Int { outs * 4 }
+    /// Rule of 2 — equity for the single next card.
+    var equityOneCard: Int { outs * 2 }
+
+    /// The equity that actually applies to this decision.
+    var effectiveEquity: Int { cardsToCome == 2 ? equityBothCards : equityOneCard }
+
     var requiredEquity: Double {
         // formula: bet / (pot + bet + call)
         // If bet is fraction of pot F: F / (1.0 + F + F) = F / (1.0 + 2F)
         return (betFraction / (1.0 + 2.0 * betFraction)) * 100.0
     }
-    
+
     var isCallProfitable: Bool {
-        return Double(equityFlop) >= requiredEquity
+        return Double(effectiveEquity) >= requiredEquity
     }
-    
+
     var betLabel: String {
         switch betFraction {
         case 0.25: return "1/4 пота"
@@ -462,7 +501,7 @@ struct PotOddsTrainerCard: View {
         default:   return "\(Int(betFraction * 100))% пота"
         }
     }
-    
+
     var body: some View {
         GlassCard {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
@@ -473,18 +512,31 @@ struct PotOddsTrainerCard: View {
                         .font(AppTypography.headline)
                         .foregroundStyle(AppColors.textPrimary)
                     Spacer()
-                    
+
                     // +EV Badge
                     Text(isCallProfitable ? "+EV Call" : "-EV Fold/Marginal")
                         .font(AppTypography.caption)
                         .bold()
                         .foregroundStyle(isCallProfitable ? AppColors.backgroundDeep : AppColors.textPrimary)
                         .padding(.horizontal, AppSpacing.xs)
-                        .padding(.vertical, 4)
+                        .padding(.vertical, AppSpacing.xxs)
                         .background(isCallProfitable ? AppColors.accentLime : AppColors.accentPeach)
                         .clipShape(Capsule())
                 }
-                
+
+                // Street Selector (cards to come) — drives which equity applies
+                VStack(alignment: .leading, spacing: AppSpacing.xxs) {
+                    Text("Сколько карт впереди:")
+                        .font(AppTypography.footnote)
+                        .foregroundStyle(AppColors.textSecondary)
+                    HStack(spacing: AppSpacing.sm) {
+                        StrategyChip(title: "1 карта (ставка)", isSelected: cardsToCome == 1,
+                                     font: AppTypography.footnote, verticalPadding: 6) { cardsToCome = 1 }
+                        StrategyChip(title: "Олл-ин (2 карты)", isSelected: cardsToCome == 2,
+                                     font: AppTypography.footnote, verticalPadding: 6) { cardsToCome = 2 }
+                    }
+                }
+
                 // Slider 1: Outs
                 VStack(alignment: .leading, spacing: AppSpacing.xxs) {
                     HStack {
@@ -501,13 +553,13 @@ struct PotOddsTrainerCard: View {
                         set: { outs = Int($0) }
                     ), in: 1...15, step: 1)
                     .tint(AppColors.primaryMint)
-                    
+
                     Text("Например: \(outsTextForDescription)")
                         .font(AppTypography.caption)
                         .foregroundStyle(AppColors.textSecondary)
                         .italic()
                 }
-                
+
                 // Slider 2: Bet Fraction
                 VStack(alignment: .leading, spacing: AppSpacing.xxs) {
                     HStack {
@@ -525,31 +577,31 @@ struct PotOddsTrainerCard: View {
                     ), in: 0.25...1.5, step: 0.05)
                     .tint(AppColors.accentPeach)
                 }
-                
+
                 Divider().overlay(AppColors.divider)
-                
+
                 // Calculations Breakdown
                 VStack(spacing: AppSpacing.sm) {
                     HStack {
-                        Text("Ваше Эквити (Флоп):")
+                        Text("Эквити, 2 карты (×4):")
                             .font(AppTypography.footnote)
                             .foregroundStyle(AppColors.textSecondary)
                         Spacer()
-                        Text("~ \(equityFlop)%")
+                        Text("~ \(equityBothCards)%")
                             .font(AppTypography.numericMedium)
-                            .foregroundStyle(AppColors.primaryMint)
+                            .foregroundStyle(cardsToCome == 2 ? AppColors.primaryMint : AppColors.textSecondary)
                     }
-                    
+
                     HStack {
-                        Text("Ваше Эквити (Терн):")
+                        Text("Эквити, 1 карта (×2):")
                             .font(AppTypography.footnote)
                             .foregroundStyle(AppColors.textSecondary)
                         Spacer()
-                        Text("~ \(equityTurn)%")
+                        Text("~ \(equityOneCard)%")
                             .font(AppTypography.numericMedium)
-                            .foregroundStyle(AppColors.textPrimary)
+                            .foregroundStyle(cardsToCome == 1 ? AppColors.primaryMint : AppColors.textSecondary)
                     }
-                    
+
                     HStack {
                         Text("Шансы банка (Пот-оддсы):")
                             .font(AppTypography.footnote)
@@ -560,18 +612,30 @@ struct PotOddsTrainerCard: View {
                             .foregroundStyle(AppColors.accentLime)
                     }
                 }
-                
-                Text(isCallProfitable ? "✅ Колл ВЫГОДЕН! Ваша вероятность доехать на флопе (\(equityFlop)%) выше стоимости билета (\(Int(requiredEquity))%). Это плюсовое действие на дистанции." : "❌ Колл НЕВЫГОДЕН. Шансов собрать руку (\(equityFlop)%) не хватает, чтобы перебить цену колла (\(Int(requiredEquity))%). Ищите фолд, если нет скрытых имплайд-оддсов.")
-                    .font(AppTypography.footnote)
-                    .foregroundStyle(AppColors.textSecondary)
-                    .padding(AppSpacing.sm)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(isCallProfitable ? AppColors.primaryMint.opacity(0.08) : AppColors.accentPeach.opacity(0.08))
-                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.chip))
+
+                HStack(alignment: .top, spacing: AppSpacing.xs) {
+                    Image(systemName: isCallProfitable ? "checkmark.circle.fill" : "xmark.circle.fill")
+                        .foregroundStyle(isCallProfitable ? AppColors.accentLime : AppColors.accentPeach)
+                        .font(.footnote)
+                        .padding(.top, 2)
+
+                    Text(isCallProfitable ?
+                         "Колл ВЫГОДЕН! Ваше эквити (\(effectiveEquity)%) выше стоимости билета (\(Int(requiredEquity))%). Это плюсовое действие на дистанции." :
+                         "Колл НЕВЫГОДЕН. Эквити (\(effectiveEquity)%) не хватает, чтобы перебить цену колла (\(Int(requiredEquity))%). Ищите фолд, если нет скрытых имплайд-оддсов.")
+                        .font(AppTypography.footnote)
+                        .foregroundStyle(AppColors.textSecondary)
+                }
+                .padding(AppSpacing.sm)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(
+                    RoundedRectangle(cornerRadius: AppRadius.chip, style: .continuous)
+                        .fill(Color.clear)
+                        .liquidGlass(in: RoundedRectangle(cornerRadius: AppRadius.chip, style: .continuous))
+                )
             }
         }
     }
-    
+
     private var outsTextForDescription: String {
         switch outs {
         case 1...3: return "Бэкдор или оверкарта (мало шансов)"
@@ -583,7 +647,7 @@ struct PotOddsTrainerCard: View {
         default: return "\(outs) аутов на улучшение"
         }
     }
-    
+
     private func snapBetFraction(_ val: Double) -> Double {
         // Snap to common poker sizes
         if abs(val - 0.25) < 0.04 { return 0.25 }
@@ -593,5 +657,82 @@ struct PotOddsTrainerCard: View {
         if abs(val - 1.0) < 0.08 { return 1.0 }
         if abs(val - 1.5) < 0.1 { return 1.5 }
         return Double(round(val * 20) / 20)
+    }
+}
+
+// MARK: - Hand Shorthand Range Parser
+struct RangeParser {
+    static func parse(_ shorthand: String) -> Set<String> {
+        let parts = shorthand.components(separatedBy: ",")
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+        var result: Set<String> = []
+
+        for part in parts {
+            if part.isEmpty { continue }
+
+            if part.hasSuffix("+") {
+                let handStr = String(part.dropLast())
+                guard let combo = HandCombo.parse(handStr) else { continue }
+
+                switch combo.category {
+                case .pair:
+                    for rank in HandCombo.Rank.allCases {
+                        if rank >= combo.highRank {
+                            result.insert("\(rank.rawValue)\(rank.rawValue)")
+                        }
+                    }
+                case .suited:
+                    let highRank = combo.highRank
+                    for rank in HandCombo.Rank.allCases {
+                        if rank >= combo.lowRank && rank < highRank {
+                            result.insert("\(highRank.rawValue)\(rank.rawValue)s")
+                        }
+                    }
+                case .offsuit:
+                    let highRank = combo.highRank
+                    for rank in HandCombo.Rank.allCases {
+                        if rank >= combo.lowRank && rank < highRank {
+                            result.insert("\(highRank.rawValue)\(rank.rawValue)o")
+                        }
+                    }
+                }
+            } else {
+                guard let combo = HandCombo.parse(part) else { continue }
+                result.insert(combo.notation)
+            }
+        }
+        return result
+    }
+}
+
+// MARK: - Mini Range Grid Visualizer (iOS 26 Liquid Glass)
+struct MiniRangeGridView: View {
+    let shorthand: String
+    let activeColor: Color
+
+    var body: some View {
+        // Parse once per render rather than once per cell.
+        let parsedHands = RangeParser.parse(shorthand)
+
+        VStack(spacing: 1.5) {
+            ForEach(0..<13, id: \.self) { row in
+                HStack(spacing: 1.5) {
+                    ForEach(0..<13, id: \.self) { col in
+                        let combo = HandCombo.combo(forRow: row, column: col)
+                        let inRange = parsedHands.contains(combo.notation)
+
+                        RoundedRectangle(cornerRadius: 1)
+                            .fill(inRange ? activeColor : AppColors.cardSurface.opacity(0.18))
+                            .frame(width: 8, height: 8)
+                    }
+                }
+            }
+        }
+        .padding(6)
+        .background(
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .fill(Color.clear)
+                .liquidGlass(in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+        )
     }
 }

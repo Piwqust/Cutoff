@@ -1,4 +1,65 @@
 import Foundation
+import Observation
+
+/// Reactive source of truth for which chapters the user has marked "studied".
+/// Backed by `UserDefaults` but exposed through an `@Observable` set so SwiftUI
+/// views update automatically — no manual `.id()` redraw hacks needed.
+@MainActor
+@Observable
+final class StrategyProgressStore {
+    static let shared = StrategyProgressStore()
+
+    private static let storageKey = "strategy.completedChapters"
+
+    /// Completion keys in the form `"<weekId>.<chapterId>"`.
+    private(set) var completed: Set<String>
+
+    init() {
+        let stored = UserDefaults.standard.stringArray(forKey: Self.storageKey) ?? []
+        completed = Set(stored)
+        migrateLegacyKeysIfNeeded()
+    }
+
+    private func key(week: String, chapter: Int) -> String { "\(week).\(chapter)" }
+
+    func isStudied(week: String, chapter: Int) -> Bool {
+        completed.contains(key(week: week, chapter: chapter))
+    }
+
+    func setStudied(_ studied: Bool, week: String, chapter: Int) {
+        let k = key(week: week, chapter: chapter)
+        if studied { completed.insert(k) } else { completed.remove(k) }
+        persist()
+    }
+
+    func toggle(week: String, chapter: Int) {
+        setStudied(!isStudied(week: week, chapter: chapter), week: week, chapter: chapter)
+    }
+
+    private func persist() {
+        UserDefaults.standard.set(Array(completed), forKey: Self.storageKey)
+    }
+
+    /// One-time migration from the old per-chapter boolean keys
+    /// (`"strategy.completed.<week>.<chapter>"`) to the consolidated set.
+    private func migrateLegacyKeysIfNeeded() {
+        let defaults = UserDefaults.standard
+        var migrated = false
+        for guide in StrategyStore.allGuides {
+            for chapter in guide.chapters {
+                let legacyKey = "strategy.completed.\(guide.id).\(chapter.id)"
+                if defaults.object(forKey: legacyKey) != nil {
+                    if defaults.bool(forKey: legacyKey) {
+                        completed.insert(key(week: guide.id, chapter: chapter.id))
+                    }
+                    defaults.removeObject(forKey: legacyKey)
+                    migrated = true
+                }
+            }
+        }
+        if migrated { persist() }
+    }
+}
 
 struct StrategyChapter: Identifiable, Hashable {
     var id: Int // 1 to 5 corresponding to the 5 themes
