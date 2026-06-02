@@ -246,10 +246,7 @@ struct StrategyChapterDetailContentView: View {
                                 .bold()
                                 .foregroundStyle(AppColors.accentLime)
                         }
-                        Text(chapter.whatsDo(for: l10n.language))
-                            .font(AppTypography.body)
-                            .foregroundStyle(AppColors.textPrimary)
-                            .lineSpacing(4)
+                        RichCardText(text: chapter.whatsDo(for: l10n.language), font: AppTypography.body, foregroundColor: AppColors.textPrimary)
                     }
                     .padding(AppSpacing.md)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -270,10 +267,7 @@ struct StrategyChapterDetailContentView: View {
                                 .bold()
                                 .foregroundStyle(AppColors.textSecondary)
                         }
-                        Text(chapter.whyReason(for: l10n.language))
-                            .font(AppTypography.subheadline)
-                            .foregroundStyle(AppColors.textSecondary)
-                            .lineSpacing(4)
+                        RichCardText(text: chapter.whyReason(for: l10n.language), font: AppTypography.subheadline, foregroundColor: AppColors.textSecondary)
                     }
                     .padding(AppSpacing.md)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -295,10 +289,7 @@ struct StrategyChapterDetailContentView: View {
                                     .bold()
                                     .foregroundStyle(AppColors.primaryMint)
                             }
-                            Text(scenario.body)
-                                .font(AppTypography.subheadline)
-                                .foregroundStyle(AppColors.textPrimary)
-                                .lineSpacing(4)
+                            RichCardText(text: scenario.body, font: AppTypography.subheadline, foregroundColor: AppColors.textPrimary)
                         }
                         .padding(AppSpacing.md)
                         .frame(maxWidth: .infinity, alignment: .leading)
