@@ -2,7 +2,9 @@
 
 A calm, studio-grade iPhone trainer for No-Limit Texas Hold'em **multi-table tournament** preflop decisions. Built in SwiftUI for iOS 17+, dark-mode forced, Liquid Glass on iOS 18.
 
-> Educational training only. No real money, no play money, no live-table assistance. Bundled ranges are approximate demo data — not solver output.
+> Educational training only. No real money, no play money, no live-table assistance. Bundled ranges are published community charts (RangeConverter / poker.academy free charts), rounded and adapted for study — not the output of a live solver.
+
+See [`CHANGELOG.md`](CHANGELOG.md) for release notes.
 
 ---
 
@@ -23,18 +25,19 @@ A calm, studio-grade iPhone trainer for No-Limit Texas Hold'em **multi-table tou
 
 ## What it is
 
-- **Preflop drills** — 9-max MTT spots, one decision per card, immediate feedback in plain English.
-- **Stack-depth lessons** — discrete buckets at 125 / 75 / 50 / 30 / 20 / 15 / 10 BB so the player builds depth-specific instinct.
+- **Preflop drills** — 8-max MTT spots (9-max derived by adaptation), one decision per card, immediate feedback in plain English.
+- **Stack-depth lessons** — discrete buckets at 100 / 80 / 70 / 60 / 50 / 40 / 35 / 30 / 25 / 20 / 15 / 10 BB so the player builds depth-specific instinct.
 - **Push/fold trainer** — short-stack jam ranges from every position.
-- **13×13 range browser** — filter by position, depth, and action; tap a cell to see the mixed-strategy frequencies.
+- **13×13 range browser** — filter by position, depth, opponent, and action; tap a cell to see the mixed-strategy frequencies.
 - **Leak review** — names the player's recurring mistakes in human language ("you over-defend the BB vs UTG opens at 30bb") and routes back to drilling them.
+- **Strategy guide** — a chapter-based MTT preflop walkthrough with per-chapter progress (Russian-language content; English shows a not-supported notice).
 - **Standard routine** — a single tap pulls a random mix of preflop spots across positions and depths for a balanced rep.
 
 ## What it isn't
 
 - Not a gambling app — no real money, no play money, no buy-ins, no chips.
 - Not a live-table assistant — no in-hand coaching, no opponent profiling.
-- Not a solver — bundled ranges are approximate demo data, not GTO output.
+- Not a solver — bundled ranges are published study charts (rounded, ChipEV), not live GTO output.
 
 ## Design principles
 
@@ -48,7 +51,7 @@ A calm, studio-grade iPhone trainer for No-Limit Texas Hold'em **multi-table tou
 
 - SwiftUI + MVVM with `@Observable`
 - `SwiftData` for `QuizResult` / `TrainingSession`, `UserDefaults` for config
-- JSON ranges in `Cutoff/Resources/Ranges/` (schema v2 with provenance)
+- ~1,930 per-chart JSON ranges in `Cutoff/Resources/Ranges/`; each chart carries `source` provenance and a `spot` block (position, opponent, facing, depth, ante)
 - No backend, no third-party dependencies
 - Liquid Glass `@available(iOS 18, *)` with `.ultraThinMaterial` fallback
 
@@ -56,13 +59,13 @@ Layout:
 
 ```
 Cutoff/
-├── Theme/          design tokens
-├── Components/     PrimaryButton, glass surfaces, range grid cells…
-├── Models/         Hand, Spot, Range, StackDepthBucket…
-├── Logic/          EquityCalculator, Scorer, LeakAnalyzer, SpotGenerator
+├── Theme/          design tokens + localization
+├── Components/     PrimaryButton, glass surfaces, poker table, range grid cells…
+├── Models/         RangeChart, TrainingSpot, StackDepthBucket, TournamentConfig…
+├── Logic/          RangeLoader, RangeService, SpotMatrix…
 ├── Persistence/    SwiftData stores
-├── Features/       Onboarding, Train, Ranges, Review, Settings
-└── Resources/Ranges/  bundled JSONL ranges
+├── Features/       Onboarding, Train, Ranges, Review, Strategy, Settings
+└── Resources/Ranges/  bundled range JSONs
 ```
 
 ## Build
@@ -85,7 +88,12 @@ xcodebuild -project Cutoff.xcodeproj \
 
 ## Range data
 
-The repo ships an ingest pipeline (`Scripts/` + `tools/`) that converts external sources — currently PokerBench and PHH hand-history files — into the v2 range JSONL the app loads. Each spot carries a `source` and `provenance` field so the app can label cells as approximate vs. canonical. See [`docs/DATA_PROVENANCE.md`](docs/DATA_PROVENANCE.md).
+The bundled charts are built from published community charts (RangeConverter / poker.academy free charts). Two tools under `Tools/RangeImporter/` produce the JSON the app loads:
+
+- **`scripts/scrape_all_ranges.py`** — bulk-scrapes the poker.academy tournament library, clicking through each opponent position and saving raw charts to `staging/poker_academy_charts/`.
+- **`RangeImporter`** (Swift CLI) — converts crib-sheet CSVs into the bundled range JSON schema, deriving the filename and 9-max siblings (`NineMaxAdapter`).
+
+Every emitted chart records its `source` (publisher, product, URL, solver assumptions) and a `spot` block (position, opponent position, facing action, stack depth, ante type), so the app can label and match charts precisely. `scripts/validate_ranges.py` gates the bundled JSONs. See [`docs/DATA_PROVENANCE.md`](docs/DATA_PROVENANCE.md).
 
 ## Documentation
 
